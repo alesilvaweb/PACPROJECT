@@ -40,6 +40,7 @@ export const App = () => {
     <BrowserRouter basename={baseHref}>
       <div className="app-container" style={{ paddingTop }}>
         <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+
         <ErrorBoundary>
           <Header
             isAuthenticated={isAuthenticated}
@@ -51,11 +52,11 @@ export const App = () => {
           />
         </ErrorBoundary>
         <div className="container-fluid view-container" id="app-view-container">
-          <Card className="jh-card">
-            <ErrorBoundary>
-              <AppRoutes />
-            </ErrorBoundary>
-          </Card>
+          {/*<Card className="jh-card">*/}
+          <ErrorBoundary>
+            <AppRoutes />
+          </ErrorBoundary>
+          {/*</Card>*/}
           <Footer />
         </div>
       </div>

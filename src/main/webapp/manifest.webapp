@@ -1,6 +1,7 @@
 {
-  "name": "Aapm",
-  "short_name": "Aapm",
+  "name": "SISTEMA DE RESERVAS",
+  "short_name": "AAPM APP",
+  "description" :"Sistema de Reservas",
   "icons": [
     {
       "src": "./content/images/jhipster_family_member_1_head-192.png",

@@ -1,0 +1,27 @@
+import React from 'react';
+import { Route } from 'react-router-dom';
+
+import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
+
+import Reservas from './reserva';
+import ReservasDetail from './reserva-detail';
+import ReservasUpdate from './reserva-update';
+import ReservasDeleteDialog from './reserva-delete-dialog';
+
+const ReservasRoutes = () => (
+  <ErrorBoundaryRoutes>
+    <Route index element={<Reservas />} />
+    <Route path="new" element={<ReservasUpdate />} />
+    <Route path="new/:local/:start" element={<ReservasUpdate />} />
+    <Route path=":id/:local/delete" element={<ReservasDeleteDialog />} />
+    <Route path=":id/:local/edit" element={<ReservasUpdate />} />
+
+    <Route path=":id/">
+      <Route index element={<ReservasDetail />} />
+      <Route path="edit" element={<ReservasUpdate />} />
+      <Route path="delete" element={<ReservasDeleteDialog />} />
+    </Route>
+  </ErrorBoundaryRoutes>
+);
+
+export default ReservasRoutes;

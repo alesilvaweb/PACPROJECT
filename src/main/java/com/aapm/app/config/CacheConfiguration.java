@@ -48,6 +48,31 @@ public class CacheConfiguration {
             createCache(cm, com.aapm.app.domain.User.class.getName());
             createCache(cm, com.aapm.app.domain.Authority.class.getName());
             createCache(cm, com.aapm.app.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.aapm.app.domain.Local.class.getName());
+            createCache(cm, com.aapm.app.domain.Local.class.getName() + ".reservas");
+            createCache(cm, com.aapm.app.domain.Arquivo.class.getName());
+            createCache(cm, com.aapm.app.domain.Associado.class.getName());
+            createCache(cm, com.aapm.app.domain.Associado.class.getName() + ".reservas");
+            createCache(cm, com.aapm.app.domain.Associado.class.getName() + ".contatos");
+            createCache(cm, com.aapm.app.domain.Associado.class.getName() + ".dependentes");
+            createCache(cm, com.aapm.app.domain.Dependente.class.getName());
+            createCache(cm, com.aapm.app.domain.Contato.class.getName());
+            createCache(cm, com.aapm.app.domain.Convenio.class.getName());
+            createCache(cm, com.aapm.app.domain.Convenio.class.getName() + ".imagens");
+            createCache(cm, com.aapm.app.domain.Convenio.class.getName() + ".redesSociais");
+            createCache(cm, com.aapm.app.domain.ImagensConvenio.class.getName());
+            createCache(cm, com.aapm.app.domain.RedesSociaisConvenio.class.getName());
+            createCache(cm, com.aapm.app.domain.IconsRedesSociais.class.getName());
+            createCache(cm, com.aapm.app.domain.IconsRedesSociais.class.getName() + ".redeSocials");
+            createCache(cm, com.aapm.app.domain.Reserva.class.getName());
+            createCache(cm, com.aapm.app.domain.Departamento.class.getName());
+            createCache(cm, com.aapm.app.domain.Departamento.class.getName() + ".reservas");
+            createCache(cm, com.aapm.app.domain.Parametro.class.getName());
+            createCache(cm, com.aapm.app.domain.Mensagem.class.getName());
+            createCache(cm, com.aapm.app.domain.Categoria.class.getName());
+            createCache(cm, com.aapm.app.domain.Categoria.class.getName() + ".convenios");
+            createCache(cm, com.aapm.app.domain.Tipo.class.getName());
+            createCache(cm, com.aapm.app.domain.Tipo.class.getName() + ".mensagems");
             // jhipster-needle-ehcache-add-entry
         };
     }

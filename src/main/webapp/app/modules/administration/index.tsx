@@ -9,6 +9,7 @@ import Metrics from './metrics/metrics';
 import Configuration from './configuration/configuration';
 import Docs from './docs/docs';
 import Tracker from './tracker/tracker';
+import Xlsx from 'app/modules/administration/xml/importxml';
 
 const AdministrationRoutes = () => (
   <div>
@@ -20,6 +21,7 @@ const AdministrationRoutes = () => (
       <Route path="configuration" element={<Configuration />} />
       <Route path="logs" element={<Logs />} />
       <Route path="docs" element={<Docs />} />
+      <Route path="xlsx" element={<Xlsx />} />
     </ErrorBoundaryRoutes>
   </div>
 );

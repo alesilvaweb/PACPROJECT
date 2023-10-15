@@ -11,7 +11,29 @@
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202343_added_entity_Local.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202344_added_entity_Arquivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202345_added_entity_Associado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202346_added_entity_Dependente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202347_added_entity_Contato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202348_added_entity_Convenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202349_added_entity_ImagensConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202350_added_entity_RedesSociaisConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202351_added_entity_IconsRedesSociais.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202352_added_entity_Reserva.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202353_added_entity_Departamento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202354_added_entity_Parametro.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202355_added_entity_Mensagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202356_added_entity_Categoria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202357_added_entity_Tipo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20231011202346_added_entity_constraints_Dependente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202347_added_entity_constraints_Contato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202348_added_entity_constraints_Convenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202349_added_entity_constraints_ImagensConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202350_added_entity_constraints_RedesSociaisConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202352_added_entity_constraints_Reserva.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231011202355_added_entity_constraints_Mensagem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

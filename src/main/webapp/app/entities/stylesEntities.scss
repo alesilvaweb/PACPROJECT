@@ -1,0 +1,26 @@
+.form-control {
+  border: solid 2px #6c757d;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+.form-select {
+  border: solid 2px #6c757d;
+  border-radius: 4px;
+}
+.form-label {
+  margin-bottom: 0;
+}
+fieldset {
+  border: solid 1px #6c757d;
+  padding: 15px;
+  border-radius: 3px;
+  margin-bottom: 5vh;
+}
+legend {
+  font-size: 15px;
+  margin-top: -29px;
+  margin-left: 10px;
+  background-color: white;
+  width: auto;
+  padding: 2px;
+}

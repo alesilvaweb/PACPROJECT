@@ -15,6 +15,10 @@ import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import { sendActivity } from 'app/config/websocket-middleware';
+import PaginaInicial from 'app/modules/home/pagina-inicial';
+import Inicial from 'app/modules/home/inicial';
+import CartaoSocio from 'app/modules/home/cartao-socio';
+import Mapa from 'app/localizacao/Mapa';
 
 const loading = <div>loading ...</div>;
 
@@ -36,7 +40,10 @@ const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
-        <Route index element={<Home />} />
+        <Route index element={<PaginaInicial />} />
+        <Route path="agenda" element={<Inicial />} />
+        <Route path="mapa" element={<Mapa />} />
+        <Route path="cartao" element={<CartaoSocio />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="account">

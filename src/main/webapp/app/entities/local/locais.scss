@@ -1,3 +1,5 @@
+@import './../../palette';
+
 .fc .fc-h-event {
   //background-color: #ca241d;
   display: block;
@@ -5,24 +7,30 @@
   text-align: center;
   border-radius: 4px;
 }
+
 .MuiInputBase-inputAdornedEnd {
   display: none;
   background-color: #474bff;
 }
+
 .fc-h-event:hover {
   //background-color: #722d26;
   animation: ease-in-out;
 }
+
 .fc .fc-day-today a {
   //background-color: #f51905;
   //color: #ffffff;
 }
+
 .fc .fc-day-past a {
   color: #afafaf;
 }
+
 .fc .fc-button-primary {
-  background-color: #0c71e8;
+  background-color: $primary;
 }
+
 .fc .fc-button-primary:hover {
   background-color: #043e80;
 }
@@ -30,6 +38,7 @@
 .fc-day-past .fc-h-event {
   background-color: rgb(170, 170, 170);
 }
+
 .fc-daygrid-day-frame:hover {
   background-color: rgba(121, 120, 119, 0.1);
   animation: ease-in-out;
@@ -92,17 +101,20 @@
     margin-left: auto;
   }
 }
+
 .locais-detail {
   display: flex;
   justify-content: center;
   margin-top: 7vh;
 }
+
 .local-titulo {
   margin-left: 22vh;
   margin-top: 0.5vh;
   font-size: 20px;
   position: fixed;
 }
+
 @media (max-width: 530px) {
   .local-titulo {
     margin-left: 40vh;
@@ -111,6 +123,7 @@
     position: fixed;
   }
 }
+
 @media (min-width: 530px) and (max-width: 650px) {
   .local-titulo {
     margin-left: 47vh;
@@ -119,6 +132,7 @@
     position: fixed;
   }
 }
+
 @media (min-width: 645px) and (max-width: 900px) {
   .local-titulo {
     margin-left: 60vh;

@@ -1,12 +1,10 @@
 import './header.scss';
 
 import React, { useState } from 'react';
-import { Translate, Storage } from 'react-jhipster';
-import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
-import LoadingBar from 'react-redux-loading-bar';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Home, Brand } from './header-components';
-import { AdminMenu, EntitiesMenu, AccountMenuMaterial, LocaleMenu } from '../menus';
+import { Storage, Translate } from 'react-jhipster';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Brand } from './header-components';
+import { AccountMenuMaterial } from '../menus';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
 import { AppBar, Box, Container, IconButton, LinearProgress, Toolbar } from '@mui/material';

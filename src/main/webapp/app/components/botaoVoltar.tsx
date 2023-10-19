@@ -9,6 +9,7 @@ const BotaoVoltar = ({ link, top }) => {
     <>
       <Button
         variant="contained"
+        color={'primary'}
         onClick={() => navigate(link)}
         startIcon={<ArrowBackIos />}
         sx={{

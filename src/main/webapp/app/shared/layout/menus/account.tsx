@@ -9,6 +9,7 @@ import Fade from '@mui/material/Fade';
 import { useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Login, Person } from '@mui/icons-material';
+import { LetterAvatar } from 'app/components/letterAvatar';
 
 // const accountMenuItemsAuthenticated = () => (
 //   <>
@@ -62,8 +63,9 @@ export const AccountMenuMaterial = ({ isAuthenticated = false }) => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
         color="inherit"
-        startIcon={<Person />}
+        // startIcon={}
       >
+        <LetterAvatar>{account.firstName[0] + account.lastName[0]}</LetterAvatar>
         {/*{account.firstName}*/}
       </Button>
       <Menu

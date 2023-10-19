@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -6,22 +7,13 @@ import Typography from '@mui/material/Typography';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { Link, useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/local/local.reducer';
-import { useEffect } from 'react';
-import { Alert, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import { BottomNavigation, BottomNavigationAction, Card, Fab, Grid, Paper, Popover, Tooltip } from '@mui/material';
+import { Alert } from 'reactstrap';
+import { BottomNavigation, BottomNavigationAction, Card, Grid } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
 // import DialogInfoLocais from 'app/modules/home/DialogoInfoLocais';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
-import Swal from 'sweetalert2';
 import Divider from '@mui/material/Divider';
-import { Add, ArrowBackIos, CalendarMonth, Favorite, Info, LocationOn, Restore } from '@mui/icons-material';
-import SendIcon from '@mui/icons-material/Send';
+import { CalendarMonth, Info, LocationOn } from '@mui/icons-material';
 import BotaoVoltar from 'app/components/botaoVoltar';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
@@ -128,7 +120,7 @@ export default function Inicial() {
     <div>
       {account?.login ? (
         <div>
-          <BotaoVoltar link={'/'} top={'-44px'} />
+          <BotaoVoltar link={'/'} top={'-46px'} />
 
           <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '7vh' }}>
             <Grid container spacing={{ xs: 1, md: 3 }}>

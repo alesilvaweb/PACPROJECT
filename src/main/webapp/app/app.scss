@@ -3,6 +3,7 @@
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
 @import '~bootswatch/dist/materia/bootswatch';
+@import '@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
 body {
   margin: 0;
 }

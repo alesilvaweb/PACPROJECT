@@ -1,0 +1,8 @@
+// variables.scss
+$primary: #1e79c7;
+$secondary: #da3121;
+
+:export {
+  primary: $primary;
+  secondary: $secondary;
+}

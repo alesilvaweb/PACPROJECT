@@ -28,6 +28,7 @@ import {
   Grading,
   GroupAdd,
   ManageAccounts,
+  Schedule,
   Settings,
 } from '@mui/icons-material';
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
@@ -68,7 +69,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
     setIsOpen(open);
   };
 
-  /*Lista de menus*/
+  /* Lista de menus */
   const list = (anchor: Anchor) => (
     <Box sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }} role="presentation">
       <List
@@ -81,19 +82,14 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
           </ListSubheader>
         }
       >
+        {/* Menus Fixos */}
         <ItemSidebar title={'Pagina inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
         <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
         <ItemSidebar title={'Convênio'} link={'/convenio'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-        <Divider />
-        <Divider />
-        <Divider />
-        <Divider />
-        <Divider />
-        <Divider />
-        <Divider />
-        <Divider />
-        <Divider />
+        <ItemSidebar title={'Agendamento'} link={'/agenda'} icon={<Schedule />} setIsOpen={setIsOpen} />
+        <hr />
 
+        {/* Grupo de menus ADM */}
         <ListItemButton onClick={() => handleClick('admin', !stateMenu.admin)}>
           <ListItemIcon>
             <AdminPanelSettings />
@@ -101,6 +97,8 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
           <ListItemText primary={translate('global.menu.admin.main')} />
           {stateMenu ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
+
+        {/* SubMenus de ADM */}
         <Collapse in={stateMenu.admin} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ItemSidebar
@@ -113,6 +111,8 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
             <ItemSidebar title={'Parâmetro'} link={'/parametro'} icon={<Settings />} setIsOpen={setIsOpen} />
           </List>
         </Collapse>
+
+        {/* Grupo de menus de Relatórios*/}
         <ListItemButton onClick={() => handleClick('report', !stateMenu.report)}>
           <ListItemIcon>
             <Grading />
@@ -120,11 +120,15 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
           <ListItemText primary="Relatórios" />
           {stateMenu ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
+
+        {/* SubMenus de Reservas */}
         <Collapse in={stateMenu.report} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ItemSidebar title={'Reservas'} link={'/reserva'} icon={<CalendarMonth />} setIsOpen={setIsOpen} />
           </List>
         </Collapse>
+
+        {/* Grupo de menus de Cadastros */}
         <ListItemButton onClick={() => handleClick('entity', !stateMenu.entity)}>
           <ListItemIcon>
             <InboxIcon />
@@ -132,10 +136,15 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
           <ListItemText primary="Cadastros" />
           {stateMenu ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
+
+        {/* SubMenus de Cadastros*/}
         <Collapse in={stateMenu.entity} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ItemSidebar title={'Local'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Convênio'} link={'/convenio'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Locais'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Convênios'} link={'/convenio'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
           </List>
         </Collapse>
       </List>
@@ -147,7 +156,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
       <Drawer anchor={'left'} open={isOpen} onClose={toggleDrawer('left', false)}>
         {list('left')}
         <Box sx={{ width: 240, p: 3 }}>
-          {isAuthenticated && <EntitiesMenu />}
+          {/*{isAuthenticated && <EntitiesMenu />}*/}
           {isAuthenticated && isAdmin && <AdminMenu showOpenAPI={isOpenAPIEnabled} />}
           {/*  <LocaleMenu currentLocale={currentLocale} onClick={handleLocaleChange} />*/}
         </Box>

@@ -7,12 +7,15 @@ import { locales, languages } from 'app/config/translation';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getSession } from 'app/shared/reducers/authentication';
 import { saveAccountSettings, reset } from './settings.reducer';
+import { Link, useNavigate } from 'react-router-dom';
+import BotaoVoltar from 'app/components/botaoVoltar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const SettingsPage = () => {
   const dispatch = useAppDispatch();
   const account = useAppSelector(state => state.authentication.account);
   const successMessage = useAppSelector(state => state.settings.successMessage);
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getSession());
     return () => {
@@ -89,6 +92,14 @@ export const SettingsPage = () => {
                 </option>
               ))}
             </ValidatedField>
+            <Button tag={Link} to="/" replace color="info">
+              <FontAwesomeIcon icon="arrow-left" />
+              &nbsp;
+              <span className="d-none d-md-inline">
+                <Translate contentKey="entity.action.back">Back</Translate>
+              </span>
+            </Button>
+            &nbsp;
             <Button color="primary" type="submit" data-cy="submit">
               <Translate contentKey="settings.form.button">Save</Translate>
             </Button>

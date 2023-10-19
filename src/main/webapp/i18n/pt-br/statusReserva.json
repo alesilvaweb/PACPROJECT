@@ -1,0 +1,10 @@
+{
+  "aapmApp": {
+    "StatusReserva": {
+      "null": "",
+      "Agendado": "Agendado",
+      "Bloqueado": "Bloqueado",
+      "Cancelado": "Cancelado"
+    }
+  }
+}

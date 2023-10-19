@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Grid } from '@mui/material';
 
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import { CorporateFare, CreditCard, ManageAccounts, Event, Info } from '@mui/icons-material';
+import { CorporateFare, CreditCard, Event, Info, ManageAccounts } from '@mui/icons-material';
 import Login from 'app/modules/login/login';
 import { useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
@@ -23,10 +23,10 @@ const PaginaInicial = () => {
           <ModalInicial />
           <CardLocais link={'/agenda'} title={'Agendamento'} icon={<EventAvailableIcon sx={{ fontSize: '7vh', color: 'white' }} />} />
           <CardLocais link={'/cartao'} title={'Cartão de Sócio'} icon={<CreditCard sx={{ fontSize: '7vh', color: 'white' }} />} />
-          <CardLocais link={'/agenda'} title={'Convênios'} icon={<CorporateFare sx={{ fontSize: '7vh', color: 'white' }} />} />
-          <CardLocais link={'/agenda'} title={'Perfil'} icon={<ManageAccounts sx={{ fontSize: '7vh', color: 'white' }} />} />
-          <CardLocais link={'/agenda'} title={'Eventos AAPM'} icon={<Event sx={{ fontSize: '7vh', color: 'white' }} />} />
-          <CardLocais link={'/agenda'} title={'Sobre'} icon={<Info sx={{ fontSize: '7vh', color: 'white' }} />} />
+          <CardLocais link={'/convenio'} title={'Convênios'} icon={<CorporateFare sx={{ fontSize: '7vh', color: 'white' }} />} />
+          <CardLocais link={'/account/settings'} title={'Perfil'} icon={<ManageAccounts sx={{ fontSize: '7vh', color: 'white' }} />} />
+          <CardLocais link={'/events'} title={'Eventos AAPM'} icon={<Event sx={{ fontSize: '7vh', color: 'white' }} />} />
+          <CardLocais link={'/sobre'} title={'Sobre'} icon={<Info sx={{ fontSize: '7vh', color: 'white' }} />} />
         </Grid>
       ) : (
         <Login />

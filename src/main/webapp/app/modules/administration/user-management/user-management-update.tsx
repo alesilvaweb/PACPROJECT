@@ -29,24 +29,28 @@ export const UserManagementUpdate = () => {
   }, [login]);
 
   const handleClose = () => {
-    navigate('/admin/user-management');
+    navigate('/');
   };
 
   const saveUser = values => {
     if (isNew) {
       dispatch(createUser(values));
+      navigate('/');
     } else {
       dispatch(updateUser(values));
+      navigate('/');
     }
-    handleClose();
   };
 
   const isInvalid = false;
   const user = useAppSelector(state => state.userManagement.user);
   const loading = useAppSelector(state => state.userManagement.loading);
   const updating = useAppSelector(state => state.userManagement.updating);
+  const updateSuccess = useAppSelector(state => state.userManagement.updateSuccess);
   const authorities = useAppSelector(state => state.userManagement.authorities);
-
+  if (updateSuccess) {
+    navigate('/');
+  }
   return (
     <div>
       <Row className="justify-content-center">

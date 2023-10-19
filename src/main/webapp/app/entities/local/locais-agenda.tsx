@@ -1,20 +1,22 @@
 import './locais.scss';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getEntity } from './local.reducer';
 import { dataAtual, difDate } from 'app/shared/util/date-utils';
 import FullCalendar from '@fullcalendar/react';
 import axios from 'axios';
 import { IReserva } from 'app/shared/model/reserva.model';
-import { ArrowBackIos } from '@mui/icons-material';
-import Button from '@mui/material/Button';
 import BotaoVoltar from 'app/components/botaoVoltar';
+import { Avatar, Chip } from '@mui/material';
+import { pink } from '@mui/material/colors';
+import { ArrowBackIos } from '@mui/icons-material';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
@@ -34,6 +36,16 @@ const LocaisAgenda = args => {
   const toggle = () => setModal(!modal);
   const { id } = useParams<'id'>();
 
+  const data = new Date();
+  const dias = 7;
+  // console.log(data.toISOString().slice(0, 10)); // 2021-05-02
+  function addDays(date, days) {
+    date.setDate(date.getDate() + days);
+    return date;
+  }
+  const DataValida = addDays(data, dias);
+  // console.log(DataValida.toISOString().slice(0, 10));  // 2021-05-12
+
   useEffect(() => {
     dispatch(getEntity(id));
     atualizaAgenda();
@@ -44,7 +56,7 @@ const LocaisAgenda = args => {
 
     reservasList.map(event => {
       if (event.local.id.toString() === id) {
-        console.log('Events = ' + event.associado.nome);
+        console.log('Events = ' + event.associado.id);
 
         if (event.associado.id === account.id) {
           // @ts-ignore
@@ -61,8 +73,8 @@ const LocaisAgenda = args => {
             id: event.id,
             title: 'RESERVADO',
             start: event.data,
-            display: 'background',
-            background: 'red',
+            groupId: event.associado.id,
+            color: 'red',
           });
         }
       }
@@ -98,8 +110,8 @@ const LocaisAgenda = args => {
                   id: event.id,
                   title: 'RESERVADO',
                   start: event.data,
-                  display: 'background',
-                  background: 'red',
+                  groupId: event.associado.id,
+                  color: 'red',
                 });
               }
             }
@@ -119,11 +131,13 @@ const LocaisAgenda = args => {
   } else {
     return (
       <div className="app">
-        <BotaoVoltar link={'/agenda'} top={''} />
+        {/*<BotaoVoltar link={'/agenda'} top={''}/>*/}
+
         {renderCallendar()}
       </div>
     );
   }
+
   function renderCallendar() {
     return (
       <div className="demo-app-sidebar">
@@ -131,8 +145,31 @@ const LocaisAgenda = args => {
           <p>Carregando ...</p>
         ) : (
           <div className="app-main">
-            <div className={'local-titulo'}> {locaisEntity.nome}</div>
-
+            <div>
+              <Chip
+                avatar={
+                  <>
+                    <ArrowBackIos />
+                    <Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>
+                  </>
+                }
+                sx={{
+                  // marginLeft:"20vh",
+                  fontSize: '20px',
+                  padding: '20px',
+                  fontWeight: 400,
+                  marginBottom: '2px',
+                  borderRadius: '5px',
+                }}
+                size="medium"
+                onClick={() => {
+                  navigate('/agenda');
+                }}
+                label={locaisEntity.nome}
+                color={'primary'}
+              />
+            </div>
+            <hr />
             <FullCalendar
               bootstrapFontAwesome={{
                 close: 'fa-times',
@@ -189,8 +226,8 @@ const LocaisAgenda = args => {
               //   },
               // }}
               headerToolbar={{
-                center: 'title',
-                left: '',
+                // center: 'title',
+                // left: '',
                 right: 'prev,next',
               }}
               views={{
@@ -203,12 +240,14 @@ const LocaisAgenda = args => {
               selectLongPressDelay={5}
               locale={'pt-br'}
               // height='parent'
-              contentHeight={500}
+              contentHeight={'80vh'}
               selectOverlap={false}
               initialView="dayGridMonth"
-              visibleRange={{
-                start: '2023-10-22',
-                end: '2023-12-25',
+              // validRange={
+              //      new Date().toISOString().substring(0,10) ,new Date().toISOString().substring(0,10)
+              // }
+              validRange={{
+                start: DataValida.toISOString().substring(0, 10),
               }}
               editable={false}
               selectable={true}
@@ -264,7 +303,13 @@ const LocaisAgenda = args => {
 
   /* FUNÇÃO DE EDIÇÃO DE RESERVAS */
   function handleEventClick(clickInfo) {
-    if (difDate(dataAtual(), clickInfo.startStr) >= 1) {
+    if (clickInfo.event.groupId != account.id) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Ops...',
+        text: 'Data reservada!',
+      });
+    } else if (difDate(dataAtual(), clickInfo.startStr) >= 1) {
       Swal.fire({
         icon: 'info',
         title: 'Data Limite!',
@@ -280,6 +325,7 @@ const LocaisAgenda = args => {
       navigate('/reserva/' + clickInfo.event.id + '/' + locaisEntity.id + '/edit');
     }
   }
+
   function handleEvents(events) {
     setCurrentEvents(events);
   }

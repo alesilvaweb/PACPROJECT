@@ -1,0 +1,158 @@
+entity Local{
+	nome String required minlength(2),
+    descricao TextBlob required,
+	capacidade Integer required,
+    imagen ImageBlob required,
+    observacoes TextBlob,
+    localizacao String,
+    status Status,
+    valor Float required,
+    cor String ,
+    created Instant,
+    modified Instant
+}
+entity Arquivo{
+    nome String required,
+    descricao String,
+    arquivo AnyBlob required,
+    status StatusArquivo,
+    created Instant,
+    modified Instant
+}
+enum StatusArquivo{
+    Carregado,Processado,Arquivado,Erro
+}
+entity Associado{
+	nome String required minlength(2),
+    matricula String required,
+    status Status,
+    telefone String,
+    email String required unique,
+    dataNascimento LocalDate,
+    created Instant,
+    modified Instant
+}
+entity Dependente{
+    nome String required,
+    dataNascimento LocalDate required,
+    parentesco String required,
+    status Status,
+    created Instant,
+    modified Instant
+}
+entity Contato{
+    tipo TipoContato required,
+    contato String required,
+    created Instant,
+    modified Instant
+}
+enum TipoContato{
+    Telefone, Email
+}
+entity Convenio{
+    nome String required minlength(2)
+    titulo String ,
+    descricao TextBlob,
+    endereco String,
+    telefone String,
+    email String ,
+    localizacao String,
+    status Status
+    created Instant,
+    modified Instant
+}
+entity ImagensConvenio{
+    titulo String required,
+    descricao String,
+    imagen ImageBlob required,
+    created Instant,
+    modified Instant
+}
+entity RedesSociaisConvenio{
+    nome String  required,
+    descricao String,
+    endereco String required
+    created Instant,
+    modified Instant
+}
+entity IconsRedesSociais{
+    nome String required,
+    descricao String,
+    icon String ,
+    image ImageBlob
+}
+enum StatusReserva{
+    Agendado,Bloqueado,Cancelado
+}
+
+entity Reserva{
+	motivoReserva String required minlength(2),
+    descricao String,
+    numPessoas Integer required,
+    status StatusReserva,
+    data LocalDate required ,
+    somenteFuncionarios Boolean,
+    created Instant ,
+    modified Instant
+}
+entity Departamento{
+    nome String,
+    descricao String,
+    status Status,
+    created Instant,
+    modified Instant
+}
+entity Parametro{
+    parametro  String required,
+    descricao String,
+    chave String,
+    valor  String required,
+    status  Status,
+    created Instant,
+    modified Instant
+}
+entity Mensagem{
+    titulo String required,
+    descricao String required
+    conteudo TextBlob,
+    imagen ImageBlob ,
+    link String,
+    startDate LocalDate,
+    endDate LocalDate,
+    status Status,
+    created Instant,
+    modified Instant
+}
+
+entity Categoria{
+    categoria String required
+    descricao String,
+    created Instant,
+    modified Instant
+}
+entity Tipo{
+    tipo String required
+}
+enum Status {
+    Ativo, Inativo, Bloqueado
+}
+relationship OneToMany {
+  Local{reserva(title)}  to  Reserva{local(nome)},
+  Associado{reserva(title)} to Reserva{associado(nome)}
+  Departamento{reserva(title)} to Reserva{departamento(nome)}
+  Categoria{convenio(nome)}  to Convenio{categoria(categoria)}
+  Tipo{mensagem(titulo)}  to Mensagem{tipo(tipo)}
+  IconsRedesSociais{redeSocial(nome)} to RedesSociaisConvenio{icon(nome)}
+  Associado{contatos(contato)} to Contato{associado(nome)}
+  Associado{dependentes(nome)} to Dependente{associado(nome)}
+  Convenio{imagens(titulo)} to ImagensConvenio{convenio(nome)}
+  Convenio{redesSociais(nome)} to RedesSociaisConvenio{convenio(nome)}
+}
+
+paginate * with pagination
+dto * with mapstruct
+filter *
+//service * with serviceClass
+// Set service options to all except few
+//service all with serviceImpl except Employee, Job
+

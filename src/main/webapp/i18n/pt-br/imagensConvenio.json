@@ -1,0 +1,29 @@
+{
+  "aapmApp": {
+    "imagensConvenio": {
+      "home": {
+        "title": "Imagens Convenios",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Imagens Convenio",
+        "createOrEditLabel": "Criar ou editar Imagens Convenio",
+        "notFound": "Nenhum Imagens Convenio encontrado"
+      },
+      "created": "Um novo Imagens Convenio foi criado com o identificador {{ param }}",
+      "updated": "Um Imagens Convenio foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Imagens Convenio foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Imagens Convenio {{ id }}?"
+      },
+      "detail": {
+        "title": "Imagens Convenio"
+      },
+      "id": "ID",
+      "titulo": "Titulo",
+      "descricao": "Descricao",
+      "imagen": "Imagen",
+      "created": "Created",
+      "modified": "Modified",
+      "convenio": "Convenio"
+    }
+  }
+}

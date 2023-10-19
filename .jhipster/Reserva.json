@@ -1,0 +1,70 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202352",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "reserva",
+  "fields": [
+    {
+      "fieldName": "motivoReserva",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "numPessoas",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "data",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "somenteFuncionarios",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modified",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Reserva",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "local",
+      "otherEntityRelationshipName": "reserva",
+      "relationshipName": "local",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "associado",
+      "otherEntityRelationshipName": "reserva",
+      "relationshipName": "associado",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "departamento",
+      "otherEntityRelationshipName": "reserva",
+      "relationshipName": "departamento",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,28 @@
+{
+  "aapmApp": {
+    "iconsRedesSociais": {
+      "home": {
+        "title": "Icons Redes Sociais",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Icons Redes Sociais",
+        "createOrEditLabel": "Create or edit a Icons Redes Sociais",
+        "notFound": "No Icons Redes Sociais found"
+      },
+      "created": "A new Icons Redes Sociais is created with identifier {{ param }}",
+      "updated": "A Icons Redes Sociais is updated with identifier {{ param }}",
+      "deleted": "A Icons Redes Sociais is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Icons Redes Sociais {{ id }}?"
+      },
+      "detail": {
+        "title": "Icons Redes Sociais"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "descricao": "Descricao",
+      "icon": "Icon",
+      "image": "Image",
+      "redeSocial": "Rede Social"
+    }
+  }
+}

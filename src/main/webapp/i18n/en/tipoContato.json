@@ -1,0 +1,9 @@
+{
+  "aapmApp": {
+    "TipoContato": {
+      "null": "",
+      "Telefone": "Telefone",
+      "Email": "Email"
+    }
+  }
+}

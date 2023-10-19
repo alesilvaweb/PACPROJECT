@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202353",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "departamento",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "Ativo,Inativo,Bloqueado"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modified",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Departamento",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "reserva",
+      "otherEntityRelationshipName": "departamento",
+      "relationshipName": "reserva",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,28 @@
+{
+  "aapmApp": {
+    "contato": {
+      "home": {
+        "title": "Contatoes",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Contato",
+        "createOrEditLabel": "Criar ou editar Contato",
+        "notFound": "Nenhum Contato encontrado"
+      },
+      "created": "Um novo Contato foi criado com o identificador {{ param }}",
+      "updated": "Um Contato foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Contato foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Contato {{ id }}?"
+      },
+      "detail": {
+        "title": "Contato"
+      },
+      "id": "ID",
+      "tipo": "Tipo",
+      "contato": "Contato",
+      "created": "Created",
+      "modified": "Modified",
+      "associado": "Associado"
+    }
+  }
+}

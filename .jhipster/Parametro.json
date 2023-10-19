@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202354",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "parametro",
+  "fields": [
+    {
+      "fieldName": "parametro",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chave",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "Ativo,Inativo,Bloqueado"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modified",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Parametro",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

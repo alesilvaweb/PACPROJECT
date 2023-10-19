@@ -1,0 +1,11 @@
+{
+  "aapmApp": {
+    "StatusArquivo": {
+      "null": "",
+      "Carregado": "Carregado",
+      "Processado": "Processado",
+      "Arquivado": "Arquivado",
+      "Erro": "Erro"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202349",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "imagens_convenio",
+  "fields": [
+    {
+      "fieldName": "titulo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imagen",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modified",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "ImagensConvenio",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "convenio",
+      "otherEntityRelationshipName": "imagens",
+      "relationshipName": "convenio",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

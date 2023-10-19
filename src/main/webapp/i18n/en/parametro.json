@@ -1,0 +1,30 @@
+{
+  "aapmApp": {
+    "parametro": {
+      "home": {
+        "title": "Parametros",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Parametro",
+        "createOrEditLabel": "Create or edit a Parametro",
+        "notFound": "No Parametros found"
+      },
+      "created": "A new Parametro is created with identifier {{ param }}",
+      "updated": "A Parametro is updated with identifier {{ param }}",
+      "deleted": "A Parametro is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Parametro {{ id }}?"
+      },
+      "detail": {
+        "title": "Parametro"
+      },
+      "id": "ID",
+      "parametro": "Parametro",
+      "descricao": "Descricao",
+      "chave": "Chave",
+      "valor": "Valor",
+      "status": "Status",
+      "created": "Created",
+      "modified": "Modified"
+    }
+  }
+}

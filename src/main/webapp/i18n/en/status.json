@@ -1,0 +1,10 @@
+{
+  "aapmApp": {
+    "Status": {
+      "null": "",
+      "Ativo": "Ativo",
+      "Inativo": "Inativo",
+      "Bloqueado": "Bloqueado"
+    }
+  }
+}

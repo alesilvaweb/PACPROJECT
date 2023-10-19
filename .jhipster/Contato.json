@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202347",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "contato",
+  "fields": [
+    {
+      "fieldName": "tipo",
+      "fieldType": "TipoContato",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Telefone,Email"
+    },
+    {
+      "fieldName": "contato",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modified",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Contato",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "associado",
+      "otherEntityRelationshipName": "contatos",
+      "relationshipName": "associado",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,29 @@
+{
+  "aapmApp": {
+    "arquivo": {
+      "home": {
+        "title": "Arquivos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Arquivo",
+        "createOrEditLabel": "Create or edit a Arquivo",
+        "notFound": "No Arquivos found"
+      },
+      "created": "A new Arquivo is created with identifier {{ param }}",
+      "updated": "A Arquivo is updated with identifier {{ param }}",
+      "deleted": "A Arquivo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Arquivo {{ id }}?"
+      },
+      "detail": {
+        "title": "Arquivo"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "descricao": "Descricao",
+      "arquivo": "Arquivo",
+      "status": "Status",
+      "created": "Created",
+      "modified": "Modified"
+    }
+  }
+}

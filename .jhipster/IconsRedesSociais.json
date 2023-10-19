@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202351",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "icons_redes_sociais",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "IconsRedesSociais",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "redesSociaisConvenio",
+      "otherEntityRelationshipName": "icon",
+      "relationshipName": "redeSocial",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

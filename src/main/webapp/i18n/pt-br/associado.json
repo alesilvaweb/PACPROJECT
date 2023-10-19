@@ -1,0 +1,34 @@
+{
+  "aapmApp": {
+    "associado": {
+      "home": {
+        "title": "Associados",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Associado",
+        "createOrEditLabel": "Criar ou editar Associado",
+        "notFound": "Nenhum Associado encontrado"
+      },
+      "created": "Um novo Associado foi criado com o identificador {{ param }}",
+      "updated": "Um Associado foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Associado foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Associado {{ id }}?"
+      },
+      "detail": {
+        "title": "Associado"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "matricula": "Matricula",
+      "status": "Status",
+      "telefone": "Telefone",
+      "email": "Email",
+      "dataNascimento": "Data Nascimento",
+      "created": "Created",
+      "modified": "Modified",
+      "reserva": "Reserva",
+      "contatos": "Contatos",
+      "dependentes": "Dependentes"
+    }
+  }
+}

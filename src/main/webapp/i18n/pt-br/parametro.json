@@ -1,0 +1,30 @@
+{
+  "aapmApp": {
+    "parametro": {
+      "home": {
+        "title": "Parametros",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Parametro",
+        "createOrEditLabel": "Criar ou editar Parametro",
+        "notFound": "Nenhum Parametro encontrado"
+      },
+      "created": "Um novo Parametro foi criado com o identificador {{ param }}",
+      "updated": "Um Parametro foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Parametro foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Parametro {{ id }}?"
+      },
+      "detail": {
+        "title": "Parametro"
+      },
+      "id": "ID",
+      "parametro": "Parametro",
+      "descricao": "Descricao",
+      "chave": "Chave",
+      "valor": "Valor",
+      "status": "Status",
+      "created": "Created",
+      "modified": "Modified"
+    }
+  }
+}

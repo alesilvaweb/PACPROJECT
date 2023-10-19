@@ -1,0 +1,29 @@
+{
+  "aapmApp": {
+    "departamento": {
+      "home": {
+        "title": "Departamentos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Departamento",
+        "createOrEditLabel": "Create or edit a Departamento",
+        "notFound": "No Departamentos found"
+      },
+      "created": "A new Departamento is created with identifier {{ param }}",
+      "updated": "A Departamento is updated with identifier {{ param }}",
+      "deleted": "A Departamento is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Departamento {{ id }}?"
+      },
+      "detail": {
+        "title": "Departamento"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "descricao": "Descricao",
+      "status": "Status",
+      "created": "Created",
+      "modified": "Modified",
+      "reserva": "Reserva"
+    }
+  }
+}

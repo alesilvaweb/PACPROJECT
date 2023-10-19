@@ -1,0 +1,34 @@
+{
+  "aapmApp": {
+    "mensagem": {
+      "home": {
+        "title": "Mensagems",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mensagem",
+        "createOrEditLabel": "Create or edit a Mensagem",
+        "notFound": "No Mensagems found"
+      },
+      "created": "A new Mensagem is created with identifier {{ param }}",
+      "updated": "A Mensagem is updated with identifier {{ param }}",
+      "deleted": "A Mensagem is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mensagem {{ id }}?"
+      },
+      "detail": {
+        "title": "Mensagem"
+      },
+      "id": "ID",
+      "titulo": "Titulo",
+      "descricao": "Descricao",
+      "conteudo": "Conteudo",
+      "imagen": "Imagen",
+      "link": "Link",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "status": "Status",
+      "created": "Created",
+      "modified": "Modified",
+      "tipo": "Tipo"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202346",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "dependente",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dataNascimento",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "parentesco",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "Ativo,Inativo,Bloqueado"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modified",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Dependente",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "associado",
+      "otherEntityRelationshipName": "dependentes",
+      "relationshipName": "associado",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

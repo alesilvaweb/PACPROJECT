@@ -1,0 +1,30 @@
+{
+  "aapmApp": {
+    "dependente": {
+      "home": {
+        "title": "Dependentes",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Dependente",
+        "createOrEditLabel": "Criar ou editar Dependente",
+        "notFound": "Nenhum Dependente encontrado"
+      },
+      "created": "Um novo Dependente foi criado com o identificador {{ param }}",
+      "updated": "Um Dependente foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Dependente foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Dependente {{ id }}?"
+      },
+      "detail": {
+        "title": "Dependente"
+      },
+      "id": "ID",
+      "nome": "Nome",
+      "dataNascimento": "Data Nascimento",
+      "parentesco": "Parentesco",
+      "status": "Status",
+      "created": "Created",
+      "modified": "Modified",
+      "associado": "Associado"
+    }
+  }
+}

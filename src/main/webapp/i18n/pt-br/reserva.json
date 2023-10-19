@@ -1,0 +1,34 @@
+{
+  "aapmApp": {
+    "reserva": {
+      "home": {
+        "title": "Reservas",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar Reserva",
+        "createOrEditLabel": "Criar ou editar Reserva",
+        "notFound": "Nenhum Reserva encontrado"
+      },
+      "created": "Reserva {{ param }} criada com sucesso!",
+      "updated": "Reserva {{ param }} atualizada com sucesso!",
+      "deleted": "Reserva {{ param }} excluída com sucesso!",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir esta reserva {{ id }}?"
+      },
+      "detail": {
+        "title": "Reserva"
+      },
+      "id": "ID",
+      "motivoReserva": "Motivo da Reserva",
+      "descricao": "Descricão",
+      "numPessoas": "N° Pessoas",
+      "data": "Data",
+      "status": "Status",
+      "somenteFuncionarios": "Somente Funcionários",
+      "created": "Reserva criada com sucesso!",
+      "modified": "Reserva modificada com sucesso!",
+      "local": "Local",
+      "associado": "Associado",
+      "departamento": "Departamento"
+    }
+  }
+}

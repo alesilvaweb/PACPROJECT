@@ -1,0 +1,82 @@
+{
+  "applications": "*",
+  "changelogDate": "20231011202348",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "convenio",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "titulo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "endereco",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telefone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "localizacao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "Ativo,Inativo,Bloqueado"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modified",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Convenio",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titulo",
+      "otherEntityName": "imagensConvenio",
+      "otherEntityRelationshipName": "convenio",
+      "relationshipName": "imagens",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "redesSociaisConvenio",
+      "otherEntityRelationshipName": "convenio",
+      "relationshipName": "redesSociais",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "categoria",
+      "otherEntityName": "categoria",
+      "otherEntityRelationshipName": "convenio",
+      "relationshipName": "categoria",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

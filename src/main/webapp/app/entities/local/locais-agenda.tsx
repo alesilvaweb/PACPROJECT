@@ -11,12 +11,8 @@ import { dataAtual, difDate } from 'app/shared/util/date-utils';
 import FullCalendar from '@fullcalendar/react';
 import axios from 'axios';
 import { IReserva } from 'app/shared/model/reserva.model';
-import BotaoVoltar from 'app/components/botaoVoltar';
-import { Avatar, Chip } from '@mui/material';
-import { pink } from '@mui/material/colors';
-import { ArrowBackIos } from '@mui/icons-material';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import { Chip, useMediaQuery } from '@mui/material';
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
@@ -38,13 +34,13 @@ const LocaisAgenda = args => {
 
   const data = new Date();
   const dias = 7;
-  // console.log(data.toISOString().slice(0, 10)); // 2021-05-02
+
   function addDays(date, days) {
     date.setDate(date.getDate() + days);
     return date;
   }
+
   const DataValida = addDays(data, dias);
-  // console.log(DataValida.toISOString().slice(0, 10));  // 2021-05-12
 
   useEffect(() => {
     dispatch(getEntity(id));
@@ -125,142 +121,136 @@ const LocaisAgenda = args => {
       console.log(error);
     }
   }
+  const [callendarButton, setCallendarButton] = useState({
+    fontSize: '0.9rem',
+    padding: '1vh',
+    fontWeight: 500,
+    marginBottom: '2px',
+    borderRadius: '5px',
+  });
+
+  const matches = useMediaQuery('(min-width:600px)');
+
+  // if (matches===true){
+  // setCallendarButton({
+  //
+  //     fontSize: '0.5rem',
+  //     padding: '5px',
+  //     fontWeight: 400,
+  //     marginBottom: '2px',
+  //     borderRadius: '5px',
+  //
+  //   })
+  //
+  // }else{
+  //   setCallendarButton({
+  //
+  //     fontSize: '0.9rem',
+  //     padding: '10px',
+  //     fontWeight: 400,
+  //     marginBottom: '2px',
+  //     borderRadius: '5px',
+  //
+  //
+  // })}
+
+  const calendarRef = useRef<FullCalendar>(null!);
 
   if (statusText != 'OK') {
     return <div>Carregando ...</div>;
   } else {
     return (
       <div className="app">
-        {/*<BotaoVoltar link={'/agenda'} top={''}/>*/}
+        <div className="demo-app-sidebar">
+          {loadingLocal ? (
+            <p>Carregando ...</p>
+          ) : (
+            <div className="app-main">
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                <Chip
+                  avatar={
+                    <>
+                      <ArrowBackIos />
+                      {/*<Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>*/}
+                    </>
+                  }
+                  sx={callendarButton}
+                  onClick={() => {
+                    navigate('/agenda');
+                  }}
+                  label={locaisEntity.nome}
+                  color={'primary'}
+                />
+                &nbsp;
+                <div>
+                  <Chip
+                    sx={callendarButton}
+                    onClick={() => calendarRef.current.getApi().prev()}
+                    label={<ArrowBackIos />}
+                    color={'primary'}
+                  />
+                  &nbsp;
+                  <Chip
+                    sx={callendarButton}
+                    style={{ textTransform: 'uppercase' }}
+                    onClick={() => calendarRef.current.getApi().today()}
+                    label={calendarRef.current ? calendarRef.current.getApi().view.title : null}
+                    color={'primary'}
+                  />
+                  &nbsp;
+                  <Chip
+                    sx={callendarButton}
+                    onClick={() => calendarRef.current.getApi().next()}
+                    color={'primary'}
+                    label={<ArrowForwardIos />}
+                  />
+                </div>
+              </div>
 
-        {renderCallendar()}
-      </div>
-    );
-  }
-
-  function renderCallendar() {
-    return (
-      <div className="demo-app-sidebar">
-        {loadingLocal ? (
-          <p>Carregando ...</p>
-        ) : (
-          <div className="app-main">
-            <div>
-              <Chip
-                avatar={
-                  <>
-                    <ArrowBackIos />
-                    <Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>
-                  </>
-                }
-                sx={{
-                  // marginLeft:"20vh",
-                  fontSize: '20px',
-                  padding: '20px',
-                  fontWeight: 400,
-                  marginBottom: '2px',
-                  borderRadius: '5px',
+              <FullCalendar
+                ref={calendarRef}
+                bootstrapFontAwesome={{
+                  close: 'fa-times',
+                  prev: 'fa-chevron-left',
+                  next: 'fa-chevron-right',
+                  prevYear: 'fa-angle-double-left',
+                  nextYear: 'fa-angle-double-right',
                 }}
-                size="medium"
-                onClick={() => {
-                  navigate('/agenda');
+                themeSystem={'bootstrap5'}
+                plugins={[dayGridPlugin, interactionPlugin]}
+                headerToolbar={{
+                  center: '',
+                  left: '',
+                  right: '',
                 }}
-                label={locaisEntity.nome}
-                color={'primary'}
+                views={{
+                  dayGridMonth: {
+                    titleFormat: { year: 'numeric', month: 'short' },
+                  },
+                }}
+                eventDisplay={'block'}
+                selectLongPressDelay={5}
+                locale={'pt-br'}
+                // height='parent'
+                contentHeight={'80vh'}
+                selectOverlap={false}
+                initialView="dayGridMonth"
+                validRange={{
+                  start: DataValida.toISOString().substring(0, 10),
+                }}
+                editable={false}
+                selectable={true}
+                dragScroll={false}
+                weekends={weekendsVisible}
+                initialEvents={currentEvents}
+                select={handleDateSelect}
+                eventContent={renderEventContent}
+                eventClick={handleEventClick}
+                eventsSet={handleEvents}
               />
             </div>
-            <hr />
-            <FullCalendar
-              bootstrapFontAwesome={{
-                close: 'fa-times',
-                prev: 'fa-chevron-left',
-                next: 'fa-chevron-right',
-                prevYear: 'fa-angle-double-left',
-                nextYear: 'fa-angle-double-right',
-              }}
-              themeSystem={'bootstrap5'}
-              plugins={[dayGridPlugin, interactionPlugin]}
-              // customButtons={{
-              //   CabanaRustica: {
-              //     text: "Cabana Rústica",
-              //     click: function () {
-              //       // {toggle()}
-              //       // @ts-ignore
-              //       window.location.replace('/local/2851');
-              //     },
-              //     // icon: 'fc-icon-chevron-left',
-              //     hint: 'Alterar local',
-              // themeIcon:  'material'
-              //   },
-              //   CabanaTenis: {
-              //     text: "Cabana Tenis",
-              //     click: function () {
-              //       // {toggle()}
-              //       // @ts-ignore
-              //       window.location.replace('/local/2852');
-              //     },
-              //     // icon: 'fc-icon-chevron-left',
-              //     hint: 'Alterar local',
-              //     themeIcon:  'material'
-              //   },
-              //   Choupana: {
-              //     text: "Choupana",
-              //     click: function () {
-              //       // {toggle()}
-              //       // @ts-ignore
-              //       window.location.replace('/local/2853');
-              //     },
-              //     // icon: 'fc-icon-chevron-left',
-              //     hint: 'Alterar local',
-              //     themeIcon:  'material'
-              //   },
-              //   CustomButton2: {
-              //     text: "Pagina inicial",
-              //     click: function () {
-              //       // {toggle()}
-              //       navigate('/');
-              //     },
-              //     // icon: 'fc-icon-chevron-left',
-              //     hint: 'Alterar local',
-              //     themeIcon:  'material'
-              //   },
-              // }}
-              headerToolbar={{
-                // center: 'title',
-                // left: '',
-                right: 'prev,next',
-              }}
-              views={{
-                dayGridMonth: {
-                  // name of view
-                  titleFormat: { year: 'numeric', month: 'short' },
-                },
-              }}
-              eventDisplay={'block'}
-              selectLongPressDelay={5}
-              locale={'pt-br'}
-              // height='parent'
-              contentHeight={'80vh'}
-              selectOverlap={false}
-              initialView="dayGridMonth"
-              // validRange={
-              //      new Date().toISOString().substring(0,10) ,new Date().toISOString().substring(0,10)
-              // }
-              validRange={{
-                start: DataValida.toISOString().substring(0, 10),
-              }}
-              editable={false}
-              selectable={true}
-              dragScroll={false}
-              weekends={weekendsVisible}
-              initialEvents={currentEvents}
-              select={handleDateSelect}
-              eventContent={renderEventContent}
-              eventClick={handleEventClick}
-              eventsSet={handleEvents}
-            />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   }

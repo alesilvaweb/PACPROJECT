@@ -63,8 +63,15 @@
 }
 
 @media (max-width: 768px) {
-  .fc .fc-toolbar-title {
+  .callendarButton {
     font-size: 1rem;
+    padding: 20px;
+    font-weight: 400;
+    margin-bottom: 2px;
+    border-radius: 1px;
+  }
+  .titleCallendar {
+    font-size: 0.8rem;
     text-transform: uppercase;
   }
   .fc .fc-event-main {
@@ -127,7 +134,7 @@
 @media (min-width: 530px) and (max-width: 650px) {
   .local-titulo {
     margin-left: 47vh;
-    //margin-top:0.5vh;
+    margin-top: 1vh;
     font-size: 15px;
     position: fixed;
   }

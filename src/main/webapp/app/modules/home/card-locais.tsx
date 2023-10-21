@@ -64,7 +64,12 @@ export default function CardLocais({ link, title, icon }) {
                 padding: '60px',
                 // backgroundColor:"red",
                 textTransform: 'uppercase',
-                color: '#212121',
+                color: '#d0291f',
+                borderRadius: 2,
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: '#a1a1a1',
+
                 ':hover': {
                   fontSize: '1.4rem',
                 },

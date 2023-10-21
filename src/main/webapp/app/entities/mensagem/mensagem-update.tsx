@@ -196,6 +196,9 @@ export const MensagemUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
+              <Button type={'button'} color="info" size="sm">
+                Tipo
+              </Button>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/mensagem" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

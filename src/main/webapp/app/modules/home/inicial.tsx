@@ -8,12 +8,11 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { Link, useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/local/local.reducer';
 import { Alert } from 'reactstrap';
-import { BottomNavigation, BottomNavigationAction, Card, Grid } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Card, Chip, Grid } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-// import DialogInfoLocais from 'app/modules/home/DialogoInfoLocais';
 import Divider from '@mui/material/Divider';
-import { CalendarMonth, Info, LocationOn } from '@mui/icons-material';
+import { ArrowBackIos, CalendarMonth, Info, LocationOn } from '@mui/icons-material';
 import BotaoVoltar from 'app/components/botaoVoltar';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
@@ -115,14 +114,32 @@ export default function Inicial() {
     navigate('/login');
   }
 
-  console.log(open);
   return (
-    <div>
+    <>
       {account?.login ? (
         <div>
-          <BotaoVoltar link={'/'} top={'-46px'} />
-
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '7vh' }}>
+          {/*<BotaoVoltar link={'/'} top={'-46px'} />*/}
+          <Chip
+            avatar={
+              <>
+                <ArrowBackIos sx={{ paddingLeft: '4px' }} />
+                {/*<Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>*/}
+              </>
+            }
+            sx={{
+              fontSize: '0.9rem',
+              padding: '1vh',
+              fontWeight: 500,
+              marginBottom: '2px',
+              borderRadius: '5px',
+            }}
+            onClick={() => {
+              navigate('/ ');
+            }}
+            label={'Voltar'}
+            color={'primary'}
+          />
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '2vh' }}>
             <Grid container spacing={{ xs: 1, md: 3 }}>
               {locaisList.map(locais => (
                 <Grid item xs={12} sm={4} md={4} key={locais.id}>
@@ -221,15 +238,7 @@ export default function Inicial() {
             </Grid>
           </Box>
         </div>
-      ) : (
-        <div>
-          <Alert color="warning">
-            <Link to="/login" className="alert-link">
-              Entrar
-            </Link>
-          </Alert>
-        </div>
-      )}
-    </div>
+      ) : null}
+    </>
   );
 }

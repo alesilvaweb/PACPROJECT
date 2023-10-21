@@ -3,9 +3,11 @@ import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import './mapa.scss';
 import BotaoVoltar from 'app/components/botaoVoltar';
 import { Card } from '@mui/material';
+import { WhatsApp } from '@mui/icons-material';
+import Button from '@mui/material/Button';
 
 const containerStyle = {
-  width: '50vh',
+  width: '100%',
   height: '80vh',
 };
 
@@ -36,17 +38,23 @@ function Mapa() {
 
   return isLoaded ? (
     <div>
-      <BotaoVoltar link={'/agenda'} top={'-43px'} />
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <BotaoVoltar link={'/agenda'} label={'Voltar'} />
+        <Button
+          onClick={() => {
+            const { lat, lng } = center;
+            const whatsappMessage = `https://wa.me/?text=Localização:%20https://maps.google.com/?q=${lat},${lng}`;
+            window.open(whatsappMessage, '_blank');
+          }}
+          startIcon={<WhatsApp />}
+          color={'success'}
+        >
+          Compartilhar no WhatsApp
+        </Button>
+      </div>
       <div className={'mapa'}>
-        <Card>
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={15}
-            // onLoad={onLoad}
-            // onUnmount={onUnmount}
-          >
-            {/* Child components, such as markers, info windows, etc. */}
+        <Card sx={{ width: '100%', height: '70%' }}>
+          <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
             <Marker
               position={center}
               options={{

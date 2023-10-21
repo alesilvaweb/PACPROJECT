@@ -2,7 +2,7 @@
   "aapmApp": {
     "parametro": {
       "home": {
-        "title": "Parametros",
+        "title": "Parâmetros",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Parametro",
         "createOrEditLabel": "Criar ou editar Parametro",
@@ -15,11 +15,11 @@
         "question": "Tem certeza de que deseja excluir Parametro {{ id }}?"
       },
       "detail": {
-        "title": "Parametro"
+        "title": "Parâmetros"
       },
       "id": "ID",
-      "parametro": "Parametro",
-      "descricao": "Descricao",
+      "parametro": "Parâmetro",
+      "descricao": "Descricão",
       "chave": "Chave",
       "valor": "Valor",
       "status": "Status",

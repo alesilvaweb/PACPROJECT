@@ -20,7 +20,7 @@ export const LocalDetail = () => {
   const localEntity = useAppSelector(state => state.local.entity);
   return (
     <div>
-      <BotaoVoltar link={'/agenda'} top={'-43px'} />
+      <BotaoVoltar link={'/agenda'} label={'Voltar'} />
       <Row className={'locais-detail'}>
         <Col md="8">
           <h2 data-cy="localDetailsHeading">{localEntity.nome}</h2>

@@ -1,31 +1,30 @@
 import './locais.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { getEntity } from './local.reducer';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getEntity } from './local.reducer';
 import { dataAtual, difDate } from 'app/shared/util/date-utils';
 import FullCalendar from '@fullcalendar/react';
-import axios from 'axios';
 import { IReserva } from 'app/shared/model/reserva.model';
 import { Chip, useMediaQuery } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import BotaoVoltar from 'app/components/botaoVoltar';
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
   const [reservasList, setReservasList] = useState([]);
   const locaisEntity = useAppSelector(state => state.local.entity);
   const parametrosList = useAppSelector(state => state.parametro.entities);
-  // @ts-ignore
   const [currentEvents, setCurrentEvents] = useState([]);
-  // @ts-ignore
-  const [weekendsVisible, setWeekendsVisible] = React.useState(true);
+  const [weekendsVisible, setWeekendsVisible] = useState(true);
   const navigate = useNavigate();
   const loadingLocal = useAppSelector(state => state.local.loading);
-  // @ts-ignore
   const [modal, setModal] = useState(false);
   const [statusText, setStatusText] = useState('');
   const account = useAppSelector(state => state.authentication.account);
@@ -121,6 +120,7 @@ const LocaisAgenda = args => {
       console.log(error);
     }
   }
+
   const [callendarButton, setCallendarButton] = useState({
     fontSize: '0.9rem',
     padding: '1vh',
@@ -167,20 +167,7 @@ const LocaisAgenda = args => {
           ) : (
             <div className="app-main">
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                <Chip
-                  avatar={
-                    <>
-                      <ArrowBackIos />
-                      {/*<Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>*/}
-                    </>
-                  }
-                  sx={callendarButton}
-                  onClick={() => {
-                    navigate('/agenda');
-                  }}
-                  label={locaisEntity.nome}
-                  color={'primary'}
-                />
+                <BotaoVoltar link={'/agenda'} label={locaisEntity.nome} />
                 &nbsp;
                 <div>
                   <Chip

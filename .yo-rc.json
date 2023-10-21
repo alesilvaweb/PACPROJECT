@@ -37,6 +37,9 @@
       "Tipo"
     ],
     "entitySuffix": "",
+    "herokuAppName": "aapm",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "17",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "7.9.4",
     "jwtSecretKey": "NTY2NTk5ODhkNzRiZjZmZGU5N2EzYzk0YzFjMTUwMjUyZjQ2NGMyYzk0MjcxZTE2N2YzYTc4YjIyYTlhYTlhMjY5NzZlMTQyMzhlZjA5NjdmZDlhYTA3NjM1NTA2ZDJmNWJkYjU4MjNhZmZiNmMxMzM4YWZkYmE3Y2Q5Y2U2Njg=",

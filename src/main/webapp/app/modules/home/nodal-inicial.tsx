@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useMediaQuery, useTheme } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -20,14 +21,21 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function ModalInicial() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
   const handleClose = () => {
+    localStorage.setItem('popUpShow', 'true');
     setOpen(false);
   };
+
+  useEffect(() => {
+    const hasPopUpBeenShown = localStorage.getItem('popUpShow');
+
+    if (!hasPopUpBeenShown) {
+      setOpen(true);
+    }
+  }, []);
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
   return (
@@ -49,21 +57,15 @@ export default function ModalInicial() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
+          <img src="../../../content/images/oktober.png" alt="" width={'100%'} />
           <Typography gutterBottom>
             Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus,
             porta ac consectetur ac, vestibulum at eros.
           </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus
-            dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed
-            odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-          </Typography>
         </DialogContent>
+
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus color={'primary'} onClick={handleClose}>
             Fechar
           </Button>
         </DialogActions>

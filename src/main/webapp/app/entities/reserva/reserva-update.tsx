@@ -107,6 +107,7 @@ export const ReservaUpdate = () => {
                 <span>Editar reserva</span>
               </h4>
               <Box component="fieldset">
+                <legend>Informações de reserva</legend>
                 {`Nome : ${account.firstName} ${account.lastName}`}&nbsp;&nbsp;- &nbsp; {`Local : ${locaisEntity.nome} `}&nbsp;&nbsp;-
                 &nbsp; {`Data : ${reservaEntity.data}`}
               </Box>
@@ -122,19 +123,6 @@ export const ReservaUpdate = () => {
               </Box>
             </>
           )}
-
-          {/*<Col md="12">*/}
-
-          {/*  /!*{start ? (*!/*/}
-
-          {/*  /!*    // <Box component="fieldset" >*!/*/}
-          {/*  /!*    //   <legend>Dados Pessoais</legend>*!/*/}
-          {/*  /!*    //*!/*/}
-          {/*  /!*    // </Box>*!/*/}
-
-          {/*  /!*) : null}*!/*/}
-
-          {/*</Col>*/}
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -326,7 +314,7 @@ export const ReservaUpdate = () => {
                       color="danger"
                     >
                       <FontAwesomeIcon icon="trash" />
-                      &nbsp; Excluir
+                      &nbsp; Cancelar Reserva
                       {/*<Translate contentKey="entity.action.back">Delete</Translate>*/}
                     </Button>
                   ) : null}

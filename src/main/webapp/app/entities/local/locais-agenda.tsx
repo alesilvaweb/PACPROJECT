@@ -78,7 +78,8 @@ const LocaisAgenda = args => {
   }, [reservasList]);
 
   async function atualizaAgenda() {
-    const apiUrl = 'api/reservas';
+    const apiUrl = `api/reservas?status.equals=Agendado&data.greaterThan=${dataAtual()}&localId.equals=${id}`;
+    // const apiUrl = `api/reservas?status.equals=Agendado&localId.equals=${id}`;
     try {
       const requestUrl = `${apiUrl}`;
       const response = await axios

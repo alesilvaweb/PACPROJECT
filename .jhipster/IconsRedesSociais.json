@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231011202351",
+  "changelogDate": "20231018134147",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "icons_redes_sociais",

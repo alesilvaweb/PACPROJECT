@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231011202352",
+  "changelogDate": "20231018134148",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "reserva",
@@ -19,6 +19,11 @@
       "fieldName": "numPessoas",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "StatusReserva",
+      "fieldValues": "Agendado,Bloqueado,Cancelado"
     },
     {
       "fieldName": "data",

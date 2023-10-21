@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231011202343",
+  "changelogDate": "20231018134139",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "local",
@@ -36,6 +36,11 @@
     {
       "fieldName": "localizacao",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "Ativo,Inativo,Bloqueado"
     },
     {
       "fieldName": "valor",

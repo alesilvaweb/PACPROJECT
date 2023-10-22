@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Reserva.
     -->
-    <changeSet id="20231011202352-2" author="jhipster">
+    <changeSet id="20231018134148-2" author="jhipster">
 
         <addForeignKeyConstraint baseColumnNames="local_id"
                                  baseTableName="reserva"

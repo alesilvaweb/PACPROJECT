@@ -21,6 +21,7 @@ import CartaoSocio from 'app/modules/home/cartao-socio';
 import Mapa from 'app/localizacao/Mapa';
 import Sobre from 'app/modules/home/sobre';
 import Events from 'app/modules/home/events';
+import MapaGoogle from 'app/localizacao/MapaGoogle';
 
 const loading = <div>loading ...</div>;
 
@@ -46,7 +47,7 @@ const AppRoutes = () => {
         <Route path="agenda" element={<Inicial />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="events" element={<Events />} />
-        <Route path="mapa" element={<Mapa />} />
+        <Route path="mapa" element={<MapaGoogle />} />
         <Route path="cartao" element={<CartaoSocio />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />

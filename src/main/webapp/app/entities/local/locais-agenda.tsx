@@ -30,7 +30,7 @@ const LocaisAgenda = args => {
   const account = useAppSelector(state => state.authentication.account);
   const toggle = () => setModal(!modal);
   const { id } = useParams<'id'>();
-
+  const calendarRef = useRef<FullCalendar>(null!);
   const data = new Date();
   const dias = 7;
 
@@ -90,9 +90,7 @@ const LocaisAgenda = args => {
           e.data.map(event => {
             if (event.local.id.toString() === id) {
               console.log('Events = ' + event.associado.nome);
-
               if (event.associado.id === account.id) {
-                // @ts-ignore
                 evento.push({
                   id: event.id,
                   title: event.local.nome,
@@ -101,7 +99,6 @@ const LocaisAgenda = args => {
                   resourceEditable: false,
                 });
               } else {
-                // @ts-ignore
                 evento.push({
                   id: event.id,
                   title: 'RESERVADO',
@@ -154,8 +151,6 @@ const LocaisAgenda = args => {
   //
   //
   // })}
-
-  const calendarRef = useRef<FullCalendar>(null!);
 
   if (statusText != 'OK') {
     return <div>Carregando ...</div>;

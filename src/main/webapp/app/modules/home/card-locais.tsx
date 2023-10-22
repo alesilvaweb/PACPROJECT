@@ -59,19 +59,20 @@ export default function CardLocais({ link, title, icon }) {
               sx={{
                 fontSize: '1.3rem',
                 position: 'relative',
-                fontWeight: '1000',
+                fontWeight: '700',
                 // marginTop:"2vh" ,
                 padding: '60px',
                 // backgroundColor:"red",
                 textTransform: 'uppercase',
-                color: '#d0291f',
-                borderRadius: 2,
-                borderWidth: '1px',
-                borderStyle: 'solid',
-                borderColor: '#a1a1a1',
+                color: '#242424',
+                // borderRadius: 2,
+                // borderWidth: '1px',
+                // borderStyle: 'solid',
+                // borderColor: '#a1a1a1',
 
                 ':hover': {
                   fontSize: '1.4rem',
+                  fontWeight: '900',
                 },
               }}
             >

@@ -7,41 +7,30 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity Associado.
+        Added the entity IconsRedesSociais.
     -->
-    <changeSet id="20231011202345-1" author="jhipster">
-        <createTable tableName="associado">
+    <changeSet id="20231018134147-1" author="jhipster">
+        <createTable tableName="icons_redes_sociais">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="nome" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="matricula" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="status" type="varchar(255)">
+            <column name="descricao" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="telefone" type="varchar(255)">
+            <column name="icon" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_associado__email" />
-            </column>
-            <column name="data_nascimento" type="date">
+            <column name="image" type="${blobType}">
                 <constraints nullable="true" />
             </column>
-            <column name="created" type="${datetimeType}">
-                <constraints nullable="true" />
-            </column>
-            <column name="modified" type="${datetimeType}">
+            <column name="image_content_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="associado" columnName="created" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="associado" columnName="modified" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -54,21 +43,18 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20231011202345-1-data" author="jhipster" context="faker">
+    <changeSet id="20231018134147-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/associado.csv"
+                  file="config/liquibase/fake-data/icons_redes_sociais.csv"
                   separator=";"
-                  tableName="associado"
+                  tableName="icons_redes_sociais"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="nome" type="string"/>
-            <column name="matricula" type="string"/>
-            <column name="status" type="string"/>
-            <column name="telefone" type="string"/>
-            <column name="email" type="string"/>
-            <column name="data_nascimento" type="date"/>
-            <column name="created" type="date"/>
-            <column name="modified" type="date"/>
+            <column name="descricao" type="string"/>
+            <column name="icon" type="string"/>
+            <column name="image" type="blob"/>
+            <column name="image_content_type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

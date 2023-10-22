@@ -7,18 +7,24 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
-        Added the entity Departamento.
+        Added the entity Arquivo.
     -->
-    <changeSet id="20231011202353-1" author="jhipster">
-        <createTable tableName="departamento">
+    <changeSet id="20231018134140-1" author="jhipster">
+        <createTable tableName="arquivo">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="nome" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="descricao" type="varchar(255)">
                 <constraints nullable="true" />
+            </column>
+            <column name="arquivo" type="${blobType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="arquivo_content_type" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
@@ -31,8 +37,8 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="departamento" columnName="created" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="departamento" columnName="modified" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="arquivo" columnName="created" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="arquivo" columnName="modified" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -45,15 +51,17 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20231011202353-1-data" author="jhipster" context="faker">
+    <changeSet id="20231018134140-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/departamento.csv"
+                  file="config/liquibase/fake-data/arquivo.csv"
                   separator=";"
-                  tableName="departamento"
+                  tableName="arquivo"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="nome" type="string"/>
             <column name="descricao" type="string"/>
+            <column name="arquivo" type="blob"/>
+            <column name="arquivo_content_type" type="string"/>
             <column name="status" type="string"/>
             <column name="created" type="date"/>
             <column name="modified" type="date"/>

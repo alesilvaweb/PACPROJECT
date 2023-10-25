@@ -1,17 +1,9 @@
-import './footer.scss';
-
 import React from 'react';
-import { Translate } from 'react-jhipster';
-import { Col, Row } from 'reactstrap';
 
-const Footer = () => (
-  <div className="footer page-content">
-    <Row>
-      <Col md="12">
-        <p>{/*<Translate contentKey="footer">Your footer</Translate>*/}</p>
-      </Col>
-    </Row>
-  </div>
-);
+export const Footer = () => {
+  return (
+    <footer style={{ backgroundColor: 'black', position: 'fixed', color: 'white', bottom: '0', width: '100%', height: '10px' }}></footer>
+  );
+};
 
 export default Footer;

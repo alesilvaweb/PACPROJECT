@@ -86,14 +86,19 @@ export const ImagensConvenio = () => {
       <h2 id="imagens-convenio-heading" data-cy="ImagensConvenioHeading">
         <Translate contentKey="aapmApp.imagensConvenio.home.title">Imagens Convenios</Translate>
         <div className="d-flex justify-content-end">
+          <Link to="/convenio" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+            <FontAwesomeIcon icon="plus" />
+            &nbsp; Convênios
+          </Link>
+          &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.imagensConvenio.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.imagensConvenio.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/imagens-convenio/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.imagensConvenio.home.createLabel">Create new Imagens Convenio</Translate>
+            {/*<Translate contentKey="aapmApp.imagensConvenio.home.createLabel">Create new Imagens Convenio</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -102,25 +107,25 @@ export const ImagensConvenio = () => {
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.imagensConvenio.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.imagensConvenio.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('titulo')}>
                   <Translate contentKey="aapmApp.imagensConvenio.titulo">Titulo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('descricao')}>
-                  <Translate contentKey="aapmApp.imagensConvenio.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('descricao')}>*/}
+                {/*  <Translate contentKey="aapmApp.imagensConvenio.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('imagen')}>
                   <Translate contentKey="aapmApp.imagensConvenio.imagen">Imagen</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('created')}>
-                  <Translate contentKey="aapmApp.imagensConvenio.created">Created</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('modified')}>
-                  <Translate contentKey="aapmApp.imagensConvenio.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
+                {/*<th className="hand" onClick={sort('created')}>*/}
+                {/*  <Translate contentKey="aapmApp.imagensConvenio.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('modified')}>*/}
+                {/*  <Translate contentKey="aapmApp.imagensConvenio.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                <th className="hand" onClick={sort('convenio')}>
                   <Translate contentKey="aapmApp.imagensConvenio.convenio">Convenio</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -129,13 +134,13 @@ export const ImagensConvenio = () => {
             <tbody>
               {imagensConvenioList.map((imagensConvenio, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/imagens-convenio/${imagensConvenio.id}`} color="link" size="sm">
-                      {imagensConvenio.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/imagens-convenio/${imagensConvenio.id}`} color="link" size="sm">*/}
+                  {/*    {imagensConvenio.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{imagensConvenio.titulo}</td>
-                  <td>{imagensConvenio.descricao}</td>
+                  {/*<td>{imagensConvenio.descricao}</td>*/}
                   <td>
                     {imagensConvenio.imagen ? (
                       <div>
@@ -154,12 +159,12 @@ export const ImagensConvenio = () => {
                       </div>
                     ) : null}
                   </td>
-                  <td>
-                    {imagensConvenio.created ? <TextFormat type="date" value={imagensConvenio.created} format={APP_DATE_FORMAT} /> : null}
-                  </td>
-                  <td>
-                    {imagensConvenio.modified ? <TextFormat type="date" value={imagensConvenio.modified} format={APP_DATE_FORMAT} /> : null}
-                  </td>
+                  {/*<td>*/}
+                  {/*  {imagensConvenio.created ? <TextFormat type="date" value={imagensConvenio.created} format={APP_DATE_FORMAT} /> : null}*/}
+                  {/*</td>*/}
+                  {/*<td>*/}
+                  {/*  {imagensConvenio.modified ? <TextFormat type="date" value={imagensConvenio.modified} format={APP_DATE_FORMAT} /> : null}*/}
+                  {/*</td>*/}
                   <td>
                     {imagensConvenio.convenio ? (
                       <Link to={`/convenio/${imagensConvenio.convenio.id}`}>{imagensConvenio.convenio.nome}</Link>
@@ -177,9 +182,7 @@ export const ImagensConvenio = () => {
                         data-cy="entityDetailsButton"
                       >
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -189,9 +192,7 @@ export const ImagensConvenio = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -201,9 +202,7 @@ export const ImagensConvenio = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

@@ -51,11 +51,14 @@ enum TipoContato{
 }
 entity Convenio{
     nome String required minlength(2)
-    titulo String ,
+    titulo String,
     descricao TextBlob,
     endereco String,
     telefone String,
-    email String ,
+    email String,
+    imagem ImageBlob required,
+    logo ImageBlob,
+    banner ImageBlob,
     localizacao String,
     status Status
     created Instant,
@@ -64,7 +67,7 @@ entity Convenio{
 entity ImagensConvenio{
     titulo String required,
     descricao String,
-    imagen ImageBlob required,
+    imagem ImageBlob required,
     created Instant,
     modified Instant
 }

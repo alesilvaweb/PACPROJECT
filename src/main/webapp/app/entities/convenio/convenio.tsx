@@ -86,14 +86,22 @@ export const Convenio = () => {
       <h2 id="convenio-heading" data-cy="ConvenioHeading">
         <Translate contentKey="aapmApp.convenio.home.title">Convenios</Translate>
         <div className="d-flex justify-content-end">
+          <Link to="/imagens-convenio" className="btn btn-primary jh-create-entity" id="jh">
+            Imagens
+          </Link>
+          &nbsp;
+          <Link to="/categoria" className="btn btn-primary jh-create-entity">
+            Categorias
+          </Link>
+          &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.convenio.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.convenio.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/convenio/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.convenio.home.createLabel">Create new Convenio</Translate>
+            {/*<Translate contentKey="aapmApp.convenio.home.createLabel">Create new Convenio</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -102,40 +110,40 @@ export const Convenio = () => {
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.convenio.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('nome')}>
                   <Translate contentKey="aapmApp.convenio.nome">Nome</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('titulo')}>
                   <Translate contentKey="aapmApp.convenio.titulo">Titulo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('descricao')}>
-                  <Translate contentKey="aapmApp.convenio.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('descricao')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('endereco')}>
                   <Translate contentKey="aapmApp.convenio.endereco">Endereco</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('telefone')}>
                   <Translate contentKey="aapmApp.convenio.telefone">Telefone</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('email')}>
-                  <Translate contentKey="aapmApp.convenio.email">Email</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('localizacao')}>
-                  <Translate contentKey="aapmApp.convenio.localizacao">Localizacao</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('email')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.email">Email</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('localizacao')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.localizacao">Localizacao</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('status')}>
                   <Translate contentKey="aapmApp.convenio.status">Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('created')}>
-                  <Translate contentKey="aapmApp.convenio.created">Created</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('modified')}>
-                  <Translate contentKey="aapmApp.convenio.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
+                {/*<th className="hand" onClick={sort('created')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('modified')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                <th className="hand" onClick={sort('categoria')}>
                   <Translate contentKey="aapmApp.convenio.categoria">Categoria</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -144,23 +152,23 @@ export const Convenio = () => {
             <tbody>
               {convenioList.map((convenio, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/convenio/${convenio.id}`} color="link" size="sm">
-                      {convenio.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/convenio/${convenio.id}`} color="link" size="sm">*/}
+                  {/*    {convenio.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{convenio.nome}</td>
                   <td>{convenio.titulo}</td>
-                  <td>{convenio.descricao}</td>
+                  {/*<td>{convenio.descricao}</td>*/}
                   <td>{convenio.endereco}</td>
                   <td>{convenio.telefone}</td>
-                  <td>{convenio.email}</td>
-                  <td>{convenio.localizacao}</td>
+                  {/*<td>{convenio.email}</td>*/}
+                  {/*<td>{convenio.localizacao}</td>*/}
                   <td>
                     <Translate contentKey={`aapmApp.Status.${convenio.status}`} />
                   </td>
-                  <td>{convenio.created ? <TextFormat type="date" value={convenio.created} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{convenio.modified ? <TextFormat type="date" value={convenio.modified} format={APP_DATE_FORMAT} /> : null}</td>
+                  {/*<td>{convenio.created ? <TextFormat type="date" value={convenio.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
+                  {/*<td>{convenio.modified ? <TextFormat type="date" value={convenio.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td>
                     {convenio.categoria ? <Link to={`/categoria/${convenio.categoria.id}`}>{convenio.categoria.categoria}</Link> : ''}
                   </td>
@@ -168,9 +176,7 @@ export const Convenio = () => {
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/convenio/${convenio.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -180,9 +186,7 @@ export const Convenio = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -192,9 +196,7 @@ export const Convenio = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

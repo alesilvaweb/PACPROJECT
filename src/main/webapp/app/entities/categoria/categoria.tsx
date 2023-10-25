@@ -86,14 +86,19 @@ export const Categoria = () => {
       <h2 id="categoria-heading" data-cy="CategoriaHeading">
         <Translate contentKey="aapmApp.categoria.home.title">Categorias</Translate>
         <div className="d-flex justify-content-end">
+          <Link to="/convenio" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+            <FontAwesomeIcon icon="plus" />
+            &nbsp; Convênios
+          </Link>
+          &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.categoria.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.categoria.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/categoria/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.categoria.home.createLabel">Create new Categoria</Translate>
+            {/*<Translate contentKey="aapmApp.categoria.home.createLabel">Create new Categoria</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -102,9 +107,9 @@ export const Categoria = () => {
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.categoria.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.categoria.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('categoria')}>
                   <Translate contentKey="aapmApp.categoria.categoria">Categoria</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -123,11 +128,11 @@ export const Categoria = () => {
             <tbody>
               {categoriaList.map((categoria, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/categoria/${categoria.id}`} color="link" size="sm">
-                      {categoria.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/categoria/${categoria.id}`} color="link" size="sm">*/}
+                  {/*    {categoria.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{categoria.categoria}</td>
                   <td>{categoria.descricao}</td>
                   <td>{categoria.created ? <TextFormat type="date" value={categoria.created} format={APP_DATE_FORMAT} /> : null}</td>
@@ -136,9 +141,7 @@ export const Categoria = () => {
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/categoria/${categoria.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -148,9 +151,7 @@ export const Categoria = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -160,9 +161,7 @@ export const Categoria = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

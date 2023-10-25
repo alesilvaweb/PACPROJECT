@@ -23,6 +23,10 @@ export const getEntities = createAsyncThunk('convenio/fetch_entity_list', async 
   const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
   return axios.get<IConvenio[]>(requestUrl);
 });
+export const getConvenios = createAsyncThunk('convenio/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
+  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
+  return axios.get<IConvenio[]>(requestUrl);
+});
 
 export const getEntity = createAsyncThunk(
   'convenio/fetch_entity',

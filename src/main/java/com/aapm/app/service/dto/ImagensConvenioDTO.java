@@ -20,9 +20,9 @@ public class ImagensConvenioDTO implements Serializable {
     private String descricao;
 
     @Lob
-    private byte[] imagen;
+    private byte[] imagem;
 
-    private String imagenContentType;
+    private String imagemContentType;
     private Instant created;
 
     private Instant modified;
@@ -53,20 +53,20 @@ public class ImagensConvenioDTO implements Serializable {
         this.descricao = descricao;
     }
 
-    public byte[] getImagen() {
-        return imagen;
+    public byte[] getImagem() {
+        return imagem;
     }
 
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
-    public String getImagenContentType() {
-        return imagenContentType;
+    public String getImagemContentType() {
+        return imagemContentType;
     }
 
-    public void setImagenContentType(String imagenContentType) {
-        this.imagenContentType = imagenContentType;
+    public void setImagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
     }
 
     public Instant getCreated() {
@@ -121,7 +121,7 @@ public class ImagensConvenioDTO implements Serializable {
             "id=" + getId() +
             ", titulo='" + getTitulo() + "'" +
             ", descricao='" + getDescricao() + "'" +
-            ", imagen='" + getImagen() + "'" +
+            ", imagem='" + getImagem() + "'" +
             ", created='" + getCreated() + "'" +
             ", modified='" + getModified() + "'" +
             ", convenio=" + getConvenio() +

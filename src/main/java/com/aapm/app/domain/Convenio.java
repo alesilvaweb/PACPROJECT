@@ -51,6 +51,28 @@ public class Convenio implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @Lob
+    @Column(name = "imagem", nullable = false)
+    private byte[] imagem;
+
+    @NotNull
+    @Column(name = "imagem_content_type", nullable = false)
+    private String imagemContentType;
+
+    @Lob
+    @Column(name = "logo")
+    private byte[] logo;
+
+    @Column(name = "logo_content_type")
+    private String logoContentType;
+
+    @Lob
+    @Column(name = "banner")
+    private byte[] banner;
+
+    @Column(name = "banner_content_type")
+    private String bannerContentType;
+
     @Column(name = "localizacao")
     private String localizacao;
 
@@ -169,6 +191,84 @@ public class Convenio implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public byte[] getImagem() {
+        return this.imagem;
+    }
+
+    public Convenio imagem(byte[] imagem) {
+        this.setImagem(imagem);
+        return this;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
+    public String getImagemContentType() {
+        return this.imagemContentType;
+    }
+
+    public Convenio imagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
+        return this;
+    }
+
+    public void setImagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
+    }
+
+    public byte[] getLogo() {
+        return this.logo;
+    }
+
+    public Convenio logo(byte[] logo) {
+        this.setLogo(logo);
+        return this;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    public String getLogoContentType() {
+        return this.logoContentType;
+    }
+
+    public Convenio logoContentType(String logoContentType) {
+        this.logoContentType = logoContentType;
+        return this;
+    }
+
+    public void setLogoContentType(String logoContentType) {
+        this.logoContentType = logoContentType;
+    }
+
+    public byte[] getBanner() {
+        return this.banner;
+    }
+
+    public Convenio banner(byte[] banner) {
+        this.setBanner(banner);
+        return this;
+    }
+
+    public void setBanner(byte[] banner) {
+        this.banner = banner;
+    }
+
+    public String getBannerContentType() {
+        return this.bannerContentType;
+    }
+
+    public Convenio bannerContentType(String bannerContentType) {
+        this.bannerContentType = bannerContentType;
+        return this;
+    }
+
+    public void setBannerContentType(String bannerContentType) {
+        this.bannerContentType = bannerContentType;
     }
 
     public String getLocalizacao() {
@@ -328,6 +428,12 @@ public class Convenio implements Serializable {
             ", endereco='" + getEndereco() + "'" +
             ", telefone='" + getTelefone() + "'" +
             ", email='" + getEmail() + "'" +
+            ", imagem='" + getImagem() + "'" +
+            ", imagemContentType='" + getImagemContentType() + "'" +
+            ", logo='" + getLogo() + "'" +
+            ", logoContentType='" + getLogoContentType() + "'" +
+            ", banner='" + getBanner() + "'" +
+            ", bannerContentType='" + getBannerContentType() + "'" +
             ", localizacao='" + getLocalizacao() + "'" +
             ", status='" + getStatus() + "'" +
             ", created='" + getCreated() + "'" +

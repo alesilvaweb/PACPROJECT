@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231018134145",
+  "changelogDate": "20231025004831",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "imagens_convenio",
@@ -15,7 +15,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "imagen",
+      "fieldName": "imagem",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "image",
       "fieldValidateRules": ["required"]

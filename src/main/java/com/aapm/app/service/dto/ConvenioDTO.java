@@ -30,6 +30,20 @@ public class ConvenioDTO implements Serializable {
 
     private String email;
 
+    @Lob
+    private byte[] imagem;
+
+    private String imagemContentType;
+
+    @Lob
+    private byte[] logo;
+
+    private String logoContentType;
+
+    @Lob
+    private byte[] banner;
+
+    private String bannerContentType;
     private String localizacao;
 
     private Status status;
@@ -94,6 +108,54 @@ public class ConvenioDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
+    public String getImagemContentType() {
+        return imagemContentType;
+    }
+
+    public void setImagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
+    }
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    public String getLogoContentType() {
+        return logoContentType;
+    }
+
+    public void setLogoContentType(String logoContentType) {
+        this.logoContentType = logoContentType;
+    }
+
+    public byte[] getBanner() {
+        return banner;
+    }
+
+    public void setBanner(byte[] banner) {
+        this.banner = banner;
+    }
+
+    public String getBannerContentType() {
+        return bannerContentType;
+    }
+
+    public void setBannerContentType(String bannerContentType) {
+        this.bannerContentType = bannerContentType;
     }
 
     public String getLocalizacao() {
@@ -168,6 +230,9 @@ public class ConvenioDTO implements Serializable {
             ", endereco='" + getEndereco() + "'" +
             ", telefone='" + getTelefone() + "'" +
             ", email='" + getEmail() + "'" +
+            ", imagem='" + getImagem() + "'" +
+            ", logo='" + getLogo() + "'" +
+            ", banner='" + getBanner() + "'" +
             ", localizacao='" + getLocalizacao() + "'" +
             ", status='" + getStatus() + "'" +
             ", created='" + getCreated() + "'" +

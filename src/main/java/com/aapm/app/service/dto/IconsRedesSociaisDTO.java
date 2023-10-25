@@ -21,9 +21,9 @@ public class IconsRedesSociaisDTO implements Serializable {
     private String icon;
 
     @Lob
-    private byte[] image;
+    private byte[] imagem;
 
-    private String imageContentType;
+    private String imagemContentType;
 
     public Long getId() {
         return id;
@@ -57,20 +57,20 @@ public class IconsRedesSociaisDTO implements Serializable {
         this.icon = icon;
     }
 
-    public byte[] getImage() {
-        return image;
+    public byte[] getImagem() {
+        return imagem;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
-    public String getImageContentType() {
-        return imageContentType;
+    public String getImagemContentType() {
+        return imagemContentType;
     }
 
-    public void setImageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
+    public void setImagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
     }
 
     @Override
@@ -102,7 +102,7 @@ public class IconsRedesSociaisDTO implements Serializable {
             ", nome='" + getNome() + "'" +
             ", descricao='" + getDescricao() + "'" +
             ", icon='" + getIcon() + "'" +
-            ", image='" + getImage() + "'" +
+            ", imagem='" + getImagem() + "'" +
             "}";
     }
 }

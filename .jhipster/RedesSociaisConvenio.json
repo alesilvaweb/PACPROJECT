@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231018134146",
+  "changelogDate": "20231025004832",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "redes_sociais_convenio",

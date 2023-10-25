@@ -51,23 +51,23 @@ export const IconsRedesSociaisDetail = () => {
           </dt>
           <dd>{iconsRedesSociaisEntity.icon}</dd>
           <dt>
-            <span id="image">
-              <Translate contentKey="aapmApp.iconsRedesSociais.image">Image</Translate>
+            <span id="imagem">
+              <Translate contentKey="aapmApp.iconsRedesSociais.imagem">Imagem</Translate>
             </span>
           </dt>
           <dd>
-            {iconsRedesSociaisEntity.image ? (
+            {iconsRedesSociaisEntity.imagem ? (
               <div>
-                {iconsRedesSociaisEntity.imageContentType ? (
-                  <a onClick={openFile(iconsRedesSociaisEntity.imageContentType, iconsRedesSociaisEntity.image)}>
+                {iconsRedesSociaisEntity.imagemContentType ? (
+                  <a onClick={openFile(iconsRedesSociaisEntity.imagemContentType, iconsRedesSociaisEntity.imagem)}>
                     <img
-                      src={`data:${iconsRedesSociaisEntity.imageContentType};base64,${iconsRedesSociaisEntity.image}`}
+                      src={`data:${iconsRedesSociaisEntity.imagemContentType};base64,${iconsRedesSociaisEntity.imagem}`}
                       style={{ maxHeight: '30px' }}
                     />
                   </a>
                 ) : null}
                 <span>
-                  {iconsRedesSociaisEntity.imageContentType}, {byteSize(iconsRedesSociaisEntity.image)}
+                  {iconsRedesSociaisEntity.imagemContentType}, {byteSize(iconsRedesSociaisEntity.imagem)}
                 </span>
               </div>
             ) : null}

@@ -67,6 +67,21 @@ class ConvenioResourceIT {
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
+    private static final byte[] DEFAULT_IMAGEM = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGEM = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGEM_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGEM_CONTENT_TYPE = "image/png";
+
+    private static final byte[] DEFAULT_LOGO = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_LOGO = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_LOGO_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_LOGO_CONTENT_TYPE = "image/png";
+
+    private static final byte[] DEFAULT_BANNER = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_BANNER = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_BANNER_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_BANNER_CONTENT_TYPE = "image/png";
+
     private static final String DEFAULT_LOCALIZACAO = "AAAAAAAAAA";
     private static final String UPDATED_LOCALIZACAO = "BBBBBBBBBB";
 
@@ -119,6 +134,12 @@ class ConvenioResourceIT {
             .endereco(DEFAULT_ENDERECO)
             .telefone(DEFAULT_TELEFONE)
             .email(DEFAULT_EMAIL)
+            .imagem(DEFAULT_IMAGEM)
+            .imagemContentType(DEFAULT_IMAGEM_CONTENT_TYPE)
+            .logo(DEFAULT_LOGO)
+            .logoContentType(DEFAULT_LOGO_CONTENT_TYPE)
+            .banner(DEFAULT_BANNER)
+            .bannerContentType(DEFAULT_BANNER_CONTENT_TYPE)
             .localizacao(DEFAULT_LOCALIZACAO)
             .status(DEFAULT_STATUS)
             .created(DEFAULT_CREATED)
@@ -140,6 +161,12 @@ class ConvenioResourceIT {
             .endereco(UPDATED_ENDERECO)
             .telefone(UPDATED_TELEFONE)
             .email(UPDATED_EMAIL)
+            .imagem(UPDATED_IMAGEM)
+            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE)
+            .logo(UPDATED_LOGO)
+            .logoContentType(UPDATED_LOGO_CONTENT_TYPE)
+            .banner(UPDATED_BANNER)
+            .bannerContentType(UPDATED_BANNER_CONTENT_TYPE)
             .localizacao(UPDATED_LOCALIZACAO)
             .status(UPDATED_STATUS)
             .created(UPDATED_CREATED)
@@ -172,6 +199,12 @@ class ConvenioResourceIT {
         assertThat(testConvenio.getEndereco()).isEqualTo(DEFAULT_ENDERECO);
         assertThat(testConvenio.getTelefone()).isEqualTo(DEFAULT_TELEFONE);
         assertThat(testConvenio.getEmail()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(testConvenio.getImagem()).isEqualTo(DEFAULT_IMAGEM);
+        assertThat(testConvenio.getImagemContentType()).isEqualTo(DEFAULT_IMAGEM_CONTENT_TYPE);
+        assertThat(testConvenio.getLogo()).isEqualTo(DEFAULT_LOGO);
+        assertThat(testConvenio.getLogoContentType()).isEqualTo(DEFAULT_LOGO_CONTENT_TYPE);
+        assertThat(testConvenio.getBanner()).isEqualTo(DEFAULT_BANNER);
+        assertThat(testConvenio.getBannerContentType()).isEqualTo(DEFAULT_BANNER_CONTENT_TYPE);
         assertThat(testConvenio.getLocalizacao()).isEqualTo(DEFAULT_LOCALIZACAO);
         assertThat(testConvenio.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testConvenio.getCreated()).isEqualTo(DEFAULT_CREATED);
@@ -233,6 +266,12 @@ class ConvenioResourceIT {
             .andExpect(jsonPath("$.[*].endereco").value(hasItem(DEFAULT_ENDERECO)))
             .andExpect(jsonPath("$.[*].telefone").value(hasItem(DEFAULT_TELEFONE)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
+            .andExpect(jsonPath("$.[*].imagemContentType").value(hasItem(DEFAULT_IMAGEM_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].imagem").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEM))))
+            .andExpect(jsonPath("$.[*].logoContentType").value(hasItem(DEFAULT_LOGO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].logo").value(hasItem(Base64Utils.encodeToString(DEFAULT_LOGO))))
+            .andExpect(jsonPath("$.[*].bannerContentType").value(hasItem(DEFAULT_BANNER_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].banner").value(hasItem(Base64Utils.encodeToString(DEFAULT_BANNER))))
             .andExpect(jsonPath("$.[*].localizacao").value(hasItem(DEFAULT_LOCALIZACAO)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
@@ -274,6 +313,12 @@ class ConvenioResourceIT {
             .andExpect(jsonPath("$.endereco").value(DEFAULT_ENDERECO))
             .andExpect(jsonPath("$.telefone").value(DEFAULT_TELEFONE))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
+            .andExpect(jsonPath("$.imagemContentType").value(DEFAULT_IMAGEM_CONTENT_TYPE))
+            .andExpect(jsonPath("$.imagem").value(Base64Utils.encodeToString(DEFAULT_IMAGEM)))
+            .andExpect(jsonPath("$.logoContentType").value(DEFAULT_LOGO_CONTENT_TYPE))
+            .andExpect(jsonPath("$.logo").value(Base64Utils.encodeToString(DEFAULT_LOGO)))
+            .andExpect(jsonPath("$.bannerContentType").value(DEFAULT_BANNER_CONTENT_TYPE))
+            .andExpect(jsonPath("$.banner").value(Base64Utils.encodeToString(DEFAULT_BANNER)))
             .andExpect(jsonPath("$.localizacao").value(DEFAULT_LOCALIZACAO))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
@@ -889,6 +934,12 @@ class ConvenioResourceIT {
             .andExpect(jsonPath("$.[*].endereco").value(hasItem(DEFAULT_ENDERECO)))
             .andExpect(jsonPath("$.[*].telefone").value(hasItem(DEFAULT_TELEFONE)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
+            .andExpect(jsonPath("$.[*].imagemContentType").value(hasItem(DEFAULT_IMAGEM_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].imagem").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEM))))
+            .andExpect(jsonPath("$.[*].logoContentType").value(hasItem(DEFAULT_LOGO_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].logo").value(hasItem(Base64Utils.encodeToString(DEFAULT_LOGO))))
+            .andExpect(jsonPath("$.[*].bannerContentType").value(hasItem(DEFAULT_BANNER_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].banner").value(hasItem(Base64Utils.encodeToString(DEFAULT_BANNER))))
             .andExpect(jsonPath("$.[*].localizacao").value(hasItem(DEFAULT_LOCALIZACAO)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
@@ -947,6 +998,12 @@ class ConvenioResourceIT {
             .endereco(UPDATED_ENDERECO)
             .telefone(UPDATED_TELEFONE)
             .email(UPDATED_EMAIL)
+            .imagem(UPDATED_IMAGEM)
+            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE)
+            .logo(UPDATED_LOGO)
+            .logoContentType(UPDATED_LOGO_CONTENT_TYPE)
+            .banner(UPDATED_BANNER)
+            .bannerContentType(UPDATED_BANNER_CONTENT_TYPE)
             .localizacao(UPDATED_LOCALIZACAO)
             .status(UPDATED_STATUS)
             .created(UPDATED_CREATED)
@@ -971,6 +1028,12 @@ class ConvenioResourceIT {
         assertThat(testConvenio.getEndereco()).isEqualTo(UPDATED_ENDERECO);
         assertThat(testConvenio.getTelefone()).isEqualTo(UPDATED_TELEFONE);
         assertThat(testConvenio.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testConvenio.getImagem()).isEqualTo(UPDATED_IMAGEM);
+        assertThat(testConvenio.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
+        assertThat(testConvenio.getLogo()).isEqualTo(UPDATED_LOGO);
+        assertThat(testConvenio.getLogoContentType()).isEqualTo(UPDATED_LOGO_CONTENT_TYPE);
+        assertThat(testConvenio.getBanner()).isEqualTo(UPDATED_BANNER);
+        assertThat(testConvenio.getBannerContentType()).isEqualTo(UPDATED_BANNER_CONTENT_TYPE);
         assertThat(testConvenio.getLocalizacao()).isEqualTo(UPDATED_LOCALIZACAO);
         assertThat(testConvenio.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testConvenio.getCreated()).isEqualTo(UPDATED_CREATED);
@@ -1054,7 +1117,14 @@ class ConvenioResourceIT {
         Convenio partialUpdatedConvenio = new Convenio();
         partialUpdatedConvenio.setId(convenio.getId());
 
-        partialUpdatedConvenio.nome(UPDATED_NOME).localizacao(UPDATED_LOCALIZACAO).status(UPDATED_STATUS);
+        partialUpdatedConvenio
+            .nome(UPDATED_NOME)
+            .imagem(UPDATED_IMAGEM)
+            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE)
+            .logo(UPDATED_LOGO)
+            .logoContentType(UPDATED_LOGO_CONTENT_TYPE)
+            .status(UPDATED_STATUS)
+            .created(UPDATED_CREATED);
 
         restConvenioMockMvc
             .perform(
@@ -1074,9 +1144,15 @@ class ConvenioResourceIT {
         assertThat(testConvenio.getEndereco()).isEqualTo(DEFAULT_ENDERECO);
         assertThat(testConvenio.getTelefone()).isEqualTo(DEFAULT_TELEFONE);
         assertThat(testConvenio.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testConvenio.getLocalizacao()).isEqualTo(UPDATED_LOCALIZACAO);
+        assertThat(testConvenio.getImagem()).isEqualTo(UPDATED_IMAGEM);
+        assertThat(testConvenio.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
+        assertThat(testConvenio.getLogo()).isEqualTo(UPDATED_LOGO);
+        assertThat(testConvenio.getLogoContentType()).isEqualTo(UPDATED_LOGO_CONTENT_TYPE);
+        assertThat(testConvenio.getBanner()).isEqualTo(DEFAULT_BANNER);
+        assertThat(testConvenio.getBannerContentType()).isEqualTo(DEFAULT_BANNER_CONTENT_TYPE);
+        assertThat(testConvenio.getLocalizacao()).isEqualTo(DEFAULT_LOCALIZACAO);
         assertThat(testConvenio.getStatus()).isEqualTo(UPDATED_STATUS);
-        assertThat(testConvenio.getCreated()).isEqualTo(DEFAULT_CREATED);
+        assertThat(testConvenio.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testConvenio.getModified()).isEqualTo(DEFAULT_MODIFIED);
     }
 
@@ -1099,6 +1175,12 @@ class ConvenioResourceIT {
             .endereco(UPDATED_ENDERECO)
             .telefone(UPDATED_TELEFONE)
             .email(UPDATED_EMAIL)
+            .imagem(UPDATED_IMAGEM)
+            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE)
+            .logo(UPDATED_LOGO)
+            .logoContentType(UPDATED_LOGO_CONTENT_TYPE)
+            .banner(UPDATED_BANNER)
+            .bannerContentType(UPDATED_BANNER_CONTENT_TYPE)
             .localizacao(UPDATED_LOCALIZACAO)
             .status(UPDATED_STATUS)
             .created(UPDATED_CREATED)
@@ -1122,6 +1204,12 @@ class ConvenioResourceIT {
         assertThat(testConvenio.getEndereco()).isEqualTo(UPDATED_ENDERECO);
         assertThat(testConvenio.getTelefone()).isEqualTo(UPDATED_TELEFONE);
         assertThat(testConvenio.getEmail()).isEqualTo(UPDATED_EMAIL);
+        assertThat(testConvenio.getImagem()).isEqualTo(UPDATED_IMAGEM);
+        assertThat(testConvenio.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
+        assertThat(testConvenio.getLogo()).isEqualTo(UPDATED_LOGO);
+        assertThat(testConvenio.getLogoContentType()).isEqualTo(UPDATED_LOGO_CONTENT_TYPE);
+        assertThat(testConvenio.getBanner()).isEqualTo(UPDATED_BANNER);
+        assertThat(testConvenio.getBannerContentType()).isEqualTo(UPDATED_BANNER_CONTENT_TYPE);
         assertThat(testConvenio.getLocalizacao()).isEqualTo(UPDATED_LOCALIZACAO);
         assertThat(testConvenio.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testConvenio.getCreated()).isEqualTo(UPDATED_CREATED);

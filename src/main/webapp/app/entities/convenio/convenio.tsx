@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -86,12 +86,9 @@ export const Convenio = () => {
       <h2 id="convenio-heading" data-cy="ConvenioHeading">
         <Translate contentKey="aapmApp.convenio.home.title">Convenios</Translate>
         <div className="d-flex justify-content-end">
-          <Link to="/imagens-convenio" className="btn btn-primary jh-create-entity" id="jh">
-            Imagens
-          </Link>
-          &nbsp;
           <Link to="/categoria" className="btn btn-primary jh-create-entity">
-            Categorias
+            <FontAwesomeIcon icon="plus" />
+            &nbsp; Categorias
           </Link>
           &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
@@ -100,7 +97,7 @@ export const Convenio = () => {
           </Button>
           <Link to="/convenio/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp;
+
             {/*<Translate contentKey="aapmApp.convenio.home.createLabel">Create new Convenio</Translate>*/}
           </Link>
         </div>
@@ -122,14 +119,23 @@ export const Convenio = () => {
                 {/*<th className="hand" onClick={sort('descricao')}>*/}
                 {/*  <Translate contentKey="aapmApp.convenio.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
-                <th className="hand" onClick={sort('endereco')}>
-                  <Translate contentKey="aapmApp.convenio.endereco">Endereco</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('endereco')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.endereco">Endereco</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('telefone')}>
                   <Translate contentKey="aapmApp.convenio.telefone">Telefone</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 {/*<th className="hand" onClick={sort('email')}>*/}
                 {/*  <Translate contentKey="aapmApp.convenio.email">Email</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                <th className="hand" onClick={sort('imagem')}>
+                  <Translate contentKey="aapmApp.convenio.imagem">Imagem</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                {/*<th className="hand" onClick={sort('logo')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.logo">Logo</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('banner')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.banner">Banner</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
                 {/*<th className="hand" onClick={sort('localizacao')}>*/}
                 {/*  <Translate contentKey="aapmApp.convenio.localizacao">Localizacao</Translate> <FontAwesomeIcon icon="sort" />*/}
@@ -143,7 +149,7 @@ export const Convenio = () => {
                 {/*<th className="hand" onClick={sort('modified')}>*/}
                 {/*  <Translate contentKey="aapmApp.convenio.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
-                <th className="hand" onClick={sort('categoria')}>
+                <th>
                   <Translate contentKey="aapmApp.convenio.categoria">Categoria</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
@@ -160,13 +166,58 @@ export const Convenio = () => {
                   <td>{convenio.nome}</td>
                   <td>{convenio.titulo}</td>
                   {/*<td>{convenio.descricao}</td>*/}
-                  <td>{convenio.endereco}</td>
+                  {/*<td>{convenio.endereco}</td>*/}
                   <td>{convenio.telefone}</td>
                   {/*<td>{convenio.email}</td>*/}
-                  {/*<td>{convenio.localizacao}</td>*/}
                   <td>
-                    <Translate contentKey={`aapmApp.Status.${convenio.status}`} />
+                    {convenio.imagem ? (
+                      <div>
+                        {convenio.imagemContentType ? (
+                          <a onClick={openFile(convenio.imagemContentType, convenio.imagem)}>
+                            <img src={`data:${convenio.imagemContentType};base64,${convenio.imagem}`} style={{ maxHeight: '30px' }} />
+                            &nbsp;
+                          </a>
+                        ) : null}
+                        <span>
+                          {convenio.imagemContentType}, {byteSize(convenio.imagem)}
+                        </span>
+                      </div>
+                    ) : null}
                   </td>
+                  {/*<td>*/}
+                  {/*  {convenio.logo ? (*/}
+                  {/*    <div>*/}
+                  {/*      {convenio.logoContentType ? (*/}
+                  {/*        <a onClick={openFile(convenio.logoContentType, convenio.logo)}>*/}
+                  {/*          <img src={`data:${convenio.logoContentType};base64,${convenio.logo}`} style={{ maxHeight: '30px' }} />*/}
+                  {/*          &nbsp;*/}
+                  {/*        </a>*/}
+                  {/*      ) : null}*/}
+                  {/*      <span>*/}
+                  {/*        {convenio.logoContentType}, {byteSize(convenio.logo)}*/}
+                  {/*      </span>*/}
+                  {/*    </div>*/}
+                  {/*  ) : null}*/}
+                  {/*</td>*/}
+                  {/*<td>*/}
+                  {/*  {convenio.banner ? (*/}
+                  {/*    <div>*/}
+                  {/*      {convenio.bannerContentType ? (*/}
+                  {/*        <a onClick={openFile(convenio.bannerContentType, convenio.banner)}>*/}
+                  {/*          <img src={`data:${convenio.bannerContentType};base64,${convenio.banner}`} style={{ maxHeight: '30px' }} />*/}
+                  {/*          &nbsp;*/}
+                  {/*        </a>*/}
+                  {/*      ) : null}*/}
+                  {/*      <span>*/}
+                  {/*        {convenio.bannerContentType}, {byteSize(convenio.banner)}*/}
+                  {/*      </span>*/}
+                  {/*    </div>*/}
+                  {/*  ) : null}*/}
+                  {/*</td>*/}
+                  {/*<td>{convenio.localizacao}</td>*/}
+                  {/*<td>*/}
+                  {/*  <Translate contentKey={`aapmApp.Status.${convenio.status}`} />*/}
+                  {/*</td>*/}
                   {/*<td>{convenio.created ? <TextFormat type="date" value={convenio.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   {/*<td>{convenio.modified ? <TextFormat type="date" value={convenio.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td>

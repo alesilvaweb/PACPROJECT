@@ -45,23 +45,23 @@ export const ImagensConvenioDetail = () => {
           </dt>
           <dd>{imagensConvenioEntity.descricao}</dd>
           <dt>
-            <span id="imagen">
-              <Translate contentKey="aapmApp.imagensConvenio.imagen">Imagen</Translate>
+            <span id="imagem">
+              <Translate contentKey="aapmApp.imagensConvenio.imagem">Imagem</Translate>
             </span>
           </dt>
           <dd>
-            {imagensConvenioEntity.imagen ? (
+            {imagensConvenioEntity.imagem ? (
               <div>
-                {imagensConvenioEntity.imagenContentType ? (
-                  <a onClick={openFile(imagensConvenioEntity.imagenContentType, imagensConvenioEntity.imagen)}>
+                {imagensConvenioEntity.imagemContentType ? (
+                  <a onClick={openFile(imagensConvenioEntity.imagemContentType, imagensConvenioEntity.imagem)}>
                     <img
-                      src={`data:${imagensConvenioEntity.imagenContentType};base64,${imagensConvenioEntity.imagen}`}
+                      src={`data:${imagensConvenioEntity.imagemContentType};base64,${imagensConvenioEntity.imagem}`}
                       style={{ maxHeight: '30px' }}
                     />
                   </a>
                 ) : null}
                 <span>
-                  {imagensConvenioEntity.imagenContentType}, {byteSize(imagensConvenioEntity.imagen)}
+                  {imagensConvenioEntity.imagemContentType}, {byteSize(imagensConvenioEntity.imagem)}
                 </span>
               </div>
             ) : null}

@@ -112,10 +112,10 @@ export const IconsRedesSociaisUpdate = () => {
                 type="text"
               />
               <ValidatedBlobField
-                label={translate('aapmApp.iconsRedesSociais.image')}
-                id="icons-redes-sociais-image"
-                name="image"
-                data-cy="image"
+                label={translate('aapmApp.iconsRedesSociais.imagem')}
+                id="icons-redes-sociais-imagem"
+                name="imagem"
+                data-cy="imagem"
                 isImage
                 accept="image/*"
               />

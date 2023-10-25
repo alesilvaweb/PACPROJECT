@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231018134144",
+  "changelogDate": "20231025004830",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "convenio",
@@ -31,6 +31,22 @@
     {
       "fieldName": "email",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "imagem",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "logo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "banner",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
     },
     {
       "fieldName": "localizacao",

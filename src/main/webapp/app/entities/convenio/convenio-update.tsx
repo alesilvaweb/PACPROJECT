@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -145,6 +145,33 @@ export const ConvenioUpdate = () => {
                 type="text"
               />
               <ValidatedField label={translate('aapmApp.convenio.email')} id="convenio-email" name="email" data-cy="email" type="text" />
+              <ValidatedBlobField
+                label={translate('aapmApp.convenio.imagem')}
+                id="convenio-imagem"
+                name="imagem"
+                data-cy="imagem"
+                isImage
+                accept="image/*"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
+              />
+              <ValidatedBlobField
+                label={translate('aapmApp.convenio.logo')}
+                id="convenio-logo"
+                name="logo"
+                data-cy="logo"
+                isImage
+                accept="image/*"
+              />
+              <ValidatedBlobField
+                label={translate('aapmApp.convenio.banner')}
+                id="convenio-banner"
+                name="banner"
+                data-cy="banner"
+                isImage
+                accept="image/*"
+              />
               <ValidatedField
                 label={translate('aapmApp.convenio.localizacao')}
                 id="convenio-localizacao"
@@ -169,8 +196,8 @@ export const ConvenioUpdate = () => {
                 label={translate('aapmApp.convenio.created')}
                 id="convenio-created"
                 name="created"
-                data-cy="created"
                 hidden={true}
+                data-cy="created"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
@@ -178,8 +205,8 @@ export const ConvenioUpdate = () => {
                 label={translate('aapmApp.convenio.modified')}
                 id="convenio-modified"
                 name="modified"
-                data-cy="modified"
                 hidden={true}
+                data-cy="modified"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />

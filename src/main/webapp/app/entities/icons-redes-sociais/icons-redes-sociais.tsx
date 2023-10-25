@@ -119,8 +119,8 @@ export const IconsRedesSociais = () => {
                 <th className="hand" onClick={sort('icon')}>
                   <Translate contentKey="aapmApp.iconsRedesSociais.icon">Icon</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('image')}>
-                  <Translate contentKey="aapmApp.iconsRedesSociais.image">Image</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('imagem')}>
+                  <Translate contentKey="aapmApp.iconsRedesSociais.imagem">Imagem</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -137,19 +137,19 @@ export const IconsRedesSociais = () => {
                   <td>{iconsRedesSociais.descricao}</td>
                   <td>{iconsRedesSociais.icon}</td>
                   <td>
-                    {iconsRedesSociais.image ? (
+                    {iconsRedesSociais.imagem ? (
                       <div>
-                        {iconsRedesSociais.imageContentType ? (
-                          <a onClick={openFile(iconsRedesSociais.imageContentType, iconsRedesSociais.image)}>
+                        {iconsRedesSociais.imagemContentType ? (
+                          <a onClick={openFile(iconsRedesSociais.imagemContentType, iconsRedesSociais.imagem)}>
                             <img
-                              src={`data:${iconsRedesSociais.imageContentType};base64,${iconsRedesSociais.image}`}
+                              src={`data:${iconsRedesSociais.imagemContentType};base64,${iconsRedesSociais.imagem}`}
                               style={{ maxHeight: '30px' }}
                             />
                             &nbsp;
                           </a>
                         ) : null}
                         <span>
-                          {iconsRedesSociais.imageContentType}, {byteSize(iconsRedesSociais.image)}
+                          {iconsRedesSociais.imagemContentType}, {byteSize(iconsRedesSociais.imagem)}
                         </span>
                       </div>
                     ) : null}

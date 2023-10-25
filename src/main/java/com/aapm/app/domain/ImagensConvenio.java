@@ -33,12 +33,12 @@ public class ImagensConvenio implements Serializable {
     private String descricao;
 
     @Lob
-    @Column(name = "imagen", nullable = false)
-    private byte[] imagen;
+    @Column(name = "imagem", nullable = false)
+    private byte[] imagem;
 
     @NotNull
-    @Column(name = "imagen_content_type", nullable = false)
-    private String imagenContentType;
+    @Column(name = "imagem_content_type", nullable = false)
+    private String imagemContentType;
 
     @Column(name = "created")
     private Instant created;
@@ -91,30 +91,30 @@ public class ImagensConvenio implements Serializable {
         this.descricao = descricao;
     }
 
-    public byte[] getImagen() {
-        return this.imagen;
+    public byte[] getImagem() {
+        return this.imagem;
     }
 
-    public ImagensConvenio imagen(byte[] imagen) {
-        this.setImagen(imagen);
+    public ImagensConvenio imagem(byte[] imagem) {
+        this.setImagem(imagem);
         return this;
     }
 
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
-    public String getImagenContentType() {
-        return this.imagenContentType;
+    public String getImagemContentType() {
+        return this.imagemContentType;
     }
 
-    public ImagensConvenio imagenContentType(String imagenContentType) {
-        this.imagenContentType = imagenContentType;
+    public ImagensConvenio imagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
         return this;
     }
 
-    public void setImagenContentType(String imagenContentType) {
-        this.imagenContentType = imagenContentType;
+    public void setImagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
     }
 
     public Instant getCreated() {
@@ -182,8 +182,8 @@ public class ImagensConvenio implements Serializable {
             "id=" + getId() +
             ", titulo='" + getTitulo() + "'" +
             ", descricao='" + getDescricao() + "'" +
-            ", imagen='" + getImagen() + "'" +
-            ", imagenContentType='" + getImagenContentType() + "'" +
+            ", imagem='" + getImagem() + "'" +
+            ", imagemContentType='" + getImagemContentType() + "'" +
             ", created='" + getCreated() + "'" +
             ", modified='" + getModified() + "'" +
             "}";

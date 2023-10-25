@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import CardLocais from 'app/modules/home/card-locais';
 import ModalInicial from 'app/modules/home/nodal-inicial';
 import PaginaInicialNew from 'app/modules/home/pagina-inicial-new';
-import BunnerCarousel from 'app/modules/home/bunner-carousel';
+import BannerCarousel from 'app/modules/home/banner-carousel';
 
 const PaginaInicial = () => {
   const account = useAppSelector(state => state.authentication.account);
@@ -22,7 +22,18 @@ const PaginaInicial = () => {
     <div>
       {account?.login ? (
         <>
-          {/*//   <PaginaInicialNew/>*/}
+          <div>
+            <h4>Bem vindos ao APP da Associação Atlética Philip Morris</h4>
+            <div
+              style={{
+                fontSize: '0.9rem',
+                color: 'text.disabled',
+              }}
+            >
+              Aqui você pode fazer reservas para as sedes da associação, consultar convênios, visualizar o seu cartão de associado entre
+              outros recursos disponíveis, click <a href={'/'}>aqui</a> e descubra.
+            </div>
+          </div>
 
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <ModalInicial />
@@ -34,7 +45,8 @@ const PaginaInicial = () => {
             {/*<CardLocais link={'/sobre'} title={'Sobre'} icon={<Info sx={{ fontSize: '7vh', color: 'white' }} />} />*/}
           </Grid>
           <br />
-          <BunnerCarousel />
+          <h5>Convênios</h5>
+          <BannerCarousel />
         </>
       ) : (
         <Login />

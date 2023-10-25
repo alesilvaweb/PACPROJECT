@@ -37,11 +37,11 @@ public class IconsRedesSociais implements Serializable {
     private String icon;
 
     @Lob
-    @Column(name = "image")
-    private byte[] image;
+    @Column(name = "imagem")
+    private byte[] imagem;
 
-    @Column(name = "image_content_type")
-    private String imageContentType;
+    @Column(name = "imagem_content_type")
+    private String imagemContentType;
 
     @OneToMany(mappedBy = "icon")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -102,30 +102,30 @@ public class IconsRedesSociais implements Serializable {
         this.icon = icon;
     }
 
-    public byte[] getImage() {
-        return this.image;
+    public byte[] getImagem() {
+        return this.imagem;
     }
 
-    public IconsRedesSociais image(byte[] image) {
-        this.setImage(image);
+    public IconsRedesSociais imagem(byte[] imagem) {
+        this.setImagem(imagem);
         return this;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
-    public String getImageContentType() {
-        return this.imageContentType;
+    public String getImagemContentType() {
+        return this.imagemContentType;
     }
 
-    public IconsRedesSociais imageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
+    public IconsRedesSociais imagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
         return this;
     }
 
-    public void setImageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
+    public void setImagemContentType(String imagemContentType) {
+        this.imagemContentType = imagemContentType;
     }
 
     public Set<RedesSociaisConvenio> getRedeSocials() {
@@ -186,8 +186,8 @@ public class IconsRedesSociais implements Serializable {
             ", nome='" + getNome() + "'" +
             ", descricao='" + getDescricao() + "'" +
             ", icon='" + getIcon() + "'" +
-            ", image='" + getImage() + "'" +
-            ", imageContentType='" + getImageContentType() + "'" +
+            ", imagem='" + getImagem() + "'" +
+            ", imagemContentType='" + getImagemContentType() + "'" +
             "}";
     }
 }

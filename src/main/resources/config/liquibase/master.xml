@@ -11,29 +11,29 @@
     <property name="datetimeType" value="datetime" dbms="postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134139_added_entity_Local.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134140_added_entity_Arquivo.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134141_added_entity_Associado.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134142_added_entity_Dependente.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134143_added_entity_Contato.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134144_added_entity_Convenio.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134145_added_entity_ImagensConvenio.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134146_added_entity_RedesSociaisConvenio.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134147_added_entity_IconsRedesSociais.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134148_added_entity_Reserva.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134149_added_entity_Departamento.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134150_added_entity_Parametro.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134151_added_entity_Mensagem.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134152_added_entity_Categoria.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134153_added_entity_Tipo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004825_added_entity_Local.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004826_added_entity_Arquivo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004827_added_entity_Associado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004828_added_entity_Dependente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004829_added_entity_Contato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004830_added_entity_Convenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004831_added_entity_ImagensConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004832_added_entity_RedesSociaisConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004833_added_entity_IconsRedesSociais.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004834_added_entity_Reserva.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004835_added_entity_Departamento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004836_added_entity_Parametro.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004837_added_entity_Mensagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004838_added_entity_Categoria.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004839_added_entity_Tipo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20231018134142_added_entity_constraints_Dependente.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134143_added_entity_constraints_Contato.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134144_added_entity_constraints_Convenio.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134145_added_entity_constraints_ImagensConvenio.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134146_added_entity_constraints_RedesSociaisConvenio.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134148_added_entity_constraints_Reserva.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20231018134151_added_entity_constraints_Mensagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004828_added_entity_constraints_Dependente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004829_added_entity_constraints_Contato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004830_added_entity_constraints_Convenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004831_added_entity_constraints_ImagensConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004832_added_entity_constraints_RedesSociaisConvenio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004834_added_entity_constraints_Reserva.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20231025004837_added_entity_constraints_Mensagem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

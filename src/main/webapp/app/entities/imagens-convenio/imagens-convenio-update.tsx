@@ -120,10 +120,10 @@ export const ImagensConvenioUpdate = () => {
                 type="text"
               />
               <ValidatedBlobField
-                label={translate('aapmApp.imagensConvenio.imagen')}
-                id="imagens-convenio-imagen"
-                name="imagen"
-                data-cy="imagen"
+                label={translate('aapmApp.imagensConvenio.imagem')}
+                id="imagens-convenio-imagem"
+                name="imagem"
+                data-cy="imagem"
                 isImage
                 accept="image/*"
                 validate={{
@@ -135,7 +135,6 @@ export const ImagensConvenioUpdate = () => {
                 id="imagens-convenio-created"
                 name="created"
                 data-cy="created"
-                hidden={true}
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
@@ -144,7 +143,6 @@ export const ImagensConvenioUpdate = () => {
                 id="imagens-convenio-modified"
                 name="modified"
                 data-cy="modified"
-                hidden={true}
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />

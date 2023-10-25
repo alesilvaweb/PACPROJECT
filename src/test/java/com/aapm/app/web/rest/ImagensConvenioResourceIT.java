@@ -52,10 +52,10 @@ class ImagensConvenioResourceIT {
     private static final String DEFAULT_DESCRICAO = "AAAAAAAAAA";
     private static final String UPDATED_DESCRICAO = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_IMAGEN = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGEN = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_IMAGEN_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGEN_CONTENT_TYPE = "image/png";
+    private static final byte[] DEFAULT_IMAGEM = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGEM = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGEM_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGEM_CONTENT_TYPE = "image/png";
 
     private static final Instant DEFAULT_CREATED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -99,8 +99,8 @@ class ImagensConvenioResourceIT {
         ImagensConvenio imagensConvenio = new ImagensConvenio()
             .titulo(DEFAULT_TITULO)
             .descricao(DEFAULT_DESCRICAO)
-            .imagen(DEFAULT_IMAGEN)
-            .imagenContentType(DEFAULT_IMAGEN_CONTENT_TYPE)
+            .imagem(DEFAULT_IMAGEM)
+            .imagemContentType(DEFAULT_IMAGEM_CONTENT_TYPE)
             .created(DEFAULT_CREATED)
             .modified(DEFAULT_MODIFIED);
         return imagensConvenio;
@@ -116,8 +116,8 @@ class ImagensConvenioResourceIT {
         ImagensConvenio imagensConvenio = new ImagensConvenio()
             .titulo(UPDATED_TITULO)
             .descricao(UPDATED_DESCRICAO)
-            .imagen(UPDATED_IMAGEN)
-            .imagenContentType(UPDATED_IMAGEN_CONTENT_TYPE)
+            .imagem(UPDATED_IMAGEM)
+            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE)
             .created(UPDATED_CREATED)
             .modified(UPDATED_MODIFIED);
         return imagensConvenio;
@@ -146,8 +146,8 @@ class ImagensConvenioResourceIT {
         ImagensConvenio testImagensConvenio = imagensConvenioList.get(imagensConvenioList.size() - 1);
         assertThat(testImagensConvenio.getTitulo()).isEqualTo(DEFAULT_TITULO);
         assertThat(testImagensConvenio.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
-        assertThat(testImagensConvenio.getImagen()).isEqualTo(DEFAULT_IMAGEN);
-        assertThat(testImagensConvenio.getImagenContentType()).isEqualTo(DEFAULT_IMAGEN_CONTENT_TYPE);
+        assertThat(testImagensConvenio.getImagem()).isEqualTo(DEFAULT_IMAGEM);
+        assertThat(testImagensConvenio.getImagemContentType()).isEqualTo(DEFAULT_IMAGEM_CONTENT_TYPE);
         assertThat(testImagensConvenio.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testImagensConvenio.getModified()).isEqualTo(DEFAULT_MODIFIED);
     }
@@ -207,8 +207,8 @@ class ImagensConvenioResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(imagensConvenio.getId().intValue())))
             .andExpect(jsonPath("$.[*].titulo").value(hasItem(DEFAULT_TITULO)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
-            .andExpect(jsonPath("$.[*].imagenContentType").value(hasItem(DEFAULT_IMAGEN_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].imagen").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEN))))
+            .andExpect(jsonPath("$.[*].imagemContentType").value(hasItem(DEFAULT_IMAGEM_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].imagem").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEM))))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].modified").value(hasItem(DEFAULT_MODIFIED.toString())));
     }
@@ -244,8 +244,8 @@ class ImagensConvenioResourceIT {
             .andExpect(jsonPath("$.id").value(imagensConvenio.getId().intValue()))
             .andExpect(jsonPath("$.titulo").value(DEFAULT_TITULO))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO))
-            .andExpect(jsonPath("$.imagenContentType").value(DEFAULT_IMAGEN_CONTENT_TYPE))
-            .andExpect(jsonPath("$.imagen").value(Base64Utils.encodeToString(DEFAULT_IMAGEN)))
+            .andExpect(jsonPath("$.imagemContentType").value(DEFAULT_IMAGEM_CONTENT_TYPE))
+            .andExpect(jsonPath("$.imagem").value(Base64Utils.encodeToString(DEFAULT_IMAGEM)))
             .andExpect(jsonPath("$.created").value(DEFAULT_CREATED.toString()))
             .andExpect(jsonPath("$.modified").value(DEFAULT_MODIFIED.toString()));
     }
@@ -510,8 +510,8 @@ class ImagensConvenioResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(imagensConvenio.getId().intValue())))
             .andExpect(jsonPath("$.[*].titulo").value(hasItem(DEFAULT_TITULO)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
-            .andExpect(jsonPath("$.[*].imagenContentType").value(hasItem(DEFAULT_IMAGEN_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].imagen").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEN))))
+            .andExpect(jsonPath("$.[*].imagemContentType").value(hasItem(DEFAULT_IMAGEM_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].imagem").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEM))))
             .andExpect(jsonPath("$.[*].created").value(hasItem(DEFAULT_CREATED.toString())))
             .andExpect(jsonPath("$.[*].modified").value(hasItem(DEFAULT_MODIFIED.toString())));
 
@@ -564,8 +564,8 @@ class ImagensConvenioResourceIT {
         updatedImagensConvenio
             .titulo(UPDATED_TITULO)
             .descricao(UPDATED_DESCRICAO)
-            .imagen(UPDATED_IMAGEN)
-            .imagenContentType(UPDATED_IMAGEN_CONTENT_TYPE)
+            .imagem(UPDATED_IMAGEM)
+            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE)
             .created(UPDATED_CREATED)
             .modified(UPDATED_MODIFIED);
         ImagensConvenioDTO imagensConvenioDTO = imagensConvenioMapper.toDto(updatedImagensConvenio);
@@ -584,8 +584,8 @@ class ImagensConvenioResourceIT {
         ImagensConvenio testImagensConvenio = imagensConvenioList.get(imagensConvenioList.size() - 1);
         assertThat(testImagensConvenio.getTitulo()).isEqualTo(UPDATED_TITULO);
         assertThat(testImagensConvenio.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
-        assertThat(testImagensConvenio.getImagen()).isEqualTo(UPDATED_IMAGEN);
-        assertThat(testImagensConvenio.getImagenContentType()).isEqualTo(UPDATED_IMAGEN_CONTENT_TYPE);
+        assertThat(testImagensConvenio.getImagem()).isEqualTo(UPDATED_IMAGEM);
+        assertThat(testImagensConvenio.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
         assertThat(testImagensConvenio.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testImagensConvenio.getModified()).isEqualTo(UPDATED_MODIFIED);
     }
@@ -669,7 +669,7 @@ class ImagensConvenioResourceIT {
         ImagensConvenio partialUpdatedImagensConvenio = new ImagensConvenio();
         partialUpdatedImagensConvenio.setId(imagensConvenio.getId());
 
-        partialUpdatedImagensConvenio.titulo(UPDATED_TITULO).imagen(UPDATED_IMAGEN).imagenContentType(UPDATED_IMAGEN_CONTENT_TYPE);
+        partialUpdatedImagensConvenio.titulo(UPDATED_TITULO).imagem(UPDATED_IMAGEM).imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE);
 
         restImagensConvenioMockMvc
             .perform(
@@ -685,8 +685,8 @@ class ImagensConvenioResourceIT {
         ImagensConvenio testImagensConvenio = imagensConvenioList.get(imagensConvenioList.size() - 1);
         assertThat(testImagensConvenio.getTitulo()).isEqualTo(UPDATED_TITULO);
         assertThat(testImagensConvenio.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
-        assertThat(testImagensConvenio.getImagen()).isEqualTo(UPDATED_IMAGEN);
-        assertThat(testImagensConvenio.getImagenContentType()).isEqualTo(UPDATED_IMAGEN_CONTENT_TYPE);
+        assertThat(testImagensConvenio.getImagem()).isEqualTo(UPDATED_IMAGEM);
+        assertThat(testImagensConvenio.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
         assertThat(testImagensConvenio.getCreated()).isEqualTo(DEFAULT_CREATED);
         assertThat(testImagensConvenio.getModified()).isEqualTo(DEFAULT_MODIFIED);
     }
@@ -706,8 +706,8 @@ class ImagensConvenioResourceIT {
         partialUpdatedImagensConvenio
             .titulo(UPDATED_TITULO)
             .descricao(UPDATED_DESCRICAO)
-            .imagen(UPDATED_IMAGEN)
-            .imagenContentType(UPDATED_IMAGEN_CONTENT_TYPE)
+            .imagem(UPDATED_IMAGEM)
+            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE)
             .created(UPDATED_CREATED)
             .modified(UPDATED_MODIFIED);
 
@@ -725,8 +725,8 @@ class ImagensConvenioResourceIT {
         ImagensConvenio testImagensConvenio = imagensConvenioList.get(imagensConvenioList.size() - 1);
         assertThat(testImagensConvenio.getTitulo()).isEqualTo(UPDATED_TITULO);
         assertThat(testImagensConvenio.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
-        assertThat(testImagensConvenio.getImagen()).isEqualTo(UPDATED_IMAGEN);
-        assertThat(testImagensConvenio.getImagenContentType()).isEqualTo(UPDATED_IMAGEN_CONTENT_TYPE);
+        assertThat(testImagensConvenio.getImagem()).isEqualTo(UPDATED_IMAGEM);
+        assertThat(testImagensConvenio.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
         assertThat(testImagensConvenio.getCreated()).isEqualTo(UPDATED_CREATED);
         assertThat(testImagensConvenio.getModified()).isEqualTo(UPDATED_MODIFIED);
     }

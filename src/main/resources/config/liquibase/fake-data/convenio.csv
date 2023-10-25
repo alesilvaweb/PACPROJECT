@@ -1,11 +1,1 @@
-id;nome;titulo;descricao;endereco;telefone;email;localizacao;status;created;modified
-1;syndicate;Fantástico Bedfordshire;../fake-data/blob/hipster.txt;solution-oriented;Principal empowering AI;AnaLaura_Pereira@gmail.com;recontextualize;Ativo;2023-10-18T04:28:44;2023-10-18T12:54:49
-2;drive 24/7;empower;../fake-data/blob/hipster.txt;Amapá impactful sticky;circuit Madeira;Samuel.Albuquerque@live.com;Cazaquistão;Inativo;2023-10-17T15:18:42;2023-10-18T03:28:14
-3;Frango;deposit;../fake-data/blob/hipster.txt;Genérico;deposit Crianças Incrível;DaviLucca_Batista@hotmail.com;Bahia content-based;Ativo;2023-10-18T02:45:03;2023-10-17T22:04:41
-4;Roupas SAS ametista;Buckinghamshire back-end Filmes;../fake-data/blob/hipster.txt;Bedfordshire deposit Distrito;Organized;Alcia46@gmail.com;transmit;Inativo;2023-10-17T21:25:46;2023-10-18T06:45:10
-5;cobre;infrastructure Krone;../fake-data/blob/hipster.txt;Cambridgeshire Bedfordshire;Brinquedos Public-key Realigned;Sirineu11@gmail.com;full-range;Bloqueado;2023-10-17T22:57:01;2023-10-18T08:25:48
-6;Sabonete Luvas;Metal Madeira;../fake-data/blob/hipster.txt;Concreto withdrawal amarelo;hacking Directives e-business;Laura_Albuquerque7@live.com;XML;Ativo;2023-10-18T13:16:25;2023-10-18T06:08:30
-7;Marginal;withdrawal;../fake-data/blob/hipster.txt;ametista synthesize;redundant;Morgana_Barros@hotmail.com;Research;Inativo;2023-10-18T01:05:29;2023-10-18T02:42:40
-8;withdrawal;Executive Industrial deposit;../fake-data/blob/hipster.txt;up;caramelo card;Elisa.Souza34@bol.com.br;Inteligente Business-focused;Bloqueado;2023-10-18T01:32:55;2023-10-18T13:09:00
-9;Chapéu;Salgadinhos;../fake-data/blob/hipster.txt;IB withdrawal;bluetooth Industrial;Jlio.Souza@hotmail.com;Graphic infrastructures tertiary;Ativo;2023-10-18T08:01:32;2023-10-18T07:46:18
-10;Paraná;Queijo;../fake-data/blob/hipster.txt;Congelado;quantifying SMTP;Helena70@hotmail.com;preto lima sensor;Bloqueado;2023-10-17T18:24:13;2023-10-17T18:25:14
+id;nome;titulo;descricao;endereco;telefone;email;imagem;imagem_content_type;logo;logo_content_type;banner;banner_content_type;localizacao;status;created;modified

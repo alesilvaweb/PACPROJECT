@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231018134147",
+  "changelogDate": "20231025004833",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "icons_redes_sociais",
@@ -19,7 +19,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "image",
+      "fieldName": "imagem",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "image"
     }

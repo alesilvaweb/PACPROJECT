@@ -3,22 +3,20 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import { Carousel, CarouselResponsiveOption } from 'primereact/carousel';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
-import { getEntities } from 'app/entities/local/local.reducer';
-import { getConvenios } from 'app/entities/convenio/convenio.reducer';
+import { getEntities } from 'app/entities/convenio/convenio.reducer';
 import Card from '@mui/material/Card';
 
-interface Local {
+interface Convenio {
   imagenContentType: string | undefined;
   id: string;
   nome: string;
-  descricao: string;
-  imagen: string | undefined;
+  titulo: string;
+  imagem: string | undefined;
 }
 
-export default function BunnerCarousel() {
+export default function BannerCarousel() {
   const convenioList = useAppSelector(state => state.convenio.entities);
   const loading = useAppSelector(state => state.convenio.loading);
-  const locaisList = useAppSelector(state => state.local.entities);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -39,54 +37,53 @@ export default function BunnerCarousel() {
       numScroll: 1,
     },
   ];
-  const getAllEntities = () => {
-    dispatch(getConvenios({}));
-  };
 
   useEffect(() => {
-    getAllEntities();
+    dispatch(getEntities({}));
   }, []);
 
-  const localTemplate = (local: Local) => {
+  const convenioTemplate = (convenio: Convenio) => {
     return (
-      <div className="border-2 surface-border border-round m-2 text-center pt-5 ">
-        <div className="mb-2 br4 ">
-          <img src={`data:${local.imagenContentType};base64,${local.imagen}`} alt={local.nome} width={200} height={150} />
+      <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+        <div className="mb-3">
+          <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={300} height={250} />
         </div>
-
         <div>
-          <h5 className="mb-1">{local.nome}</h5>
-          <h6 className="mt-0 mb-1">{local.descricao}</h6>
+          <h5 className="mb-1">{convenio.nome}</h5>
+          <h6 className="mt-0 mb-1">{convenio.titulo}</h6>
         </div>
       </div>
     );
   };
 
+  // @ts-ignore
   return (
-    <Card
-      sx={{
+    <div
+      className="card"
+      style={{
+        // @ts-ignore
+        boxShadow: 10,
         borderWidth: '1px',
         borderStyle: 'solid',
-        boxShadow: 5,
         borderRadius: 3,
         borderColor: '#a1a1a1',
+        // @ts-ignore
         ':hover': {
           boxShadow: 10,
           position: 'relative',
           borderColor: '#1e77c5',
-          // backgroundColor:'#f5f5f5',
           cursor: 'pointer',
         },
       }}
     >
       <Carousel
-        value={locaisList}
+        value={convenioList}
         numScroll={1}
         numVisible={2}
         responsiveOptions={responsiveOptions}
-        itemTemplate={localTemplate}
+        itemTemplate={convenioTemplate}
         circular
       />
-    </Card>
+    </div>
   );
 }

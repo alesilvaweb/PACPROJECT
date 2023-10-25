@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate, byteSize, TextFormat } from 'react-jhipster';
+import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -68,6 +68,63 @@ export const ConvenioDetail = () => {
             </span>
           </dt>
           <dd>{convenioEntity.email}</dd>
+          <dt>
+            <span id="imagem">
+              <Translate contentKey="aapmApp.convenio.imagem">Imagem</Translate>
+            </span>
+          </dt>
+          <dd>
+            {convenioEntity.imagem ? (
+              <div>
+                {convenioEntity.imagemContentType ? (
+                  <a onClick={openFile(convenioEntity.imagemContentType, convenioEntity.imagem)}>
+                    <img src={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`} style={{ maxHeight: '30px' }} />
+                  </a>
+                ) : null}
+                <span>
+                  {convenioEntity.imagemContentType}, {byteSize(convenioEntity.imagem)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
+          <dt>
+            <span id="logo">
+              <Translate contentKey="aapmApp.convenio.logo">Logo</Translate>
+            </span>
+          </dt>
+          <dd>
+            {convenioEntity.logo ? (
+              <div>
+                {convenioEntity.logoContentType ? (
+                  <a onClick={openFile(convenioEntity.logoContentType, convenioEntity.logo)}>
+                    <img src={`data:${convenioEntity.logoContentType};base64,${convenioEntity.logo}`} style={{ maxHeight: '30px' }} />
+                  </a>
+                ) : null}
+                <span>
+                  {convenioEntity.logoContentType}, {byteSize(convenioEntity.logo)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
+          <dt>
+            <span id="banner">
+              <Translate contentKey="aapmApp.convenio.banner">Banner</Translate>
+            </span>
+          </dt>
+          <dd>
+            {convenioEntity.banner ? (
+              <div>
+                {convenioEntity.bannerContentType ? (
+                  <a onClick={openFile(convenioEntity.bannerContentType, convenioEntity.banner)}>
+                    <img src={`data:${convenioEntity.bannerContentType};base64,${convenioEntity.banner}`} style={{ maxHeight: '30px' }} />
+                  </a>
+                ) : null}
+                <span>
+                  {convenioEntity.bannerContentType}, {byteSize(convenioEntity.banner)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
           <dt>
             <span id="localizacao">
               <Translate contentKey="aapmApp.convenio.localizacao">Localizacao</Translate>

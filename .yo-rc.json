@@ -37,7 +37,7 @@
       "Tipo"
     ],
     "entitySuffix": "",
-    "herokuAppName": "aapm",
+    "herokuAppName": "aapm-dev",
     "herokuDeployType": "git",
     "herokuJavaVersion": "17",
     "jhiPrefix": "jhi",

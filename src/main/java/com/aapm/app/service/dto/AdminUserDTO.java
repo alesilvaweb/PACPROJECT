@@ -179,7 +179,8 @@ public class AdminUserDTO implements Serializable {
     @Override
     public String toString() {
         return "AdminUserDTO{" +
-            "login='" + login + '\'' +
+            "id='" + id + '\'' +
+            ", login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +

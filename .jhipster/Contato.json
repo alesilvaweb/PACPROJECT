@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231025004829",
+  "changelogDate": "20231102181624",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "contato",

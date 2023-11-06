@@ -85,7 +85,7 @@ export const ArquivoUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           {loading ? (
-            <p>Loading...</p>
+            <p>Processando aguarde...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? (
@@ -112,6 +112,7 @@ export const ArquivoUpdate = () => {
                 label={translate('aapmApp.arquivo.descricao')}
                 id="arquivo-descricao"
                 name="descricao"
+                hidden={true}
                 data-cy="descricao"
                 type="text"
               />
@@ -125,7 +126,14 @@ export const ArquivoUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField label={translate('aapmApp.arquivo.status')} id="arquivo-status" name="status" data-cy="status" type="select">
+              <ValidatedField
+                label={translate('aapmApp.arquivo.status')}
+                id="arquivo-status"
+                hidden={true}
+                name="status"
+                data-cy="status"
+                type="select"
+              >
                 {statusArquivoValues.map(statusArquivo => (
                   <option value={statusArquivo} key={statusArquivo}>
                     {translate('aapmApp.StatusArquivo.' + statusArquivo)}

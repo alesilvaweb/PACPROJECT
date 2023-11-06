@@ -432,7 +432,7 @@ public class Convenio implements Serializable {
             ", imagemContentType='" + getImagemContentType() + "'" +
             ", logo='" + getLogo() + "'" +
             ", logoContentType='" + getLogoContentType() + "'" +
-            ", banner='" + getBanner() + "'" +
+            ", banner.tsx='" + getBanner() + "'" +
             ", bannerContentType='" + getBannerContentType() + "'" +
             ", localizacao='" + getLocalizacao() + "'" +
             ", status='" + getStatus() + "'" +

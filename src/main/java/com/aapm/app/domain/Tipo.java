@@ -30,6 +30,10 @@ public class Tipo implements Serializable {
     @Column(name = "tipo", nullable = false)
     private String tipo;
 
+    @NotNull
+    @Column(name = "chave", nullable = false)
+    private String chave;
+
     @OneToMany(mappedBy = "tipo")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "tipo" }, allowSetters = true)
@@ -61,6 +65,19 @@ public class Tipo implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getChave() {
+        return this.chave;
+    }
+
+    public Tipo chave(String chave) {
+        this.setChave(chave);
+        return this;
+    }
+
+    public void setChave(String chave) {
+        this.chave = chave;
     }
 
     public Set<Mensagem> getMensagems() {
@@ -119,6 +136,7 @@ public class Tipo implements Serializable {
         return "Tipo{" +
             "id=" + getId() +
             ", tipo='" + getTipo() + "'" +
+            ", chave='" + getChave() + "'" +
             "}";
     }
 }

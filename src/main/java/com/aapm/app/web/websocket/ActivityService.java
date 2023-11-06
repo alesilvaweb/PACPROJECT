@@ -36,6 +36,14 @@ public class ActivityService implements ApplicationListener<SessionDisconnectEve
         return activityDTO;
     }
 
+    @MessageMapping("/table/update")
+    @SendTo("/topic/table-updates")
+    public void sendTableUpdate() {
+        // Aqui você pode adicionar lógica para obter os dados da tabela e enviá-los para os clientes
+        // Por exemplo, você pode consultar o banco de dados e usar messagingTemplate para enviar os dados.
+        // messagingTemplate.convertAndSend("/topic/table-updates", tableData);
+    }
+
     @Override
     public void onApplicationEvent(SessionDisconnectEvent event) {
         ActivityDTO activityDTO = new ActivityDTO();

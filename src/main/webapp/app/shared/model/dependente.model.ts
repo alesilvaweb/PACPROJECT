@@ -10,7 +10,7 @@ export interface IDependente {
   status?: Status | null;
   created?: string | null;
   modified?: string | null;
-  associado?: IAssociado | null;
+  associado?: number | null;
 }
 
 export const defaultValue: Readonly<IDependente> = {};

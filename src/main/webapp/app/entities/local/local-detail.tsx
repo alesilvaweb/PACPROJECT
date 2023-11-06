@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './local.reducer';
 import BotaoVoltar from 'app/components/botaoVoltar';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const LocalDetail = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ export const LocalDetail = () => {
   const localEntity = useAppSelector(state => state.local.entity);
   return (
     <div>
-      <BotaoVoltar link={'/agenda'} label={'Voltar'} />
+      <Breadcrunbs />
       <Row className={'locais-detail'}>
         <Col md="8">
           <h2 data-cy="localDetailsHeading">{localEntity.nome}</h2>
@@ -47,20 +48,20 @@ export const LocalDetail = () => {
                 <Translate contentKey="aapmApp.local.capacidade">Capacidade</Translate>
               </span>
             </dt>
+            <dd>{localEntity.capacidade}</dd>
 
-            <dd>{localEntity.observacoes}</dd>
             <dt>
               <span id="valor">
                 <Translate contentKey="aapmApp.local.valor">Valor</Translate>
               </span>
             </dt>
-            <dd>{localEntity.capacidade}</dd>
+            <dd>{`R$ ${localEntity.valor},00`}</dd>
             <dt>
               <span id="observacoes">
                 <Translate contentKey="aapmApp.local.observacoes">Observacoes</Translate>
               </span>
             </dt>
-            <dd>{`R$ ${localEntity.valor},00`}</dd>
+            <dd>{localEntity.observacoes}</dd>
           </dl>
         </Col>
       </Row>

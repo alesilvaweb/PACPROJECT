@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IArquivo } from 'app/shared/model/arquivo.model';
 import { getEntities } from './arquivo.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Arquivo = () => {
   const dispatch = useAppDispatch();
@@ -83,17 +84,22 @@ export const Arquivo = () => {
 
   return (
     <div>
+      <Breadcrunbs />
       <h2 id="arquivo-heading" data-cy="ArquivoHeading">
         <Translate contentKey="aapmApp.arquivo.home.title">Arquivos</Translate>
         <div className="d-flex justify-content-end">
+          <Link to="/associado" className="btn btn-primary jh-create-entity">
+            Associados
+          </Link>
+          &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.arquivo.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.arquivo.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/arquivo/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.arquivo.home.createLabel">Create new Arquivo</Translate>
+            {/*<Translate contentKey="aapmApp.arquivo.home.createLabel">Create new Arquivo</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -102,9 +108,9 @@ export const Arquivo = () => {
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.arquivo.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.arquivo.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('nome')}>
                   <Translate contentKey="aapmApp.arquivo.nome">Nome</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -117,23 +123,23 @@ export const Arquivo = () => {
                 <th className="hand" onClick={sort('status')}>
                   <Translate contentKey="aapmApp.arquivo.status">Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('created')}>
-                  <Translate contentKey="aapmApp.arquivo.created">Created</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('modified')}>
-                  <Translate contentKey="aapmApp.arquivo.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('created')}>*/}
+                {/*  <Translate contentKey="aapmApp.arquivo.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('modified')}>*/}
+                {/*  <Translate contentKey="aapmApp.arquivo.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th />
               </tr>
             </thead>
             <tbody>
               {arquivoList.map((arquivo, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/arquivo/${arquivo.id}`} color="link" size="sm">
-                      {arquivo.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/arquivo/${arquivo.id}`} color="link" size="sm">*/}
+                  {/*    {arquivo.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{arquivo.nome}</td>
                   <td>{arquivo.descricao}</td>
                   <td>
@@ -145,24 +151,22 @@ export const Arquivo = () => {
                             &nbsp;
                           </a>
                         ) : null}
-                        <span>
-                          {arquivo.arquivoContentType}, {byteSize(arquivo.arquivo)}
-                        </span>
+                        {/*<span>*/}
+                        {/*  {arquivo.arquivoContentType}, {byteSize(arquivo.arquivo)}*/}
+                        {/*</span>*/}
                       </div>
                     ) : null}
                   </td>
                   <td>
                     <Translate contentKey={`aapmApp.StatusArquivo.${arquivo.status}`} />
                   </td>
-                  <td>{arquivo.created ? <TextFormat type="date" value={arquivo.created} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{arquivo.modified ? <TextFormat type="date" value={arquivo.modified} format={APP_DATE_FORMAT} /> : null}</td>
+                  {/*<td>{arquivo.created ? <TextFormat type="date" value={arquivo.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
+                  {/*<td>{arquivo.modified ? <TextFormat type="date" value={arquivo.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/arquivo/${arquivo.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -172,9 +176,7 @@ export const Arquivo = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -184,9 +186,7 @@ export const Arquivo = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

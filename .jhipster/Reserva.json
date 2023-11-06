@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231025004834",
+  "changelogDate": "20231102181630",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "reserva",

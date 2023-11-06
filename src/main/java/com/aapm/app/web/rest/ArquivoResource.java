@@ -1,18 +1,26 @@
 package com.aapm.app.web.rest;
 
+import com.aapm.app.domain.User;
+import com.aapm.app.domain.enumeration.Status;
+import com.aapm.app.domain.enumeration.StatusArquivo;
 import com.aapm.app.repository.ArquivoRepository;
-import com.aapm.app.service.ArquivoQueryService;
-import com.aapm.app.service.ArquivoService;
+import com.aapm.app.repository.AssociadoRepository;
+import com.aapm.app.repository.DependenteRepository;
+import com.aapm.app.repository.UserRepository;
+import com.aapm.app.service.*;
 import com.aapm.app.service.criteria.ArquivoCriteria;
-import com.aapm.app.service.dto.ArquivoDTO;
+import com.aapm.app.service.dto.*;
 import com.aapm.app.web.rest.errors.BadRequestAlertException;
+import com.aapm.app.web.rest.errors.EmailAlreadyUsedException;
+import com.aapm.app.web.rest.errors.LoginAlreadyUsedException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import org.apache.commons.collections4.IteratorUtils;
+import org.apache.poi.ss.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +28,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -44,38 +53,168 @@ public class ArquivoResource {
 
     private final ArquivoRepository arquivoRepository;
 
+    private final UserRepository userRepository;
+
+    private final DependenteRepository dependenteRepository;
+
     private final ArquivoQueryService arquivoQueryService;
 
-    public ArquivoResource(ArquivoService arquivoService, ArquivoRepository arquivoRepository, ArquivoQueryService arquivoQueryService) {
+    private final AssociadoService associadoService;
+
+    private final AssociadoRepository associadoRepository;
+    private final UserService userService;
+    private final MailService mailService;
+    private String salvarAssociado;
+    private String salvarUser;
+    private int usuariosSalvos;
+    private int usuariosAtualizados;
+    private final Set<String> ROLE = Collections.singleton("ROLE_USER");
+
+    public ArquivoResource(
+        ArquivoService arquivoService,
+        ArquivoRepository arquivoRepository,
+        UserRepository userRepository,
+        DependenteRepository dependenteRepository,
+        ArquivoQueryService arquivoQueryService,
+        AssociadoService associadoService,
+        AssociadoRepository associadoRepository,
+        UserService userService,
+        MailService mailService
+    ) {
         this.arquivoService = arquivoService;
         this.arquivoRepository = arquivoRepository;
+        this.userRepository = userRepository;
+        this.dependenteRepository = dependenteRepository;
         this.arquivoQueryService = arquivoQueryService;
+        this.associadoService = associadoService;
+        this.associadoRepository = associadoRepository;
+        this.userService = userService;
+        this.mailService = mailService;
+        this.usuariosSalvos = 0;
+        this.usuariosAtualizados = 0;
     }
 
-    /**
-     * {@code POST  /arquivos} : Create a new arquivo.
-     *
-     * @param arquivoDTO the arquivoDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new arquivoDTO, or with status {@code 400 (Bad Request)} if the arquivo has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PostMapping("/arquivos")
-    public ResponseEntity<ArquivoDTO> createArquivo(@Valid @RequestBody ArquivoDTO arquivoDTO) throws URISyntaxException {
-        log.debug("REST request to save Arquivo : {}", arquivoDTO);
+    @PostMapping(value = "/arquivos")
+    public ResponseEntity<ArquivoDTO> createArquivo(@Valid @RequestBody ArquivoDTO arquivoDTO) throws URISyntaxException, IOException {
+        usuariosSalvos = 0;
+        usuariosAtualizados = 0;
+
         if (arquivoDTO.getId() != null) {
             throw new BadRequestAlertException("A new arquivo cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        /* Cria um arquivo temporário com os dados binários */
+        File tempFile = File.createTempFile(UUID.randomUUID().toString(), ".xlsx", new File("src/main/resources/upload"));
+        try (FileOutputStream fos = new FileOutputStream(String.valueOf(tempFile.toPath()))) {
+            fos.write(arquivoDTO.getArquivo(), 0, arquivoDTO.getArquivo().length);
+            fos.close();
+        }
+
+        /* Abre o arquivo temporário excel  -> src/main/resources/upload*/
+        try (Workbook workbook = WorkbookFactory.create(new FileInputStream(String.valueOf(tempFile.toPath())))) {
+            Sheet sheet = workbook.getSheetAt(0);
+
+            /* Remove a primeira linha da planilha */
+            sheet.removeRow(sheet.getRow(0));
+
+            for (Row row : sheet) {
+                AssociadoDTO associado = new AssociadoDTO();
+                AdminUserDTO user = new AdminUserDTO();
+                DependenteDTO dependente = new DependenteDTO();
+                salvarAssociado = " ";
+                salvarUser = " ";
+
+                /* Percorre as linhas pegando as células */
+                for (Cell cell : row) {
+                    if (cell.getColumnIndex() == 0) {
+                        Long id = (long) cell.getNumericCellValue();
+                        if (associadoRepository.findById(id).isPresent()) {
+                            salvarAssociado = "update";
+                        }
+                        if (userRepository.findById(id).isPresent()) {
+                            salvarAssociado = "update";
+                        }
+                    }
+
+                    int columnIndex = cell.getColumnIndex();
+                    if (columnIndex == 0) {
+                        associado.setId((long) cell.getNumericCellValue());
+                        associado.setMatricula(String.valueOf((long) cell.getNumericCellValue()));
+                        user.setId((long) cell.getNumericCellValue());
+                    } else if (columnIndex == 1) {
+                        associado.setNome(cell.getStringCellValue());
+                        user.setFirstName(cell.getStringCellValue());
+                    } else if (columnIndex == 2) {} else if (columnIndex == 3) {} else if (columnIndex == 4) {} else if (
+                        columnIndex == 5
+                    ) {} else if (columnIndex == 6) {
+                        associado.setDataNascimento(cell.getLocalDateTimeCellValue().toLocalDate());
+                    } else if (columnIndex == 7) {} else if (columnIndex == 8) {} else if (columnIndex == 9) {
+                        String mail = cell.getStringCellValue().toLowerCase();
+                        associado.setEmail(mail);
+
+                        if (userRepository.findOneByLogin(mail).isPresent()) {
+                            salvarUser = "update";
+                        } else if (userRepository.findOneByEmailIgnoreCase(mail).isPresent()) {
+                            salvarUser = "update";
+                        }
+                        user.setEmail(mail);
+                        user.setLogin(mail);
+                    }
+                    associado.setStatus(Status.Ativo);
+                    user.setAuthorities(ROLE);
+                    user.setActivated(true);
+                    user.setLangKey("pt-br");
+                }
+
+                /* Salva os usuários */
+                if (Objects.equals(salvarUser, "update")) {
+                    /* Update user */
+                    userService.updateUser(user);
+                    usuariosAtualizados = (usuariosAtualizados + 1);
+                    log.debug("<<< UPDATE USER >>> : {},", user);
+                } else {
+                    /* Save user */
+                    userService.createUser(user);
+                    usuariosSalvos = (usuariosSalvos + 1);
+
+                    log.debug("<<< NEW USER >>> : {},", user);
+                }
+                /* Salva os associados */
+                if (Objects.equals(salvarAssociado, "update")) {
+                    /* Update Associado */
+                    associadoService.update(associado);
+                    salvarAssociado = "";
+                    log.debug("<<< UPDATE ASSOCIADO >>> : {},", associado);
+                } else {
+                    /* Save Associado */
+                    associadoService.save(associado);
+                    log.debug("<<< NEW ASSOCIADO >>> : {},", associado);
+                }
+            }
+            log.debug("<<< NOVOS >>> : {}, << ATUALIZADOS >> : {}", usuariosSalvos, usuariosAtualizados);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        arquivoDTO.setStatus(StatusArquivo.Processado);
+
+        tempFile.delete();
+
         ArquivoDTO result = arquivoService.save(arquivoDTO);
+
         return ResponseEntity
             .created(new URI("/api/arquivos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
+    public List<?> toList(Iterator<?> iterator) {
+        return IteratorUtils.toList(iterator);
+    }
+
     /**
      * {@code PUT  /arquivos/:id} : Updates an existing arquivo.
      *
-     * @param id the id of the arquivoDTO to save.
+     * @param id         the id of the arquivoDTO to save.
      * @param arquivoDTO the arquivoDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated arquivoDTO,
      * or with status {@code 400 (Bad Request)} if the arquivoDTO is not valid,
@@ -109,7 +248,7 @@ public class ArquivoResource {
     /**
      * {@code PATCH  /arquivos/:id} : Partial updates given fields of an existing arquivo, field will ignore if it is null
      *
-     * @param id the id of the arquivoDTO to save.
+     * @param id         the id of the arquivoDTO to save.
      * @param arquivoDTO the arquivoDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated arquivoDTO,
      * or with status {@code 400 (Bad Request)} if the arquivoDTO is not valid,

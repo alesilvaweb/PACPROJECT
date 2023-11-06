@@ -8,9 +8,9 @@
         "createOrEditLabel": "Criar ou editar Convênio",
         "notFound": "Nenhum Convênio encontrado"
       },
-      "created": "Um novo Convênio foi criado com o identificador {{ param }}",
-      "updated": "Um Convênio foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Convênio foi excluído com o identificador {{ param }}",
+      "created": "Convênio criado {{ param }}",
+      "updated": "Convênio atualizado {{ param }}",
+      "deleted": "Convênio excluído {{ param }}",
       "delete": {
         "question": "Tem certeza de que deseja excluir Convênio {{ id }}?"
       },

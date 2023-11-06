@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IMensagem } from 'app/shared/model/mensagem.model';
 import { getEntities } from './mensagem.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Mensagem = () => {
   const dispatch = useAppDispatch();
@@ -83,9 +84,14 @@ export const Mensagem = () => {
 
   return (
     <div>
+      <Breadcrunbs />
       <h2 id="mensagem-heading" data-cy="MensagemHeading">
         <Translate contentKey="aapmApp.mensagem.home.title">Mensagems</Translate>
         <div className="d-flex justify-content-end">
+          <Link to="/tipo" className="btn btn-primary jh-create-entity">
+            Tipo
+          </Link>
+          &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             {/*<Translate contentKey="aapmApp.mensagem.home.refreshListLabel">Refresh List</Translate>*/}

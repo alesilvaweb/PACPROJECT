@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { getSortState, JhiItemCount, JhiPagination, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { IDepartamento } from 'app/shared/model/departamento.model';
 import { getEntities } from './departamento.reducer';
+import { Breadcrumbs } from '@mui/material';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Departamento = () => {
   const dispatch = useAppDispatch();
@@ -83,17 +81,18 @@ export const Departamento = () => {
 
   return (
     <div>
+      <Breadcrunbs />
       <h2 id="departamento-heading" data-cy="DepartamentoHeading">
         <Translate contentKey="aapmApp.departamento.home.title">Departamentos</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.departamento.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.departamento.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/departamento/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.departamento.home.createLabel">Create new Departamento</Translate>
+            {/*<Translate contentKey="aapmApp.departamento.home.createLabel">Create new Departamento</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -102,9 +101,9 @@ export const Departamento = () => {
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.departamento.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.departamento.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('nome')}>
                   <Translate contentKey="aapmApp.departamento.nome">Nome</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -114,39 +113,37 @@ export const Departamento = () => {
                 <th className="hand" onClick={sort('status')}>
                   <Translate contentKey="aapmApp.departamento.status">Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('created')}>
-                  <Translate contentKey="aapmApp.departamento.created">Created</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('modified')}>
-                  <Translate contentKey="aapmApp.departamento.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('created')}>*/}
+                {/*  <Translate contentKey="aapmApp.departamento.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('modified')}>*/}
+                {/*  <Translate contentKey="aapmApp.departamento.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th />
               </tr>
             </thead>
             <tbody>
               {departamentoList.map((departamento, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/departamento/${departamento.id}`} color="link" size="sm">
-                      {departamento.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/departamento/${departamento.id}`} color="link" size="sm">*/}
+                  {/*    {departamento.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{departamento.nome}</td>
                   <td>{departamento.descricao}</td>
                   <td>
                     <Translate contentKey={`aapmApp.Status.${departamento.status}`} />
                   </td>
-                  <td>{departamento.created ? <TextFormat type="date" value={departamento.created} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>
-                    {departamento.modified ? <TextFormat type="date" value={departamento.modified} format={APP_DATE_FORMAT} /> : null}
-                  </td>
+                  {/*<td>{departamento.created ? <TextFormat type="date" value={departamento.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
+                  {/*<td>*/}
+                  {/*  {departamento.modified ? <TextFormat type="date" value={departamento.modified} format={APP_DATE_FORMAT} /> : null}*/}
+                  {/*</td>*/}
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/departamento/${departamento.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -156,9 +153,7 @@ export const Departamento = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -168,9 +163,7 @@ export const Departamento = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

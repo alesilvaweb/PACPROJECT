@@ -1,0 +1,26 @@
+{
+  "aapmApp": {
+    "descontoConvenio": {
+      "home": {
+        "title": "Desconto Convênios",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Desconto Convenio",
+        "createOrEditLabel": "Criar ou editar Desconto Convênio",
+        "notFound": "Nenhum Desconto Convênio encontrado"
+      },
+      "created": "Desconto criado {{ param }}",
+      "updated": "Desconto atualizado {{ param }}",
+      "deleted": "Desconto excluído {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Desconto Convênio {{ id }}?"
+      },
+      "detail": {
+        "title": "Desconto Convênio"
+      },
+      "id": "ID",
+      "desconto": "Desconto",
+      "descricao": "Descricao",
+      "convenio": "Convenio"
+    }
+  }
+}

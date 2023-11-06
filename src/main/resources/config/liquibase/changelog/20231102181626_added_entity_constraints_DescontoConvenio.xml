@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity DescontoConvenio.
+    -->
+    <changeSet id="20231102181626-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="convenio_id"
+                                 baseTableName="desconto_convenio"
+                                 constraintName="fk_desconto_convenio__convenio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="convenio"/>
+    </changeSet>
+</databaseChangeLog>

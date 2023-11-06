@@ -18,10 +18,12 @@ import { sendActivity } from 'app/config/websocket-middleware';
 import PaginaInicial from 'app/modules/home/pagina-inicial';
 import Inicial from 'app/modules/home/inicial';
 import CartaoSocio from 'app/modules/home/cartao-socio';
-import Mapa from 'app/localizacao/Mapa';
+import Mapa from 'app/modules/localizacao/Mapa';
 import Sobre from 'app/modules/home/sobre';
 import Events from 'app/modules/home/events';
-import MapaGoogle from 'app/localizacao/MapaGoogle';
+import MapaGoogle from 'app/modules/localizacao/MapaGoogle';
+import Guia from 'app/modules/home/guia';
+import ReservaListWithLocalizationProvider from 'app/entities/reserva/reserva-list';
 
 const loading = <div>loading ...</div>;
 
@@ -44,10 +46,13 @@ const AppRoutes = () => {
     <div className="view-routes">
       <ErrorBoundaryRoutes>
         <Route index element={<PaginaInicial />} />
-        <Route path="agenda" element={<Inicial />} />
+        <Route path="cabanas" element={<Inicial />} />
         <Route path="sobre" element={<Sobre />} />
+        <Route path="guia" element={<Guia />} />
         <Route path="events" element={<Events />} />
         <Route path="mapa" element={<MapaGoogle />} />
+        <Route path="report" element={<ReservaListWithLocalizationProvider />} />
+
         <Route path="cartao" element={<CartaoSocio />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />

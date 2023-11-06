@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20231102181626",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "desconto_convenio",
+  "fields": [
+    {
+      "fieldName": "desconto",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "DescontoConvenio",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "convenio",
+      "otherEntityRelationshipName": "desconto",
+      "relationshipName": "convenio",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

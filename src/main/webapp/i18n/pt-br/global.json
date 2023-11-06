@@ -13,6 +13,7 @@
         "dependente": "Dependente",
         "contato": "Contato",
         "convenio": "Convenio",
+        "descontoConvenio": "Desconto Convenio",
         "imagensConvenio": "Imagens Convenio",
         "redesSociaisConvenio": "Redes Sociais Convenio",
         "iconsRedesSociais": "Icons Redes Sociais",
@@ -35,7 +36,7 @@
       },
       "admin": {
         "main": "Administração",
-        "userManagement": "Gerenciamento de usuário",
+        "userManagement": "Usuários",
         "tracker": "Rastreamento de usuário",
         "metrics": "Métricas",
         "health": "Estado do Sistema",

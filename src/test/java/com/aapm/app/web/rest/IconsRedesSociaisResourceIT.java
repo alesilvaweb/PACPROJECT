@@ -43,10 +43,10 @@ class IconsRedesSociaisResourceIT {
     private static final String DEFAULT_ICON = "AAAAAAAAAA";
     private static final String UPDATED_ICON = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_IMAGEM = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGEM = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_IMAGEM_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGEM_CONTENT_TYPE = "image/png";
+    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
     private static final String ENTITY_API_URL = "/api/icons-redes-sociais";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -79,8 +79,8 @@ class IconsRedesSociaisResourceIT {
             .nome(DEFAULT_NOME)
             .descricao(DEFAULT_DESCRICAO)
             .icon(DEFAULT_ICON)
-            .imagem(DEFAULT_IMAGEM)
-            .imagemContentType(DEFAULT_IMAGEM_CONTENT_TYPE);
+            .imagem(DEFAULT_IMAGE)
+            .imagemContentType(DEFAULT_IMAGE_CONTENT_TYPE);
         return iconsRedesSociais;
     }
 
@@ -95,8 +95,8 @@ class IconsRedesSociaisResourceIT {
             .nome(UPDATED_NOME)
             .descricao(UPDATED_DESCRICAO)
             .icon(UPDATED_ICON)
-            .imagem(UPDATED_IMAGEM)
-            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE);
+            .imagem(UPDATED_IMAGE)
+            .imagemContentType(UPDATED_IMAGE_CONTENT_TYPE);
         return iconsRedesSociais;
     }
 
@@ -126,8 +126,8 @@ class IconsRedesSociaisResourceIT {
         assertThat(testIconsRedesSociais.getNome()).isEqualTo(DEFAULT_NOME);
         assertThat(testIconsRedesSociais.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
         assertThat(testIconsRedesSociais.getIcon()).isEqualTo(DEFAULT_ICON);
-        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(DEFAULT_IMAGEM);
-        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(DEFAULT_IMAGEM_CONTENT_TYPE);
+        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -190,8 +190,8 @@ class IconsRedesSociaisResourceIT {
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
             .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
-            .andExpect(jsonPath("$.[*].imagemContentType").value(hasItem(DEFAULT_IMAGEM_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].imagem").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEM))));
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
     }
 
     @Test
@@ -209,8 +209,8 @@ class IconsRedesSociaisResourceIT {
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO))
             .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
-            .andExpect(jsonPath("$.imagemContentType").value(DEFAULT_IMAGEM_CONTENT_TYPE))
-            .andExpect(jsonPath("$.imagem").value(Base64Utils.encodeToString(DEFAULT_IMAGEM)));
+            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
     }
 
     @Test
@@ -461,8 +461,8 @@ class IconsRedesSociaisResourceIT {
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
             .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
-            .andExpect(jsonPath("$.[*].imagemContentType").value(hasItem(DEFAULT_IMAGEM_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].imagem").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGEM))));
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
 
         // Check, that the count call also returns 1
         restIconsRedesSociaisMockMvc
@@ -514,8 +514,8 @@ class IconsRedesSociaisResourceIT {
             .nome(UPDATED_NOME)
             .descricao(UPDATED_DESCRICAO)
             .icon(UPDATED_ICON)
-            .imagem(UPDATED_IMAGEM)
-            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE);
+            .imagem(UPDATED_IMAGE)
+            .imagemContentType(UPDATED_IMAGE_CONTENT_TYPE);
         IconsRedesSociaisDTO iconsRedesSociaisDTO = iconsRedesSociaisMapper.toDto(updatedIconsRedesSociais);
 
         restIconsRedesSociaisMockMvc
@@ -533,8 +533,8 @@ class IconsRedesSociaisResourceIT {
         assertThat(testIconsRedesSociais.getNome()).isEqualTo(UPDATED_NOME);
         assertThat(testIconsRedesSociais.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testIconsRedesSociais.getIcon()).isEqualTo(UPDATED_ICON);
-        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(UPDATED_IMAGEM);
-        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
+        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -616,7 +616,7 @@ class IconsRedesSociaisResourceIT {
         IconsRedesSociais partialUpdatedIconsRedesSociais = new IconsRedesSociais();
         partialUpdatedIconsRedesSociais.setId(iconsRedesSociais.getId());
 
-        partialUpdatedIconsRedesSociais.descricao(UPDATED_DESCRICAO).imagem(UPDATED_IMAGEM).imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE);
+        partialUpdatedIconsRedesSociais.descricao(UPDATED_DESCRICAO).imagem(UPDATED_IMAGE).imagemContentType(UPDATED_IMAGE_CONTENT_TYPE);
 
         restIconsRedesSociaisMockMvc
             .perform(
@@ -633,8 +633,8 @@ class IconsRedesSociaisResourceIT {
         assertThat(testIconsRedesSociais.getNome()).isEqualTo(DEFAULT_NOME);
         assertThat(testIconsRedesSociais.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testIconsRedesSociais.getIcon()).isEqualTo(DEFAULT_ICON);
-        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(UPDATED_IMAGEM);
-        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
+        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -653,8 +653,8 @@ class IconsRedesSociaisResourceIT {
             .nome(UPDATED_NOME)
             .descricao(UPDATED_DESCRICAO)
             .icon(UPDATED_ICON)
-            .imagem(UPDATED_IMAGEM)
-            .imagemContentType(UPDATED_IMAGEM_CONTENT_TYPE);
+            .imagem(UPDATED_IMAGE)
+            .imagemContentType(UPDATED_IMAGE_CONTENT_TYPE);
 
         restIconsRedesSociaisMockMvc
             .perform(
@@ -671,8 +671,8 @@ class IconsRedesSociaisResourceIT {
         assertThat(testIconsRedesSociais.getNome()).isEqualTo(UPDATED_NOME);
         assertThat(testIconsRedesSociais.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testIconsRedesSociais.getIcon()).isEqualTo(UPDATED_ICON);
-        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(UPDATED_IMAGEM);
-        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(UPDATED_IMAGEM_CONTENT_TYPE);
+        assertThat(testIconsRedesSociais.getImagem()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testIconsRedesSociais.getImagemContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
     }
 
     @Test

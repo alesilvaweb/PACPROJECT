@@ -8,7 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import HomeIcon from '@mui/icons-material/Home';
-import { AdminMenu, EntitiesMenu, LocaleMenu } from 'app/shared/layout/menus';
+import { AdminMenu } from 'app/shared/layout/menus';
 import { useAppDispatch } from 'app/config/store';
 import { Storage, Translate, translate } from 'react-jhipster';
 import { setLocale } from 'app/shared/reducers/locale';
@@ -31,6 +31,7 @@ import {
   Schedule,
   Settings,
 } from '@mui/icons-material';
+
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEnabled, isAdmin, isAuthenticated }) {
@@ -83,70 +84,74 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
         }
       >
         {/* Menus Fixos */}
-        <ItemSidebar title={'Pagina inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
+        <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
         <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
-        <ItemSidebar title={'Convênio'} link={'/convenio'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-        <ItemSidebar title={'Agendamento'} link={'/agenda'} icon={<Schedule />} setIsOpen={setIsOpen} />
+        <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+        <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<Schedule />} setIsOpen={setIsOpen} />
         <hr />
 
-        {/* Grupo de menus ADM */}
-        <ListItemButton onClick={() => handleClick('admin', !stateMenu.admin)}>
-          <ListItemIcon>
-            <AdminPanelSettings />
-          </ListItemIcon>
-          <ListItemText primary={translate('global.menu.admin.main')} />
-          {stateMenu ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
+        {isAdmin ? (
+          <>
+            {/* Grupo de menus ADM */}
+            <ListItemButton onClick={() => handleClick('admin', !stateMenu.admin)}>
+              <ListItemIcon>
+                <AdminPanelSettings />
+              </ListItemIcon>
+              <ListItemText primary={translate('global.menu.admin.main')} />
+              {stateMenu ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
 
-        {/* SubMenus de ADM */}
-        <Collapse in={stateMenu.admin} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ItemSidebar
-              title={<Translate contentKey="global.menu.admin.userManagement">User management</Translate>}
-              link={'/admin/user-management'}
-              icon={<ManageAccounts />}
-              setIsOpen={setIsOpen}
-            />
-            <ItemSidebar title={'Importar Associados'} link={'/admin/xlsx'} icon={<GroupAdd />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Parâmetro'} link={'/parametro'} icon={<Settings />} setIsOpen={setIsOpen} />
-          </List>
-        </Collapse>
+            {/* SubMenus de ADM */}
+            <Collapse in={stateMenu.admin} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ItemSidebar title={'Associados'} link={'/associado'} icon={<GroupAdd />} setIsOpen={setIsOpen} />
+                <ItemSidebar
+                  title={<Translate contentKey="global.menu.admin.userManagement">User management</Translate>}
+                  link={'/admin/user-management'}
+                  icon={<ManageAccounts />}
+                  setIsOpen={setIsOpen}
+                />
+                <ItemSidebar title={'Parâmetros'} link={'/parametro'} icon={<Settings />} setIsOpen={setIsOpen} />
+              </List>
+            </Collapse>
 
-        {/* Grupo de menus de Relatórios*/}
-        <ListItemButton onClick={() => handleClick('report', !stateMenu.report)}>
-          <ListItemIcon>
-            <Grading />
-          </ListItemIcon>
-          <ListItemText primary="Relatórios" />
-          {stateMenu ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
+            {/* Grupo de menus de Cadastros */}
+            <ListItemButton onClick={() => handleClick('entity', !stateMenu.entity)}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Cadastros" />
+              {stateMenu ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
 
-        {/* SubMenus de Reservas */}
-        <Collapse in={stateMenu.report} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ItemSidebar title={'Reservas'} link={'/reserva'} icon={<CalendarMonth />} setIsOpen={setIsOpen} />
-          </List>
-        </Collapse>
+            {/* SubMenus de Cadastros*/}
+            <Collapse in={stateMenu.entity} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Locais'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+              </List>
+            </Collapse>
 
-        {/* Grupo de menus de Cadastros */}
-        <ListItemButton onClick={() => handleClick('entity', !stateMenu.entity)}>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Cadastros" />
-          {stateMenu ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
+            {/* Grupo de menus de Relatórios*/}
+            <ListItemButton onClick={() => handleClick('report', !stateMenu.report)}>
+              <ListItemIcon>
+                <Grading />
+              </ListItemIcon>
+              <ListItemText primary="Relatórios" />
+              {stateMenu ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
 
-        {/* SubMenus de Cadastros*/}
-        <Collapse in={stateMenu.entity} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ItemSidebar title={'Locais'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Convênios'} link={'/convenio'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-          </List>
-        </Collapse>
+            {/* SubMenus de Reservas */}
+            <Collapse in={stateMenu.report} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ItemSidebar title={'Reservas'} link={'/report'} icon={<CalendarMonth />} setIsOpen={setIsOpen} />
+              </List>
+            </Collapse>
+          </>
+        ) : null}
       </List>
     </Box>
   );

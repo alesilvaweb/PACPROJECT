@@ -146,6 +146,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
@@ -250,6 +257,12 @@
             <artifactId>archunit-junit5-api</artifactId>
             <version>${archunit-junit5.version}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.4</version>
         </dependency>
         <!-- Adding the engine dependency to the surefire-plugin unfortunately does not work in the current version. -->
         <!-- https://www.archunit.org/userguide/html/000_Index.html#_junit_5 -->

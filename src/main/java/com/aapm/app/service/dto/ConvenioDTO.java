@@ -232,7 +232,7 @@ public class ConvenioDTO implements Serializable {
             ", email='" + getEmail() + "'" +
             ", imagem='" + getImagem() + "'" +
             ", logo='" + getLogo() + "'" +
-            ", banner='" + getBanner() + "'" +
+            ", banner.tsx='" + getBanner() + "'" +
             ", localizacao='" + getLocalizacao() + "'" +
             ", status='" + getStatus() + "'" +
             ", created='" + getCreated() + "'" +

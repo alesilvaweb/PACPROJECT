@@ -114,6 +114,7 @@ export const ArquivoSlice = createEntitySlice({
       .addMatcher(isPending(createEntity, updateEntity, partialUpdateEntity, deleteEntity), state => {
         state.errorMessage = null;
         state.updateSuccess = false;
+        state.loading = true;
         state.updating = true;
       });
   },

@@ -10,11 +10,13 @@
 //@import '@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
 body {
   margin: 0;
+  background-color: #fdfdfd;
 }
 
 a {
-  color: #533f03;
+  color: #2b2b2b;
   font-weight: bold;
+  text-decoration: none;
 }
 
 * {
@@ -315,7 +317,24 @@ http://stackoverflow.com/questions/23436430/bootstrap-3-input-group-100-width */
   width: 1% !important;
 }
 
-/* jhipster-needle-scss-add-main JHipster will add new css style */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-.jh-card {
+.breadcrumb-item {
+  // The separator between breadcrumbs (by default, a forward-slash: "/")
+  + .breadcrumb-item {
+    &::before {
+      float: left;
+
+      content: var(--#{$prefix}breadcrumb-divider, escape-svg($breadcrumb-divider)) #{'/* rtl:'} var(
+          --#{$prefix}breadcrumb-divider,
+          escape-svg($breadcrumb-divider-flipped)
+        ) #{'*/'};
+    }
+  }
+
+  &.active {
+  }
 }

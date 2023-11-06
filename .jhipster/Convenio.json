@@ -1,6 +1,6 @@
 {
   "applications": "*",
-  "changelogDate": "20231025004830",
+  "changelogDate": "20231102181625",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "convenio",
@@ -84,6 +84,13 @@
       "otherEntityName": "redesSociaisConvenio",
       "otherEntityRelationshipName": "convenio",
       "relationshipName": "redesSociais",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "desconto",
+      "otherEntityName": "descontoConvenio",
+      "otherEntityRelationshipName": "convenio",
+      "relationshipName": "desconto",
       "relationshipType": "one-to-many"
     },
     {

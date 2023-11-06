@@ -4,82 +4,97 @@ import React, { useEffect, useRef, useState } from 'react';
 import { getEntity } from './local.reducer';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-import { useNavigate, useParams } from 'react-router-dom';
 import { dataAtual, difDate } from 'app/shared/util/date-utils';
 import FullCalendar from '@fullcalendar/react';
 import { IReserva } from 'app/shared/model/reserva.model';
-import { Chip, useMediaQuery } from '@mui/material';
+import { Chip } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import BotaoVoltar from 'app/components/botaoVoltar';
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
   const [reservasList, setReservasList] = useState([]);
   const locaisEntity = useAppSelector(state => state.local.entity);
-  const parametrosList = useAppSelector(state => state.parametro.entities);
+  const account = useAppSelector(state => state.authentication.account);
+  const loadingLocal = useAppSelector(state => state.local.loading);
+
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const navigate = useNavigate();
-  const loadingLocal = useAppSelector(state => state.local.loading);
   const [modal, setModal] = useState(false);
   const [statusText, setStatusText] = useState('');
-  const account = useAppSelector(state => state.authentication.account);
-  const toggle = () => setModal(!modal);
-  const { id } = useParams<'id'>();
+  const [parametro, setParametro] = useState([]);
+  const [numReservas, setNumReservas] = useState(0);
+  const [count, setCount] = useState(0);
+  const [dias, setDias] = useState(0);
+
   const calendarRef = useRef<FullCalendar>(null!);
+
+  const { id } = useParams<'id'>();
   const data = new Date();
-  const dias = 7;
+  const DataValida = addDays(data, dias);
+  const location = useLocation();
+  const pathnames = location.pathname.split('/').filter(x => x);
 
   function addDays(date, days) {
     date.setDate(date.getDate() + days);
     return date;
   }
 
-  const DataValida = addDays(data, dias);
+  async function countReservas() {
+    try {
+      const response = await axios.get(`api/reservas/count`);
+      setNumReservas(response.data);
+    } catch (error) {
+      console.error('Erro ao verificar quantidade de reservas:', error);
+    }
+  }
 
+  async function fetchParametros() {
+    try {
+      const response = await axios.get(`api/parametros?chave.equals=limite-age`);
+      setParametro(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar convênios:', error);
+    }
+  }
+
+  /* consulta a quantidade de reservas de 5 em 5 segundos */
+  useEffect(() => {
+    setInterval(() => {
+      countReservas();
+    }, 5000);
+  }, []);
+
+  /* Executa quando a quantidade de reservas é alterada */
+  useEffect(() => {
+    atualizaAgenda().then(() => {
+      if (calendarRef.current) {
+        calendarRef.current.getApi().refetchEvents();
+      }
+    });
+  }, [numReservas]);
+
+  /* Carrega as entidades do banco de dados */
   useEffect(() => {
     dispatch(getEntity(id));
+    fetchParametros();
     atualizaAgenda();
   }, []);
 
+  /* Define a quantidade de dias permitida de acordo com o parametro "limite-age" */
   useEffect(() => {
-    const evento = [];
-
-    reservasList.map(event => {
-      if (event.local.id.toString() === id) {
-        console.log('Events = ' + event.associado.id);
-
-        if (event.associado.id === account.id) {
-          // @ts-ignore
-          evento.push({
-            id: event.id,
-            title: event.local.nome,
-            start: event.data,
-            groupId: event.associado.id,
-            resourceEditable: false,
-          });
-        } else {
-          // @ts-ignore
-          evento.push({
-            id: event.id,
-            title: 'RESERVADO',
-            start: event.data,
-            groupId: event.associado.id,
-            color: 'red',
-          });
-        }
-      }
+    parametro.map(values => {
+      setDias(parseInt(values.valor));
     });
-    handleEvents(evento);
-  }, [reservasList]);
+  }, [parametro]);
 
+  /* Busca os dados das reservas a partir da data atual e do local selecionado */
   async function atualizaAgenda() {
     const apiUrl = `api/reservas?status.equals=Agendado&data.greaterThan=${dataAtual()}&localId.equals=${id}`;
-    // const apiUrl = `api/reservas?status.equals=Agendado&localId.equals=${id}`;
     try {
       const requestUrl = `${apiUrl}`;
       const response = await axios
@@ -109,7 +124,7 @@ const LocaisAgenda = args => {
               }
             }
           });
-          handleEvents(evento);
+          setCurrentEvents(evento);
         })
         .then(e => {
           setStatusText('OK');
@@ -127,44 +142,35 @@ const LocaisAgenda = args => {
     borderRadius: '5px',
   });
 
-  const matches = useMediaQuery('(min-width:600px)');
-
-  // if (matches===true){
-  // setCallendarButton({
-  //
-  //     fontSize: '0.5rem',
-  //     padding: '5px',
-  //     fontWeight: 400,
-  //     marginBottom: '2px',
-  //     borderRadius: '5px',
-  //
-  //   })
-  //
-  // }else{
-  //   setCallendarButton({
-  //
-  //     fontSize: '0.9rem',
-  //     padding: '10px',
-  //     fontWeight: 400,
-  //     marginBottom: '2px',
-  //     borderRadius: '5px',
-  //
-  //
-  // })}
-
   if (statusText != 'OK') {
     return <div>Carregando ...</div>;
   } else {
     return (
-      <div className="app">
-        <div className="demo-app-sidebar">
+      <div>
+        <div>
           {loadingLocal ? (
             <p>Carregando ...</p>
           ) : (
-            <div className="app-main">
+            <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                <BotaoVoltar link={'/agenda'} label={locaisEntity.nome} />
-                &nbsp;
+                {/*<BotaoVoltar link={'/cabanas'} label={locaisEntity.nome} />*/}
+
+                <nav aria-label="breadcrumb">
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/">Início</Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link to="/cabanas">Cabanas</Link>
+                    </li>
+                    <li className="breadcrumb-item active align-middle mt7 " aria-current="page">
+                      <Link to={'#'}>
+                        {locaisEntity.nome}({currentEvents.length}){' '}
+                      </Link>
+                    </li>
+                  </ol>
+                </nav>
+
                 <div>
                   <Chip
                     sx={callendarButton}
@@ -225,7 +231,7 @@ const LocaisAgenda = args => {
                 selectable={true}
                 dragScroll={false}
                 weekends={weekendsVisible}
-                initialEvents={currentEvents}
+                events={currentEvents}
                 select={handleDateSelect}
                 eventContent={renderEventContent}
                 eventClick={handleEventClick}
@@ -237,6 +243,14 @@ const LocaisAgenda = args => {
       </div>
     );
   }
+
+  // /* Função que retorna o Calendario */
+  // function renderCallendar() {
+  //
+  //   return (
+  //
+  //   );
+  // }
 
   function handleWeekendsToggle() {
     setWeekendsVisible(!weekendsVisible);
@@ -299,9 +313,7 @@ const LocaisAgenda = args => {
     }
   }
 
-  function handleEvents(events) {
-    setCurrentEvents(events);
-  }
+  function handleEvents(events) {}
 };
 
 function renderEventContent(eventInfo) {

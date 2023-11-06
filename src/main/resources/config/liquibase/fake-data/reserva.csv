@@ -1,11 +1,11 @@
 id;motivo_reserva;descricao;num_pessoas;status;data;somente_funcionarios;created;modified
-1;generate web-enabled Jogos;Loan indexing haptic;25551;Agendado;2023-10-24;false;2023-10-24T23:09:59;2023-10-24T07:25:02
-2;ROI;Macio;12793;Bloqueado;2023-10-24;true;2023-10-24T10:22:19;2023-10-24T16:34:59
-3;asymmetric Creative;Mesa;77784;Bloqueado;2023-10-24;false;2023-10-24T10:44:52;2023-10-24T14:22:07
-4;asymmetric;schemas bus;36291;Bloqueado;2023-10-24;true;2023-10-24T23:07:32;2023-10-24T10:22:50
-5;auxiliary bluetooth;hub e-business;31142;Cancelado;2023-10-24;true;2023-10-24T10:52:37;2023-10-24T13:07:31
-6;Rua Rodovia Automotivo;azul cobre;27676;Agendado;2023-10-24;true;2023-10-24T11:25:48;2023-10-24T15:28:55
-7;Investor;interactive Uruguai quantify;70868;Bloqueado;2023-10-24;false;2023-10-24T06:23:37;2023-10-24T17:55:32
-8;SSL Rial;integrated;81778;Bloqueado;2023-10-24;false;2023-10-24T10:26:40;2023-10-24T20:06:38
-9;Lustroso Santa navigating;Macio;19035;Agendado;2023-10-24;true;2023-10-24T14:01:52;2023-10-24T02:03:16
-10;Irlanda Bacon;copying Interface implement;77404;Cancelado;2023-10-24;false;2023-10-24T05:49:36;2023-10-24T16:38:25
+1;generate web-enabled Jogos;Loan indexing haptic;25551;Agendado;2023-11-01;false;2023-11-02T16:37:55;2023-11-02T00:52:58
+2;ROI;Macio;12793;Bloqueado;2023-11-02;true;2023-11-02T03:50:15;2023-11-02T10:02:55
+3;asymmetric Creative;Mesa;77784;Bloqueado;2023-11-01;false;2023-11-02T04:12:48;2023-11-02T07:50:03
+4;asymmetric;schemas bus;36291;Bloqueado;2023-11-02;true;2023-11-02T16:35:28;2023-11-02T03:50:46
+5;auxiliary bluetooth;hub e-business;31142;Cancelado;2023-11-01;true;2023-11-02T04:20:33;2023-11-02T06:35:27
+6;Rua Rodovia Automotivo;azul cobre;27676;Agendado;2023-11-02;true;2023-11-02T04:53:44;2023-11-02T08:56:51
+7;Investor;interactive Uruguai quantify;70868;Bloqueado;2023-11-02;false;2023-11-01T23:51:33;2023-11-02T11:23:28
+8;SSL Rial;integrated;81778;Bloqueado;2023-11-02;false;2023-11-02T03:54:36;2023-11-02T13:34:34
+9;Lustroso Santa navigating;Macio;19035;Agendado;2023-11-01;true;2023-11-02T07:29:48;2023-11-01T19:31:12
+10;Irlanda Bacon;copying Interface implement;77404;Cancelado;2023-11-02;false;2023-11-01T23:17:32;2023-11-02T10:06:21

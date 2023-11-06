@@ -93,6 +93,9 @@ public class TipoQueryService extends QueryService<Tipo> {
             if (criteria.getTipo() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getTipo(), Tipo_.tipo));
             }
+            if (criteria.getChave() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getChave(), Tipo_.chave));
+            }
             if (criteria.getMensagemId() != null) {
                 specification =
                     specification.and(

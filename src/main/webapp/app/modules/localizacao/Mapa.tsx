@@ -5,6 +5,7 @@ import BotaoVoltar from 'app/components/botaoVoltar';
 import { Card } from '@mui/material';
 import { WhatsApp } from '@mui/icons-material';
 import Button from '@mui/material/Button';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 const containerStyle = {
   width: '100%',
@@ -38,19 +39,19 @@ function Mapa() {
 
   return isLoaded ? (
     <div>
+      <Breadcrunbs />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <BotaoVoltar link={'/agenda'} label={'Voltar'} />
-        <Button
-          onClick={() => {
-            const { lat, lng } = center;
-            const whatsappMessage = `https://wa.me/?text=Localização:%20https://maps.google.com/?q=${lat},${lng}`;
-            window.open(whatsappMessage, '_blank');
-          }}
-          startIcon={<WhatsApp />}
-          color={'success'}
-        >
-          Compartilhar no WhatsApp
-        </Button>
+        {/*<Button*/}
+        {/*  onClick={() => {*/}
+        {/*    const { lat, lng } = center;*/}
+        {/*    const whatsappMessage = `https://wa.me/?text=Localização:%20https://maps.google.com/?q=${lat},${lng}`;*/}
+        {/*    window.open(whatsappMessage, '_blank');*/}
+        {/*  }}*/}
+        {/*  startIcon={<WhatsApp />}*/}
+        {/*  color={'success'}*/}
+        {/*>*/}
+        {/*  Compartilhar no WhatsApp*/}
+        {/*</Button>*/}
       </div>
       <div className={'mapa'}>
         <Card sx={{ width: '100%', height: '70%' }}>

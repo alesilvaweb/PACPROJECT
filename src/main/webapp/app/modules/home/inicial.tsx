@@ -14,6 +14,7 @@ import CardActions from '@mui/material/CardActions';
 import Divider from '@mui/material/Divider';
 import { ArrowBackIos, CalendarMonth, Info, LocationOn } from '@mui/icons-material';
 import BotaoVoltar from 'app/components/botaoVoltar';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
@@ -119,27 +120,29 @@ export default function Inicial() {
       {account?.login ? (
         <div>
           {/*<BotaoVoltar link={'/'} top={'-46px'} />*/}
-          <Chip
-            avatar={
-              <>
-                <ArrowBackIos sx={{ paddingLeft: '4px' }} />
-                {/*<Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>*/}
-              </>
-            }
-            sx={{
-              fontSize: '0.9rem',
-              padding: '1vh',
-              fontWeight: 500,
-              marginBottom: '2px',
-              borderRadius: '5px',
-            }}
-            onClick={() => {
-              navigate('/ ');
-            }}
-            label={'Voltar'}
-            color={'primary'}
-          />
+          {/*<Chip*/}
+          {/*  avatar={*/}
+          {/*    <>*/}
+          {/*      <ArrowBackIos sx={{ paddingLeft: '4px' }} />*/}
+          {/*      /!*<Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>*!/*/}
+          {/*    </>*/}
+          {/*  }*/}
+          {/*  sx={{*/}
+          {/*    fontSize: '0.9rem',*/}
+          {/*    padding: '1vh',*/}
+          {/*    fontWeight: 500,*/}
+          {/*    marginBottom: '2px',*/}
+          {/*    borderRadius: '5px',*/}
+          {/*  }}*/}
+          {/*  onClick={() => {*/}
+          {/*    navigate('/ ');*/}
+          {/*  }}*/}
+          {/*  label={'Voltar'}*/}
+          {/*  color={'primary'}*/}
+          {/*/>*/}
+          <Breadcrunbs />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '2vh' }}>
+            <h5>Cabanas</h5>
             <Grid container spacing={{ xs: 1, md: 3 }}>
               {locaisList.map(locais => (
                 <Grid item xs={12} sm={4} md={4} key={locais.id}>

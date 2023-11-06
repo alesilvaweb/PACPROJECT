@@ -2,9 +2,9 @@
   "aapmApp": {
     "mensagem": {
       "home": {
-        "title": "Mensagems",
+        "title": "Mensagens",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Mensagem",
+        "createLabel": "Nova Mensagem",
         "createOrEditLabel": "Criar ou editar Mensagem",
         "notFound": "Nenhum Mensagem encontrado"
       },

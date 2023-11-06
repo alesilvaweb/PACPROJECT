@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity RedesSociaisConvenio.
+    -->
+    <changeSet id="20231102181628-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="icon_id"
+                                 baseTableName="redes_sociais_convenio"
+                                 constraintName="fk_redes_sociais_convenio__icon_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="icons_redes_sociais"/>
+
+        <addForeignKeyConstraint baseColumnNames="convenio_id"
+                                 baseTableName="redes_sociais_convenio"
+                                 constraintName="fk_redes_sociais_convenio__convenio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="convenio"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,7 +1,7 @@
 import './../stylesEntities.scss';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Col, ModalFooter, Row } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StatusReserva } from 'app/shared/model/enumerations/status-reserva.model';
@@ -9,11 +9,11 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import Box from '@mui/material/Box';
-import { getEntities as getLocals } from 'app/entities/local/local.reducer';
-import { getEntities as getAssociados } from 'app/entities/associado/associado.reducer';
+import { getEntity as getLocal } from 'app/entities/local/local.reducer';
+import { getEntity as getAssociado } from 'app/entities/associado/associado.reducer';
 import { getEntities as getDepartamentos } from 'app/entities/departamento/departamento.reducer';
 import { createEntity, getEntity, reset, updateEntity } from './reserva.reducer';
-import Card from '@mui/material/Card';
+import { values } from 'lodash';
 
 export const ReservaUpdate = () => {
   const dispatch = useAppDispatch();
@@ -26,10 +26,11 @@ export const ReservaUpdate = () => {
   const isNew = id === undefined;
 
   const locals = useAppSelector(state => state.local.entities);
-  const associados = useAppSelector(state => state.associado.entities);
+
   const departamentos = useAppSelector(state => state.departamento.entities);
   const reservaEntity = useAppSelector(state => state.reserva.entity);
-  const locaisEntity = useAppSelector(state => state.local.entity);
+  const associado = useAppSelector(state => state.associado.entity);
+  const localEntity = useAppSelector(state => state.local.entity);
   const loading = useAppSelector(state => state.reserva.loading);
   const updating = useAppSelector(state => state.reserva.updating);
   const updateSuccess = useAppSelector(state => state.reserva.updateSuccess);
@@ -46,13 +47,11 @@ export const ReservaUpdate = () => {
     if (isNew) {
       dispatch(reset());
       // @ts-ignore
-      dispatch(getLocals(local));
+      dispatch(getLocal(local));
     } else {
       dispatch(getEntity(id));
     }
-
-    dispatch(getLocals({}));
-    dispatch(getAssociados({}));
+    dispatch(getAssociado(account.id));
     dispatch(getDepartamentos({}));
   }, []);
 
@@ -65,12 +64,12 @@ export const ReservaUpdate = () => {
   const saveEntity = values => {
     values.created = convertDateTimeToServer(values.created);
     values.modified = convertDateTimeToServer(values.modified);
-
+    console.log({ values });
     const entity = {
       ...reservaEntity,
       ...values,
-      local: locals.find(it => it.id.toString() === values.local.toString()),
-      associado: associados.find(it => it.id.toString() === values.associado.toString()),
+      local: localEntity,
+      associado: associado,
       departamento: departamentos.find(it => it.id.toString() === values.departamento.toString()),
     };
 
@@ -83,6 +82,10 @@ export const ReservaUpdate = () => {
     }
   };
 
+  if (!localEntity.id) {
+    navigate('/local/' + local);
+  }
+
   const defaultValues = () =>
     isNew
       ? {
@@ -93,74 +96,80 @@ export const ReservaUpdate = () => {
           ...reservaEntity,
           created: convertDateTimeFromServer(reservaEntity.created),
           modified: convertDateTimeFromServer(reservaEntity.modified),
+          numPessoas: reservaEntity.numPessoas,
           local: reservaEntity?.local?.id,
           associado: reservaEntity?.associado?.id,
           departamento: reservaEntity?.departamento?.id,
         };
 
+  console.log({ localEntity });
+  // @ts-ignore
   return (
     <>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <Card>
+        <div>
+          <Breadcrumb>
+            <BreadcrumbItem onClick={() => navigate('/')}>
+              <a>início</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem onClick={() => navigate('/cabanas')}>
+              <a>Cabanas</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem onClick={() => navigate(`/local/${local}/1`)}>
+              <a>{localEntity.nome}</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Reserva</BreadcrumbItem>
+          </Breadcrumb>
           {/*<Modal isOpen toggle={handleClose}  fullscreen={"sm"} style={{ marginTop: '10vh' }} >*/}
           {/*  <ModalHeader toggle={handleClose}>*/}
           <Row className="justify-content-center">
             <Col md="8" sx={{ textAlign: 'center' }}>
               {/*<Translate contentKey="aapmApp.reserva.home.createOrEditLabel">Create or edit a Reserva</Translate>*/}
-              {!isNew ? <h5>Editar Reserva</h5> : <h5>Nova Reserva</h5>}
+              {!isNew ? <h4>Editar Reserva {localEntity.nome}</h4> : <h4>Reserva {localEntity.nome}</h4>}
             </Col>
           </Row>
           {/*</ModalHeader>*/}
           {/*<ModalBody>*/}
-          <Row className="justify-content-center">
-            <Col md="8">
-              {/*<Translate contentKey="aapmApp.reserva.home.createOrEditLabel">Create or edit a Reserva</Translate>*/}
-              {!isNew ? (
-                <>
-                  <div>
-                    <span className={'info-reserva'}>{`Nome : ${account.firstName} ${account.lastName}`}</span>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span className={'info-reserva'}>{`Local : ${locaisEntity.nome} `}</span>
-                      <span className={'info-reserva'}>{`Data : ${reservaEntity.data}`}</span>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div>
-                    <span className={'info-reserva'}>{`Nome : ${account.firstName} ${account.lastName}`}</span>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span className={'info-reserva'}>{`Local : ${locaisEntity.nome} `}</span>
-                      <span className={'info-reserva'}>{`Data : ${start}`}</span>
-                    </div>
-                  </div>
-                </>
-              )}
-            </Col>
-          </Row>
+          {/*<Row className="justify-content-center">*/}
+          {/*  <Col md="8">*/}
+          {/*    /!*<Translate contentKey="aapmApp.reserva.home.createOrEditLabel">Create or edit a Reserva</Translate>*!/*/}
+          {/*    {!isNew ? (*/}
+          {/*      <>*/}
+          {/*        <div>*/}
+          {/*          <div style={{display: 'flex', justifyContent: 'space-between'}}>*/}
+          {/*            <span className={'info-reserva'}>{`Nome : ${account.firstName} ${account.lastName} `}</span>*/}
+          {/*            <span className={'info-reserva'}>{`Data : ${ reservaEntity.data  } N ${ localEntity.capacidade  }`}</span>*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*      </>*/}
+          {/*    ) : (*/}
+          {/*      <>*/}
+          {/*        <div>*/}
+          {/*          <div style={{display: 'flex', justifyContent: 'space-between'}}>*/}
+          {/*            <span className={'info-reserva'}>{`Nome : ${associado.nome} N ${ localEntity.numPessoas }`}</span>*/}
+          {/*            /!*<span className={'info-reserva'}>{`Data : ${formatData(start)}`}</span>*!/*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*      </>*/}
+          {/*    )}*/}
+          {/*  </Col>*/}
+
+          {/*</Row>*/}
           <br />
           <Row className="justify-content-center">
             <Col md="8">
               <Box component="fieldset">
-                <legend>Informações adicionais</legend>
+                <legend>Preencha as informações abaixo</legend>
+
                 <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity} key={'form1'}>
-                  {!isNew ? (
-                    <ValidatedField
-                      name="id"
-                      required
-                      hidden={true}
-                      readOnly
-                      id="reserva-id"
-                      label={translate('global.field.id')}
-                      validate={{ required: true }}
-                    />
-                  ) : null}
+                  {/* Motivo da Reserva */}
                   <ValidatedField
                     label={translate('aapmApp.reserva.motivoReserva')}
                     id="reserva-motivoReserva"
                     name="motivoReserva"
+                    defaultValue={reservaEntity.motivoReserva}
                     data-cy="motivoReserva"
                     type="text"
                     validate={{
@@ -168,26 +177,49 @@ export const ReservaUpdate = () => {
                       minLength: { value: 2, message: translate('entity.validation.minlength', { min: 2 }) },
                     }}
                   />
-                  <ValidatedField
-                    label={translate('aapmApp.reserva.descricao')}
-                    id="reserva-descricao"
-                    name="descricao"
-                    hidden={true}
-                    data-cy="descricao"
-                    type="text"
-                  />
 
+                  {/* Numero de Pessoas */}
                   <ValidatedField
                     label={translate('aapmApp.reserva.numPessoas')}
                     id="reserva-numPessoas"
                     name="numPessoas"
+                    required={true}
                     data-cy="numPessoas"
                     type="number"
                     validate={{
                       required: { value: true, message: translate('entity.validation.required') },
-                      validate: v => isNumber(v) || translate('entity.validation.number'),
+                      max: {
+                        value: localEntity.capacidade,
+                        message: `A ${localEntity.nome} comporta apenas ${localEntity.capacidade} pessoas.`,
+                      },
                     }}
                   />
+
+                  {/* Data */}
+                  <ValidatedField
+                    label={translate('aapmApp.reserva.data')}
+                    id="reservas-data"
+                    name="data"
+                    data-cy="data"
+                    hidden={true}
+                    Value={isNew ? start : reservaEntity.data}
+                    type="date"
+                    readonly={true}
+                    validate={{
+                      required: { value: true, message: translate('entity.validation.required') },
+                    }}
+                  />
+                  <ValidatedField
+                    label={translate('aapmApp.reserva.data')}
+                    id="reservas-data-see"
+                    name="datasee"
+                    disabled={true}
+                    Value={isNew ? start : reservaEntity.data}
+                    type="date"
+                    readonly={true}
+                  />
+
+                  {/* Departamento */}
                   <ValidatedField
                     id="reserva-departamento"
                     name="departamento"
@@ -205,32 +237,91 @@ export const ReservaUpdate = () => {
                       : null}
                   </ValidatedField>
 
+                  <div className="form-group row">
+                    <div className="col-md-6">
+                      {/* Associado */}
+                      <ValidatedField
+                        id="reserva-associado"
+                        name="associado"
+                        data-cy="associado"
+                        defaultValue={account.id}
+                        value={account.id}
+                        label={translate('aapmApp.reserva.associado')}
+                        type="select"
+                      >
+                        <option value={associado.id} key={associado.id}>
+                          {associado.nome}
+                        </option>
+                      </ValidatedField>
+                    </div>
+
+                    <div className="col-md-6">
+                      {/* Local */}
+                      <ValidatedField
+                        id="reservas-local"
+                        name="local"
+                        data-cy="local"
+                        label={translate('aapmApp.reserva.local')}
+                        type="select"
+                        defaultValue={reservaEntity?.local?.id}
+                        required={true}
+                        hidden={false}
+                        validate={{
+                          required: { value: true, message: translate('entity.validation.required') },
+                        }}
+                      >
+                        <option value={localEntity.id} key={localEntity.id}>
+                          {localEntity.nome}
+                        </option>
+                      </ValidatedField>
+                    </div>
+                  </div>
+
+                  {/* Somente Funcionários */}
                   <ValidatedField
-                    label={translate('aapmApp.reserva.status')}
-                    id="reserva-status"
-                    name="status"
-                    data-cy="status"
-                    type="select"
-                    hidden={true}
-                  >
-                    {statusReservaValues.map(statusReserva => (
-                      <option value={statusReserva} key={statusReserva}>
-                        {translate('aapmApp.StatusReserva.' + statusReserva)}
-                      </option>
-                    ))}
-                  </ValidatedField>
+                    label={translate('aapmApp.reserva.somenteFuncionarios')}
+                    id="reserva-somenteFuncionarios"
+                    name="somenteFuncionarios"
+                    data-cy="somenteFuncionarios"
+                    defaultValue={reservaEntity?.somenteFuncionarios}
+                    check
+                    type="checkbox"
+                  />
+
+                  {/* Cancelar Reserva */}
+                  {!isNew ? (
+                    <ValidatedField
+                      label={'Cancelar reserva'}
+                      id="cancelarReserva"
+                      name="cancelarReserva"
+                      check
+                      onChange={() => setCancelarReserva(!cancelarReserva)}
+                      type="checkbox"
+                    />
+                  ) : null}
+
+                  {/* Campos Hidden */}
+                  {!isNew ? (
+                    <ValidatedField
+                      name="id"
+                      required
+                      hidden={true}
+                      readOnly
+                      defaultValue={reservaEntity?.id}
+                      somenteFuncionarios
+                      label={translate('global.field.id')}
+                      validate={{ required: true }}
+                    />
+                  ) : null}
 
                   <ValidatedField
-                    label={translate('aapmApp.reserva.data')}
-                    id="reservas-data"
-                    name="data"
-                    data-cy="data"
+                    label={translate('aapmApp.reserva.descricao')}
+                    id="reserva-descricao"
+                    name="descricao"
+                    defaultValue={reservaEntity?.descricao}
                     hidden={true}
-                    defaultValue={start}
-                    type="date"
-                    validate={{
-                      required: { value: true, message: translate('entity.validation.required') },
-                    }}
+                    data-cy="descricao"
+                    type="text"
                   />
 
                   <ValidatedField
@@ -242,6 +333,7 @@ export const ReservaUpdate = () => {
                     type="datetime-local"
                     placeholder="YYYY-MM-DD HH:mm"
                   />
+
                   <ValidatedField
                     label={translate('aapmApp.reserva.modified')}
                     id="reserva-modified"
@@ -251,118 +343,46 @@ export const ReservaUpdate = () => {
                     type="datetime-local"
                     placeholder="YYYY-MM-DD HH:mm"
                   />
-                  {isNew ? (
-                    <ValidatedField
-                      label={translate('aapmApp.reserva.local')}
-                      id="reservas-local"
-                      name="local"
-                      required={true}
-                      hidden={true}
-                      data-cy="local"
-                      value={locaisEntity.id}
-                      type="text"
-                      validate={{
-                        required: { value: true, message: translate('entity.validation.required') },
-                      }}
-                    />
-                  ) : (
-                    <ValidatedField
-                      id="reservas-local"
-                      name="local"
-                      data-cy="local"
-                      label={translate('aapmApp.reserva.local')}
-                      type="select"
-                      required={true}
-                      hidden={true}
-                      validate={{
-                        required: { value: true, message: translate('entity.validation.required') },
-                      }}
-                    >
-                      <option value="" key="0" />
-                      {locals
-                        ? locals.map(otherEntity => (
-                            <option value={otherEntity.id} key={otherEntity.id}>
-                              {otherEntity.nome}
-                            </option>
-                          ))
-                        : null}
-                    </ValidatedField>
-                  )}
+
                   <ValidatedField
-                    id="reserva-associado"
-                    name="associado"
-                    hidden={true}
-                    data-cy="associado"
-                    value={account.id}
-                    label={translate('aapmApp.reserva.associado')}
+                    label={translate('aapmApp.reserva.status')}
+                    id="reserva-status"
+                    name="status"
+                    defaultValue={reservaEntity?.status}
+                    data-cy="status"
                     type="select"
+                    hidden={true}
                   >
-                    <option value="" key="0" />
-                    {associados
-                      ? associados.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.nome}
-                          </option>
-                        ))
-                      : null}
+                    {statusReservaValues.map(statusReserva => (
+                      <option value={statusReserva} key={statusReserva}>
+                        {translate('aapmApp.StatusReserva.' + statusReserva)}
+                      </option>
+                    ))}
                   </ValidatedField>
-
-                  <ValidatedField
-                    label={translate('aapmApp.reserva.somenteFuncionarios')}
-                    id="reserva-somenteFuncionarios"
-                    name="somenteFuncionarios"
-                    data-cy="somenteFuncionarios"
-                    check
-                    type="switch"
-                  />
-                  {!isNew ? (
-                    <ValidatedField
-                      label={'Cancelar reserva'}
-                      id="cancelarReserva"
-                      name="cancelarReserva"
-                      check
-                      onChange={() => setCancelarReserva(!cancelarReserva)}
-                      type="switch"
-                    />
-                  ) : null}
-
-                  <br />
-                  {/*<Col md={12} style={{display: 'flex', justifyContent: 'flex-end'}}>*/}
-
-                  {/*  &nbsp;*/}
-                  {/*  <Button tag={Link} id="cancel" data-cy="entityCreateCancelButton" to={'/local/' + local} replace*/}
-                  {/*          color="secondary">*/}
-                  {/*    &nbsp; Cancelar*/}
-                  {/*  </Button>*/}
-                  {/*  &nbsp;*/}
-                  {/*  <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit"*/}
-                  {/*          disabled={updating}>*/}
-                  {/*    <FontAwesomeIcon icon="save"/>*/}
-                  {/*    &nbsp;*/}
-                  {/*    <Translate contentKey="entity.action.save">Save</Translate>*/}
-                  {/*  </Button>*/}
-                  {/*</Col>*/}
+                  <hr />
                   <ModalFooter>
                     {!isNew ? (
-                      <div>
-                        {cancelarReserva ? (
-                          <Button
-                            tag={Link}
-                            id="cancel-save"
-                            data-cy="entityCreateCancelButton"
-                            to={'/reserva/' + id + '/' + local + '/delete'}
-                            replace
-                            color="danger"
-                          >
-                            <FontAwesomeIcon icon="trash" />
-                            &nbsp; Cancelar Reserva
-                            {/*<Translate contentKey="entity.action.back">Delete</Translate>*/}
-                          </Button>
-                        ) : null}
+                      <div className="form-group row">
+                        <div className="col-md-12 d-flex justify-content-end">
+                          {cancelarReserva ? (
+                            <Button
+                              tag={Link}
+                              id="cancel-save"
+                              data-cy="entityCreateCancelButton"
+                              to={'/reserva/' + id + '/' + local + '/delete'}
+                              replace
+                              color="danger"
+                            >
+                              <FontAwesomeIcon icon="trash" />
+                              &nbsp; Cancelar Reserva
+                              {/*<Translate contentKey="entity.action.back">Delete</Translate>*/}
+                            </Button>
+                          ) : null}
+                        </div>
                       </div>
                     ) : null}
                     {!cancelarReserva ? (
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div className={'d-flex justify-content-between'}>
                         <Button tag={Link} id="cancel" data-cy="entityCreateCancelButton" to={'/local/' + local} replace color="info">
                           <FontAwesomeIcon icon="cancel" />
                           &nbsp; Cancelar
@@ -383,7 +403,7 @@ export const ReservaUpdate = () => {
           {/*  </ModalBody>*/}
 
           {/*</Modal>*/}
-        </Card>
+        </div>
       )}
     </>
   );

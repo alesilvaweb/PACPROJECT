@@ -9,6 +9,7 @@ import Associado from './associado';
 import Dependente from './dependente';
 import Contato from './contato';
 import Convenio from './convenio';
+import DescontoConvenio from './desconto-convenio';
 import ImagensConvenio from './imagens-convenio';
 import RedesSociaisConvenio from './redes-sociais-convenio';
 import IconsRedesSociais from './icons-redes-sociais';
@@ -32,6 +33,7 @@ export default () => {
         <Route path="contato/*" element={<Contato />} />
         <Route path="convenio/*" element={<Convenio />} />
         <Route path="imagens-convenio/*" element={<ImagensConvenio />} />
+        <Route path="desconto-convenio/*" element={<DescontoConvenio />} />
         <Route path="redes-sociais-convenio/*" element={<RedesSociaisConvenio />} />
         <Route path="icons-redes-sociais/*" element={<IconsRedesSociais />} />
         <Route path="reserva/*" element={<Reserva />} />

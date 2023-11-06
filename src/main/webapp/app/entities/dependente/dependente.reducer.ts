@@ -23,6 +23,10 @@ export const getEntities = createAsyncThunk('dependente/fetch_entity_list', asyn
   const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
   return axios.get<IDependente[]>(requestUrl);
 });
+export const getDependentes = createAsyncThunk('dependente/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
+  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
+  return axios.get<IDependente[]>(requestUrl);
+});
 
 export const getEntity = createAsyncThunk(
   'dependente/fetch_entity',
@@ -34,6 +38,16 @@ export const getEntity = createAsyncThunk(
 );
 
 export const createEntity = createAsyncThunk(
+  'dependente/create_entity',
+  async (entity: IDependente, thunkAPI) => {
+    const result = await axios.post<IDependente>(apiUrl, cleanEntity(entity));
+    thunkAPI.dispatch(getEntities({}));
+    return result;
+  },
+  { serializeError: serializeAxiosError }
+);
+
+export const createDependente = createAsyncThunk(
   'dependente/create_entity',
   async (entity: IDependente, thunkAPI) => {
     const result = await axios.post<IDependente>(apiUrl, cleanEntity(entity));

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.aapm.app.IntegrationTest;
 import com.aapm.app.domain.Categoria;
 import com.aapm.app.domain.Convenio;
+import com.aapm.app.domain.DescontoConvenio;
 import com.aapm.app.domain.ImagensConvenio;
 import com.aapm.app.domain.RedesSociaisConvenio;
 import com.aapm.app.domain.enumeration.Status;
@@ -894,6 +895,29 @@ class ConvenioResourceIT {
 
         // Get all the convenioList where redesSociais equals to (redesSociaisId + 1)
         defaultConvenioShouldNotBeFound("redesSociaisId.equals=" + (redesSociaisId + 1));
+    }
+
+    @Test
+    @Transactional
+    void getAllConveniosByDescontoIsEqualToSomething() throws Exception {
+        DescontoConvenio desconto;
+        if (TestUtil.findAll(em, DescontoConvenio.class).isEmpty()) {
+            convenioRepository.saveAndFlush(convenio);
+            desconto = DescontoConvenioResourceIT.createEntity(em);
+        } else {
+            desconto = TestUtil.findAll(em, DescontoConvenio.class).get(0);
+        }
+        em.persist(desconto);
+        em.flush();
+        //        convenio.addDesconto(desconto);
+        convenioRepository.saveAndFlush(convenio);
+        Long descontoId = desconto.getId();
+
+        // Get all the convenioList where desconto equals to descontoId
+        defaultConvenioShouldBeFound("descontoId.equals=" + descontoId);
+
+        // Get all the convenioList where desconto equals to (descontoId + 1)
+        defaultConvenioShouldNotBeFound("descontoId.equals=" + (descontoId + 1));
     }
 
     @Test

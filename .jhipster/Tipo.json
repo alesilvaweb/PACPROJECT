@@ -1,12 +1,17 @@
 {
   "applications": "*",
-  "changelogDate": "20231025004839",
+  "changelogDate": "20231102181635",
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "tipo",
   "fields": [
     {
       "fieldName": "tipo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "chave",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
     }

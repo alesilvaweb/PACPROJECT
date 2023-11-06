@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IReserva } from 'app/shared/model/reserva.model';
 import { getEntities } from './reserva.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Reserva = () => {
   const dispatch = useAppDispatch();
@@ -83,6 +84,7 @@ export const Reserva = () => {
 
   return (
     <div>
+      <Breadcrunbs />
       <h2 id="reserva-heading" data-cy="ReservaHeading">
         <Translate contentKey="aapmApp.reserva.home.title">Reservas</Translate>
         <div className="d-flex justify-content-end">

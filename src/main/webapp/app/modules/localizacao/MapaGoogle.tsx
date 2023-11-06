@@ -4,6 +4,7 @@ import { Loader } from '@googlemaps/js-api-loader';
 import BotaoVoltar from 'app/components/botaoVoltar';
 import { WhatsApp } from '@mui/icons-material';
 import Button from '@mui/material/Button';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 const containerStyle = {
   width: '100%',
@@ -53,7 +54,7 @@ function MapaGoogle() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <BotaoVoltar link={'/agenda'} label={'Voltar'} />
+        <Breadcrunbs />
         <Button
           onClick={() => {
             const { lat, lng } = center;

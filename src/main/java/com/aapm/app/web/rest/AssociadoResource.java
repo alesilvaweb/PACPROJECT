@@ -63,16 +63,34 @@ public class AssociadoResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new associadoDTO, or with status {@code 400 (Bad Request)} if the associado has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/associados")
+    @PostMapping("/associados/list")
     public ResponseEntity<AssociadoDTO> createAssociado(@Valid @RequestBody AssociadoDTO associadoDTO) throws URISyntaxException {
         log.debug("REST request to save Associado : {}", associadoDTO);
-        if (associadoDTO.getId() != null) {
-            throw new BadRequestAlertException("A new associado cannot already have an ID", ENTITY_NAME, "idexists");
-        }
+        //        if (associadoDTO.getId() != null) {
+        //            throw new BadRequestAlertException("A new associado cannot already have an ID", ENTITY_NAME, "idexists");
+        //        }
         AssociadoDTO result = associadoService.save(associadoDTO);
         return ResponseEntity
             .created(new URI("/api/associados/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/associados")
+    public ResponseEntity<AssociadoDTO> createAssociados(@Valid @RequestBody List<AssociadoDTO> associadoDTO) throws URISyntaxException {
+        log.debug("REST request to save Associado : {}", associadoDTO);
+
+        for (AssociadoDTO associadoDTO1 : associadoDTO) {
+            if (!associadoRepository.existsById(associadoDTO1.getId())) {
+                associadoService.save(associadoDTO1);
+            }
+        }
+
+        AssociadoDTO result = new AssociadoDTO();
+
+        return ResponseEntity
+            .created(new URI("/api/associados/"))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, "Lista Salva com sucesso!"))
             .body(result);
     }
 

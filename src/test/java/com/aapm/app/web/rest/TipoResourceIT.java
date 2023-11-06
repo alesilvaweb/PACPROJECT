@@ -36,6 +36,9 @@ class TipoResourceIT {
     private static final String DEFAULT_TIPO = "AAAAAAAAAA";
     private static final String UPDATED_TIPO = "BBBBBBBBBB";
 
+    private static final String DEFAULT_CHAVE = "AAAAAAAAAA";
+    private static final String UPDATED_CHAVE = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/tipos";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -63,7 +66,7 @@ class TipoResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Tipo createEntity(EntityManager em) {
-        Tipo tipo = new Tipo().tipo(DEFAULT_TIPO);
+        Tipo tipo = new Tipo().tipo(DEFAULT_TIPO).chave(DEFAULT_CHAVE);
         return tipo;
     }
 
@@ -74,7 +77,7 @@ class TipoResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Tipo createUpdatedEntity(EntityManager em) {
-        Tipo tipo = new Tipo().tipo(UPDATED_TIPO);
+        Tipo tipo = new Tipo().tipo(UPDATED_TIPO).chave(UPDATED_CHAVE);
         return tipo;
     }
 
@@ -98,6 +101,7 @@ class TipoResourceIT {
         assertThat(tipoList).hasSize(databaseSizeBeforeCreate + 1);
         Tipo testTipo = tipoList.get(tipoList.size() - 1);
         assertThat(testTipo.getTipo()).isEqualTo(DEFAULT_TIPO);
+        assertThat(testTipo.getChave()).isEqualTo(DEFAULT_CHAVE);
     }
 
     @Test
@@ -139,6 +143,24 @@ class TipoResourceIT {
 
     @Test
     @Transactional
+    void checkChaveIsRequired() throws Exception {
+        int databaseSizeBeforeTest = tipoRepository.findAll().size();
+        // set the field null
+        tipo.setChave(null);
+
+        // Create the Tipo, which fails.
+        TipoDTO tipoDTO = tipoMapper.toDto(tipo);
+
+        restTipoMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(tipoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Tipo> tipoList = tipoRepository.findAll();
+        assertThat(tipoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllTipos() throws Exception {
         // Initialize the database
         tipoRepository.saveAndFlush(tipo);
@@ -149,7 +171,8 @@ class TipoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tipo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO)));
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO)))
+            .andExpect(jsonPath("$.[*].chave").value(hasItem(DEFAULT_CHAVE)));
     }
 
     @Test
@@ -164,7 +187,8 @@ class TipoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tipo.getId().intValue()))
-            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO));
+            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO))
+            .andExpect(jsonPath("$.chave").value(DEFAULT_CHAVE));
     }
 
     @Test
@@ -252,6 +276,71 @@ class TipoResourceIT {
 
     @Test
     @Transactional
+    void getAllTiposByChaveIsEqualToSomething() throws Exception {
+        // Initialize the database
+        tipoRepository.saveAndFlush(tipo);
+
+        // Get all the tipoList where chave equals to DEFAULT_CHAVE
+        defaultTipoShouldBeFound("chave.equals=" + DEFAULT_CHAVE);
+
+        // Get all the tipoList where chave equals to UPDATED_CHAVE
+        defaultTipoShouldNotBeFound("chave.equals=" + UPDATED_CHAVE);
+    }
+
+    @Test
+    @Transactional
+    void getAllTiposByChaveIsInShouldWork() throws Exception {
+        // Initialize the database
+        tipoRepository.saveAndFlush(tipo);
+
+        // Get all the tipoList where chave in DEFAULT_CHAVE or UPDATED_CHAVE
+        defaultTipoShouldBeFound("chave.in=" + DEFAULT_CHAVE + "," + UPDATED_CHAVE);
+
+        // Get all the tipoList where chave equals to UPDATED_CHAVE
+        defaultTipoShouldNotBeFound("chave.in=" + UPDATED_CHAVE);
+    }
+
+    @Test
+    @Transactional
+    void getAllTiposByChaveIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        tipoRepository.saveAndFlush(tipo);
+
+        // Get all the tipoList where chave is not null
+        defaultTipoShouldBeFound("chave.specified=true");
+
+        // Get all the tipoList where chave is null
+        defaultTipoShouldNotBeFound("chave.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllTiposByChaveContainsSomething() throws Exception {
+        // Initialize the database
+        tipoRepository.saveAndFlush(tipo);
+
+        // Get all the tipoList where chave contains DEFAULT_CHAVE
+        defaultTipoShouldBeFound("chave.contains=" + DEFAULT_CHAVE);
+
+        // Get all the tipoList where chave contains UPDATED_CHAVE
+        defaultTipoShouldNotBeFound("chave.contains=" + UPDATED_CHAVE);
+    }
+
+    @Test
+    @Transactional
+    void getAllTiposByChaveNotContainsSomething() throws Exception {
+        // Initialize the database
+        tipoRepository.saveAndFlush(tipo);
+
+        // Get all the tipoList where chave does not contain DEFAULT_CHAVE
+        defaultTipoShouldNotBeFound("chave.doesNotContain=" + DEFAULT_CHAVE);
+
+        // Get all the tipoList where chave does not contain UPDATED_CHAVE
+        defaultTipoShouldBeFound("chave.doesNotContain=" + UPDATED_CHAVE);
+    }
+
+    @Test
+    @Transactional
     void getAllTiposByMensagemIsEqualToSomething() throws Exception {
         Mensagem mensagem;
         if (TestUtil.findAll(em, Mensagem.class).isEmpty()) {
@@ -282,7 +371,8 @@ class TipoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tipo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO)));
+            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO)))
+            .andExpect(jsonPath("$.[*].chave").value(hasItem(DEFAULT_CHAVE)));
 
         // Check, that the count call also returns 1
         restTipoMockMvc
@@ -330,7 +420,7 @@ class TipoResourceIT {
         Tipo updatedTipo = tipoRepository.findById(tipo.getId()).get();
         // Disconnect from session so that the updates on updatedTipo are not directly saved in db
         em.detach(updatedTipo);
-        updatedTipo.tipo(UPDATED_TIPO);
+        updatedTipo.tipo(UPDATED_TIPO).chave(UPDATED_CHAVE);
         TipoDTO tipoDTO = tipoMapper.toDto(updatedTipo);
 
         restTipoMockMvc
@@ -346,6 +436,7 @@ class TipoResourceIT {
         assertThat(tipoList).hasSize(databaseSizeBeforeUpdate);
         Tipo testTipo = tipoList.get(tipoList.size() - 1);
         assertThat(testTipo.getTipo()).isEqualTo(UPDATED_TIPO);
+        assertThat(testTipo.getChave()).isEqualTo(UPDATED_CHAVE);
     }
 
     @Test
@@ -425,6 +516,8 @@ class TipoResourceIT {
         Tipo partialUpdatedTipo = new Tipo();
         partialUpdatedTipo.setId(tipo.getId());
 
+        partialUpdatedTipo.chave(UPDATED_CHAVE);
+
         restTipoMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedTipo.getId())
@@ -438,6 +531,7 @@ class TipoResourceIT {
         assertThat(tipoList).hasSize(databaseSizeBeforeUpdate);
         Tipo testTipo = tipoList.get(tipoList.size() - 1);
         assertThat(testTipo.getTipo()).isEqualTo(DEFAULT_TIPO);
+        assertThat(testTipo.getChave()).isEqualTo(UPDATED_CHAVE);
     }
 
     @Test
@@ -452,7 +546,7 @@ class TipoResourceIT {
         Tipo partialUpdatedTipo = new Tipo();
         partialUpdatedTipo.setId(tipo.getId());
 
-        partialUpdatedTipo.tipo(UPDATED_TIPO);
+        partialUpdatedTipo.tipo(UPDATED_TIPO).chave(UPDATED_CHAVE);
 
         restTipoMockMvc
             .perform(
@@ -467,6 +561,7 @@ class TipoResourceIT {
         assertThat(tipoList).hasSize(databaseSizeBeforeUpdate);
         Tipo testTipo = tipoList.get(tipoList.size() - 1);
         assertThat(testTipo.getTipo()).isEqualTo(UPDATED_TIPO);
+        assertThat(testTipo.getChave()).isEqualTo(UPDATED_CHAVE);
     }
 
     @Test

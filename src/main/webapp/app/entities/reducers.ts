@@ -4,6 +4,7 @@ import associado from 'app/entities/associado/associado.reducer';
 import dependente from 'app/entities/dependente/dependente.reducer';
 import contato from 'app/entities/contato/contato.reducer';
 import convenio from 'app/entities/convenio/convenio.reducer';
+import descontoConvenio from 'app/entities/desconto-convenio/desconto-convenio.reducer';
 import imagensConvenio from 'app/entities/imagens-convenio/imagens-convenio.reducer';
 import redesSociaisConvenio from 'app/entities/redes-sociais-convenio/redes-sociais-convenio.reducer';
 import iconsRedesSociais from 'app/entities/icons-redes-sociais/icons-redes-sociais.reducer';
@@ -22,6 +23,7 @@ const entitiesReducers = {
   dependente,
   contato,
   convenio,
+  descontoConvenio,
   imagensConvenio,
   redesSociaisConvenio,
   iconsRedesSociais,

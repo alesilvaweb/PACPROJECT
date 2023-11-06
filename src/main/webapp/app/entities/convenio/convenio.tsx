@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Table } from 'reactstrap';
 import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IConvenio } from 'app/shared/model/convenio.model';
 import { getEntities } from './convenio.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Convenio = () => {
   const dispatch = useAppDispatch();
@@ -83,9 +84,22 @@ export const Convenio = () => {
 
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>
+          <a>Convênios</a>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <h2 id="convenio-heading" data-cy="ConvenioHeading">
         <Translate contentKey="aapmApp.convenio.home.title">Convenios</Translate>
         <div className="d-flex justify-content-end">
+          <Link to="/desconto-convenio" className="btn btn-primary jh-create-entity">
+            <FontAwesomeIcon icon="plus" />
+            &nbsp; Descontos
+          </Link>
+          &nbsp;
           <Link to="/categoria" className="btn btn-primary jh-create-entity">
             <FontAwesomeIcon icon="plus" />
             &nbsp; Categorias
@@ -134,15 +148,15 @@ export const Convenio = () => {
                 {/*<th className="hand" onClick={sort('logo')}>*/}
                 {/*  <Translate contentKey="aapmApp.convenio.logo">Logo</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
-                {/*<th className="hand" onClick={sort('banner')}>*/}
-                {/*  <Translate contentKey="aapmApp.convenio.banner">Banner</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*<th className="hand" onClick={sort('banner.tsx')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.banner.tsx">Banner</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
                 {/*<th className="hand" onClick={sort('localizacao')}>*/}
                 {/*  <Translate contentKey="aapmApp.convenio.localizacao">Localizacao</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
-                <th className="hand" onClick={sort('status')}>
-                  <Translate contentKey="aapmApp.convenio.status">Status</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('status')}>*/}
+                {/*  <Translate contentKey="aapmApp.convenio.status">Status</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 {/*<th className="hand" onClick={sort('created')}>*/}
                 {/*  <Translate contentKey="aapmApp.convenio.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
@@ -178,9 +192,9 @@ export const Convenio = () => {
                             &nbsp;
                           </a>
                         ) : null}
-                        <span>
-                          {convenio.imagemContentType}, {byteSize(convenio.imagem)}
-                        </span>
+                        {/*<span>*/}
+                        {/*  {convenio.imagemContentType}, {byteSize(convenio.imagem)}*/}
+                        {/*</span>*/}
                       </div>
                     ) : null}
                   </td>
@@ -200,16 +214,16 @@ export const Convenio = () => {
                   {/*  ) : null}*/}
                   {/*</td>*/}
                   {/*<td>*/}
-                  {/*  {convenio.banner ? (*/}
+                  {/*  {convenio.banner.tsx ? (*/}
                   {/*    <div>*/}
                   {/*      {convenio.bannerContentType ? (*/}
-                  {/*        <a onClick={openFile(convenio.bannerContentType, convenio.banner)}>*/}
-                  {/*          <img src={`data:${convenio.bannerContentType};base64,${convenio.banner}`} style={{ maxHeight: '30px' }} />*/}
+                  {/*        <a onClick={openFile(convenio.bannerContentType, convenio.banner.tsx)}>*/}
+                  {/*          <img src={`data:${convenio.bannerContentType};base64,${convenio.banner.tsx}`} style={{ maxHeight: '30px' }} />*/}
                   {/*          &nbsp;*/}
                   {/*        </a>*/}
                   {/*      ) : null}*/}
                   {/*      <span>*/}
-                  {/*        {convenio.bannerContentType}, {byteSize(convenio.banner)}*/}
+                  {/*        {convenio.bannerContentType}, {byteSize(convenio.banner.tsx)}*/}
                   {/*      </span>*/}
                   {/*    </div>*/}
                   {/*  ) : null}*/}

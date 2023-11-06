@@ -7,7 +7,6 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import { CorporateFare, CreditCard, ManageAccounts } from '@mui/icons-material';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import BannerCarousel from 'app/modules/home/banner-carousel';
 
 // ----------------------------------------------------------------------
 
@@ -75,10 +74,7 @@ export default function PaginaInicialNew() {
       </Grid>
       <br />
       <Grid xs={12} md={6} lg={8}>
-        <Card component={Stack}>
-          {/*<BannerCarousel/>*/}
-          <BannerCarousel />
-        </Card>
+        <Card component={Stack}>{/*<BannerCarousel/>*/}</Card>
       </Grid>
     </Container>
   );

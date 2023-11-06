@@ -47,7 +47,6 @@ export const ReservaDeleteDialog = () => {
       {loading ? (
         <div></div>
       ) : (
-        // <LinearProgress sx={{ borderRadius: 5 }} />
         <Modal isOpen toggle={handleClose} style={{ marginTop: '20vh' }}>
           <ModalHeader toggle={handleClose} data-cy="reservaDeleteDialogHeading">
             <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>

@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Sidebar from 'app/shared/layout/header/sidebar';
 import { Lock, Menu } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -56,6 +57,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
   const [isOpen, setIsOpen] = useState(false);
   const loading = useAppSelector(state => state.reserva.loading);
   const loadingLocal = useAppSelector(state => state.local.loading);
+  const loadingArquivo = useAppSelector(state => state.arquivo.loading);
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar>
@@ -86,6 +88,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
         </Container>
         {loading ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
         {loadingLocal ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
+        {loadingArquivo ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
       </AppBar>
 
       {/* <Sidebar {...{ isOpen, setIsOpen, currentLocale, isOpenAPIEnabled, isAdmin, isAuthenticated }} /> */}

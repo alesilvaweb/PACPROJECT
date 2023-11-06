@@ -15,6 +15,9 @@ public class TipoDTO implements Serializable {
     @NotNull
     private String tipo;
 
+    @NotNull
+    private String chave;
+
     public Long getId() {
         return id;
     }
@@ -29,6 +32,14 @@ public class TipoDTO implements Serializable {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getChave() {
+        return chave;
+    }
+
+    public void setChave(String chave) {
+        this.chave = chave;
     }
 
     @Override
@@ -58,6 +69,7 @@ public class TipoDTO implements Serializable {
         return "TipoDTO{" +
             "id=" + getId() +
             ", tipo='" + getTipo() + "'" +
+            ", chave='" + getChave() + "'" +
             "}";
     }
 }

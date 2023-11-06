@@ -65,7 +65,7 @@ export const AccountMenuMaterial = ({ isAuthenticated = false }) => {
         color="inherit"
         // startIcon={}
       >
-        <LetterAvatar>{account.firstName[0] + account.lastName[0]}</LetterAvatar>
+        <LetterAvatar>{account.firstName[0]}</LetterAvatar>
         {/*{account.firstName}*/}
       </Button>
       <Menu

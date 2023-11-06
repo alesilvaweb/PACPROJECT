@@ -13,7 +13,7 @@ export default function CardLocais({ link, title, icon }) {
     <Grid item xs={4} sm={4} md={4} sx={{ marginTop: '5%' }}>
       <Card
         sx={{
-          backgroundColor: '#1975d1',
+          backgroundColor: '#1e77c5',
           display: 'flex',
           justifyContent: 'center',
           padding: 0.5,
@@ -34,12 +34,14 @@ export default function CardLocais({ link, title, icon }) {
           backgroundColor: 'gray-100',
           borderRadius: 2,
           borderWidth: '1px',
+          boxShadow: 5,
           borderStyle: 'solid',
-          borderColor: '#a1a1a1',
+          borderColor: '#d5d5d5',
           ':hover': {
-            boxShadow: 10,
+            boxShadow: 8,
+            borderWidth: '1px',
             position: 'relative',
-            borderColor: 'blue',
+            borderColor: '#1e77c5',
           },
         }}
       >
@@ -60,19 +62,13 @@ export default function CardLocais({ link, title, icon }) {
                 fontSize: '1.3rem',
                 position: 'relative',
                 fontWeight: '700',
-                // marginTop:"2vh" ,
                 padding: '60px',
-                // backgroundColor:"red",
                 textTransform: 'uppercase',
                 color: '#242424',
-                // borderRadius: 2,
-                // borderWidth: '1px',
-                // borderStyle: 'solid',
-                // borderColor: '#a1a1a1',
 
                 ':hover': {
-                  fontSize: '1.4rem',
-                  fontWeight: '900',
+                  // fontSize: '1.4rem',
+                  // fontWeight: '1000',
                 },
               }}
             >

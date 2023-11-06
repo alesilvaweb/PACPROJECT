@@ -25,6 +25,8 @@ public class TipoCriteria implements Serializable, Criteria {
 
     private StringFilter tipo;
 
+    private StringFilter chave;
+
     private LongFilter mensagemId;
 
     private Boolean distinct;
@@ -34,6 +36,7 @@ public class TipoCriteria implements Serializable, Criteria {
     public TipoCriteria(TipoCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.tipo = other.tipo == null ? null : other.tipo.copy();
+        this.chave = other.chave == null ? null : other.chave.copy();
         this.mensagemId = other.mensagemId == null ? null : other.mensagemId.copy();
         this.distinct = other.distinct;
     }
@@ -73,6 +76,21 @@ public class TipoCriteria implements Serializable, Criteria {
         this.tipo = tipo;
     }
 
+    public StringFilter getChave() {
+        return chave;
+    }
+
+    public StringFilter chave() {
+        if (chave == null) {
+            chave = new StringFilter();
+        }
+        return chave;
+    }
+
+    public void setChave(StringFilter chave) {
+        this.chave = chave;
+    }
+
     public LongFilter getMensagemId() {
         return mensagemId;
     }
@@ -108,6 +126,7 @@ public class TipoCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(tipo, that.tipo) &&
+            Objects.equals(chave, that.chave) &&
             Objects.equals(mensagemId, that.mensagemId) &&
             Objects.equals(distinct, that.distinct)
         );
@@ -115,7 +134,7 @@ public class TipoCriteria implements Serializable, Criteria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tipo, mensagemId, distinct);
+        return Objects.hash(id, tipo, chave, mensagemId, distinct);
     }
 
     // prettier-ignore
@@ -124,6 +143,7 @@ public class TipoCriteria implements Serializable, Criteria {
         return "TipoCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (tipo != null ? "tipo=" + tipo + ", " : "") +
+            (chave != null ? "chave=" + chave + ", " : "") +
             (mensagemId != null ? "mensagemId=" + mensagemId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";

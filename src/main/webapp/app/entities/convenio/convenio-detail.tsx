@@ -1,175 +1,193 @@
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
-import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
-import { useAppDispatch, useAppSelector } from 'app/config/store';
-
+import React, { useEffect, useState } from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import CardMedia from '@mui/material/CardMedia';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import axios from 'axios';
+import { Instagram, WhatsApp } from '@mui/icons-material';
+// Importe outros ícones das redes sociais, se necessário
 import { getEntity } from './convenio.reducer';
+import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem, CardFooter } from 'reactstrap';
+import Stack from '@mui/material/Stack';
+import { Button, Paper } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import { styled } from '@mui/material/styles';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AUTHORITIES } from 'app/config/constants';
 
-export const ConvenioDetail = () => {
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#e43922',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+
+  color: '#ffffff',
+}));
+
+function ConvenioDetalhe() {
   const dispatch = useAppDispatch();
 
+  const [desconto, setDesconto] = useState([]);
+  const [redeSocial, setRedeSocial] = useState([]);
   const { id } = useParams<'id'>();
 
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
 
-  const convenioEntity = useAppSelector(state => state.convenio.entity);
-  return (
-    <Row>
-      <Col md="8">
-        <h2 data-cy="convenioDetailsHeading">
-          <Translate contentKey="aapmApp.convenio.detail.title">Convenio</Translate>
-        </h2>
-        <dl className="jh-entity-details">
-          <dt>
-            <span id="id">
-              <Translate contentKey="global.field.id">ID</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.id}</dd>
-          <dt>
-            <span id="nome">
-              <Translate contentKey="aapmApp.convenio.nome">Nome</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.nome}</dd>
-          <dt>
-            <span id="titulo">
-              <Translate contentKey="aapmApp.convenio.titulo">Titulo</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.titulo}</dd>
-          <dt>
-            <span id="descricao">
-              <Translate contentKey="aapmApp.convenio.descricao">Descricao</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.descricao}</dd>
-          <dt>
-            <span id="endereco">
-              <Translate contentKey="aapmApp.convenio.endereco">Endereco</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.endereco}</dd>
-          <dt>
-            <span id="telefone">
-              <Translate contentKey="aapmApp.convenio.telefone">Telefone</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.telefone}</dd>
-          <dt>
-            <span id="email">
-              <Translate contentKey="aapmApp.convenio.email">Email</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.email}</dd>
-          <dt>
-            <span id="imagem">
-              <Translate contentKey="aapmApp.convenio.imagem">Imagem</Translate>
-            </span>
-          </dt>
-          <dd>
-            {convenioEntity.imagem ? (
-              <div>
-                {convenioEntity.imagemContentType ? (
-                  <a onClick={openFile(convenioEntity.imagemContentType, convenioEntity.imagem)}>
-                    <img src={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`} style={{ maxHeight: '30px' }} />
-                  </a>
-                ) : null}
-                <span>
-                  {convenioEntity.imagemContentType}, {byteSize(convenioEntity.imagem)}
-                </span>
-              </div>
-            ) : null}
-          </dd>
-          <dt>
-            <span id="logo">
-              <Translate contentKey="aapmApp.convenio.logo">Logo</Translate>
-            </span>
-          </dt>
-          <dd>
-            {convenioEntity.logo ? (
-              <div>
-                {convenioEntity.logoContentType ? (
-                  <a onClick={openFile(convenioEntity.logoContentType, convenioEntity.logo)}>
-                    <img src={`data:${convenioEntity.logoContentType};base64,${convenioEntity.logo}`} style={{ maxHeight: '30px' }} />
-                  </a>
-                ) : null}
-                <span>
-                  {convenioEntity.logoContentType}, {byteSize(convenioEntity.logo)}
-                </span>
-              </div>
-            ) : null}
-          </dd>
-          <dt>
-            <span id="banner">
-              <Translate contentKey="aapmApp.convenio.banner">Banner</Translate>
-            </span>
-          </dt>
-          <dd>
-            {convenioEntity.banner ? (
-              <div>
-                {convenioEntity.bannerContentType ? (
-                  <a onClick={openFile(convenioEntity.bannerContentType, convenioEntity.banner)}>
-                    <img src={`data:${convenioEntity.bannerContentType};base64,${convenioEntity.banner}`} style={{ maxHeight: '30px' }} />
-                  </a>
-                ) : null}
-                <span>
-                  {convenioEntity.bannerContentType}, {byteSize(convenioEntity.banner)}
-                </span>
-              </div>
-            ) : null}
-          </dd>
-          <dt>
-            <span id="localizacao">
-              <Translate contentKey="aapmApp.convenio.localizacao">Localizacao</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.localizacao}</dd>
-          <dt>
-            <span id="status">
-              <Translate contentKey="aapmApp.convenio.status">Status</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.status}</dd>
-          <dt>
-            <span id="created">
-              <Translate contentKey="aapmApp.convenio.created">Created</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.created ? <TextFormat value={convenioEntity.created} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
-          <dt>
-            <span id="modified">
-              <Translate contentKey="aapmApp.convenio.modified">Modified</Translate>
-            </span>
-          </dt>
-          <dd>{convenioEntity.modified ? <TextFormat value={convenioEntity.modified} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
-          <dt>
-            <Translate contentKey="aapmApp.convenio.categoria">Categoria</Translate>
-          </dt>
-          <dd>{convenioEntity.categoria ? convenioEntity.categoria.categoria : ''}</dd>
-        </dl>
-        <Button tag={Link} to="/convenio" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.back">Back</Translate>
-          </span>
-        </Button>
-        &nbsp;
-        <Button tag={Link} to={`/convenio/${convenioEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" />{' '}
-          <span className="d-none d-md-inline">
-            <Translate contentKey="entity.action.edit">Edit</Translate>
-          </span>
-        </Button>
-      </Col>
-    </Row>
-  );
-};
+  async function fetchDescontos(id) {
+    try {
+      const response = await axios.get(`api/desconto-convenios?convenioId.equals=${id}`);
+      setDesconto(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar Descontos:', error);
+    }
+  }
 
-export default ConvenioDetail;
+  async function fetchRedesSociais(id) {
+    try {
+      const response = await axios.get(`api/redes-sociais-convenios?convenioId.equals=${id}`);
+      setRedeSocial(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar redes Sociais:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchDescontos(id);
+    fetchRedesSociais(id);
+  }, [id]);
+
+  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
+
+  const convenioEntity = useAppSelector(state => state.convenio.entity);
+  const navigate = useNavigate();
+  return (
+    <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/convenio/list')}>
+          <a>Convênios</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{convenioEntity.nome}</BreadcrumbItem>
+      </Breadcrumb>
+      <Card>
+        <CardMedia
+          component="img"
+          alt={convenioEntity.nome}
+          height="200"
+          image={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`}
+          title={convenioEntity.nome}
+          sx={{ objectFit: 'cover', width: '90vh', height: '100%', float: 'right', borderRadius: '4px', boxShadow: 5, marginRight: '10px' }}
+        />
+        <CardContent>
+          <Typography variant="h4" component="div">
+            {convenioEntity.nome}
+          </Typography>
+          <Typography variant="subtitle2" component="div">
+            {convenioEntity.titulo}
+          </Typography>
+          <hr />
+          <Typography variant="subtitle2" component="div">
+            {convenioEntity.endereco}
+          </Typography>
+          <Typography variant="subtitle2" component="div">
+            Fone: {convenioEntity.telefone}
+          </Typography>
+          <Typography variant="subtitle2" component="div">
+            {convenioEntity.email}
+          </Typography>
+          <hr />
+          <Typography variant="button" color="textSecondary" sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography variant="subtitle2" component="div">
+              Desconto:
+            </Typography>
+
+            {desconto.map(desc => (
+              <>
+                &nbsp;
+                <Stack
+                  direction="row"
+                  divider={<Divider orientation="vertical" flexItem />}
+                  spacing={{ xs: 1, sm: 2, md: 4 }}
+                  key={desc.id}
+                >
+                  <Item>
+                    &nbsp;{desc.desconto}% {desc.descricao} &nbsp;
+                  </Item>
+                </Stack>
+                &nbsp;
+              </>
+            ))}
+          </Typography>
+          <hr />
+          <Grid container spacing={2}>
+            {redeSocial.map(rede => (
+              <Grid item key={rede.id}>
+                <IconButton
+                  color="primary"
+                  aria-label={rede.nome}
+                  href={rede.endereco}
+                  target="_blank"
+                  style={{ fontSize: '15px', float: 'right' }}
+                >
+                  {rede.icon?.nome === 'Facebook' ? (
+                    <>
+                      <FacebookIcon /> {rede.endereco} &nbsp;
+                    </>
+                  ) : rede.icon?.nome === 'WhatsApp' ? (
+                    <>
+                      <WhatsApp /> {rede.endereco} &nbsp;
+                    </>
+                  ) : rede.icon?.nome === 'Instagram' ? (
+                    <>
+                      <Instagram /> {rede.endereco} &nbsp;
+                    </>
+                  ) : null}
+                </IconButton>
+              </Grid>
+            ))}
+          </Grid>
+        </CardContent>
+        <hr />
+        {isAdmin ? (
+          <CardFooter>
+            <Button
+              type={'button'}
+              color={'primary'}
+              style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
+              onClick={() => navigate(`/convenio/${convenioEntity.id}/edit`)}
+            >
+              Editar
+            </Button>
+            <Button
+              type={'button'}
+              color={'error'}
+              style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
+              onClick={() => navigate(`/convenio/${convenioEntity.id}/delete?page=1&sort=id,asc`)}
+            >
+              Excluir
+            </Button>
+          </CardFooter>
+        ) : null}
+        <Button
+          type={'button'}
+          color={'primary'}
+          style={{ float: 'left', marginBottom: '10px', marginLeft: '10px' }}
+          onClick={() => navigate(`/convenio/list`)}
+        >
+          voltar
+        </Button>
+      </Card>
+    </div>
+  );
+}
+
+export default ConvenioDetalhe;

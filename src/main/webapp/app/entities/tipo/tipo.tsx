@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { ITipo } from 'app/shared/model/tipo.model';
 import { getEntities } from './tipo.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Tipo = () => {
   const dispatch = useAppDispatch();
@@ -83,17 +84,22 @@ export const Tipo = () => {
 
   return (
     <div>
+      <Breadcrunbs />
       <h2 id="tipo-heading" data-cy="TipoHeading">
         <Translate contentKey="aapmApp.tipo.home.title">Tipos</Translate>
         <div className="d-flex justify-content-end">
+          <Link to="/mensagem" className="btn btn-primary jh-create-entity">
+            Mensagens
+          </Link>
+          &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.tipo.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.tipo.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/tipo/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.tipo.home.createLabel">Create new Tipo</Translate>
+            {/*<Translate contentKey="aapmApp.tipo.home.createLabel">Create new Tipo</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -102,9 +108,9 @@ export const Tipo = () => {
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.tipo.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.tipo.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('tipo')}>
                   <Translate contentKey="aapmApp.tipo.tipo">Tipo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -114,11 +120,11 @@ export const Tipo = () => {
             <tbody>
               {tipoList.map((tipo, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/tipo/${tipo.id}`} color="link" size="sm">
-                      {tipo.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/tipo/${tipo.id}`} color="link" size="sm">*/}
+                  {/*    {tipo.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{tipo.tipo}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

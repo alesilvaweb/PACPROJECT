@@ -84,7 +84,7 @@ export const Arquivo = () => {
 
   return (
     <div>
-      <Breadcrunbs />
+      <Breadcrunbs atual={'Arquivos'} />
       <h2 id="arquivo-heading" data-cy="ArquivoHeading">
         <Translate contentKey="aapmApp.arquivo.home.title">Arquivos</Translate>
         <div className="d-flex justify-content-end">

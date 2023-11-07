@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IIconsRedesSociais } from 'app/shared/model/icons-redes-sociais.model';
 import { getEntities } from './icons-redes-sociais.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const IconsRedesSociais = () => {
   const dispatch = useAppDispatch();
@@ -83,6 +84,7 @@ export const IconsRedesSociais = () => {
 
   return (
     <div>
+      <Breadcrunbs atual={'Redes Sociais'} />
       <h2 id="icons-redes-sociais-heading" data-cy="IconsRedesSociaisHeading">
         <Translate contentKey="aapmApp.iconsRedesSociais.home.title">Icons Redes Sociais</Translate>
         <div className="d-flex justify-content-end">
@@ -116,12 +118,12 @@ export const IconsRedesSociais = () => {
                 <th className="hand" onClick={sort('descricao')}>
                   <Translate contentKey="aapmApp.iconsRedesSociais.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('icon')}>
-                  <Translate contentKey="aapmApp.iconsRedesSociais.icon">Icon</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('image')}>
-                  <Translate contentKey="aapmApp.iconsRedesSociais.image">Image</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('icon')}>*/}
+                {/*  <Translate contentKey="aapmApp.iconsRedesSociais.icon">Icon</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('image')}>*/}
+                {/*  <Translate contentKey="aapmApp.iconsRedesSociais.imagem">Image</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th />
               </tr>
             </thead>
@@ -135,25 +137,25 @@ export const IconsRedesSociais = () => {
                   </td>
                   <td>{iconsRedesSociais.nome}</td>
                   <td>{iconsRedesSociais.descricao}</td>
-                  <td>{iconsRedesSociais.icon}</td>
-                  <td>
-                    {iconsRedesSociais.image ? (
-                      <div>
-                        {iconsRedesSociais.imageContentType ? (
-                          <a onClick={openFile(iconsRedesSociais.imageContentType, iconsRedesSociais.image)}>
-                            <img
-                              src={`data:${iconsRedesSociais.imageContentType};base64,${iconsRedesSociais.image}`}
-                              style={{ maxHeight: '30px' }}
-                            />
-                            &nbsp;
-                          </a>
-                        ) : null}
-                        <span>
-                          {iconsRedesSociais.imageContentType}, {byteSize(iconsRedesSociais.image)}
-                        </span>
-                      </div>
-                    ) : null}
-                  </td>
+                  {/*<td>{iconsRedesSociais.icon}</td>*/}
+                  {/*<td>*/}
+                  {/*  {iconsRedesSociais.image ? (*/}
+                  {/*    <div>*/}
+                  {/*      {iconsRedesSociais.imageContentType ? (*/}
+                  {/*        <a onClick={openFile(iconsRedesSociais.imageContentType, iconsRedesSociais.image)}>*/}
+                  {/*          <img*/}
+                  {/*            src={`data:${iconsRedesSociais.imageContentType};base64,${iconsRedesSociais.image}`}*/}
+                  {/*            style={{ maxHeight: '30px' }}*/}
+                  {/*          />*/}
+                  {/*          &nbsp;*/}
+                  {/*        </a>*/}
+                  {/*      ) : null}*/}
+                  {/*      <span>*/}
+                  {/*        {iconsRedesSociais.imageContentType}, {byteSize(iconsRedesSociais.image)}*/}
+                  {/*      </span>*/}
+                  {/*    </div>*/}
+                  {/*  ) : null}*/}
+                  {/*</td>*/}
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button

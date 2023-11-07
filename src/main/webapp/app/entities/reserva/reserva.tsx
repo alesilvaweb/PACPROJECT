@@ -84,7 +84,7 @@ export const Reserva = () => {
 
   return (
     <div>
-      <Breadcrunbs />
+      <Breadcrunbs atual={'Reservas'} />
       <h2 id="reserva-heading" data-cy="ReservaHeading">
         <Translate contentKey="aapmApp.reserva.home.title">Reservas</Translate>
         <div className="d-flex justify-content-end">

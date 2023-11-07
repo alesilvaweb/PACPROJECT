@@ -132,6 +132,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
                 <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Locais'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Redes Sociais'} link={'/icons-redes-sociais'} icon={<Settings />} setIsOpen={setIsOpen} />
               </List>
             </Collapse>
 

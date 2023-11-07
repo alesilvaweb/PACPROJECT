@@ -140,7 +140,7 @@ export default function Inicial() {
           {/*  label={'Voltar'}*/}
           {/*  color={'primary'}*/}
           {/*/>*/}
-          <Breadcrunbs />
+          <Breadcrunbs atual={'Cabanas'} />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '2vh' }}>
             <h5>Cabanas</h5>
             <Grid container spacing={{ xs: 1, md: 3 }}>

@@ -2,20 +2,20 @@
   "aapmApp": {
     "iconsRedesSociais": {
       "home": {
-        "title": "Icons Redes Sociais",
+        "title": "Redes Sociais",
         "refreshListLabel": "Atualizar lista",
-        "createLabel": "Criar novo Icons Redes Sociais",
-        "createOrEditLabel": "Criar ou editar Icons Redes Sociais",
+        "createLabel": "Criar novo Redes Sociais",
+        "createOrEditLabel": "Criar ou editar Redes Sociais",
         "notFound": "Nenhum Icons Redes Sociais encontrado"
       },
-      "created": "Um novo Icons Redes Sociais foi criado com o identificador {{ param }}",
-      "updated": "Um Icons Redes Sociais foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Icons Redes Sociais foi excluído com o identificador {{ param }}",
+      "created": "Um novo Redes Sociais foi criado com o identificador {{ param }}",
+      "updated": "Um Redes Sociais foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Redes Sociais foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Icons Redes Sociais {{ id }}?"
+        "question": "Tem certeza de que deseja excluir Redes Sociais {{ id }}?"
       },
       "detail": {
-        "title": "Icons Redes Sociais"
+        "title": "Redes Sociais"
       },
       "id": "ID",
       "nome": "Nome",

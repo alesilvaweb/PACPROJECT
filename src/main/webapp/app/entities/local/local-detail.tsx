@@ -21,7 +21,7 @@ export const LocalDetail = () => {
   const localEntity = useAppSelector(state => state.local.entity);
   return (
     <div>
-      <Breadcrunbs />
+      <Breadcrunbs atual={localEntity.nome} />
       <Row className={'locais-detail'}>
         <Col md="8">
           <h2 data-cy="localDetailsHeading">{localEntity.nome}</h2>

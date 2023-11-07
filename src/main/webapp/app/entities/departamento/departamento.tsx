@@ -81,7 +81,7 @@ export const Departamento = () => {
 
   return (
     <div>
-      <Breadcrunbs />
+      <Breadcrunbs atual={'Departamentos'} />
       <h2 id="departamento-heading" data-cy="DepartamentoHeading">
         <Translate contentKey="aapmApp.departamento.home.title">Departamentos</Translate>
         <div className="d-flex justify-content-end">

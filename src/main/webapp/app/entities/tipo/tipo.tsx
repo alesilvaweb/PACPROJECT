@@ -84,7 +84,7 @@ export const Tipo = () => {
 
   return (
     <div>
-      <Breadcrunbs />
+      <Breadcrunbs atual={'Tipos'} />
       <h2 id="tipo-heading" data-cy="TipoHeading">
         <Translate contentKey="aapmApp.tipo.home.title">Tipos</Translate>
         <div className="d-flex justify-content-end">

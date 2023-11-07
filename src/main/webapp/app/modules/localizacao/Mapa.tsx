@@ -39,7 +39,7 @@ function Mapa() {
 
   return isLoaded ? (
     <div>
-      <Breadcrunbs />
+      <Breadcrunbs atual={'Localização'} />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {/*<Button*/}
         {/*  onClick={() => {*/}

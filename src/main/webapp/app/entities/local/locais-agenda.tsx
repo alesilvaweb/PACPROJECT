@@ -178,14 +178,14 @@ const LocaisAgenda = args => {
                     label={<ArrowBackIos />}
                     color={'primary'}
                   />
-                  &nbsp;
-                  <Chip
-                    sx={callendarButton}
-                    style={{ textTransform: 'uppercase' }}
-                    onClick={() => calendarRef.current.getApi().today()}
-                    label={calendarRef.current ? calendarRef.current.getApi().view.title : null}
-                    color={'primary'}
-                  />
+                  {/*&nbsp;*/}
+                  {/*<Chip*/}
+                  {/*  sx={callendarButton}*/}
+                  {/*  style={{ textTransform: 'uppercase' }}*/}
+                  {/*  onClick={() => calendarRef.current.getApi().today()}*/}
+                  {/*  label={calendarRef.current ? calendarRef.current.getApi().view.title : null}*/}
+                  {/*  color={'primary'}*/}
+                  {/*/>*/}
                   &nbsp;
                   <Chip
                     sx={callendarButton}
@@ -208,7 +208,7 @@ const LocaisAgenda = args => {
                 themeSystem={'bootstrap5'}
                 plugins={[dayGridPlugin, interactionPlugin]}
                 headerToolbar={{
-                  center: '',
+                  center: 'title',
                   left: '',
                   right: '',
                 }}

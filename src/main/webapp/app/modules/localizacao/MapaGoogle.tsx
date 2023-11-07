@@ -54,7 +54,7 @@ function MapaGoogle() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Breadcrunbs />
+        <Breadcrunbs atual={'Localização'} />
         <Button
           onClick={() => {
             const { lat, lng } = center;

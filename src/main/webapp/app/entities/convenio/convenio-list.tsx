@@ -105,7 +105,6 @@ function ConveniosList() {
               </Button>
             ))}
           </div>
-
           <div
             style={{
               width: 500,
@@ -138,6 +137,7 @@ function ConveniosList() {
               </Button>
             </div>
           </div>
+          &nbsp;
           {isAdmin ? (
             <div>
               <Button

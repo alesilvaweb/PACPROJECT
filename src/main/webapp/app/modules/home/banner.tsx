@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/convenio/convenio.reducer';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Card, Typography } from '@mui/material';
 
 export default function Banner() {
   const convenioList = useAppSelector(state => state.convenio.entities);
@@ -31,23 +32,35 @@ export default function Banner() {
         onAutoplay={true}
         autoplay={{ delay: 3000 }}
         navigation={true}
-        spaceBetween={10}
-        slidesPerView={3}
-        // breakpoints={{
-        //   768: {
-        //     slidesPerView: 2,
-        //     spaceBetween: 20,
-        //   },
-        //   850: {
-        //     slidesPerView: 3,
-        //     spaceBetween: 30,
-        //   },
-        // }}
+        // spaceBetween={10}
+        // slidesPerView={4}
+        breakpoints={{
+          200: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          750: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          950: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1280: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+          1600: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+        }}
         modules={[Autoplay, Pagination, Navigation]}
       >
         {convenioList.map(convenio => (
           <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)}>
-            <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={250} height={200} />
+            <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={150} height={100} />
           </SwiperSlide>
         ))}
       </Swiper>

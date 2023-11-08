@@ -17,3 +17,15 @@ Main page styles
   color: #393939;
   height: 30vh;
 }
+.app-container .view-container {
+  width: 97%;
+  height: fit-content;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 1rem;
+}
+.textoInicial {
+  @media (min-width: 200px) and (max-width: 600px) {
+    display: none;
+  }
+}

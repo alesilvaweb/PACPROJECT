@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import CardLocais from 'app/modules/home/card-locais';
 import ModalInicial from 'app/modules/home/nodal-inicial';
 import Banner from 'app/modules/home/banner';
+import './home.scss';
 
 const PaginaInicial = () => {
   const account = useAppSelector(state => state.authentication.account);
@@ -22,6 +23,7 @@ const PaginaInicial = () => {
           <div>
             <h4>Bem vindo ao APP da Associação Atlética Philip Morris</h4>
             <div
+              className={'textoInicial'}
               style={{
                 fontSize: '0.9rem',
                 color: 'text.disabled',
@@ -32,16 +34,18 @@ const PaginaInicial = () => {
             </div>
           </div>
           <ModalInicial />
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <CardLocais link={'/cabanas'} title={'Reservas'} icon={<EventAvailableIcon sx={{ fontSize: '7vh', color: 'white' }} />} />
+          <Grid container>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <CardLocais link={'/cabanas'} title={'Reservas'} icon={<EventAvailableIcon sx={{ fontSize: '7vh', color: 'white' }} />} />
 
-            <CardLocais link={'/cartao'} title={'Cartão de Sócio'} icon={<CreditCard sx={{ fontSize: '7vh', color: 'white' }} />} />
+              <CardLocais link={'/cartao'} title={'Cartão de Sócio'} icon={<CreditCard sx={{ fontSize: '7vh', color: 'white' }} />} />
 
-            <CardLocais link={'/convenio/list'} title={'Convênios'} icon={<CorporateFare sx={{ fontSize: '7vh', color: 'white' }} />} />
+              <CardLocais link={'/convenio/list'} title={'Convênios'} icon={<CorporateFare sx={{ fontSize: '7vh', color: 'white' }} />} />
+            </Grid>
 
             <Grid item xs={12} sm={12} md={12}>
+              <br />
               <h5>Convênios</h5>
-              {/*<BannerRotativo/>*/}
               <Banner />
             </Grid>
           </Grid>

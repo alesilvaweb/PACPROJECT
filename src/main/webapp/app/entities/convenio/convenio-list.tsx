@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardContent, CardMedia, Container, Grid, Pagination, Typography } from '@mui/material';
+import { Button, Card, CardContent, CardMedia, TextField, Grid, Pagination, Typography } from '@mui/material';
 import axios from 'axios';
-import TextField from '@mui/material/TextField';
-import { Breadcrumb, BreadcrumbItem, CardFooter } from 'reactstrap';
+
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'app/config/store';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
@@ -96,22 +96,8 @@ function ConveniosList() {
         <BreadcrumbItem active>Convênios</BreadcrumbItem>
       </Breadcrumb>
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginBottom: '5px' }}>
-          <div>
-            <Button onClick={() => filterConvenios('')}>Todas</Button>
-            {categorias.map(categoria => (
-              <Button key={categoria.id} onClick={() => filterConvenios(categoria.id)}>
-                {categoria.categoria}
-              </Button>
-            ))}
-          </div>
-          <div
-            style={{
-              width: 500,
-              maxWidth: '100%',
-              display: 'flex',
-            }}
-          >
+        <Grid container spacing={1} sx={{ dispay: 'flex', justifyContent: 'flex-end' }}>
+          <Grid item>
             <TextField
               label="Busca"
               name={'busca'}
@@ -124,69 +110,82 @@ function ConveniosList() {
                 handleSearch();
               }}
               type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
-            <div>
-              <Button
-                type={'button'}
-                variant={'contained'}
-                color={'primary'}
-                style={{ float: 'left', marginBottom: '10px', marginLeft: '10px' }}
-                onClick={handleSearch}
-              >
-                Buscar
-              </Button>
-            </div>
-          </div>
-          &nbsp;
+          </Grid>
+          <Grid item>
+            <Button
+              type={'button'}
+              variant={'contained'}
+              color={'primary'}
+              // style={{ float: 'left', marginBottom: '10px', marginLeft: '10px' }}
+              onClick={handleSearch}
+            >
+              Buscar
+            </Button>
+          </Grid>
           {isAdmin ? (
-            <div>
+            <Grid item>
               <Button
                 type={'button'}
                 variant={'contained'}
                 color={'primary'}
-                style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
+                // style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
                 onClick={() => navigate(`/convenio/new`)}
               >
                 Novo
               </Button>
-            </div>
-          ) : null}
-        </div>
-        <Grid container spacing={2}>
-          {convenios.map(convenio => (
-            <Grid item xs={12} sm={6} md={4} key={convenio.id}>
-              <a>
-                <Card
-                  onClick={() => {
-                    navigate(`/convenio/${convenio.id}`);
-                  }}
-                >
-                  <CardMedia component="img" height="200" image={`data:${convenio.imagemContentType};base64,${convenio.imagem}`} />
-                  <CardContent>
-                    <Typography variant="h6" component="div">
-                      {convenio.nome}
-                    </Typography>
-                    <Typography color="textSecondary">Categoria: {convenio.categoria.categoria}</Typography>
-                  </CardContent>
-
-                  {/*{isAdmin?(*/}
-                  {/*  // <CardFooter>*/}
-                  {/*  //   <Button type={"button"} color={"primary"}*/}
-                  {/*  //           style={{float:"right", marginBottom:"10px", marginRight:"10px"}}*/}
-                  {/*  //           onClick={()=>navigate(`/convenio/${convenio.id}/edit`)}*/}
-                  {/*  //   >*/}
-                  {/*  //     Editar*/}
-                  {/*  //   </Button>*/}
-                  {/*  // </CardFooter>*/}
-                  {/*):null}*/}
-                </Card>
-              </a>
             </Grid>
-          ))}
+          ) : null}
         </Grid>
-        <br />
-        <Pagination count={Math.ceil(convenios.length / itemsPerPage)} page={page} onChange={handlePageChange} color="primary" />
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid item>
+            <Button onClick={() => filterConvenios('')}>Todas</Button>
+            {categorias.map(categoria => (
+              <Button key={categoria.id} onClick={() => filterConvenios(categoria.id)}>
+                {categoria.categoria}
+              </Button>
+            ))}
+          </Grid>
+        </Grid>
+        &nbsp;
       </div>
+      <Grid container spacing={2}>
+        {convenios.map(convenio => (
+          <Grid item xs={12} sm={6} md={4} key={convenio.id}>
+            <a>
+              <Card
+                onClick={() => {
+                  navigate(`/convenio/${convenio.id}`);
+                }}
+              >
+                <CardMedia component="img" height="200" image={`data:${convenio.imagemContentType};base64,${convenio.imagem}`} />
+                <CardContent>
+                  <Typography variant="h6" component="div">
+                    {convenio.nome}
+                  </Typography>
+                  <Typography color="textSecondary">Categoria: {convenio.categoria.categoria}</Typography>
+                </CardContent>
+
+                {/*{isAdmin?(*/}
+                {/*  // <CardFooter>*/}
+                {/*  //   <Button type={"button"} color={"primary"}*/}
+                {/*  //           style={{float:"right", marginBottom:"10px", marginRight:"10px"}}*/}
+                {/*  //           onClick={()=>navigate(`/convenio/${convenio.id}/edit`)}*/}
+                {/*  //   >*/}
+                {/*  //     Editar*/}
+                {/*  //   </Button>*/}
+                {/*  // </CardFooter>*/}
+                {/*):null}*/}
+              </Card>
+            </a>
+          </Grid>
+        ))}
+      </Grid>
+      <br />
+      <Pagination count={Math.ceil(convenios.length / itemsPerPage)} page={page} onChange={handlePageChange} color="primary" />
     </div>
   );
 }

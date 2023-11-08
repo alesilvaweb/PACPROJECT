@@ -3,22 +3,23 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { Translate, translate, ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { locales, languages } from 'app/config/translation';
 import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { v4 as uuidv4 } from 'uuid';
 
 export const UserManagementUpdate = () => {
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
-
+  const [idAle, setIdAleatorio] = useState();
   const { login } = useParams<'login'>();
   const isNew = login === undefined;
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
+      gerarIdAleatorio();
     } else {
       dispatch(getUser(login));
     }
@@ -41,6 +42,14 @@ export const UserManagementUpdate = () => {
       navigate('/');
     }
   };
+  function gerarIdAleatorio() {
+    const min = 8000; // Valor mínimo
+    const max = 9999; // Valor máximo (altere conforme necessário)
+    const idAleatorio = Math.floor(Math.random() * (max - min + 1)) + min;
+    // @ts-ignore
+    setIdAleatorio(idAleatorio);
+  }
+  console.log({ idAle });
 
   const isInvalid = false;
   const user = useAppSelector(state => state.userManagement.user);
@@ -66,7 +75,9 @@ export const UserManagementUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm onSubmit={saveUser} defaultValues={user}>
-              {user.id ? (
+              {isNew ? (
+                <ValidatedField type="text" name="id" value={idAle} autoFocus={true} readOnly label={translate('global.field.id')} />
+              ) : (
                 <ValidatedField
                   type="text"
                   name="id"
@@ -75,7 +86,7 @@ export const UserManagementUpdate = () => {
                   label={translate('global.field.id')}
                   validate={{ required: true }}
                 />
-              ) : null}
+              )}
               <ValidatedField
                 type="text"
                 name="login"

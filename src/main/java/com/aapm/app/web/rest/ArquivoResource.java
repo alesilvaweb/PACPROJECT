@@ -1,6 +1,6 @@
 package com.aapm.app.web.rest;
 
-import com.aapm.app.domain.User;
+import com.aapm.app.domain.Associado;
 import com.aapm.app.domain.enumeration.Status;
 import com.aapm.app.domain.enumeration.StatusArquivo;
 import com.aapm.app.repository.ArquivoRepository;
@@ -9,11 +9,15 @@ import com.aapm.app.repository.DependenteRepository;
 import com.aapm.app.repository.UserRepository;
 import com.aapm.app.service.*;
 import com.aapm.app.service.criteria.ArquivoCriteria;
-import com.aapm.app.service.dto.*;
+import com.aapm.app.service.dto.AdminUserDTO;
+import com.aapm.app.service.dto.ArquivoDTO;
+import com.aapm.app.service.dto.AssociadoDTO;
+import com.aapm.app.service.dto.DependenteDTO;
 import com.aapm.app.web.rest.errors.BadRequestAlertException;
-import com.aapm.app.web.rest.errors.EmailAlreadyUsedException;
-import com.aapm.app.web.rest.errors.LoginAlreadyUsedException;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -28,7 +32,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -61,11 +64,15 @@ public class ArquivoResource {
 
     private final AssociadoService associadoService;
 
+    private final DependenteService dependenteService;
+
     private final AssociadoRepository associadoRepository;
     private final UserService userService;
     private final MailService mailService;
     private String salvarAssociado;
+    private String salvarDependente;
     private String salvarUser;
+    private boolean salvarDependentes;
     private int usuariosSalvos;
     private int usuariosAtualizados;
     private final Set<String> ROLE = Collections.singleton("ROLE_USER");
@@ -77,6 +84,7 @@ public class ArquivoResource {
         DependenteRepository dependenteRepository,
         ArquivoQueryService arquivoQueryService,
         AssociadoService associadoService,
+        DependenteService dependenteService,
         AssociadoRepository associadoRepository,
         UserService userService,
         MailService mailService
@@ -87,6 +95,7 @@ public class ArquivoResource {
         this.dependenteRepository = dependenteRepository;
         this.arquivoQueryService = arquivoQueryService;
         this.associadoService = associadoService;
+        this.dependenteService = dependenteService;
         this.associadoRepository = associadoRepository;
         this.userService = userService;
         this.mailService = mailService;
@@ -123,6 +132,8 @@ public class ArquivoResource {
                 DependenteDTO dependente = new DependenteDTO();
                 salvarAssociado = " ";
                 salvarUser = " ";
+                salvarDependente = " ";
+                salvarDependentes = false;
 
                 /* Percorre as linhas pegando as células */
                 for (Cell cell : row) {
@@ -135,20 +146,65 @@ public class ArquivoResource {
                             salvarAssociado = "update";
                         }
                     }
+                    if (cell.getColumnIndex() == 4) {
+                        Long id = Long.valueOf(associado.getId().toString().concat(String.valueOf((long) cell.getNumericCellValue())));
+                        if (dependenteRepository.findById(id).isPresent()) {
+                            salvarDependente = "update";
+                        }
+                    }
 
                     int columnIndex = cell.getColumnIndex();
+                    /* Coluna id */
                     if (columnIndex == 0) {
                         associado.setId((long) cell.getNumericCellValue());
                         associado.setMatricula(String.valueOf((long) cell.getNumericCellValue()));
                         user.setId((long) cell.getNumericCellValue());
+                        /* Coluna nome */
                     } else if (columnIndex == 1) {
                         associado.setNome(cell.getStringCellValue());
                         user.setFirstName(cell.getStringCellValue());
-                    } else if (columnIndex == 2) {} else if (columnIndex == 3) {} else if (columnIndex == 4) {} else if (
-                        columnIndex == 5
-                    ) {} else if (columnIndex == 6) {
+                        /* Coluna Situação */
+                    } else if (columnIndex == 2) {} /* Coluna Dependente Nome */
+                    else if (columnIndex == 3) {
+                        if (cell.getStringCellValue().isBlank()) {
+                            salvarDependentes = false;
+                        } else {
+                            salvarDependentes = true;
+                        }
+                        if (salvarDependentes) {
+                            dependente.setNome(cell.getStringCellValue());
+                        }
+                    } /* Coluna sequencia gera o id concatenado com o id do associado */
+                    else if (columnIndex == 4) {
+                        dependente.setId(
+                            Long.valueOf(associado.getId().toString().concat(String.valueOf((long) cell.getNumericCellValue())))
+                        );
+                    } /* Coluna Parentesco */
+                    else if (columnIndex == 5) {
+                        if (salvarDependentes) {
+                            dependente.setParentesco(cell.getStringCellValue());
+                        }
+                    } /* Coluna Data de nascimento Associado */
+                    else if (columnIndex == 6) {
                         associado.setDataNascimento(cell.getLocalDateTimeCellValue().toLocalDate());
-                    } else if (columnIndex == 7) {} else if (columnIndex == 8) {} else if (columnIndex == 9) {
+                    } /* Coluna Data de nascimento Dependente */
+                    else if (columnIndex == 7) {
+                        if (salvarDependentes) {
+                            dependente.setDataNascimento(cell.getLocalDateTimeCellValue().toLocalDate());
+                        }
+                    } /* Coluna status */
+                    else if (columnIndex == 8) {
+                        if (cell.getStringCellValue().toLowerCase().trim().equals("ativo")) {
+                            if (salvarDependentes) {
+                                dependente.setStatus(Status.Ativo);
+                            }
+                        } else {
+                            if (salvarDependentes) {
+                                dependente.setStatus(Status.Inativo);
+                            }
+                        }
+                    } /* Coluna Email */
+                    else if (columnIndex == 9) {
                         String mail = cell.getStringCellValue().toLowerCase();
                         associado.setEmail(mail);
 
@@ -164,6 +220,9 @@ public class ArquivoResource {
                     user.setAuthorities(ROLE);
                     user.setActivated(true);
                     user.setLangKey("pt-br");
+                    if (salvarDependentes) {
+                        dependente.setAssociado(associado);
+                    }
                 }
 
                 /* Salva os usuários */
@@ -176,9 +235,9 @@ public class ArquivoResource {
                     /* Save user */
                     userService.createUser(user);
                     usuariosSalvos = (usuariosSalvos + 1);
-
                     log.debug("<<< NEW USER >>> : {},", user);
                 }
+
                 /* Salva os associados */
                 if (Objects.equals(salvarAssociado, "update")) {
                     /* Update Associado */
@@ -189,6 +248,30 @@ public class ArquivoResource {
                     /* Save Associado */
                     associadoService.save(associado);
                     log.debug("<<< NEW ASSOCIADO >>> : {},", associado);
+                }
+
+                /* Salva os Dependente */
+                if (salvarDependentes) {
+                    //                    List<Optional<Associado>> associado2 = Collections.singletonList(associadoRepository.findById(associado.getId())
+                    //                        .filter(associado1 -> associado1.getDependentes()
+                    //                            .stream().filter(dependente1 -> {
+                    //                                return dependente.getNome().toLowerCase().trim().equals(dependente1.getNome().toLowerCase().trim());
+                    //                            }).isParallel()));
+
+                    //                    if (associado2.stream().findAny().isPresent()) {
+                    //                        salvarDependente = "update";
+                    //                        log.debug("<<< IS PRESENTE >>> : {},", associado2);
+                    //                    } else {
+                    if (Objects.equals(salvarDependente, "update")) {
+                        /* Update Dependente */
+                        dependenteService.update(dependente);
+                        salvarDependente = "";
+                        log.debug("<<< UPDATE DEPENDENTE >>> : {},", dependente);
+                    } else {
+                        /* Save Dependente */
+                        dependenteService.save(dependente);
+                        log.debug("<<< NEW DEPENDENTE >>> : {},", dependente);
+                    }
                 }
             }
             log.debug("<<< NOVOS >>> : {}, << ATUALIZADOS >> : {}", usuariosSalvos, usuariosAtualizados);

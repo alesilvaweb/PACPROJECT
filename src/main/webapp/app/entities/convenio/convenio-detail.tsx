@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import axios from 'axios';
-import { Instagram, WhatsApp } from '@mui/icons-material';
+import { Image, Instagram, WhatsApp } from '@mui/icons-material';
 // Importe outros ícones das redes sociais, se necessário
 import { getEntity } from './convenio.reducer';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -78,22 +78,42 @@ function ConvenioDetalhe() {
         </BreadcrumbItem>
         <BreadcrumbItem active>{convenioEntity.nome}</BreadcrumbItem>
       </Breadcrumb>
-      <Card>
+      <Card raised sx={{ margin: '0 auto', padding: '0.1em' }}>
         <CardMedia
           component="img"
           alt={convenioEntity.nome}
           height="200"
           image={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`}
           title={convenioEntity.nome}
-          sx={{ objectFit: 'cover', width: '90vh', height: '100%', float: 'right', borderRadius: '4px', boxShadow: 5, marginRight: '10px' }}
+          sx={{
+            objectFit: 'contain',
+            maxWidth: '400px',
+            width: '100%',
+            height: '100%',
+            float: 'right',
+            borderRadius: '4px',
+            boxShadow: 5,
+            marginRight: '10px',
+          }}
         />
         <CardContent>
-          <Typography variant="h4" component="div">
-            {convenioEntity.nome}
-          </Typography>
+          {convenioEntity.logo ? (
+            <Typography variant="h4" component="div">
+              <img
+                src={`data:${convenioEntity.logoContentType};base64,${convenioEntity.logo}`}
+                style={{ maxHeight: '50px', borderRadius: '4px', marginTop: '10px', marginBottom: '5px' }}
+              />{' '}
+              {convenioEntity.nome}
+            </Typography>
+          ) : (
+            <Typography variant="h4" component="div">
+              {convenioEntity.nome}
+            </Typography>
+          )}
           <Typography variant="subtitle2" component="div">
             {convenioEntity.titulo}
           </Typography>
+
           <hr />
           <Typography variant="subtitle2" component="div">
             {convenioEntity.endereco}

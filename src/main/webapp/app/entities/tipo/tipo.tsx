@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { ITipo } from 'app/shared/model/tipo.model';
 import { getEntities } from './tipo.reducer';
-import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Tipo = () => {
   const dispatch = useAppDispatch();
@@ -84,14 +83,9 @@ export const Tipo = () => {
 
   return (
     <div>
-      <Breadcrunbs atual={'Tipos'} />
       <h2 id="tipo-heading" data-cy="TipoHeading">
         <Translate contentKey="aapmApp.tipo.home.title">Tipos</Translate>
         <div className="d-flex justify-content-end">
-          <Link to="/mensagem" className="btn btn-primary jh-create-entity">
-            Mensagens
-          </Link>
-          &nbsp;
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             {/*<Translate contentKey="aapmApp.tipo.home.refreshListLabel">Refresh List</Translate>*/}
@@ -108,11 +102,14 @@ export const Tipo = () => {
           <Table responsive>
             <thead>
               <tr>
-                {/*<th className="hand" onClick={sort('id')}>*/}
-                {/*  <Translate contentKey="aapmApp.tipo.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
-                {/*</th>*/}
+                <th className="hand" onClick={sort('id')}>
+                  <Translate contentKey="aapmApp.tipo.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('tipo')}>
                   <Translate contentKey="aapmApp.tipo.tipo">Tipo</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('chave')}>
+                  <Translate contentKey="aapmApp.tipo.chave">Chave</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -120,19 +117,18 @@ export const Tipo = () => {
             <tbody>
               {tipoList.map((tipo, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  {/*<td>*/}
-                  {/*  <Button tag={Link} to={`/tipo/${tipo.id}`} color="link" size="sm">*/}
-                  {/*    {tipo.id}*/}
-                  {/*  </Button>*/}
-                  {/*</td>*/}
+                  <td>
+                    <Button tag={Link} to={`/tipo/${tipo.id}`} color="link" size="sm">
+                      {tipo.id}
+                    </Button>
+                  </td>
                   <td>{tipo.tipo}</td>
+                  <td>{tipo.chave}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/tipo/${tipo.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -142,9 +138,7 @@ export const Tipo = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -154,9 +148,7 @@ export const Tipo = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

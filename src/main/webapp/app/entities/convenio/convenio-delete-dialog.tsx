@@ -25,7 +25,7 @@ export const ConvenioDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.convenio.updateSuccess);
 
   const handleClose = () => {
-    navigate('/convenio' + location.search);
+    navigate('/convenio/list' + location.search);
   };
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const ConvenioDeleteDialog = () => {
   };
 
   return (
-    <Modal isOpen toggle={handleClose}>
+    <Modal isOpen toggle={handleClose} style={{ marginTop: '30vh' }}>
       <ModalHeader toggle={handleClose} data-cy="convenioDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>

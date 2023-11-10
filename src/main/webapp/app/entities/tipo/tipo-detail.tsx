@@ -38,6 +38,12 @@ export const TipoDetail = () => {
             </span>
           </dt>
           <dd>{tipoEntity.tipo}</dd>
+          <dt>
+            <span id="chave">
+              <Translate contentKey="aapmApp.tipo.chave">Chave</Translate>
+            </span>
+          </dt>
+          <dd>{tipoEntity.chave}</dd>
         </dl>
         <Button tag={Link} to="/tipo" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

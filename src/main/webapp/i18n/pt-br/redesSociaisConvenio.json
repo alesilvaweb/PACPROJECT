@@ -8,11 +8,11 @@
         "createOrEditLabel": "Criar ou editar Redes Sociais Convenio",
         "notFound": "Nenhum Redes Sociais Convenio encontrado"
       },
-      "created": "Um novo Redes Sociais Convenio foi criado com o identificador {{ param }}",
-      "updated": "Um Redes Sociais Convenio foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Redes Sociais Convenio foi excluído com o identificador {{ param }}",
+      "created": "Redes Social criada {{ param }}",
+      "updated": "Redes Social criada atualizado {{ param }}",
+      "deleted": "Redes Social criada excluído {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Redes Sociais Convenio {{ id }}?"
+        "question": "Tem certeza de que deseja excluir Redes Sociais {{ id }}?"
       },
       "detail": {
         "title": "Redes Sociais Convenio"

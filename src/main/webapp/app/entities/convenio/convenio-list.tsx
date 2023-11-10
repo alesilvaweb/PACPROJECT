@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'app/config/store';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
+import CardActions from '@mui/material/CardActions';
 
 function ConveniosList() {
   const [convenios, setConvenios] = useState([]);
@@ -168,24 +169,13 @@ function ConveniosList() {
                   </Typography>
                   <Typography color="textSecondary">Categoria: {convenio.categoria.categoria}</Typography>
                 </CardContent>
-
-                {/*{isAdmin?(*/}
-                {/*  // <CardFooter>*/}
-                {/*  //   <Button type={"button"} color={"primary"}*/}
-                {/*  //           style={{float:"right", marginBottom:"10px", marginRight:"10px"}}*/}
-                {/*  //           onClick={()=>navigate(`/convenio/${convenio.id}/edit`)}*/}
-                {/*  //   >*/}
-                {/*  //     Editar*/}
-                {/*  //   </Button>*/}
-                {/*  // </CardFooter>*/}
-                {/*):null}*/}
               </Card>
             </a>
           </Grid>
         ))}
       </Grid>
       <br />
-      <Pagination count={Math.ceil(convenios.length / itemsPerPage)} page={page} onChange={handlePageChange} color="primary" />
+      {/*<Pagination count={Math.ceil(convenios.length / itemsPerPage)} page={page} onChange={handlePageChange} color="primary" />*/}
     </div>
   );
 }

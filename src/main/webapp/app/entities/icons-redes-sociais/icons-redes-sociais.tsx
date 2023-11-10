@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { openFile, byteSize, Translate, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { getSortState, JhiItemCount, JhiPagination, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { IIconsRedesSociais } from 'app/shared/model/icons-redes-sociais.model';
 import { getEntities } from './icons-redes-sociais.reducer';
 import Breadcrunbs from 'app/components/breadcrunbs';
 
@@ -90,7 +86,7 @@ export const IconsRedesSociais = () => {
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.iconsRedesSociais.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.iconsRedesSociais.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link
             to="/icons-redes-sociais/new"
@@ -100,7 +96,7 @@ export const IconsRedesSociais = () => {
           >
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.iconsRedesSociais.home.createLabel">Create new Icons Redes Sociais</Translate>
+            {/*<Translate contentKey="aapmApp.iconsRedesSociais.home.createLabel">Create new Icons Redes Sociais</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -166,9 +162,7 @@ export const IconsRedesSociais = () => {
                         data-cy="entityDetailsButton"
                       >
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -178,9 +172,7 @@ export const IconsRedesSociais = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -190,9 +182,7 @@ export const IconsRedesSociais = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

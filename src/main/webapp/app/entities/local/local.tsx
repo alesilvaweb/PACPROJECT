@@ -88,12 +88,12 @@ export const Local = () => {
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.local.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.local.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/local/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.local.home.createLabel">Create new Local</Translate>
+            {/*<Translate contentKey="aapmApp.local.home.createLabel">Create new Local</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -117,24 +117,24 @@ export const Local = () => {
                 <th className="hand" onClick={sort('imagen')}>
                   <Translate contentKey="aapmApp.local.imagen">Imagen</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('observacoes')}>
-                  <Translate contentKey="aapmApp.local.observacoes">Observacoes</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('localizacao')}>
-                  <Translate contentKey="aapmApp.local.localizacao">Localizacao</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('observacoes')}>*/}
+                {/*  <Translate contentKey="aapmApp.local.observacoes">Observacoes</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('localizacao')}>*/}
+                {/*  <Translate contentKey="aapmApp.local.localizacao">Localizacao</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('valor')}>
                   <Translate contentKey="aapmApp.local.valor">Valor</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('cor')}>
-                  <Translate contentKey="aapmApp.local.cor">Cor</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('created')}>
-                  <Translate contentKey="aapmApp.local.created">Created</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('modified')}>
-                  <Translate contentKey="aapmApp.local.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('cor')}>*/}
+                {/*  <Translate contentKey="aapmApp.local.cor">Cor</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('created')}>*/}
+                {/*  <Translate contentKey="aapmApp.local.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('modified')}>*/}
+                {/*  <Translate contentKey="aapmApp.local.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th />
               </tr>
             </thead>
@@ -158,25 +158,23 @@ export const Local = () => {
                             &nbsp;
                           </a>
                         ) : null}
-                        <span>
-                          {local.imagenContentType}, {byteSize(local.imagen)}
-                        </span>
+                        {/*<span>*/}
+                        {/*  {local.imagenContentType}, {byteSize(local.imagen)}*/}
+                        {/*</span>*/}
                       </div>
                     ) : null}
                   </td>
-                  <td>{local.observacoes}</td>
-                  <td>{local.localizacao}</td>
+                  {/*<td>{local.observacoes}</td>*/}
+                  {/*<td>{local.localizacao}</td>*/}
                   <td>{local.valor}</td>
-                  <td>{local.cor}</td>
-                  <td>{local.created ? <TextFormat type="date" value={local.created} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{local.modified ? <TextFormat type="date" value={local.modified} format={APP_DATE_FORMAT} /> : null}</td>
+                  {/*<td>{local.cor}</td>*/}
+                  {/*<td>{local.created ? <TextFormat type="date" value={local.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
+                  {/*<td>{local.modified ? <TextFormat type="date" value={local.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/local/detail/${local.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -186,9 +184,7 @@ export const Local = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -198,9 +194,7 @@ export const Local = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

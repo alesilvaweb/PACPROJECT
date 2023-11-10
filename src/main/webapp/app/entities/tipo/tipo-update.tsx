@@ -97,6 +97,16 @@ export const TipoUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
+              <ValidatedField
+                label={translate('aapmApp.tipo.chave')}
+                id="tipo-chave"
+                name="chave"
+                data-cy="chave"
+                type="text"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
+              />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/tipo" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

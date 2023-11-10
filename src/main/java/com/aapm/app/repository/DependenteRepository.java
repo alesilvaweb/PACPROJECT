@@ -37,4 +37,6 @@ public interface DependenteRepository extends JpaRepository<Dependente, Long>, J
 
     @Query("select dependente from Dependente dependente left join fetch dependente.associado where dependente.id =:id")
     Optional<Dependente> findOneWithToOneRelationships(@Param("id") Long id);
+
+    Optional<Object> findByNome(String nome);
 }

@@ -1,5 +1,7 @@
 package com.aapm.app.service;
 
+import static java.util.Arrays.stream;
+
 import com.aapm.app.config.Constants;
 import com.aapm.app.domain.Authority;
 import com.aapm.app.domain.User;
@@ -9,10 +11,12 @@ import com.aapm.app.security.AuthoritiesConstants;
 import com.aapm.app.security.SecurityUtils;
 import com.aapm.app.service.dto.AdminUserDTO;
 import com.aapm.app.service.dto.UserDTO;
+import com.aapm.app.service.mapper.UserMapper;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -40,17 +44,20 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+    private final UserMapper userMapper;
 
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        UserMapper userMapper
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userMapper = userMapper;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -270,6 +277,11 @@ public class UserService {
                 this.clearUserCaches(user);
                 log.debug("Changed password for User: {}", user);
             });
+    }
+
+    @Transactional(readOnly = true)
+    public Stream<UserDTO> searchUsers(String query) {
+        return userRepository.findAllByNameContainingIgnoreCase(query).stream().map(UserDTO::new);
     }
 
     @Transactional(readOnly = true)

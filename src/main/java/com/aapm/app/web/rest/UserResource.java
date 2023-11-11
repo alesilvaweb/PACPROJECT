@@ -7,6 +7,7 @@ import com.aapm.app.security.AuthoritiesConstants;
 import com.aapm.app.service.MailService;
 import com.aapm.app.service.UserService;
 import com.aapm.app.service.dto.AdminUserDTO;
+import com.aapm.app.service.dto.UserDTO;
 import com.aapm.app.web.rest.errors.BadRequestAlertException;
 import com.aapm.app.web.rest.errors.EmailAlreadyUsedException;
 import com.aapm.app.web.rest.errors.LoginAlreadyUsedException;
@@ -156,6 +157,14 @@ public class UserResource {
             updatedUser,
             HeaderUtil.createAlert(applicationName, "userManagement.updated", userDTO.getLogin())
         );
+    }
+
+    // UserController.java
+
+    @GetMapping("/users/search")
+    public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam String query) {
+        List<UserDTO> users = (List<UserDTO>) userService.searchUsers(query);
+        return ResponseEntity.ok().body(users);
     }
 
     /**

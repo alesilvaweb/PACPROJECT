@@ -60,17 +60,17 @@ export const DependenteDetail = () => {
             </span>
           </dt>
           <dd>{dependenteEntity.status}</dd>
-          <dt>
-            <span id="created">
-              <Translate contentKey="aapmApp.dependente.created">Created</Translate>
-            </span>
-          </dt>
-          <dd>{dependenteEntity.created ? <TextFormat value={dependenteEntity.created} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
-          <dt>
-            <span id="modified">
-              <Translate contentKey="aapmApp.dependente.modified">Modified</Translate>
-            </span>
-          </dt>
+          {/*<dt>*/}
+          {/*  <span id="created">*/}
+          {/*    <Translate contentKey="aapmApp.dependente.created">Created</Translate>*/}
+          {/*  </span>*/}
+          {/*</dt>*/}
+          {/*<dd>{dependenteEntity.created ? <TextFormat value={dependenteEntity.created} type="date" format={APP_DATE_FORMAT} /> : null}</dd>*/}
+          {/*<dt>*/}
+          {/*  <span id="modified">*/}
+          {/*    <Translate contentKey="aapmApp.dependente.modified">Modified</Translate>*/}
+          {/*  </span>*/}
+          {/*</dt>*/}
           <dd>
             {dependenteEntity.modified ? <TextFormat value={dependenteEntity.modified} type="date" format={APP_DATE_FORMAT} /> : null}
           </dd>
@@ -79,7 +79,13 @@ export const DependenteDetail = () => {
           </dt>
           <dd>{dependenteEntity.associado ? dependenteEntity.associado.nome : ''}</dd>
         </dl>
-        <Button tag={Link} to="/dependente" replace color="info" data-cy="entityDetailsBackButton">
+        <Button
+          tag={Link}
+          to={`/associado/${dependenteEntity.associado ? dependenteEntity.associado.id : ''}`}
+          replace
+          color="info"
+          data-cy="entityDetailsBackButton"
+        >
           <FontAwesomeIcon icon="arrow-left" />{' '}
           <span className="d-none d-md-inline">
             <Translate contentKey="entity.action.back">Back</Translate>

@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, BreadcrumbItem, Breadcrumb, Table } from 'reactstrap';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Row, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { getEntity } from './associado.reducer';
+import { getEntity } from 'app/entities/associado/associado.reducer';
 import axios from 'axios';
 import { formatData } from 'app/shared/util/date-utils';
-import Breadcrunbs from 'app/components/breadcrunbs';
 
-export const AssociadoDetail = () => {
+export const CartaoDetail = () => {
   const dispatch = useAppDispatch();
   const [dependentes, setDependentes] = useState([]);
-  const { id } = useParams<'id'>();
-  const navigate = useNavigate();
+  const account = useAppSelector(state => state.authentication.account);
+  const { id } = account.id;
+
   async function fetchDependentes() {
     try {
       const response = await axios.get(`api/dependentes?associadoId.equals=${id}`);
@@ -33,21 +33,17 @@ export const AssociadoDetail = () => {
   const associadoEntity = useAppSelector(state => state.associado.entity);
   return (
     <Row>
-      <Breadcrumb>
-        <BreadcrumbItem onClick={() => navigate('/')}>
-          <a>Início</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem onClick={() => navigate('/associado')}>
-          <a>Associados</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem active>{associadoEntity.nome}</BreadcrumbItem>
-      </Breadcrumb>
       <Col md="12">
-        <h4 data-cy="associadoDetailsHeading">
+        <h2 data-cy="associadoDetailsHeading">
           <Translate contentKey="aapmApp.associado.detail.title">Associado</Translate>
-        </h4>
-        <hr />
+        </h2>
         <dl style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+          {/*<dt>*/}
+          {/*  <span id="id">*/}
+          {/*    <Translate contentKey="global.field.id">ID</Translate>*/}
+          {/*  </span>*/}
+          {/*</dt>*/}
+          {/*<dd>{associadoEntity.id}</dd>*/}
           <Col xs={12} sm={12} md={12}>
             <dt>
               <span id="nome">
@@ -101,33 +97,18 @@ export const AssociadoDetail = () => {
             </dd>
           </Col>
         </dl>
-        {dependentes.length > 0 ? (
-          <>
-            <hr />
-            <h4 data-cy="associadoDetailsHeading">Dependentes</h4>
-            <hr />
-            <Table responsive hover>
-              <thead>
-                <th>Nome</th>
-                <th>Parentesco</th>
-                <th>Status</th>
-                <th>Nascimento</th>
-              </thead>
-              <tbody>
-                {dependentes.map(dep => (
-                  <tr onClick={() => navigate(`/dependente/${dep.id}`)} className={'hand'}>
-                    <td>{dep.nome}</td>
-                    <td>{dep.parentesco}</td>
-                    <td>{dep.status}</td>
-                    <td>{formatData(dep.dataNascimento)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </>
-        ) : (
-          <hr />
-        )}
+        {dependentes.length > 0 ? <h4>Dependentes</h4> : null}
+        <>
+          {dependentes.map(dep => (
+            <ul>
+              <li>
+                <a href={`/dependente/${dep.id}`}>
+                  {dep.id} - {dep.nome} - {dep.parentesco} - {formatData(dep.dataNascimento)} - {dep.status}{' '}
+                </a>{' '}
+              </li>
+            </ul>
+          ))}
+        </>
         <Button tag={Link} to="/associado" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}
           <span className="d-none d-md-inline">
@@ -141,14 +122,9 @@ export const AssociadoDetail = () => {
             <Translate contentKey="entity.action.edit">Edit</Translate>
           </span>
         </Button>
-        &nbsp;
-        <Button tag={Link} to={`/associado/${associadoEntity.id}/delete`} color="danger" data-cy="entityDeleteButton">
-          <FontAwesomeIcon icon="trash" />{' '}
-          <span className="d-none d-md-inline">{<Translate contentKey="entity.action.delete">Delete</Translate>}</span>
-        </Button>
       </Col>
     </Row>
   );
 };
 
-export default AssociadoDetail;
+export default CartaoDetail;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Table } from 'reactstrap';
 import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -84,14 +84,23 @@ export const Arquivo = () => {
 
   return (
     <div>
-      <Breadcrunbs atual={'Arquivos'} />
-      <h2 id="arquivo-heading" data-cy="ArquivoHeading">
-        <Translate contentKey="aapmApp.arquivo.home.title">Arquivos</Translate>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/associado')}>
+          <a>Associados</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{'Importação de associados'}</BreadcrumbItem>
+      </Breadcrumb>
+
+      <h4 id="arquivo-heading" data-cy="ArquivoHeading">
+        Importação de arquivos
         <div className="d-flex justify-content-end">
-          <Link to="/associado" className="btn btn-primary jh-create-entity">
-            Associados
-          </Link>
-          &nbsp;
+          {/*<Link to="/associado" className="btn btn-primary jh-create-entity">*/}
+          {/*  Associados*/}
+          {/*</Link>*/}
+          {/*&nbsp;*/}
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
             {/*<Translate contentKey="aapmApp.arquivo.home.refreshListLabel">Refresh List</Translate>*/}
@@ -102,7 +111,7 @@ export const Arquivo = () => {
             {/*<Translate contentKey="aapmApp.arquivo.home.createLabel">Create new Arquivo</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </h4>
       <div className="table-responsive">
         {arquivoList && arquivoList.length > 0 ? (
           <Table responsive>
@@ -114,9 +123,9 @@ export const Arquivo = () => {
                 <th className="hand" onClick={sort('nome')}>
                   <Translate contentKey="aapmApp.arquivo.nome">Nome</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('descricao')}>
-                  <Translate contentKey="aapmApp.arquivo.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('descricao')}>*/}
+                {/*  <Translate contentKey="aapmApp.arquivo.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('arquivo')}>
                   <Translate contentKey="aapmApp.arquivo.arquivo">Arquivo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -141,7 +150,7 @@ export const Arquivo = () => {
                   {/*  </Button>*/}
                   {/*</td>*/}
                   <td>{arquivo.nome}</td>
-                  <td>{arquivo.descricao}</td>
+                  {/*<td>{arquivo.descricao}</td>*/}
                   <td>
                     {arquivo.arquivo ? (
                       <div>
@@ -164,20 +173,20 @@ export const Arquivo = () => {
                   {/*<td>{arquivo.modified ? <TextFormat type="date" value={arquivo.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/arquivo/${arquivo.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
-                      </Button>
-                      <Button
-                        tag={Link}
-                        to={`/arquivo/${arquivo.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="primary"
-                        size="sm"
-                        data-cy="entityEditButton"
-                      >
-                        <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
-                      </Button>
+                      {/*<Button tag={Link} to={`/arquivo/${arquivo.id}`} color="info" size="sm" data-cy="entityDetailsButton">*/}
+                      {/*  <FontAwesomeIcon icon="eye" />{' '}*/}
+                      {/*  <span className="d-none d-md-inline">/!*<Translate contentKey="entity.action.view">View</Translate>*!/</span>*/}
+                      {/*</Button>*/}
+                      {/*<Button*/}
+                      {/*  tag={Link}*/}
+                      {/*  to={`/arquivo/${arquivo.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}*/}
+                      {/*  color="primary"*/}
+                      {/*  size="sm"*/}
+                      {/*  data-cy="entityEditButton"*/}
+                      {/*>*/}
+                      {/*  <FontAwesomeIcon icon="pencil-alt" />{' '}*/}
+                      {/*  <span className="d-none d-md-inline">/!*<Translate contentKey="entity.action.edit">Edit</Translate>*!/</span>*/}
+                      {/*</Button>*/}
                       <Button
                         tag={Link}
                         to={`/arquivo/${arquivo.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}

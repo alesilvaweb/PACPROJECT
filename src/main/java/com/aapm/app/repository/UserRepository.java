@@ -2,6 +2,7 @@ package com.aapm.app.repository;
 
 import com.aapm.app.domain.User;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.cache.annotation.Cacheable;
@@ -33,4 +34,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
+
+    default List<User> findAllByNameContainingIgnoreCase(String query) {
+        return null;
+    }
 }

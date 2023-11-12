@@ -24,12 +24,12 @@ export default function ModalInicial() {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
-    localStorage.setItem('popUpShow', 'true');
+    sessionStorage.setItem('popUpShow', 'true');
     setOpen(false);
   };
 
   useEffect(() => {
-    const hasPopUpBeenShown = localStorage.getItem('popUpShow');
+    const hasPopUpBeenShown = sessionStorage.getItem('popUpShow');
 
     if (!hasPopUpBeenShown) {
       setOpen(true);

@@ -59,8 +59,8 @@ export default function Banner() {
         modules={[Autoplay, Pagination, Navigation]}
       >
         {convenioList.map(convenio => (
-          <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)}>
-            <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={150} height={100} />
+          <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)} className={'hand'}>
+            <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={100} height={150} />
           </SwiperSlide>
         ))}
       </Swiper>

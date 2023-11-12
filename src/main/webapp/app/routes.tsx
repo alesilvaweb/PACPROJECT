@@ -25,6 +25,8 @@ import MapaGoogle from 'app/modules/localizacao/MapaGoogle';
 import Guia from 'app/modules/home/guia';
 import ReservaListWithLocalizationProvider from 'app/entities/reserva/reserva-list';
 import AssociadoCard from 'app/modules/CartaoAssociado/AssociadoCard';
+import TelaInicial from 'app/modules/home/aapm-dashboard';
+import AAPMDashboard from 'app/modules/home/aapm-dashboard';
 
 const loading = <div>loading ...</div>;
 
@@ -46,7 +48,7 @@ const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
-        <Route index element={<PaginaInicial />} />
+        <Route index element={<AAPMDashboard />} />
         <Route path="cabanas" element={<Inicial />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="guia" element={<Guia />} />

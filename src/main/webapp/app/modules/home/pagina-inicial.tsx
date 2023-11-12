@@ -13,12 +13,13 @@ import './home.scss';
 const PaginaInicial = () => {
   const account = useAppSelector(state => state.authentication.account);
   const navigate = useNavigate();
+  const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   // if (!account?.login) {
   //   navigate('/login');
   // }
   return (
     <div>
-      {account?.login ? (
+      {isAuthenticated ? (
         <>
           <div>
             <h4>Bem vindo ao APP da Associação Atlética Philip Morris</h4>

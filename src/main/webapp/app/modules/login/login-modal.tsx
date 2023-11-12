@@ -2,15 +2,18 @@ import React from 'react';
 import { Translate, translate, ValidatedField } from 'react-jhipster';
 import Link from '@mui/material/Link';
 import { type FieldError, useForm } from 'react-hook-form';
-import Dialog, { DialogProps } from '@mui/material/Dialog';
+import { DialogProps } from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogActions from '@mui/material/DialogActions';
-import { SelectChangeEvent } from '@mui/material';
-import { Col, Form } from 'reactstrap';
+import { SelectChangeEvent, Typography } from '@mui/material';
+import { Col, Form, Row } from 'reactstrap';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import { useAppSelector } from 'app/config/store';
+import { useNavigate } from 'react-router-dom';
+
 export interface ILoginModalProps {
   showModal: boolean;
   loginError: boolean;
@@ -22,6 +25,12 @@ const LoginModal = (props: ILoginModalProps) => {
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('sm');
   const [open, setOpen] = React.useState(false);
+  const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
+  const navigate = useNavigate();
+
+  if (isAuthenticated) {
+    navigate('/');
+  }
 
   const handleMaxWidthChange = (event: SelectChangeEvent<typeof maxWidth>) => {
     setMaxWidth(
@@ -50,14 +59,14 @@ const LoginModal = (props: ILoginModalProps) => {
     handleSubmit(login)(e);
   };
   return (
-    <div>
-      <Dialog open={props.showModal} onClose={handleClose} fullWidth={fullWidth} maxWidth={maxWidth}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Col xl={4} md={6} sm={8} xs={12} style={{ marginTop: '10vh' }}>
         <Form onSubmit={handleLoginSubmit}>
-          <DialogTitle>
+          <Typography variant={'h5'} className={'text-center'}>
             <Translate contentKey="login.title">Sign in</Translate>
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
+          </Typography>
+          <Row>
+            <Row>
               <Col md="12">
                 {loginError ? (
                   <Alert severity="error">
@@ -67,7 +76,7 @@ const LoginModal = (props: ILoginModalProps) => {
                   </Alert>
                 ) : null}
               </Col>
-            </DialogContentText>
+            </Row>
 
             <ValidatedField
               name="username"
@@ -93,29 +102,28 @@ const LoginModal = (props: ILoginModalProps) => {
               error={errors.password as FieldError}
               isTouched={touchedFields.password}
             />
-            <ValidatedField
-              name="rememberMe"
-              type="checkbox"
-              check
-              label={translate('login.form.rememberme')}
-              value={true}
-              register={register}
-            />
-            <br />
-            <Link href="/account/reset/request" underline="none">
-              <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
-            </Link>
-          </DialogContent>
-          <DialogActions>
-            {/*<Button onClick={handleClose}> {<Translate contentKey="entity.action.cancel">Cancel</Translate>}</Button>*/}
-            <Button variant="contained" color={'primary'} type="submit">
-              <Translate contentKey="login.form.button">Sign in</Translate>
-            </Button>
-          </DialogActions>
-        </Form>
-      </Dialog>
-    </div>
 
+            <Col md={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <ValidatedField
+                name="rememberMe"
+                type="checkbox"
+                check
+                label={translate('login.form.rememberme')}
+                value={true}
+                register={register}
+              />
+
+              <Button variant="contained" color={'primary'} type="submit" className={'text-center'}>
+                <Translate contentKey="login.form.button">Sign in</Translate>
+              </Button>
+            </Col>
+          </Row>
+          <Link href="/account/reset/request" underline="none">
+            <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
+          </Link>
+        </Form>
+      </Col>
+    </div>
     // <Modal isOpen={props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false} style={{marginTop:'8%'}}>
     //   <Form onSubmit={handleLoginSubmit}>
     //     <ModalHeader id="login-title" data-cy="loginTitle">

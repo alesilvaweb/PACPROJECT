@@ -5,11 +5,11 @@
         "title": "Associados",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Associado",
-        "createOrEditLabel": "Criar ou editar Associado",
+        "createOrEditLabel": "Editar Associado",
         "notFound": "Nenhum Associado encontrado"
       },
-      "created": "Um novo Associado foi criado com o identificador {{ param }}",
-      "updated": "Um Associado foi atualizado com o identificador {{ param }}",
+      "created": "Associado foi criado {{ param }}",
+      "updated": "Associado foi atualizado {{ param }}",
       "deleted": "Um Associado foi excluído com o identificador {{ param }}",
       "delete": {
         "question": "Tem certeza de que deseja excluir Associado {{ id }}?"

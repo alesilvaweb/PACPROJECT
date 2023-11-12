@@ -8,12 +8,13 @@ import ConvenioDetail from './convenio-detail';
 import ConvenioUpdate from './convenio-update';
 import ConvenioDeleteDialog from './convenio-delete-dialog';
 import ConvenioList from 'app/entities/convenio/convenio-list';
+import ConveniosFilter from 'app/entities/convenio/convenios-filter';
 
 const ConvenioRoutes = () => (
   <ErrorBoundaryRoutes>
     <Route index element={<Convenio />} />
     <Route path="new" element={<ConvenioUpdate />} />
-    <Route path="list" element={<ConvenioList />} />
+    <Route path="list" element={<ConveniosFilter />} />
 
     <Route path=":id">
       <Route index element={<ConvenioDetail />} />

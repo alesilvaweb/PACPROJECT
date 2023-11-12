@@ -33,7 +33,7 @@ export default function CustomizedDialogs() {
     <div>
       <BootstrapDialog fullScreen={true} onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogContent dividers>
-          <AssociadoCard name={'Associado'} memberSince={'2013'} imageUrl={'content/images/CartaoAssociado.png'} />
+          {/*<AssociadoCard name={'Associado'} memberSince={'2013'} imageUrl={'content/images/CartaoAssociado.png'} />*/}
         </DialogContent>
         <DialogActions>
           <Button

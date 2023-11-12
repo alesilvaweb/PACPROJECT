@@ -83,13 +83,16 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
           </ListSubheader>
         }
       >
-        {/* Menus Fixos */}
-        <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
-        <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
-        <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-        <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<Schedule />} setIsOpen={setIsOpen} />
-        <hr />
-
+        {isAuthenticated ? (
+          <>
+            {/* Menus Fixos */}
+            <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+            <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<Schedule />} setIsOpen={setIsOpen} />
+            <hr />
+          </>
+        ) : null}
         {isAdmin ? (
           <>
             {/* Grupo de menus ADM */}

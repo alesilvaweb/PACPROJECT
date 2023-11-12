@@ -5,7 +5,7 @@
         "title": "Dependentes",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Dependente",
-        "createOrEditLabel": "Criar ou editar Dependente",
+        "createOrEditLabel": "Editar Dependente",
         "notFound": "Nenhum Dependente encontrado"
       },
       "created": "Um novo Dependente foi criado com o identificador {{ param }}",

@@ -12,8 +12,9 @@ import CardActions from '@mui/material/CardActions';
 function ConveniosList() {
   const [convenios, setConvenios] = useState([]);
   const [conveniosTemp, setConveniosTemp] = useState([]);
-  const [categoriaFiltro, setCategoriaFiltro] = useState('');
+  const [categoriaFiltro, setCategoriaFiltro] = useState(0);
   const [categoriaFiltradas, setCategoriaFiltradas] = useState([]);
+  const [conveniosFiltrados, setConveniosFiltrados] = useState([]);
 
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
@@ -36,9 +37,10 @@ function ConveniosList() {
     }
   }
 
-  async function fetchConvenios(categoria) {
+  async function fetchConvenios() {
     try {
-      const response = await axios.get(`api/convenios?categoriaId.equals=${categoria}`).then(res => {
+      // const response = await axios.get(`api/convenios?categoriaId.equals=${categoria}`).then(res => {
+      const response = await axios.get(`api/convenios`).then(res => {
         setConvenios(res.data);
       });
     } catch (error) {
@@ -56,24 +58,31 @@ function ConveniosList() {
   }
 
   useEffect(() => {
-    fetchCategorias();
-    filterCategoria();
-  }, []);
-
-  useEffect(() => {
-    fetchConvenios(categoriaFiltro);
+    filterConvenios(categoriaFiltro);
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     setConvenios(convenios.slice(startIndex, endIndex));
   }, [page]);
 
+  useEffect(() => {
+    fetchCategorias();
+    filterCategoria();
+    filterConvenios(categoriaFiltro);
+  }, []);
+
   function handlePageChange(event, value) {
     setPage(value);
   }
 
-  function filterConvenios(categoria) {
-    setCategoriaFiltro(categoria);
-    fetchConvenios(categoria);
+  function filterConvenios(cate) {
+    setCategoriaFiltro(cate);
+    if (cate == 0) {
+    } else {
+      fetchConvenios().then(r => {
+        setConveniosFiltrados(convenios.filter(value => value.categoria.id === cate));
+      });
+    }
+
     filterCategoria();
     setPage(1);
   }
@@ -81,6 +90,7 @@ function ConveniosList() {
   function filterCategoria() {
     if (categorias.length > 0) {
       const cate = categorias.filter(ca => convenios.some(co => ca.id === co.categoria.id));
+
       setCategoriaFiltradas(cate);
     }
   }
@@ -154,7 +164,7 @@ function ConveniosList() {
         &nbsp;
       </div>
       <Grid container spacing={2}>
-        {convenios.map(convenio => (
+        {conveniosFiltrados.map(convenio => (
           <Grid item xs={12} sm={6} md={4} key={convenio.id}>
             <a>
               <Card

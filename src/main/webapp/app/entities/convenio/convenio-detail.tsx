@@ -125,19 +125,19 @@ function ConvenioDetalhe() {
             {convenioEntity.email}
           </Typography>
           <hr />
-          <Typography variant="button" color="textSecondary" sx={{ display: 'flex', alignItems: 'center' }}>
-            <Typography variant="subtitle2" component="div">
-              Desconto:
-            </Typography>
+          <Typography variant="subtitle1" component="div">
+            Descontos
+          </Typography>
 
+          <Typography variant="button" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
             {desconto.map(desc => (
               <>
-                &nbsp;
                 <Stack
                   direction="row"
                   divider={<Divider orientation="vertical" flexItem />}
                   spacing={{ xs: 1, sm: 2, md: 4 }}
                   key={desc.id}
+                  sx={{ marginTop: '5px' }}
                 >
                   <Item>
                     &nbsp;{desc.desconto}% {desc.descricao} &nbsp;
@@ -154,8 +154,8 @@ function ConvenioDetalhe() {
                 <IconButton
                   color="primary"
                   aria-label={rede.nome}
-                  href={rede.endereco}
-                  target="_blank"
+                  // href={""}
+                  // target="_blank"
                   style={{ fontSize: '15px', float: 'right' }}
                 >
                   {rede.icon?.nome === 'Facebook' ? (

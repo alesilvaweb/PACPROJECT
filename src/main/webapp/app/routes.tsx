@@ -24,6 +24,7 @@ import Events from 'app/modules/home/events';
 import MapaGoogle from 'app/modules/localizacao/MapaGoogle';
 import Guia from 'app/modules/home/guia';
 import ReservaListWithLocalizationProvider from 'app/entities/reserva/reserva-list';
+import AssociadoCard from 'app/modules/CartaoAssociado/AssociadoCard';
 
 const loading = <div>loading ...</div>;
 
@@ -52,8 +53,8 @@ const AppRoutes = () => {
         <Route path="events" element={<Events />} />
         <Route path="mapa" element={<MapaGoogle />} />
         <Route path="report" element={<ReservaListWithLocalizationProvider />} />
+        <Route path="cartao" element={<AssociadoCard />} />
 
-        <Route path="cartao" element={<CartaoSocio />} />
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="account">

@@ -88,12 +88,12 @@ export const Dependente = () => {
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="aapmApp.dependente.home.refreshListLabel">Refresh List</Translate>
+            {/*<Translate contentKey="aapmApp.dependente.home.refreshListLabel">Refresh List</Translate*/}
           </Button>
           <Link to="/dependente/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="aapmApp.dependente.home.createLabel">Create new Dependente</Translate>
+            {/*<Translate contentKey="aapmApp.dependente.home.createLabel">Create new Dependente</Translate>*/}
           </Link>
         </div>
       </h2>
@@ -117,12 +117,12 @@ export const Dependente = () => {
                 <th className="hand" onClick={sort('status')}>
                   <Translate contentKey="aapmApp.dependente.status">Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('created')}>
-                  <Translate contentKey="aapmApp.dependente.created">Created</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('modified')}>
-                  <Translate contentKey="aapmApp.dependente.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('created')}>*/}
+                {/*  <Translate contentKey="aapmApp.dependente.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('modified')}>*/}
+                {/*  <Translate contentKey="aapmApp.dependente.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th>
                   <Translate contentKey="aapmApp.dependente.associado">Associado</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -147,8 +147,8 @@ export const Dependente = () => {
                   <td>
                     <Translate contentKey={`aapmApp.Status.${dependente.status}`} />
                   </td>
-                  <td>{dependente.created ? <TextFormat type="date" value={dependente.created} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{dependente.modified ? <TextFormat type="date" value={dependente.modified} format={APP_DATE_FORMAT} /> : null}</td>
+                  {/*<td>{dependente.created ? <TextFormat type="date" value={dependente.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
+                  {/*<td>{dependente.modified ? <TextFormat type="date" value={dependente.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td>
                     {dependente.associado ? <Link to={`/associado/${dependente.associado.id}`}>{dependente.associado.nome}</Link> : ''}
                   </td>
@@ -156,9 +156,7 @@ export const Dependente = () => {
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/dependente/${dependente.id}`} color="info" size="sm" data-cy="entityDetailsButton">
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.view">View</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -168,9 +166,7 @@ export const Dependente = () => {
                         data-cy="entityEditButton"
                       >
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.edit">Edit</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
                       <Button
                         tag={Link}
@@ -180,9 +176,7 @@ export const Dependente = () => {
                         data-cy="entityDeleteButton"
                       >
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          <Translate contentKey="entity.action.delete">Delete</Translate>
-                        </span>
+                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
                       </Button>
                     </div>
                   </td>

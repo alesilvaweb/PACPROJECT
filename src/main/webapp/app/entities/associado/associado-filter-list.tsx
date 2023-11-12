@@ -60,25 +60,30 @@ const AssociadoFilter = () => {
           </Col>
 
           <Col sm={2}>
-            <Link to="/arquivo" className="btn btn-primary" style={{ float: 'right' }}>
+            <Button type={'button'} color={'primary'} onClick={() => navigate('/arquivo')}>
               Importar
-            </Link>
+            </Button>
           </Col>
         </div>
         <Table responsive hover>
           <thead>
             <tr>
-              <th className="hand" onClick={() => handleSort('id')}>
-                Matrícula <FontAwesomeIcon icon="sort" />
-              </th>
               <th className="hand" onClick={() => handleSort('nome')}>
-                Nome <FontAwesomeIcon icon="sort" />
+                Nome
+                <FontAwesomeIcon icon="sort" />
               </th>
-              <th className="hand">
-                Status <FontAwesomeIcon icon="sort" />
+              <th className="hand" onClick={() => handleSort('id')}>
+                Matrícula
+                <FontAwesomeIcon icon="sort" />
               </th>
-              <th className="hand">
-                Nascimento <FontAwesomeIcon icon="sort" />
+
+              <th className="hand" onClick={() => handleSort('status')}>
+                Status
+                <FontAwesomeIcon icon="sort" />
+              </th>
+              <th className="hand" onClick={() => handleSort('dataNascimento')}>
+                Data Nascimento
+                <FontAwesomeIcon icon="sort" />
               </th>
               {/*<th> </th>*/}
             </tr>
@@ -86,11 +91,10 @@ const AssociadoFilter = () => {
           <tbody>
             {associados.map(associado => (
               <tr key={associado.id} onClick={() => navigate(`/associado/${associado.id}`)} className="hand">
-                <td> {associado.id}</td>
                 <td> {associado.nome}</td>
+                <td> {associado.id}</td>
                 <td> {associado.status}</td>
                 <td>
-                  {' '}
                   <TextFormat type="date" value={associado.dataNascimento} format={APP_LOCAL_DATE_FORMAT} />
                 </td>
 

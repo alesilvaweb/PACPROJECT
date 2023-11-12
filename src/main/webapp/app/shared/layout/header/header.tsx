@@ -92,7 +92,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
       </AppBar>
 
       {/* <Sidebar {...{ isOpen, setIsOpen, currentLocale, isOpenAPIEnabled, isAdmin, isAuthenticated }} /> */}
-      <Sidebar {...{ isOpen, setIsOpen, currentLocale, isOpenAPIEnabled, isAdmin, isAuthenticated }} />
+      {isAuthenticated ? <Sidebar {...{ isOpen, setIsOpen, currentLocale, isOpenAPIEnabled, isAdmin, isAuthenticated }} /> : null}
     </ThemeProvider>
   );
 

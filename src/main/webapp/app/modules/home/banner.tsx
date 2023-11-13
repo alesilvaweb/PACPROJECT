@@ -24,46 +24,60 @@ export default function Banner() {
   useEffect(() => {
     dispatch(getEntities({}));
   }, []);
-
+  const cardStyle = {
+    padding: 1,
+    backgroundColor: 'gray-100',
+    borderRadius: 2,
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#a1a1a1',
+    ':hover': {
+      boxShadow: 5,
+      borderColor: '#1975d1',
+    },
+  };
   return (
-    <>
-      <Swiper
-        // loop={true}
-        onAutoplay={true}
-        autoplay={{ delay: 3000 }}
-        navigation={true}
-        // spaceBetween={10}
-        // slidesPerView={4}
-        breakpoints={{
-          200: {
-            slidesPerView: 1,
-            spaceBetween: 20,
-          },
-          750: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          950: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1280: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
-          1600: {
-            slidesPerView: 5,
-            spaceBetween: 30,
-          },
-        }}
-        modules={[Autoplay, Pagination, Navigation]}
-      >
-        {convenioList.map(convenio => (
-          <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)} className={'hand'}>
-            <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={100} height={150} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </>
+    <div>
+      <Typography variant={'h5'}>Convênios</Typography>
+      <Card sx={cardStyle}>
+        <Swiper
+          // loop={true}
+          onAutoplay={true}
+          autoplay={{ delay: 3000 }}
+          navigation={true}
+          // spaceBetween={10}
+          // slidesPerView={4}
+          breakpoints={{
+            200: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            750: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            950: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1280: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+            1600: {
+              slidesPerView: 5,
+              spaceBetween: 30,
+            },
+          }}
+          modules={[Autoplay, Pagination, Navigation]}
+        >
+          {convenioList.map(convenio => (
+            <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)} className={'hand'}>
+              <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={100} height={150} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Card>
+    </div>
   );
 }

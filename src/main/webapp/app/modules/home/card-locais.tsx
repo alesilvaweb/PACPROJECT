@@ -11,67 +11,74 @@ export default function CardLocais({ link, title, icon, subtitle }) {
   // @ts-ignore
   return (
     <Grid item xs={4} sm={4} md={4} sx={{ marginTop: '5%' }}>
-      {/* Icone do card*/}
       <Card
         sx={{
-          backgroundColor: '#1e77c5',
+          backgroundColor: '#1975d1',
           display: 'flex',
           justifyContent: 'center',
           padding: 0.5,
-          marginTop: '-18px',
-          marginLeft: '11.px',
+          marginTop: '-15px',
+          marginLeft: '15px',
           position: 'absolute',
           borderRadius: 2,
-          // boxShadow: 5,
+          boxShadow: 5,
           zIndex: 10,
           width: '13vh',
         }}
       >
         {icon}
       </Card>
-
       <Card
+        className={'hand'}
         sx={{
           backgroundColor: 'gray-100',
           borderRadius: 2,
           borderWidth: '1px',
-          boxShadow: 2,
-          // borderStyle: 'solid',
-          // borderColor: '#d5d5d5',
+          borderStyle: 'solid',
+          borderColor: '#a1a1a1',
           ':hover': {
-            boxShadow: 3,
-            borderWidth: '1px',
-            position: 'relative',
-            // borderColor: '#1e77c5',
+            boxShadow: 5,
+            borderColor: '#1975d1',
           },
         }}
       >
-        <CardActionArea>
-          <CardContent
-            onClick={() => navigate(link)}
+        <CardContent
+          onClick={() => navigate(link)}
+          sx={{
+            height: '30vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Typography
+            gutterBottom
+            className={'MuiTypography-h1'}
             sx={{
-              height: '20vh',
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              alignItems: 'center',
+              fontSize: '1.3rem',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              color: '#242424',
             }}
           >
-            <Typography
-              gutterBottom
-              variant={'subtitle1'}
-              sx={{
-                fontWeight: 600,
-                fontSize: '2rem',
-              }}
-            >
-              {title}
-            </Typography>
-            <CardActionArea>
-              <Typography variant={'overline'}>{subtitle}</Typography>
-            </CardActionArea>
-          </CardContent>
-        </CardActionArea>
+            {title}
+          </Typography>
+
+          <CardActionArea
+            sx={{
+              borderRadius: 2,
+              padding: '10px',
+              height: '15vh',
+
+              ':hover': {
+                backgroundColor: 'rgba(255,255,255,0.33)',
+              },
+            }}
+          >
+            <Typography>{subtitle}</Typography>
+          </CardActionArea>
+        </CardContent>
       </Card>
     </Grid>
   );

@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, Typography, Grid } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 import { AccessTime, CreditCard, LocalHospital } from '@mui/icons-material';
 import { write } from 'xlsx';
@@ -11,6 +16,7 @@ const cardStyle = {
   background: '#e63946', // Cor de fundo vermelha
   color: 'white', // Cor do texto branca
   position: 'relative', // Para permitir posicionamento absoluto dentro do relativo
+  height: '20vh',
 };
 
 const iconStyle = {
@@ -55,11 +61,12 @@ const SwiperBanner = () => {
     <Swiper
       spaceBetween={50}
       slidesPerView={1}
-      // loop={true}
+      loop={true}
       // pagination={{ clickable: true }}
       onAutoplay={true}
       autoplay={{ delay: 3000 }}
       navigation={true}
+      modules={[Autoplay, Pagination, Navigation]}
     >
       {newsData.map((news, index) => (
         <SwiperSlide key={index}>
@@ -95,6 +102,7 @@ const AAPMDashboard = () => {
       <Typography variant="subtitle1" paragraph sx={{ color: 'black' }}>
         Explore os recursos exclusivos para membros da AAPM e aproveite ao máximo sua associação.
       </Typography>
+
       <Grid container spacing={3}>
         {/* Reservas */}
         <Grid item xs={12} sm={6} md={4}>
@@ -103,7 +111,7 @@ const AAPMDashboard = () => {
               <AccessTime sx={iconStyle} />
               <CardContent sx={{ ...cardStyle }}>
                 <Typography variant="h5">Reservas</Typography>
-                <Typography>Faça reservas para eventos e atividades da AAPM aqui.</Typography>
+                <Typography>Faça reservas para eventos aqui. </Typography>
               </CardContent>
             </Card>
           </Link>

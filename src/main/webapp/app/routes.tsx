@@ -48,7 +48,7 @@ const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
-        <Route index element={<AAPMDashboard />} />
+        <Route index element={<PaginaInicial />} />
         <Route path="cabanas" element={<Inicial />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="guia" element={<Guia />} />

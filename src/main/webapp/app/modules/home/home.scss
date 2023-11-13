@@ -26,6 +26,18 @@ Main page styles
 }
 .textoInicial {
   @media (min-width: 200px) and (max-width: 600px) {
-    display: none;
+    //display: none;
+  }
+  .titleCard {
+  }
+  .subtiTileCard {
+  }
+}
+
+.tituloInicial {
+  font-size: 2rem;
+  font-weight: 500;
+  @media (min-width: 200px) and (max-width: 1000px) {
+    font-size: 1.5rem;
   }
 }

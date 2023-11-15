@@ -28,7 +28,7 @@ export const Login = () => {
   // @ts-ignore
   const { from } = location.state || { from: { pathname: '/', search: location.search } };
   if (isAuthenticated) {
-    return <Navigate to={from} replace />;
+    return <Navigate to={'/'} replace />;
   }
   return <LoginModal showModal={showModal} handleLogin={handleLogin} handleClose={handleClose} loginError={loginError} />;
 };

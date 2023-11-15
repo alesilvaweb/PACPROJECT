@@ -1,16 +1,22 @@
 .campoTitle {
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   font-weight: bold;
   text-transform: uppercase;
 }
 .campoField {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 }
 .containerCard {
-  width: 70%;
+  width: 50px;
 }
+.campoInput {
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+}
+
 @media (min-width: 200px) and (max-width: 500px) {
   .campoTitle {
     font-size: 6px;
@@ -20,6 +26,9 @@
   }
   .containerCard {
     width: 100%;
+  }
+  .campoInput {
+    padding: 5px;
   }
 }
 @media (min-width: 500px) and (max-width: 600px) {
@@ -32,6 +41,9 @@
   .containerCard {
     width: 10%;
   }
+  .campoInput {
+    padding: 5px;
+  }
 }
 @media (min-width: 600px) and (max-width: 750px) {
   .campoTitle {
@@ -41,6 +53,6 @@
     font-size: 12px;
   }
   .containerCard {
-    width: 80%;
+    width: 50%;
   }
 }

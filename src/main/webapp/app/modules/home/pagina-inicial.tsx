@@ -39,7 +39,7 @@ const PaginaInicial = () => {
             {/*  <Link href={'/guia'}>aqui ...</Link>*/}
             {/*</Typography>*/}
             <div className={'tituloInicial'}>Bem-vindos ao App da AAPM</div>
-            <div className={'textoInicial'}>Explore os recursos exclusivos para membros da AAPM e aproveite ao máximo sua associação.</div>
+            <div className={'subtiTileCard'}>Explore os recursos exclusivos para membros da AAPM e aproveite ao máximo sua associação.</div>
           </div>
           <ModalInicial />
           <Grid container>
@@ -72,7 +72,7 @@ const PaginaInicial = () => {
           <br />
         </>
       ) : (
-        <Login />
+        <div>Carregando ...</div>
       )}
     </div>
   );

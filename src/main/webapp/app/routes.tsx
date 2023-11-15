@@ -10,6 +10,7 @@ import PasswordResetFinish from 'app/modules/account/password-reset/finish/passw
 import Logout from 'app/modules/login/logout';
 import Home from 'app/modules/home/home';
 import EntitiesRoutes from 'app/entities/routes';
+import HomeRoutes from 'app/modules/home/routes';
 import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
@@ -48,15 +49,6 @@ const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
-        <Route index element={<PaginaInicial />} />
-        <Route path="cabanas" element={<Inicial />} />
-        <Route path="sobre" element={<Sobre />} />
-        <Route path="guia" element={<Guia />} />
-        <Route path="events" element={<Events />} />
-        <Route path="mapa" element={<MapaGoogle />} />
-        <Route path="report" element={<ReservaListWithLocalizationProvider />} />
-        <Route path="cartao" element={<AssociadoCard />} />
-
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="account">
@@ -88,6 +80,7 @@ const AppRoutes = () => {
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
               <EntitiesRoutes />
+              <HomeRoutes />
             </PrivateRoute>
           }
         />

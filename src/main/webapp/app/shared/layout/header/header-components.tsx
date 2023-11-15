@@ -1,9 +1,10 @@
 import React from 'react';
 import { Translate } from 'react-jhipster';
 
-import { NavItem, NavLink, NavbarBrand } from 'reactstrap';
+import { NavbarBrand, NavItem, NavLink } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAppSelector } from 'app/config/store';
 
 export const BrandIcon = props => (
   <div {...props} className="brand-icon">
@@ -11,6 +12,15 @@ export const BrandIcon = props => (
   </div>
 );
 
+export const BrandLogin = () => (
+  <NavbarBrand className="brand-logo">
+    <BrandIcon />
+    {/*<span className="brand-title">*/}
+    {/*  <Translate contentKey="global.title">AAPM</Translate>*/}
+    {/*</span>*/}
+    {/*<span className="navbar-version">{VERSION}</span>*/}
+  </NavbarBrand>
+);
 export const Brand = () => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
     <BrandIcon />

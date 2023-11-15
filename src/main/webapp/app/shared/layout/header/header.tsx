@@ -3,7 +3,7 @@ import './header.scss';
 import React, { useState } from 'react';
 import { Storage, Translate } from 'react-jhipster';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Brand } from './header-components';
+import { Brand, BrandLogin } from './header-components';
 import { AccountMenuMaterial } from '../menus';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
@@ -14,6 +14,7 @@ import Sidebar from 'app/shared/layout/header/sidebar';
 import { Lock, Menu } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -58,6 +59,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
   const loading = useAppSelector(state => state.reserva.loading);
   const loadingLocal = useAppSelector(state => state.local.loading);
   const loadingArquivo = useAppSelector(state => state.arquivo.loading);
+  const loadingConvenio = useAppSelector(state => state.convenio.loading);
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar>
@@ -69,7 +71,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
               </IconButton>
             </Box>
             <Typography variant="h6" component="h1" noWrap sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Brand />
+              {isAuthenticated ? <Brand /> : <BrandLogin />}
             </Typography>
             <Typography variant="h6" component="h1" noWrap sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <Brand />
@@ -89,6 +91,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
         {loading ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
         {loadingLocal ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
         {loadingArquivo ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
+        {loadingConvenio ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
       </AppBar>
 
       {/* <Sidebar {...{ isOpen, setIsOpen, currentLocale, isOpenAPIEnabled, isAdmin, isAuthenticated }} /> */}

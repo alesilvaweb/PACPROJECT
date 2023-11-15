@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/convenio/convenio.reducer';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { Card, Typography } from '@mui/material';
+import { Card, Skeleton, Typography } from '@mui/material';
 
 export default function Banner() {
   const convenioList = useAppSelector(state => state.convenio.entities);
@@ -24,6 +24,7 @@ export default function Banner() {
   useEffect(() => {
     dispatch(getEntities({}));
   }, []);
+
   const cardStyle = {
     padding: 1,
     backgroundColor: 'gray-100',
@@ -36,6 +37,7 @@ export default function Banner() {
       borderColor: '#1975d1',
     },
   };
+  // @ts-ignore
   return (
     <div>
       <Typography variant={'h5'}>Convênios</Typography>
@@ -71,11 +73,37 @@ export default function Banner() {
           }}
           modules={[Autoplay, Pagination, Navigation]}
         >
-          {convenioList.map(convenio => (
-            <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)} className={'hand'}>
-              <img src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`} alt={convenio.nome} width={100} height={150} />
-            </SwiperSlide>
-          ))}
+          <>
+            {!loading ? (
+              <>
+                {convenioList.map(convenio => (
+                  <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)} className={'hand'}>
+                    <img
+                      src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`}
+                      alt={convenio.nome}
+                      width={100}
+                      height={150}
+                    />
+                  </SwiperSlide>
+                ))}
+              </>
+            ) : (
+              <>
+                <SwiperSlide key={1}>
+                  <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
+                </SwiperSlide>
+                <SwiperSlide key={2}>
+                  <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
+                </SwiperSlide>
+                <SwiperSlide key={3}>
+                  <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
+                </SwiperSlide>
+                <SwiperSlide key={4}>
+                  <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
+                </SwiperSlide>
+              </>
+            )}
+          </>
         </Swiper>
       </Card>
     </div>

@@ -19,6 +19,7 @@ import Parametro from './parametro';
 import Mensagem from './mensagem';
 import Categoria from './categoria';
 import Tipo from './tipo';
+
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {

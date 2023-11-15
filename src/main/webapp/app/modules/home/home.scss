@@ -28,9 +28,22 @@ Main page styles
   @media (min-width: 200px) and (max-width: 600px) {
     //display: none;
   }
-  .titleCard {
+}
+.subtiTileCard {
+  @media (min-width: 1500px) and (max-width: 5000px) {
+    font-size: 1.5rem;
   }
-  .subtiTileCard {
+  @media (min-width: 800px) and (max-width: 1500px) {
+    font-size: 1.2rem;
+  }
+}
+
+.titleCard {
+  @media (min-width: 1500px) and (max-width: 5000px) {
+    font-size: 1.5rem;
+  }
+  @media (min-width: 800px) and (max-width: 1500px) {
+    font-size: 1.2rem;
   }
 }
 

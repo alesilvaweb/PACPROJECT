@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, CardFooter } from 'reactstrap';
 import Stack from '@mui/material/Stack';
-import { Button, Paper } from '@mui/material';
+import { Button, Paper, Skeleton } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
@@ -31,7 +31,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function ConvenioDetalhe() {
   const dispatch = useAppDispatch();
-
+  const loadingConvenio = useAppSelector(state => state.convenio.loading);
   const [desconto, setDesconto] = useState([]);
   const [redeSocial, setRedeSocial] = useState([]);
   const { id } = useParams<'id'>();
@@ -79,23 +79,37 @@ function ConvenioDetalhe() {
         <BreadcrumbItem active>{convenioEntity.nome}</BreadcrumbItem>
       </Breadcrumb>
       <Card raised sx={{ margin: '0 auto', padding: '0.1em' }}>
-        <CardMedia
-          component="img"
-          alt={convenioEntity.nome}
-          height="200"
-          image={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`}
-          title={convenioEntity.nome}
-          sx={{
-            objectFit: 'contain',
-            maxWidth: '400px',
-            width: '100%',
-            height: '100%',
-            float: 'right',
-            borderRadius: '4px',
-            boxShadow: 5,
-            marginRight: '10px',
-          }}
-        />
+        {!loadingConvenio ? (
+          <CardMedia
+            component="img"
+            alt={convenioEntity.nome}
+            height="200"
+            image={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`}
+            title={convenioEntity.nome}
+            sx={{
+              objectFit: 'contain',
+              maxWidth: '400px',
+              width: '100%',
+              height: '100%',
+              float: 'right',
+              borderRadius: '4px',
+              boxShadow: 5,
+              marginRight: '10px',
+            }}
+          />
+        ) : (
+          <Skeleton
+            variant="rectangular"
+            sx={{
+              width: '250px',
+              height: '150px',
+              float: 'right',
+              borderRadius: '4px',
+              boxShadow: 5,
+              marginRight: '10px',
+            }}
+          />
+        )}
         <CardContent>
           {convenioEntity.logo ? (
             <Typography variant="h4" component="div">

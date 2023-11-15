@@ -76,7 +76,7 @@ export default function CardLocais({ link, title, icon, subtitle }) {
               },
             }}
           >
-            <Typography>{subtitle}</Typography>
+            <div className={'subtiTileCard'}>{subtitle}</div>
           </CardActionArea>
         </CardContent>
       </Card>

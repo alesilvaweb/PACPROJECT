@@ -83,7 +83,7 @@ const AssociadoCard = () => {
           <Grid item xs={2}></Grid>
           <Grid item xs={8}>
             <div className={'campoTitle'}>Nome do Associado</div>
-            <div style={{ padding: '10px', background: 'white', borderRadius: '8px' }}>
+            <div className={'campoInput'}>
               <div className={'campoField'}>{associadoEntity.nome}</div>
             </div>
           </Grid>
@@ -91,7 +91,7 @@ const AssociadoCard = () => {
           <Grid item xs={2}></Grid>
           <Grid item xs={2}>
             <div className={'campoTitle'}>Registro</div>
-            <div style={{ padding: '10px', background: 'white', borderRadius: '8px' }}>
+            <div className={'campoInput'}>
               <div className={'campoField'}>{associadoEntity.id}</div>
             </div>
           </Grid>
@@ -103,7 +103,7 @@ const AssociadoCard = () => {
               <>
                 <Grid item key={dependent.id} xs={6}>
                   <div className={'campoTitle'}>Titular/Dependente</div>
-                  <div style={{ padding: '10px', background: 'white', borderRadius: '8px' }}>
+                  <div className={'campoInput'}>
                     <div className={'campoField'}>{dependent.nome}</div>
                   </div>
                 </Grid>
@@ -113,7 +113,6 @@ const AssociadoCard = () => {
         </Grid>
         <br />
       </Container>
-
       <br />
       <CardActions className={'justify-content-between'}>
         <div>

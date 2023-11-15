@@ -96,96 +96,103 @@ function ConveniosList() {
   }
 
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
-
+  const loadingConvenio = useAppSelector(state => state.convenio.loading);
   const navigate = useNavigate();
+
   return (
     <div>
-      <Breadcrumb>
-        <BreadcrumbItem onClick={() => navigate('/')}>
-          <a>Início</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem active>Convênios</BreadcrumbItem>
-      </Breadcrumb>
-      <div>
-        <Grid container spacing={1} sx={{ dispay: 'flex', justifyContent: 'flex-end' }}>
-          <Grid item>
-            <TextField
-              label="Busca"
-              name={'busca'}
-              value={searchTerm}
-              variant="outlined"
-              size="small"
-              fullWidth
-              onChange={e => {
-                setSearchTerm(e.target.value);
-                handleSearch();
-              }}
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </Grid>
-          <Grid item>
-            <Button
-              type={'button'}
-              variant={'contained'}
-              color={'primary'}
-              // style={{ float: 'left', marginBottom: '10px', marginLeft: '10px' }}
-              onClick={handleSearch}
-            >
-              Buscar
-            </Button>
-          </Grid>
-          {isAdmin ? (
-            <Grid item>
-              <Button
-                type={'button'}
-                variant={'contained'}
-                color={'primary'}
-                // style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
-                onClick={() => navigate(`/convenio/new`)}
-              >
-                Novo
-              </Button>
+      {!loadingConvenio ? (
+        <div>
+          <Breadcrumb>
+            <BreadcrumbItem onClick={() => navigate('/')}>
+              <a>Início</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Convênios</BreadcrumbItem>
+          </Breadcrumb>
+          <div>
+            <Grid container spacing={1} sx={{ dispay: 'flex', justifyContent: 'flex-end' }}>
+              <Grid item>
+                <TextField
+                  label="Busca"
+                  name={'busca'}
+                  value={searchTerm}
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                  onChange={e => {
+                    setSearchTerm(e.target.value);
+                    handleSearch();
+                  }}
+                  type="text"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  type={'button'}
+                  variant={'contained'}
+                  color={'primary'}
+                  // style={{ float: 'left', marginBottom: '10px', marginLeft: '10px' }}
+                  onClick={handleSearch}
+                >
+                  Buscar
+                </Button>
+              </Grid>
+              {isAdmin ? (
+                <Grid item>
+                  <Button
+                    type={'button'}
+                    variant={'contained'}
+                    color={'primary'}
+                    // style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
+                    onClick={() => navigate(`/convenio/new`)}
+                  >
+                    Novo
+                  </Button>
+                </Grid>
+              ) : null}
             </Grid>
-          ) : null}
-        </Grid>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <Grid item>
-            <Button onClick={() => filterConvenios('')}>Todas</Button>
-            {categorias.map(categoria => (
-              <Button key={categoria.id} onClick={() => filterConvenios(categoria.id)}>
-                {categoria.categoria}
-              </Button>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid item>
+                <Button onClick={() => filterConvenios('')}>Todas</Button>
+                {categorias.map(categoria => (
+                  <Button key={categoria.id} onClick={() => filterConvenios(categoria.id)}>
+                    {categoria.categoria}
+                  </Button>
+                ))}
+              </Grid>
+            </Grid>
+            &nbsp;
+          </div>
+          <Grid container spacing={2}>
+            {conveniosFiltrados.map(convenio => (
+              <Grid item xs={12} sm={6} md={4} key={convenio.id}>
+                <a>
+                  <Card
+                    onClick={() => {
+                      navigate(`/convenio/${convenio.id}`);
+                    }}
+                  >
+                    <CardMedia component="img" height="200" image={`data:${convenio.imagemContentType};base64,${convenio.imagem}`} />
+                    <CardContent>
+                      <Typography variant="h6" component="div">
+                        {convenio.nome}
+                      </Typography>
+                      <Typography color="textSecondary">Categoria: {convenio.categoria.categoria}</Typography>
+                    </CardContent>
+                  </Card>
+                </a>
+              </Grid>
             ))}
           </Grid>
-        </Grid>
-        &nbsp;
-      </div>
-      <Grid container spacing={2}>
-        {conveniosFiltrados.map(convenio => (
-          <Grid item xs={12} sm={6} md={4} key={convenio.id}>
-            <a>
-              <Card
-                onClick={() => {
-                  navigate(`/convenio/${convenio.id}`);
-                }}
-              >
-                <CardMedia component="img" height="200" image={`data:${convenio.imagemContentType};base64,${convenio.imagem}`} />
-                <CardContent>
-                  <Typography variant="h6" component="div">
-                    {convenio.nome}
-                  </Typography>
-                  <Typography color="textSecondary">Categoria: {convenio.categoria.categoria}</Typography>
-                </CardContent>
-              </Card>
-            </a>
-          </Grid>
-        ))}
-      </Grid>
-      <br />
-      {/*<Pagination count={Math.ceil(convenios.length / itemsPerPage)} page={page} onChange={handlePageChange} color="primary" />*/}
+          <br />
+          {/*<Pagination count={Math.ceil(convenios.length / itemsPerPage)} page={page} onChange={handlePageChange} color="primary" />*/}
+        </div>
+      ) : (
+        <div>Carregando...</div>
+      )}
     </div>
   );
 }

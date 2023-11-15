@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './home.scss';
+import '../home.scss';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Link, useNavigate } from 'react-router-dom';

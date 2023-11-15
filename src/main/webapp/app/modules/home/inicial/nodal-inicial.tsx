@@ -57,7 +57,7 @@ export default function ModalInicial() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-          <img src="../../../content/images/oktober.png" alt="" width={'100%'} />
+          <img src="../../../../content/images/oktober.png" alt="" width={'100%'} />
           <Typography gutterBottom>Descição aqui ..... Descição aqui .....</Typography>
         </DialogContent>
 

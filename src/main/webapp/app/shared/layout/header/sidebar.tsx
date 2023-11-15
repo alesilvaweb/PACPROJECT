@@ -166,7 +166,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
         {list('left')}
         <Box sx={{ width: 240, p: 3 }}>
           {/*{isAuthenticated && <EntitiesMenu />}*/}
-          {isAuthenticated && isAdmin && <AdminMenu showOpenAPI={isOpenAPIEnabled} />}
+          {/*{isAuthenticated && isAdmin && <AdminMenu showOpenAPI={isOpenAPIEnabled} />}*/}
           {/*  <LocaleMenu currentLocale={currentLocale} onClick={handleLocaleChange} />*/}
         </Box>
         <Divider />

@@ -40,7 +40,7 @@ export const App = () => {
     palette: {
       mode: 'light',
       primary: {
-        main: '#1e78c6',
+        main: '#1e77c5',
       },
     },
   });
@@ -49,7 +49,7 @@ export const App = () => {
     <ThemeProvider theme={darkTheme}>
       <BrowserRouter basename={baseHref}>
         <div className="app-container" style={{ paddingTop }}>
-          <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+          <ToastContainer position={toast.POSITION.BOTTOM_LEFT} className="toastify-container" toastClassName="toastify-toast" />
           <ErrorBoundary>
             <Header
               isAuthenticated={isAuthenticated}

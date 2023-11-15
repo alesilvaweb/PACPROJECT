@@ -1,12 +1,12 @@
 import * as React from 'react';
-import './home.scss';
+import '../home.scss';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
 import { Card, CardActionArea, Grid } from '@mui/material';
 
-export default function CardLocais({ link, title, icon, subtitle }) {
+export default function CardDashboard({ link, title, icon, subtitle }) {
   const navigate = useNavigate();
   // @ts-ignore
   return (

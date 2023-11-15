@@ -81,9 +81,11 @@ const ImageMarked = styled('span')(({ theme }) => ({
   transition: theme.transitions.create('opacity'),
 }));
 
-export default function Inicial() {
+export default function CabanasList() {
   const account = useAppSelector(state => state.authentication.account);
   const locaisList = useAppSelector(state => state.local.entities);
+  const loading = useAppSelector(state => state.local.loading);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
@@ -117,29 +119,8 @@ export default function Inicial() {
 
   return (
     <>
-      {account?.login ? (
+      {!loading ? (
         <div>
-          {/*<BotaoVoltar link={'/'} top={'-46px'} />*/}
-          {/*<Chip*/}
-          {/*  avatar={*/}
-          {/*    <>*/}
-          {/*      <ArrowBackIos sx={{ paddingLeft: '4px' }} />*/}
-          {/*      /!*<Avatar sx={{ backgroundColor: `${locaisEntity.cor}` }}>{locaisEntity.nome[0]}</Avatar>*!/*/}
-          {/*    </>*/}
-          {/*  }*/}
-          {/*  sx={{*/}
-          {/*    fontSize: '0.9rem',*/}
-          {/*    padding: '1vh',*/}
-          {/*    fontWeight: 500,*/}
-          {/*    marginBottom: '2px',*/}
-          {/*    borderRadius: '5px',*/}
-          {/*  }}*/}
-          {/*  onClick={() => {*/}
-          {/*    navigate('/ ');*/}
-          {/*  }}*/}
-          {/*  label={'Voltar'}*/}
-          {/*  color={'primary'}*/}
-          {/*/>*/}
           <Breadcrunbs atual={'Cabanas'} />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '2vh' }}>
             <h5>Cabanas</h5>
@@ -199,15 +180,7 @@ export default function Inicial() {
                     </CardContent>
                     <Divider />
                     <CardActions></CardActions>
-                    <BottomNavigation
-                      showLabels
-                      style={{ display: 'flex' }}
-                      sx={{ backgroundColor: '#fafafa' }}
-                      // value={value}
-                      // onChange={(event, newValue) => {
-                      //   setValue(newValue);
-                      // }}
-                    >
+                    <BottomNavigation showLabels style={{ display: 'flex' }} sx={{ backgroundColor: '#fafafa' }}>
                       <BottomNavigationAction
                         label="Informações"
                         icon={<Info sx={{ fontSize: '30px' }} />}
@@ -241,7 +214,9 @@ export default function Inicial() {
             </Grid>
           </Box>
         </div>
-      ) : null}
+      ) : (
+        <div>Carregando...</div>
+      )}
     </>
   );
 }

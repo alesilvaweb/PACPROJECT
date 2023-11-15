@@ -2,7 +2,7 @@ import React from 'react';
 import './mapa.scss';
 import { Loader } from '@googlemaps/js-api-loader';
 import BotaoVoltar from 'app/components/botaoVoltar';
-import { WhatsApp } from '@mui/icons-material';
+import { Map, WhatsApp } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Breadcrunbs from 'app/components/breadcrunbs';
 
@@ -22,8 +22,8 @@ function MapaGoogle() {
   //   googleMapsApiKey: 'AIzaSyChx4KBgoZYiZohZ7V6Fa96oVNZG-LfZ58',
   // });
   const loader = new Loader({
-    apiKey: 'AIzaSyChx4KBgoZYiZohZ7V6Fa96oVNZG-LfZ58',
     version: 'weekly',
+    apiKey: 'AIzaSyChx4KBgoZYiZohZ7V6Fa96oVNZG-LfZ58',
   });
 
   const [map, setMap] = React.useState(null);
@@ -65,6 +65,17 @@ function MapaGoogle() {
           color={'success'}
         >
           Compartilhar no WhatsApp
+        </Button>
+        <Button
+          onClick={() => {
+            const { lat, lng } = center;
+            const maps = `https://maps.google.com/?q=${lat},${lng}`;
+            window.open(maps, '_blank');
+          }}
+          startIcon={<Map />}
+          color={'primary'}
+        >
+          Maps
         </Button>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>

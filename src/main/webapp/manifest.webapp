@@ -29,4 +29,6 @@
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait"
+  "id": "aapm-app",
+  "lang": "pt"
 }

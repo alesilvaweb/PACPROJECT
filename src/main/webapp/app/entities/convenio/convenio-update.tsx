@@ -18,7 +18,7 @@ import { createEntity as createDesconto, deleteEntity as deleteDesconto } from '
 import { createEntity as createCategoria } from './../categoria/categoria.reducer';
 import axios from 'axios';
 import Stack from '@mui/material/Stack';
-import { Chip } from '@mui/material';
+import { Chip, Typography } from '@mui/material';
 
 export const ConvenioUpdate = () => {
   const dispatch = useAppDispatch();
@@ -270,62 +270,7 @@ export const ConvenioUpdate = () => {
                 data-cy="titulo"
                 type="text"
               />
-              {/* ************** */}
-              {/* Lista Desconto */}
-              {/* ************** */}
-              <Col md={12} style={{ display: 'flex' }}>
-                <Col md={3}>
-                  <Button color="primary" type="button" onClick={toggle}>
-                    <FontAwesomeIcon icon="plus" />
-                    &nbsp; Desconto &nbsp; &nbsp; &nbsp; &nbsp;
-                  </Button>
-                </Col>
-                <br />
-                <Col md={9} style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {desconto.map((desc, i) => (
-                    <>
-                      <Stack direction="row" spacing={1}>
-                        <Chip
-                          color="error"
-                          variant="filled"
-                          label={`Desconto de ${desc.desconto}% ${desc.descricao}`}
-                          onDelete={() => removerDesconto(isNew ? desc : desc.id)}
-                        />
-                      </Stack>
-                      &nbsp;
-                    </>
-                  ))}
-                </Col>
-              </Col>
-              <hr />
-              {/* ******************* */}
-              {/* Lista Redes Sociais */}
-              {/* ******************* */}
-              <Col md={12} style={{ display: 'flex' }}>
-                <Col md={3}>
-                  <Button color="primary" type="button" onClick={toggleRedesSociais}>
-                    <FontAwesomeIcon icon="plus" />
-                    &nbsp; Redes Sociais
-                  </Button>
-                </Col>
-                <br />
-                <Col md={9} style={{ display: 'flex', flexWrap: 'wrap', marginTop: '5px' }}>
-                  {redeSocial.map((rede, i) => (
-                    <>
-                      <Stack direction="row" spacing={1} style={{ marginTop: '5px' }}>
-                        <Chip
-                          color="error"
-                          variant="filled"
-                          label={rede.endereco}
-                          onDelete={() => removerRedeSocial(isNew ? rede : rede.id)}
-                        />
-                      </Stack>
-                      &nbsp;
-                    </>
-                  ))}
-                </Col>
-              </Col>
-              <br />
+
               <ValidatedField
                 label={translate('aapmApp.convenio.descricao')}
                 id="convenio-descricao"
@@ -346,7 +291,7 @@ export const ConvenioUpdate = () => {
                 id="convenio-telefone"
                 name="telefone"
                 data-cy="telefone"
-                type="text"
+                type="tel"
               />
               <ValidatedField label={translate('aapmApp.convenio.email')} id="convenio-email" name="email" data-cy="email" type="text" />
               <ValidatedField
@@ -409,15 +354,71 @@ export const ConvenioUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
+              <Typography variant={'h6'}>Adicionar Categorias</Typography>
               <Col md={12} style={{ display: 'flex' }}>
-                <Col md={4}>
+                <Col md={1}>
                   <Button color="primary" type="button" onClick={toggleCategoria}>
                     <FontAwesomeIcon icon="plus" />
-                    &nbsp; Categoria &nbsp; &nbsp;
                   </Button>
                 </Col>
               </Col>
-              <br />
+              <hr />
+              <Typography variant={'h6'}>Adicionar descontos</Typography>
+              {/* ************** */}
+              {/* Lista Desconto */}
+              {/* ************** */}
+              <Col md={12} style={{ display: 'flex' }}>
+                <Col md={1}>
+                  <Button color="primary" type="button" onClick={toggle}>
+                    <FontAwesomeIcon icon="plus" />
+                  </Button>
+                </Col>
+                <br />
+                <Col md={11} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch' }}>
+                  {desconto.map((desc, i) => (
+                    <>
+                      <Stack direction="row" spacing={1} style={{ margin: '5px' }}>
+                        <Chip
+                          color="error"
+                          variant="filled"
+                          label={`Desconto de ${desc.desconto}% ${desc.descricao}`}
+                          onDelete={() => removerDesconto(isNew ? desc : desc.id)}
+                        />
+                      </Stack>
+                      &nbsp;
+                    </>
+                  ))}
+                </Col>
+              </Col>
+              <hr />
+              {/* ******************* */}
+              {/* Lista Redes Sociais */}
+              {/* ******************* */}
+              <Typography variant={'h6'}>Adicionar Redes Sociais</Typography>
+              <Col md={12} style={{ display: 'flex' }}>
+                <Col md={1}>
+                  <Button color="primary" type="button" onClick={toggleRedesSociais}>
+                    <FontAwesomeIcon icon="plus" />
+                  </Button>
+                </Col>
+                <br />
+                <Col md={11} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch' }}>
+                  {redeSocial.map((rede, i) => (
+                    <>
+                      <Stack direction="row" spacing={1} style={{ margin: '5px' }}>
+                        <Chip
+                          color="error"
+                          variant="filled"
+                          label={rede.endereco}
+                          onDelete={() => removerRedeSocial(isNew ? rede : rede.id)}
+                        />
+                      </Stack>
+                      &nbsp;
+                    </>
+                  ))}
+                </Col>
+              </Col>
+              <hr />
               <ValidatedBlobField
                 label={translate('aapmApp.convenio.imagem')}
                 id="convenio-imagem"
@@ -442,23 +443,27 @@ export const ConvenioUpdate = () => {
                 label={translate('aapmApp.convenio.banner')}
                 id="convenio-banner"
                 name="banner"
+                hidden={true}
                 data-cy="banner"
                 isImage
                 accept="image/*"
               />
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/convenio/list" replace color="info">
-                <FontAwesomeIcon icon="arrow-left" />
+
+              <div>
+                <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/convenio/list" replace color="info">
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
+                  <span className="d-none d-md-inline">
+                    <Translate contentKey="entity.action.back">Back</Translate>
+                  </span>
+                </Button>
                 &nbsp;
-                <span className="d-none d-md-inline">
-                  <Translate contentKey="entity.action.back">Back</Translate>
-                </span>
-              </Button>
-              &nbsp;
-              <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
-                <FontAwesomeIcon icon="save" />
-                &nbsp;
-                <Translate contentKey="entity.action.save">Save</Translate>
-              </Button>
+                <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
+                  <Translate contentKey="entity.action.save">Save</Translate>
+                </Button>
+              </div>
             </ValidatedForm>
           )}
         </Col>

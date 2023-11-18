@@ -9,14 +9,7 @@ import axios from 'axios';
 import { getEntity } from 'app/entities/associado/associado.reducer';
 import AssociadoCard from 'app/modules/CartaoAssociado/AssociadoCard';
 import Breadcrunbs from 'app/components/breadcrunbs';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+import { Card } from '@mui/material';
 
 export default function CartaoList() {
   const dispatch = useAppDispatch();
@@ -38,23 +31,34 @@ export default function CartaoList() {
       console.error('Erro ao buscar Dependentes:', error);
     }
   }
-
   useEffect(() => {
     dispatch(getEntity(id));
     fetchDependentes().then(r => null);
   }, []);
 
-  const [size, setSize] = useState(6);
+  const [size, setSize] = useState(4);
 
   return (
     <div>
       <Breadcrunbs atual={'Cartões'} />
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           <Grid item xs={12} sm={12} md={size} xl={size}>
-            <Item>
-              <AssociadoCard dependent={null} idAssociado={id} />
-            </Item>
+            <Card
+              sx={{
+                borderRadius: 2,
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: '#a1a1a1',
+                ':hover': {
+                  boxShadow: 10,
+                  position: 'relative',
+                  borderColor: '#1975d1',
+                },
+              }}
+            >
+              <AssociadoCard dependent={null} idAssociado={id} associadoEntity={associadoEntity} />
+            </Card>
           </Grid>
           {/* Lista de Dependentes */}
           {dependentes &&
@@ -63,9 +67,21 @@ export default function CartaoList() {
               <>
                 {dependent.status != 'Inativo' ? (
                   <Grid item xs={12} sm={12} md={size} key={dependent.id}>
-                    <Item>
-                      <AssociadoCard dependent={dependent} idAssociado={id} />
-                    </Item>
+                    <Card
+                      sx={{
+                        borderRadius: 2,
+                        borderWidth: '1px',
+                        borderStyle: 'solid',
+                        borderColor: '#a1a1a1',
+                        ':hover': {
+                          boxShadow: 10,
+                          position: 'relative',
+                          borderColor: '#1975d1',
+                        },
+                      }}
+                    >
+                      <AssociadoCard dependent={dependent} idAssociado={id} associadoEntity={associadoEntity} />
+                    </Card>
                   </Grid>
                 ) : null}
               </>

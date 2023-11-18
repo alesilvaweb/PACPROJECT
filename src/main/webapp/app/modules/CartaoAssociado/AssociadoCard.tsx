@@ -8,17 +8,13 @@ import CardActions from '@mui/material/CardActions';
 import './cartao.scss';
 import { Download, Print, Share } from '@mui/icons-material';
 
-const AssociadoCard = ({ dependent, idAssociado }) => {
+const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
   const cardRef = useRef(null);
   const dispatch = useAppDispatch();
   const [imgData, setImgData] = React.useState('');
-  const associadoEntity = useAppSelector(state => state.associado.entity);
+
   // const { id } = account.id;
   const id = idAssociado;
-
-  useEffect(() => {
-    dispatch(getEntity(id));
-  }, []);
 
   const handleShare = nome => {
     if (cardRef.current) {
@@ -88,7 +84,15 @@ const AssociadoCard = ({ dependent, idAssociado }) => {
       {/*<Breadcrunbs atual={'Cartão Associado'} />*/}
 
       <Container key={associadoEntity.id} style={{ backgroundColor: '#860608', padding: '0' }} ref={cardRef} className={'containerCard'}>
-        <img src="content/images/Cartao-associado.png" alt="AAPM" style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+        <img
+          src="content/images/Cartao-associado.png"
+          alt="AAPM"
+          style={{
+            width: '100%',
+            height: '20%',
+            borderRadius: '8px',
+          }}
+        />
 
         <Grid container justifyContent="center" alignItems="center" spacing={2} sx={{ padding: '10px' }}>
           {/* Campos com fundo branco */}
@@ -135,12 +139,12 @@ const AssociadoCard = ({ dependent, idAssociado }) => {
       </Container>
       <br />
       <div className={'justify-content-between'}>
-        <BottomNavigation showLabels style={{ display: 'flex', justifyContent: 'space-between' }} sx={{ backgroundColor: '#fafafa' }}>
+        <BottomNavigation showLabels style={{ display: 'flex', justifyContent: 'space-around' }} sx={{ backgroundColor: '#fafafa' }}>
           <BottomNavigationAction label="Imprimir" icon={<Print sx={{ fontSize: '30px' }} />} onClick={handlePrint} />
 
           <BottomNavigationAction label="Baixar" icon={<Download sx={{ fontSize: '30px' }} />} onClick={handleShare} />
 
-          <BottomNavigationAction label="Compartilhar" icon={<Share sx={{ fontSize: '30px' }} />} onClick={handleShare} />
+          {/*<BottomNavigationAction label="Compartilhar" icon={<Share sx={{ fontSize: '30px' }} />} onClick={handleShare} />*/}
         </BottomNavigation>
         <PrintButton imgData={imgData} /> &nbsp;
       </div>

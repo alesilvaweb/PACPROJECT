@@ -43,12 +43,9 @@ export default function Banner() {
       <Typography variant={'h5'}>Convênios</Typography>
       <Card sx={cardStyle}>
         <Swiper
-          // loop={true}
           onAutoplay={true}
           autoplay={{ delay: 3000 }}
           navigation={true}
-          // spaceBetween={10}
-          // slidesPerView={4}
           breakpoints={{
             200: {
               slidesPerView: 1,
@@ -96,6 +93,9 @@ export default function Banner() {
                   <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
                 </SwiperSlide>
                 <SwiperSlide key={3}>
+                  <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
+                </SwiperSlide>
+                <SwiperSlide key={4}>
                   <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
                 </SwiperSlide>
                 <SwiperSlide key={4}>

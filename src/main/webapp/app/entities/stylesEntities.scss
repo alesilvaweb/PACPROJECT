@@ -1,7 +1,7 @@
 .form-control {
   border: solid 2px #6c757d;
   border-radius: 4px;
-  padding-left: 10px;
+  padding: 5px 5px 5px 5px;
 }
 .form-select {
   border: solid 2px #6c757d;
@@ -17,6 +17,7 @@ fieldset {
   border-radius: 3px;
   margin-bottom: 5vh;
 }
+
 legend {
   font-size: 15px;
   margin-top: -29px;
@@ -31,4 +32,7 @@ legend {
   border: solid 1px #1974d0;
   border-radius: 4px;
   margin-top: 3px;
+}
+.form-select {
+  padding: 5px 5px 5px 5px;
 }

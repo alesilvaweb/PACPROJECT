@@ -36,12 +36,11 @@ function MapaGoogle() {
     setMap(map);
   }, []);
 
-  loader.load().then(async () => {
+  loader.loadPromise().then(async () => {
     const { Map } = (await google.maps.importLibrary('maps')) as google.maps.MapsLibrary;
-    const { AdvancedMarkerElement, PinElement } = (await google.maps.importLibrary('marker')) as google.maps.MarkerLibrary;
 
     const map = new Map(document.getElementById('map') as HTMLElement, {
-      center: { lat: -29.761491, lng: -52.43024 },
+      center: { lat: -29.761555263783332, lng: -52.43046036367052 },
       zoom: 15,
       fullscreenControl: true,
     });
@@ -75,7 +74,7 @@ function MapaGoogle() {
           startIcon={<Map />}
           color={'primary'}
         >
-          Maps
+          Abrir no Maps
         </Button>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>

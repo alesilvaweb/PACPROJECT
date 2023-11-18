@@ -19,10 +19,10 @@
 
 @media (min-width: 200px) and (max-width: 500px) {
   .campoTitle {
-    font-size: 6px;
+    font-size: 8px;
   }
   .campoField {
-    font-size: 6px;
+    font-size: 8px;
   }
   .containerCard {
     width: 100%;
@@ -33,10 +33,10 @@
 }
 @media (min-width: 500px) and (max-width: 600px) {
   .campoTitle {
-    font-size: 9px;
+    font-size: 10px;
   }
   .campoField {
-    font-size: 9px;
+    font-size: 10px;
   }
   .containerCard {
     width: 10%;
@@ -47,10 +47,27 @@
 }
 @media (min-width: 600px) and (max-width: 750px) {
   .campoTitle {
-    font-size: 12px;
+    font-size: 10px;
   }
   .campoField {
-    font-size: 12px;
+    font-size: 10px;
+  }
+  .containerCard {
+    width: 50%;
+  }
+  .campoInput {
+    padding: 5px;
+  }
+}
+@media (min-width: 750px) and (max-width: 1500px) {
+  .campoTitle {
+    font-size: 10px;
+  }
+  .campoField {
+    font-size: 10px;
+  }
+  .campoInput {
+    padding: 5px;
   }
   .containerCard {
     width: 50%;

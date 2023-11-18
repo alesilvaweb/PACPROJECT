@@ -13,6 +13,8 @@ import { Chip } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AUTHORITIES } from 'app/config/constants';
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
@@ -20,7 +22,7 @@ const LocaisAgenda = args => {
   const locaisEntity = useAppSelector(state => state.local.entity);
   const account = useAppSelector(state => state.authentication.account);
   const loadingLocal = useAppSelector(state => state.local.loading);
-
+  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
   const [currentEvents, setCurrentEvents] = useState([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const navigate = useNavigate();
@@ -277,11 +279,11 @@ const LocaisAgenda = args => {
         title: 'Data Limite!',
         text: 'Você não pode fazer uma reserva no passado!',
       });
-    } else if (difDate(dataAtual(), selectInfo.startStr) == 0 || difDate(dataAtual(), selectInfo.startStr) > -7) {
+    } else if (difDate(dataAtual(), selectInfo.startStr) == 0 || difDate(dataAtual(), selectInfo.startStr) > -dias) {
       Swal.fire({
         icon: 'info',
         title: 'Data Limite!',
-        text: 'Você não pode fazer uma reserva com menos de 7 dias de antecedência!',
+        text: `Você não pode fazer uma reserva com menos de ${dias} dias de antecedência!`,
       });
     } else {
       navigate('/reserva/new/' + locaisEntity.id + '/' + selectInfo.startStr);
@@ -290,26 +292,30 @@ const LocaisAgenda = args => {
 
   /* FUNÇÃO DE EDIÇÃO DE RESERVAS */
   function handleEventClick(clickInfo) {
-    if (clickInfo.event.groupId != account.id) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Ops...',
-        text: 'Data reservada!',
-      });
-    } else if (difDate(dataAtual(), clickInfo.startStr) >= 1) {
-      Swal.fire({
-        icon: 'info',
-        title: 'Data Limite!',
-        text: 'Você não pode editar uma reserva no passado!',
-      });
-    } else if (difDate(dataAtual(), clickInfo.event.startStr) == 0 || difDate(dataAtual(), clickInfo.event.startStr) > -7) {
-      Swal.fire({
-        icon: 'info',
-        title: 'Data Limite!',
-        text: 'Você não pode editar reservas com menos de 7 dias de antecedência!',
-      });
-    } else {
+    if (isAdmin) {
       navigate('/reserva/' + clickInfo.event.id + '/' + locaisEntity.id + '/edit');
+    } else {
+      if (clickInfo.event.groupId != account.id) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Data reservada!',
+          text: `Esta data já está reservada para ${locaisEntity.nome}`,
+        });
+      } else if (difDate(dataAtual(), clickInfo.startStr) >= 1) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Data Limite!',
+          text: 'Você não pode editar uma reserva no passado!',
+        });
+      } else if (difDate(dataAtual(), clickInfo.event.startStr) == 0 || difDate(dataAtual(), clickInfo.event.startStr) > -dias) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Data Limite!',
+          text: `Você não pode editar reservas com menos de ${dias} dias de antecedência!`,
+        });
+      } else {
+        navigate('/reserva/' + clickInfo.event.id + '/' + locaisEntity.id + '/edit');
+      }
     }
   }
 

@@ -68,7 +68,7 @@ export default function CardDashboard({ link, title, icon, subtitle }) {
           <CardActionArea
             sx={{
               borderRadius: 2,
-              padding: '10px',
+              padding: '5px',
               height: '15vh',
 
               ':hover': {

@@ -113,10 +113,12 @@ public class UserResource {
     public ResponseEntity<User> createUser(@Valid @RequestBody AdminUserDTO userDTO) throws URISyntaxException {
         log.debug("REST request to save User : {}", userDTO);
 
+        /* Desativada a função de criação automatica de ID, este é gerado no Front End */
         //        if (userDTO.getId() != null) {
         //            throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
         //            // Lowercase the user login before comparing with database
         //        }
+
         if (userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).isPresent()) {
             throw new LoginAlreadyUsedException();
         } else if (userRepository.findOneByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -9,7 +9,9 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { ILocal } from 'app/shared/model/local.model';
+import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './local.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const LocalUpdate = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +25,7 @@ export const LocalUpdate = () => {
   const loading = useAppSelector(state => state.local.loading);
   const updating = useAppSelector(state => state.local.updating);
   const updateSuccess = useAppSelector(state => state.local.updateSuccess);
+  const statusValues = Object.keys(Status);
 
   const handleClose = () => {
     navigate('/local' + location.search);
@@ -65,6 +68,7 @@ export const LocalUpdate = () => {
           modified: displayDefaultDateTime(),
         }
       : {
+          status: 'Ativo',
           ...localEntity,
           created: convertDateTimeFromServer(localEntity.created),
           modified: convertDateTimeFromServer(localEntity.modified),
@@ -72,11 +76,20 @@ export const LocalUpdate = () => {
 
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/local')}>
+          <a>Locais</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{isNew ? 'Novo' : localEntity.nome}</BreadcrumbItem>
+      </Breadcrumb>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="aapmApp.local.home.createOrEditLabel" data-cy="LocalCreateUpdateHeading">
+          <h3 id="aapmApp.local.home.createOrEditLabel" data-cy="LocalCreateUpdateHeading">
             <Translate contentKey="aapmApp.local.home.createOrEditLabel">Create or edit a Local</Translate>
-          </h2>
+          </h3>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -89,6 +102,7 @@ export const LocalUpdate = () => {
                 <ValidatedField
                   name="id"
                   required
+                  hidden={true}
                   readOnly
                   id="local-id"
                   label={translate('global.field.id')}
@@ -145,13 +159,20 @@ export const LocalUpdate = () => {
                 data-cy="observacoes"
                 type="textarea"
               />
-              <ValidatedField
-                label={translate('aapmApp.local.localizacao')}
-                id="local-localizacao"
-                name="localizacao"
-                data-cy="localizacao"
-                type="text"
-              />
+              {/*<ValidatedField*/}
+              {/*  label={translate('aapmApp.local.localizacao')}*/}
+              {/*  id="local-localizacao"*/}
+              {/*  name="localizacao"*/}
+              {/*  data-cy="localizacao"*/}
+              {/*  type="text"*/}
+              {/*/>*/}
+              <ValidatedField label={translate('aapmApp.local.status')} id="local-status" name="status" data-cy="status" type="select">
+                {statusValues.map(status => (
+                  <option value={status} key={status}>
+                    {translate('aapmApp.Status.' + status)}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField
                 label={translate('aapmApp.local.valor')}
                 id="local-valor"
@@ -163,7 +184,7 @@ export const LocalUpdate = () => {
                   validate: v => isNumber(v) || translate('entity.validation.number'),
                 }}
               />
-              <ValidatedField label={translate('aapmApp.local.cor')} id="local-cor" name="cor" data-cy="cor" type="text" />
+              {/*<ValidatedField label={translate('aapmApp.local.cor')} id="local-cor" name="cor" data-cy="cor" type="text" />*/}
               <ValidatedField
                 label={translate('aapmApp.local.created')}
                 id="local-created"
@@ -177,8 +198,8 @@ export const LocalUpdate = () => {
                 label={translate('aapmApp.local.modified')}
                 id="local-modified"
                 name="modified"
-                data-cy="modified"
                 hidden={true}
+                data-cy="modified"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />

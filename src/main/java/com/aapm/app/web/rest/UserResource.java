@@ -5,8 +5,11 @@ import com.aapm.app.domain.User;
 import com.aapm.app.repository.UserRepository;
 import com.aapm.app.security.AuthoritiesConstants;
 import com.aapm.app.service.MailService;
+import com.aapm.app.service.UserQueryService;
 import com.aapm.app.service.UserService;
+import com.aapm.app.service.criteria.UserCriteria;
 import com.aapm.app.service.dto.AdminUserDTO;
+import com.aapm.app.service.dto.AssociadoDTO;
 import com.aapm.app.service.dto.UserDTO;
 import com.aapm.app.web.rest.errors.BadRequestAlertException;
 import com.aapm.app.web.rest.errors.EmailAlreadyUsedException;
@@ -90,10 +93,18 @@ public class UserResource {
 
     private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    private final UserQueryService userQueryService;
+
+    public UserResource(
+        UserService userService,
+        UserRepository userRepository,
+        MailService mailService,
+        UserQueryService userQueryService
+    ) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.userQueryService = userQueryService;
     }
 
     /**
@@ -163,10 +174,18 @@ public class UserResource {
 
     // UserController.java
 
-    @GetMapping("/users/search")
-    public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam String query) {
-        List<UserDTO> users = (List<UserDTO>) userService.searchUsers(query);
-        return ResponseEntity.ok().body(users);
+    @GetMapping("/users")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<List<AdminUserDTO>> searchUsers(
+        @RequestParam(value = "query", defaultValue = "") String query,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return ResponseEntity.badRequest().build();
+        }
+        final Page<AdminUserDTO> page = userService.searchUsers(query, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -175,18 +194,18 @@ public class UserResource {
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all users.
      */
-    @GetMapping("/users")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<List<AdminUserDTO>> getAllUsers(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
-        log.debug("REST request to get all User for an admin");
-        if (!onlyContainsAllowedProperties(pageable)) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        final Page<AdminUserDTO> page = userService.getAllManagedUsers(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+    //    @GetMapping("/users")
+    //    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    //    public ResponseEntity<List<AdminUserDTO>> getAllUsers(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    //        log.debug("REST request to get all User for an admin");
+    //        if (!onlyContainsAllowedProperties(pageable)) {
+    //            return ResponseEntity.badRequest().build();
+    //        }
+    //
+    //        final Page<AdminUserDTO> page = userService.getAllManagedUsers(pageable);
+    //        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+    //        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    //    }
 
     private boolean onlyContainsAllowedProperties(Pageable pageable) {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);

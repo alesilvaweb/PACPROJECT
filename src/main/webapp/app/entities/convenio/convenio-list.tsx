@@ -17,7 +17,7 @@ function ConveniosList() {
   const [conveniosFiltrados, setConveniosFiltrados] = useState([]);
 
   const [page, setPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
   const [categorias, setCategorias] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 

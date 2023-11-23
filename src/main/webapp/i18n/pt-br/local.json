@@ -2,15 +2,15 @@
   "aapmApp": {
     "local": {
       "home": {
-        "title": "Local",
+        "title": "Locais",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Local",
         "createOrEditLabel": "Criar ou editar Local",
         "notFound": "Nenhum Local encontrado"
       },
-      "created": "Um novo Local foi criado com o identificador {{ param }}",
-      "updated": "Um Local foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Local foi excluído com o identificador {{ param }}",
+      "created": "Local criado {{ param }}",
+      "updated": "Local atualizado {{ param }}",
+      "deleted": "Local excluído {{ param }}",
       "delete": {
         "question": "Tem certeza de que deseja excluir Local {{ id }}?"
       },
@@ -19,15 +19,16 @@
       },
       "id": "ID",
       "nome": "Nome",
-      "descricao": "Descricão",
+      "descricao": "Descrição",
       "capacidade": "Capacidade",
       "imagen": "Imagen",
       "observacoes": "Observacões",
       "localizacao": "Localizacão",
+      "status": "Status",
       "valor": "Valor",
       "cor": "Cor",
-      "created": "Local Criado com sucesso!",
-      "modified": "Local modificado com sucesso!",
+      "created": "Created",
+      "modified": "Modified",
       "reserva": "Reserva"
     }
   }

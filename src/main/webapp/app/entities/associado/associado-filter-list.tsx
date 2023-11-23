@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { JhiItemCount, JhiPagination, TextFormat, ValidatedField, ValidatedForm } from 'react-jhipster';
 import associadoService from './associado-service';
-import { Button, Col, Table } from 'reactstrap';
+import { Button, Col, Input, Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useNavigate } from 'react-router-dom';
 import Breadcrunbs from 'app/components/breadcrunbs';
@@ -48,18 +48,18 @@ const AssociadoFilter = () => {
       <Breadcrunbs atual={'Associados'} />
       <h4>Associados</h4>
       <ValidatedForm onSubmit={null}>
-        <div className="d-flex justify-content-between ">
-          <Col sm={4}>
-            <ValidatedField
+        <div className="d-flex justify-content-between   align-items-center">
+          <Col sm={4} className="d-flex align-content-center">
+            <Input
               type="text"
               name="searchQuery"
               placeholder="Busca"
               onChange={e => handleSearch(e.target.value)}
-              style={{ padding: '5px' }}
+              // style={{ padding: '10px', marginTop:"10px" }}
             />
           </Col>
 
-          <Col sm={2}>
+          <Col sm={2} className="d-flex justify-content-end">
             <Button type={'button'} color={'primary'} onClick={() => navigate('/arquivo')}>
               Importar
             </Button>
@@ -98,33 +98,19 @@ const AssociadoFilter = () => {
                   <TextFormat type="date" value={associado.dataNascimento} format={APP_LOCAL_DATE_FORMAT} />
                 </td>
 
-                {/*<td className="text-end">*/}
-                {/*  <div className="btn-group flex-btn-group-container">*/}
-
-                {/*    /!*<Button*!/*/}
-                {/*    /!*  tag={Link}*!/*/}
-                {/*    /!*  to={`/associado/${associado.id}/edit`}*!/*/}
-                {/*    /!*  color="primary"*!/*/}
-                {/*    /!*  size="sm"*!/*/}
-                {/*    /!*  data-cy="entityEditButton"*!/*/}
-                {/*    /!*>*!/*/}
-                {/*    /!*  <FontAwesomeIcon icon="pencil-alt"/>{' '}*!/*/}
-                {/*    /!*  <span*!/*/}
-                {/*    /!*    className="d-none d-md-inline">/!*<Translate contentKey="entity.action.edit">Edit</Translate>*!/</span>*!/*/}
-                {/*    /!*</Button> &nbsp;*!/*/}
-                {/*    /!*<Button*!/*/}
-                {/*    /!*  tag={Link}*!/*/}
-                {/*    /!*  to={`/associado/${associado.id}/delete`}*!/*/}
-                {/*    /!*  color="danger"*!/*/}
-                {/*    /!*  size="sm"*!/*/}
-                {/*    /!*  data-cy="entityDeleteButton"*!/*/}
-                {/*    /!*>*!/*/}
-                {/*    /!*  <FontAwesomeIcon icon="trash"/>{' '}*!/*/}
-                {/*    /!*  <span*!/*/}
-                {/*    /!*    className="d-none d-md-inline">/!*<Translate contentKey="entity.action.delete">Delete</Translate>*!/</span>*!/*/}
-                {/*    /!*</Button>*!/*/}
-                {/*  </div>*/}
-                {/*</td>*/}
+                <td className="text-end">
+                  <div className="btn-group flex-btn-group-container">
+                    <Button tag={Link} to={`/associado/${associado.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
+                      <FontAwesomeIcon icon="pencil-alt" />{' '}
+                      <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
+                    </Button>{' '}
+                    &nbsp;
+                    <Button tag={Link} to={`/associado/${associado.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton">
+                      <FontAwesomeIcon icon="trash" />{' '}
+                      <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
+                    </Button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

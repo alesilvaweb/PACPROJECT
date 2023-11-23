@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table, Badge } from 'reactstrap';
-import { Translate, TextFormat, JhiPagination, JhiItemCount, getSortState } from 'react-jhipster';
+import { Badge, Button, Input, Table } from 'reactstrap';
+import { getSortState, JhiItemCount, JhiPagination, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { APP_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { getUsersAsAdmin, updateUser } from './user-management.reducer';
@@ -16,7 +14,7 @@ export const UserManagement = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [filterName, setFilterName] = useState('');
   const [pagination, setPagination] = useState(
     overridePaginationStateWithQueryParams(getSortState(location, ITEMS_PER_PAGE, 'id'), location.search)
   );
@@ -25,11 +23,12 @@ export const UserManagement = () => {
     dispatch(
       getUsersAsAdmin({
         page: pagination.activePage - 1,
+        filter: filterName,
         size: pagination.itemsPerPage,
         sort: `${pagination.sort},${pagination.order}`,
       })
     );
-    const endURL = `?page=${pagination.activePage}&sort=${pagination.sort},${pagination.order}`;
+    const endURL = `?page=${pagination.activePage}&sort=${pagination.sort},${pagination.order}&query=${filterName}`;
     if (location.search !== endURL) {
       navigate(`${location.pathname}${endURL}`);
     }
@@ -37,7 +36,7 @@ export const UserManagement = () => {
 
   useEffect(() => {
     getUsersFromProps();
-  }, [pagination.activePage, pagination.order, pagination.sort]);
+  }, [pagination.activePage, pagination.order, pagination.sort, filterName]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -77,7 +76,9 @@ export const UserManagement = () => {
         ...user,
         activated: !user.activated,
       })
-    );
+    ).then(() => {
+      getUsersFromProps();
+    });
   };
 
   const account = useAppSelector(state => state.authentication.account);
@@ -90,15 +91,28 @@ export const UserManagement = () => {
       <Breadcrunbs atual={'Usuário'} />
       <h2 id="user-management-page-heading" data-cy="userManagementPageHeading">
         <Translate contentKey="userManagement.home.title">Users</Translate>
-        <div className="d-flex justify-content-end">
-          <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            {/*<Translate contentKey="userManagement.home.refreshListLabel">Refresh List</Translate>*/}
-          </Button>
-          <Link to="new" className="btn btn-primary jh-create-entity">
-            <FontAwesomeIcon icon="plus" />
-            {/*<Translate contentKey="userManagement.home.createLabel">Create a new user</Translate>*/}
-          </Link>
+        <div className="d-flex justify-content-between">
+          <div className="col-md-4 col-sm-8 col-xl-4">
+            <Input
+              type={'text'}
+              name={'busca'}
+              onChange={e => {
+                setFilterName(e.target.value);
+              }}
+              placeholder={'Buscar'}
+            />
+          </div>
+
+          <div className="d-flex justify-content-end">
+            <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
+              <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+              {/*<Translate contentKey="userManagement.home.refreshListLabel">Refresh List</Translate>*/}
+            </Button>
+            <Link to="new" className="btn btn-primary jh-create-entity">
+              <FontAwesomeIcon icon="plus" />
+              {/*<Translate contentKey="userManagement.home.createLabel">Create a new user</Translate>*/}
+            </Link>
+          </div>
         </div>
       </h2>
       <Table responsive striped>
@@ -106,17 +120,23 @@ export const UserManagement = () => {
           <tr>
             <th className="hand" onClick={sort('id')}>
               <Translate contentKey="global.field.id">ID</Translate>
+              &nbsp;
               <FontAwesomeIcon icon="sort" />
             </th>
             <th className="hand" onClick={sort('login')}>
               <Translate contentKey="userManagement.login">Login</Translate>
+              &nbsp;
+              <FontAwesomeIcon icon="sort" />
+            </th>
+            <th className="hand" onClick={sort('activated')}>
+              Status &nbsp;
               <FontAwesomeIcon icon="sort" />
             </th>
             {/*<th className="hand" onClick={sort('email')}>*/}
             {/*  <Translate contentKey="userManagement.email">Email</Translate>*/}
             {/*  <FontAwesomeIcon icon="sort" />*/}
             {/*</th>*/}
-            <th />
+
             {/*<th className="hand" onClick={sort('langKey')}>*/}
             {/*  <Translate contentKey="userManagement.langKey">Lang Key</Translate>*/}
             {/*  <FontAwesomeIcon icon="sort" />*/}
@@ -124,6 +144,7 @@ export const UserManagement = () => {
             <th>
               <Translate contentKey="userManagement.profiles">Profiles</Translate>
             </th>
+            <th></th>
             {/*<th className="hand" onClick={sort('createdDate')}>*/}
             {/*  <Translate contentKey="userManagement.createdDate">Created Date</Translate>*/}
             {/*  <FontAwesomeIcon icon="sort" />*/}
@@ -140,7 +161,7 @@ export const UserManagement = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, i) => (
+          {users?.map((user, i) => (
             <tr id={user.login} key={`user-${i}`}>
               <td>
                 <Button tag={Link} to={user.login} color="link" size="sm">
@@ -151,12 +172,12 @@ export const UserManagement = () => {
               {/*<td>{user.email}</td>*/}
               <td>
                 {user.activated ? (
-                  <Button color="success" onClick={toggleActive(user)}>
+                  <Button color="success" onClick={toggleActive(user)} sx={{ padding: '0' }}>
                     <Translate contentKey="userManagement.activated">Activated</Translate>
                   </Button>
                 ) : (
                   <Button color="danger" onClick={toggleActive(user)}>
-                    <Translate contentKey="userManagement.deactivated">Deactivated</Translate>
+                    Inativo
                   </Button>
                 )}
               </td>

@@ -363,7 +363,7 @@ export const ConvenioUpdate = () => {
                 </Col>
               </Col>
               <hr />
-              <Typography variant={'h6'}>Adicionar descontos</Typography>
+              <Typography variant={'h6'}>Adicionar Descontos</Typography>
               {/* ************** */}
               {/* Lista Desconto */}
               {/* ************** */}

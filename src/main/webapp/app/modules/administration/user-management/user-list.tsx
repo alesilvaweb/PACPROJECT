@@ -12,17 +12,17 @@ const UserList = () => {
 
   useEffect(() => {
     handleSearch(searchQuery, currentPage);
-  }, [currentPage]);
+  }, []);
 
   const handleSearch = async (value, page = 1) => {
     setSearchQuery(value);
     try {
-      const result = await userService.searchUsers(value, page, itemsPerPage);
-      setUsers(result.content);
-      setTotalItems(result.totalElements);
+      const result = await userService.searchUsers(value, 1, itemsPerPage);
+      console.log(result.data);
+      setUsers(result.data);
+      setTotalItems(result.data.totalElements);
       setCurrentPage(page);
     } catch (error) {
-      // Trate os erros conforme necessário
       console.error('Error searching users:', error);
     }
   };
@@ -41,21 +41,25 @@ const UserList = () => {
       />
       <Table>
         <thead>
-          <tr>{/*...cabeçalhos da tabela...*/}</tr>
+          <th>id</th>
+          <th>Nome</th>
         </thead>
         <tbody>
           {users.map(user => (
-            <tr key={user.id}>{/*...células da tabela...*/}</tr>
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.firstName}</td>
+            </tr>
           ))}
         </tbody>
       </Table>
-      <JhiPagination
-        totalItems={totalItems}
-        activePage={currentPage}
-        onSelect={page => handlePagination(page)}
-        maxButtons={5} // Ajuste conforme necessário
-        itemsPerPage={itemsPerPage}
-      />
+      {/*<JhiPagination*/}
+      {/*  totalItems={totalItems}*/}
+      {/*  activePage={currentPage}*/}
+      {/*  onSelect={page => handlePagination(page)}*/}
+      {/*  maxButtons={5} // Ajuste conforme necessário*/}
+      {/*  itemsPerPage={itemsPerPage}*/}
+      {/*/>*/}
     </ValidatedForm>
   );
 };

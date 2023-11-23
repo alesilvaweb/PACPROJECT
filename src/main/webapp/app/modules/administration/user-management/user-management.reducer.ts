@@ -20,15 +20,18 @@ const adminUrl = 'api/admin/users';
 
 // Async Actions
 
-export const getUsers = createAsyncThunk('userManagement/fetch_users', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
+export const getUsers = createAsyncThunk('userManagement/fetch_users', async ({ page, size, sort, filter }: IQueryParams) => {
+  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&query=${filter}` : ''}`;
   return axios.get<IUser[]>(requestUrl);
 });
 
-export const getUsersAsAdmin = createAsyncThunk('userManagement/fetch_users_as_admin', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${adminUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
-  return axios.get<IUser[]>(requestUrl);
-});
+export const getUsersAsAdmin = createAsyncThunk(
+  'userManagement/fetch_users_as_admin',
+  async ({ page, size, sort, filter }: IQueryParams) => {
+    const requestUrl = `${adminUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&query=${filter}` : ''}`;
+    return axios.get<IUser[]>(requestUrl);
+  }
+);
 
 export const getRoles = createAsyncThunk('userManagement/fetch_roles', async () => {
   return axios.get<any[]>(`api/authorities`);
@@ -47,7 +50,7 @@ export const createUser = createAsyncThunk(
   'userManagement/create_user',
   async (user: IUser, thunkAPI) => {
     const result = await axios.post<IUser>(adminUrl, user);
-    thunkAPI.dispatch(getUsersAsAdmin({}));
+    thunkAPI.dispatch(getUsersAsAdmin({ query: '' }));
     return result;
   },
   { serializeError: serializeAxiosError }
@@ -57,7 +60,7 @@ export const updateUser = createAsyncThunk(
   'userManagement/update_user',
   async (user: IUser, thunkAPI) => {
     const result = await axios.put<IUser>(adminUrl, user);
-    thunkAPI.dispatch(getUsersAsAdmin({}));
+    thunkAPI.dispatch(getUsersAsAdmin({ query: '' }));
     return result;
   },
   { serializeError: serializeAxiosError }
@@ -68,7 +71,7 @@ export const deleteUser = createAsyncThunk(
   async (id: string, thunkAPI) => {
     const requestUrl = `${adminUrl}/${id}`;
     const result = await axios.delete<IUser>(requestUrl);
-    thunkAPI.dispatch(getUsersAsAdmin({}));
+    thunkAPI.dispatch(getUsersAsAdmin({ query: '' }));
     return result;
   },
   { serializeError: serializeAxiosError }

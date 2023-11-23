@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-
 import { MaterialReactTable, type MRT_ColumnDef, MRT_Row, useMaterialReactTable } from 'material-react-table';
-// import {citiesList, data, type Person, usStateList} from './makeData';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Button } from '@mui/material';
@@ -10,11 +8,6 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Box from '@mui/material/Box';
 import axios from 'axios';
-import { IReserva } from 'app/shared/model/reserva.model';
-import { StatusReserva } from 'app/shared/model/enumerations/status-reserva.model';
-import { ILocal } from 'app/shared/model/local.model';
-import { IAssociado } from 'app/shared/model/associado.model';
-import { IDepartamento } from 'app/shared/model/departamento.model';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,6 +29,7 @@ const ReservaList = () => {
   }, []);
 
   type Reserva = {
+    matricula: string;
     status: boolean;
     motivoReserva: string;
     data: string;
@@ -76,10 +70,19 @@ const ReservaList = () => {
         filterVariant: 'text',
         size: 100,
       },
-
+      {
+        accessorKey: 'matricula',
+        header: 'Matricula',
+        filterVariant: 'text',
+      },
       {
         accessorKey: 'associado',
         header: 'Associado',
+        filterVariant: 'text',
+      },
+      {
+        accessorKey: 'telefone',
+        header: 'Telefone',
         filterVariant: 'text',
       },
       {
@@ -107,23 +110,31 @@ const ReservaList = () => {
       //   },
       // },
 
-      {
-        accessorKey: 'departamento',
-        header: 'Departamento',
-        filterVariant: 'text',
-      },
+      // {
+      //   accessorKey: 'departamento',
+      //   header: 'Departamento',
+      //   filterVariant: 'text',
+      // },
     ],
     []
   );
+
   const handleExportRows = (rows: MRT_Row<Reserva>[]) => {
-    const doc = new jsPDF();
+    const doc = new jsPDF('l', 'pt', 'letter');
+
     const tableData = rows.map(row => Object.values(row.original));
     const tableHeaders = columns.map(c => c.header);
 
     autoTable(doc, {
       head: [tableHeaders],
       body: tableData,
+      headStyles: { lineWidth: 1, fillColor: [202, 37, 30], textColor: [255, 255, 255] },
     });
+    console.log({ doc });
+    var y = 10;
+    doc.setLineWidth(2);
+    doc.text('Relatório de Reservas AAPM', (y = y + 30), 25);
+    doc.setLanguage('pt-BR');
 
     doc.save('Reservas.pdf');
   };
@@ -132,13 +143,15 @@ const ReservaList = () => {
     const re = [];
     reservas.map(res => {
       re.push({
-        motivoReserva: res.motivoReserva,
-        numPessoas: res.numPessoas,
-        status: res.status,
-        data: res.data,
         local: res.local?.nome,
+        data: res.data,
+        numPessoas: res.numPessoas,
+        matricula: res.associado?.id,
         associado: res.associado?.nome,
-        departamento: res.departamento?.nome,
+        // status: res.status,
+        telefone: res.associado?.telefone,
+        motivoReserva: res.motivoReserva,
+        // departamento: res.departamento?.nome,
       });
     });
     setData(re);
@@ -147,12 +160,17 @@ const ReservaList = () => {
   useEffect(() => {
     dataReserva();
   }, [reservas]);
+
   // @ts-ignore
   const navigate = useNavigate();
+
   const table = useMaterialReactTable({
     columns,
     data,
-    initialState: { showColumnFilters: false },
+    initialState: {
+      showColumnFilters: false,
+      density: 'compact',
+    },
     renderTopToolbarCustomActions: ({ table }) => (
       <Box
         sx={{
@@ -168,7 +186,7 @@ const ReservaList = () => {
           onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
           startIcon={<FileDownloadIcon />}
         >
-          Salvar PDF
+          Baixar PDF
         </Button>
         {/*<Button*/}
         {/*  disabled={table.getRowModel().rows.length === 0}*/}

@@ -15,6 +15,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
+import { Simulate } from 'react-dom/test-utils';
+import ended = Simulate.ended;
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
@@ -38,6 +40,8 @@ const LocaisAgenda = args => {
   const { id } = useParams<'id'>();
   const data = new Date();
   const DataValida = addDays(data, dias);
+  // const DataFinal = addDays(data, 120);
+
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter(x => x);
 
@@ -96,7 +100,7 @@ const LocaisAgenda = args => {
 
   /* Busca os dados das reservas a partir da data atual e do local selecionado */
   async function atualizaAgenda() {
-    const apiUrl = `api/reservas?status.equals=Agendado&data.greaterThan=${dataAtual()}&localId.equals=${id}`;
+    const apiUrl = `api/reservas?data.greaterThan=${dataAtual()}&localId.equals=${id}`;
     try {
       const requestUrl = `${apiUrl}`;
       const response = await axios
@@ -106,23 +110,32 @@ const LocaisAgenda = args => {
           const evento = [];
           e.data.map(event => {
             if (event.local.id.toString() === id) {
-              console.log('Events = ' + event.associado.nome);
-              if (event.associado.id === account.id) {
+              if (event.status === 'Bloqueado') {
                 evento.push({
                   id: event.id,
-                  title: event.local.nome,
+                  title: '-RESERVADO AAPM',
                   start: event.data,
-                  groupId: event.associado.id,
-                  resourceEditable: false,
+                  end: event.descricao,
+                  color: 'black',
                 });
               } else {
-                evento.push({
-                  id: event.id,
-                  title: 'RESERVADO',
-                  start: event.data,
-                  groupId: event.associado.id,
-                  color: 'red',
-                });
+                if (event.associado.id === account.id) {
+                  evento.push({
+                    id: event.id,
+                    title: event.local.nome,
+                    start: event.data,
+                    groupId: event.associado.id,
+                    resourceEditable: false,
+                  });
+                } else {
+                  evento.push({
+                    id: event.id,
+                    title: 'RESERVADO',
+                    start: event.data,
+                    groupId: event.associado.id,
+                    color: 'red',
+                  });
+                }
               }
             }
           });
@@ -135,7 +148,7 @@ const LocaisAgenda = args => {
       console.log(error);
     }
   }
-
+  console.log({ currentEvents });
   const [callendarButton, setCallendarButton] = useState({
     fontSize: '0.9rem',
     padding: '1vh',
@@ -229,6 +242,13 @@ const LocaisAgenda = args => {
                 validRange={{
                   start: DataValida.toISOString().substring(0, 10),
                 }}
+                // visibleRange={
+                //   {
+                //     start: '2023-11-26',
+                //     end: '2023-12-30',
+                //   }
+                // }
+
                 editable={false}
                 selectable={true}
                 dragScroll={false}

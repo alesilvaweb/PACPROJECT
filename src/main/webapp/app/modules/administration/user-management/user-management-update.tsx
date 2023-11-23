@@ -127,12 +127,11 @@ export const UserManagementUpdate = () => {
                 label={translate('userManagement.lastName')}
                 validate={{
                   maxLength: {
-                    value: 50,
-                    message: translate('entity.validation.maxlength', { max: 50 }),
+                    value: 100,
+                    message: translate('entity.validation.maxlength', { max: 100 }),
                   },
                 }}
               />
-              <FormText>This field cannot be longer than 50 characters.</FormText>
               <ValidatedField
                 name="email"
                 label={translate('global.form.email.label')}

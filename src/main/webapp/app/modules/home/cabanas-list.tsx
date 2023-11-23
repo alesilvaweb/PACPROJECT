@@ -5,15 +5,13 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/local/local.reducer';
-import { Alert } from 'reactstrap';
-import { BottomNavigation, BottomNavigationAction, Card, Chip, Grid } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Card, Grid } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Divider from '@mui/material/Divider';
-import { ArrowBackIos, CalendarMonth, Info, LocationOn } from '@mui/icons-material';
-import BotaoVoltar from 'app/components/botaoVoltar';
+import { CalendarMonth, Info, LocationOn } from '@mui/icons-material';
 import Breadcrunbs from 'app/components/breadcrunbs';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
@@ -126,90 +124,90 @@ export default function CabanasList() {
             <h5>Cabanas</h5>
             <Grid container spacing={{ xs: 1, md: 3 }}>
               {locaisList.map(locais => (
-                <Grid item xs={12} sm={4} md={4} key={locais.id}>
-                  <Card
-                    sx={{
-                      backgroundColor: '#fafafa',
-                      borderRadius: 2,
-                      borderWidth: '1px',
-                      borderStyle: 'solid',
-                      borderColor: '#a1a1a1',
-                      ':hover': {
-                        boxShadow: 10,
-                        position: 'relative',
-                        borderColor: '#1975d1',
-                      },
-                    }}
-                  >
-                    <ImageButton
-                      onClick={() => {
-                        navigate('/local/' + locais.id);
-                      }}
-                      focusRipple
-                      key={locais.nome}
-                      style={{
-                        width: '100%',
-                        height: '20rem',
-                      }}
-                    >
-                      <ImageSrc style={{ backgroundImage: `url(data:${locais.imagenContentType};base64,${locais.imagen})` }} />
-                      <ImageBackdrop className="MuiImageBackdrop-root" />
-                      <Image>
-                        <Typography
-                          component="span"
-                          variant="subtitle1"
-                          color="inherit"
-                          fontSize={'200%'}
-                          sx={{
+                <>
+                  {locais.status === 'Ativo' ? (
+                    <Grid item xs={12} sm={4} md={4} key={locais.id}>
+                      <Card
+                        sx={{
+                          backgroundColor: '#fafafa',
+                          borderRadius: 2,
+                          borderWidth: '1px',
+                          borderStyle: 'solid',
+                          borderColor: '#a1a1a1',
+                          ':hover': {
+                            boxShadow: 10,
                             position: 'relative',
-                            p: 4,
-                            pt: 2,
-                            pb: theme => `calc(${theme.spacing(1)} + 6px)`,
+                            borderColor: '#1975d1',
+                          },
+                        }}
+                      >
+                        <ImageButton
+                          onClick={() => {
+                            navigate('/local/' + locais.id);
+                          }}
+                          focusRipple
+                          key={locais.nome}
+                          style={{
+                            width: '100%',
+                            height: '20rem',
                           }}
                         >
-                          {locais.nome}
-                          <ImageMarked className="MuiImageMarked-root" />
-                        </Typography>
-                      </Image>
-                    </ImageButton>
+                          <ImageSrc style={{ backgroundImage: `url(data:${locais.imagenContentType};base64,${locais.imagen})` }} />
+                          <ImageBackdrop className="MuiImageBackdrop-root" />
+                          <Image>
+                            <Typography
+                              component="span"
+                              variant="subtitle1"
+                              color="inherit"
+                              fontSize={'200%'}
+                              sx={{
+                                position: 'relative',
+                                p: 4,
+                                pt: 2,
+                                pb: theme => `calc(${theme.spacing(1)} + 6px)`,
+                              }}
+                            >
+                              {locais.nome}
+                              <ImageMarked className="MuiImageMarked-root" />
+                            </Typography>
+                          </Image>
+                        </ImageButton>
 
-                    <CardContent>
-                      <Typography gutterBottom variant="subtitle2" component="div">
-                        {/*{locais.descricao}*/}
-                      </Typography>
-                    </CardContent>
-                    <Divider />
-                    <CardActions></CardActions>
-                    <BottomNavigation showLabels style={{ display: 'flex' }} sx={{ backgroundColor: '#fafafa' }}>
-                      <BottomNavigationAction
-                        label="Informações"
-                        icon={<Info sx={{ fontSize: '30px' }} />}
-                        onClick={() => {
-                          navigate('/local/detail/' + locais.id);
-                        }}
-                        // onClick={() => {
-                        //   Swal.fire(locais.nome, locais.descricao);
-                        // }}
-                      />
+                        <CardContent>
+                          <Typography gutterBottom variant="subtitle2" component="div">
+                            {/*{locais.descricao}*/}
+                          </Typography>
+                        </CardContent>
+                        <Divider />
+                        <CardActions></CardActions>
+                        <BottomNavigation showLabels style={{ display: 'flex' }} sx={{ backgroundColor: '#fafafa' }}>
+                          <BottomNavigationAction
+                            label="Informações"
+                            icon={<Info sx={{ fontSize: '30px' }} />}
+                            onClick={() => {
+                              navigate('/local/detail/' + locais.id);
+                            }}
+                          />
+                          <BottomNavigationAction
+                            label="Reservas"
+                            icon={<CalendarMonth sx={{ fontSize: '30px' }} />}
+                            onClick={() => {
+                              navigate('/local/' + locais.id);
+                            }}
+                          />
 
-                      <BottomNavigationAction
-                        label="Reservas"
-                        icon={<CalendarMonth sx={{ fontSize: '30px' }} />}
-                        onClick={() => {
-                          navigate('/local/' + locais.id);
-                        }}
-                      />
-
-                      <BottomNavigationAction
-                        label="Localização"
-                        icon={<LocationOn sx={{ fontSize: '30px' }} />}
-                        onClick={() => {
-                          navigate('/mapa');
-                        }}
-                      />
-                    </BottomNavigation>
-                  </Card>
-                </Grid>
+                          <BottomNavigationAction
+                            label="Localização"
+                            icon={<LocationOn sx={{ fontSize: '30px' }} />}
+                            onClick={() => {
+                              navigate('/mapa');
+                            }}
+                          />
+                        </BottomNavigation>
+                      </Card>
+                    </Grid>
+                  ) : null}
+                </>
               ))}
             </Grid>
           </Box>

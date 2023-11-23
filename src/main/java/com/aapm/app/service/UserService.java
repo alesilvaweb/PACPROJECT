@@ -16,7 +16,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -280,8 +279,8 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Stream<UserDTO> searchUsers(String query) {
-        return userRepository.findAllByNameContainingIgnoreCase(query).stream().map(UserDTO::new);
+    public Page<AdminUserDTO> searchUsers(String query, Pageable pageable) {
+        return userRepository.findAllByFirstNameContainingIgnoreCase(query, pageable).map(AdminUserDTO::new);
     }
 
     @Transactional(readOnly = true)

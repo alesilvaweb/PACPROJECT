@@ -9,6 +9,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import { useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/convenio/convenio.reducer';
 import ConvenioDetail from 'app/entities/convenio/convenio-detail';
+import { Input } from 'reactstrap';
 
 const ConveniosFilter = () => {
   const [convenios, setConvenios] = useState([]);
@@ -16,7 +17,7 @@ const ConveniosFilter = () => {
   const [categoriaFiltro, setCategoriaFiltro] = useState('');
   const [buscaNome, setBuscaNome] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [conveniosPerPage] = useState(6); // Número de convênios por página
+  const [conveniosPerPage] = useState(8); // Número de convênios por página
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);

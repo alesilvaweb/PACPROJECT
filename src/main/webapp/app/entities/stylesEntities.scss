@@ -1,11 +1,12 @@
 .form-control {
   border: solid 2px #6c757d;
   border-radius: 4px;
-  padding: 5px 5px 5px 5px;
+  padding: 10px 10px 10px 10px;
 }
 .form-select {
   border: solid 2px #6c757d;
   border-radius: 4px;
+  padding: 10px 10px 10px 10px;
 }
 .form-label {
   margin-bottom: 0;
@@ -29,10 +30,7 @@ legend {
 .info-reserva {
   background-color: #dbdbdb;
   padding: 2px 4px 2px 4px;
-  border: solid 1px #1974d0;
+  border: solid 1px #ca251e;
   border-radius: 4px;
   margin-top: 3px;
-}
-.form-select {
-  padding: 5px 5px 5px 5px;
 }

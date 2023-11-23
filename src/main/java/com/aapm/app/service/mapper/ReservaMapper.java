@@ -30,6 +30,7 @@ public interface ReservaMapper extends EntityMapper<ReservaDTO, Reserva> {
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
     @Mapping(target = "nome", source = "nome")
+    @Mapping(target = "telefone", source = "telefone")
     AssociadoDTO toDtoAssociadoNome(Associado associado);
 
     @Named("departamentoNome")

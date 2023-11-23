@@ -1,5 +1,6 @@
 package com.aapm.app.repository;
 
+import com.aapm.app.domain.Associado;
 import com.aapm.app.domain.User;
 import java.time.Instant;
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -35,7 +37,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
 
-    default List<User> findAllByNameContainingIgnoreCase(String query) {
-        return null;
-    }
+    Page<User> findAllByFirstNameContainingIgnoreCase(String query, Pageable page);
+
+    List<User> findAll(Specification<User> specification);
+
+    Page<User> findAll(Specification<User> specification, Pageable page);
 }

@@ -6,6 +6,7 @@ import UserManagement from './user-management';
 import UserManagementDetail from './user-management-detail';
 import UserManagementUpdate from './user-management-update';
 import UserManagementDeleteDialog from './user-management-delete-dialog';
+import UserList from 'app/modules/administration/user-management/user-list';
 
 const UserManagementRoutes = () => (
   <ErrorBoundaryRoutes>

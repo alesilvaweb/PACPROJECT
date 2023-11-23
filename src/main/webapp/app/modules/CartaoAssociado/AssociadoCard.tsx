@@ -7,6 +7,7 @@ import axios from 'axios';
 import CardActions from '@mui/material/CardActions';
 import './cartao.scss';
 import { Download, Print, Share } from '@mui/icons-material';
+import { dE } from '@fullcalendar/core/internal-common';
 
 const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
   const cardRef = useRef(null);
@@ -96,35 +97,48 @@ const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
 
         <Grid container justifyContent="center" alignItems="center" spacing={2} sx={{ padding: '10px' }}>
           {/* Campos com fundo branco */}
-          <Grid item xs={2}></Grid>
-          <Grid item xs={8}>
-            <div className={'campoTitle'}>Nome do Associado</div>
-            <div className={'campoInput'}>
-              <div className={'campoField'}>{associadoEntity.nome}</div>
-            </div>
-          </Grid>
-          <Grid item xs={2}></Grid>
-          <Grid item xs={2}></Grid>
-          <Grid item xs={2}>
-            <div className={'campoTitle'}>Registro</div>
-            <div className={'campoInput'}>
-              <div className={'campoField'}>{associadoEntity.id}</div>
-            </div>
-          </Grid>
-
-          {/* Lista de Dependentes */}
           {dependent ? (
             <>
+              <Grid item xs={2}></Grid>
+              <Grid item xs={8}>
+                <div className={'campoTitle'}>Nome do Associado</div>
+                <div className={'campoInput'}>
+                  <div className={'campoField'}>{dependent.nome}</div>
+                </div>
+              </Grid>
+              <Grid item xs={2}></Grid>
+              <Grid item xs={2}></Grid>
+              <Grid item xs={2}>
+                <div className={'campoTitle'}>Registro</div>
+                <div className={'campoInput'}>
+                  <div className={'campoField'}>{associadoEntity.id}</div>
+                </div>
+              </Grid>
               <Grid item key={dependent.id} xs={6}>
                 <div className={'campoTitle'}>Titular/Dependente</div>
                 <div className={'campoInput'}>
-                  <div className={'campoField'}>{dependent.nome}</div>
+                  <div className={'campoField'}>DEPENDENTE</div>
                 </div>
               </Grid>
               <Grid item xs={2}></Grid>
             </>
           ) : (
             <>
+              <Grid item xs={2}></Grid>
+              <Grid item xs={8}>
+                <div className={'campoTitle'}>Nome do Associado</div>
+                <div className={'campoInput'}>
+                  <div className={'campoField'}>{associadoEntity.nome}</div>
+                </div>
+              </Grid>
+              <Grid item xs={2}></Grid>
+              <Grid item xs={2}></Grid>
+              <Grid item xs={2}>
+                <div className={'campoTitle'}>Registro</div>
+                <div className={'campoInput'}>
+                  <div className={'campoField'}>{associadoEntity.id}</div>
+                </div>
+              </Grid>
               <Grid item key={9999} xs={6}>
                 <div className={'campoTitle'}>Titular/Dependente</div>
                 <div className={'campoInput'}>

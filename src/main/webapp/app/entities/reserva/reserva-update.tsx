@@ -1,8 +1,9 @@
 import './../stylesEntities.scss';
+import './reservas.scss';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, Button, Col, ModalFooter, Row } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StatusReserva } from 'app/shared/model/enumerations/status-reserva.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -10,11 +11,9 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import Box from '@mui/material/Box';
 import { getEntity as getLocal } from 'app/entities/local/local.reducer';
-import { getEntity as getAssociado } from 'app/entities/associado/associado.reducer';
-import { getEntities as getAssociados } from 'app/entities/associado/associado.reducer';
+import { getEntities as getAssociados, getEntity as getAssociado } from 'app/entities/associado/associado.reducer';
 import { getEntities as getDepartamentos } from 'app/entities/departamento/departamento.reducer';
 import { createEntity, getEntity, reset, updateEntity } from './reserva.reducer';
-import { values } from 'lodash';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import axios from 'axios';
@@ -44,32 +43,26 @@ export const ReservaUpdate = () => {
   const [localId, setLocalId] = useState('');
   const statusReservaValues = Object.keys(StatusReserva);
   const [cancelarReserva, setCancelarReserva] = useState(false);
+  const [bloqueioReserva, setBloqueioReserva] = useState(false);
 
   const handleClose = () => {
     dispatch(reset());
     navigate('/local/' + local + '/1');
   };
-  async function countAssociados() {
-    try {
-      const response = await axios.get(`api/associados/count`);
-      return response.data;
-    } catch (error) {
-      console.error('Erro ao verificar quantidade de reservas:', error);
-    }
-  }
 
   useEffect(() => {
     if (isNew) {
       dispatch(reset());
-      // @ts-ignore
       dispatch(getLocal(local));
       dispatch(getAssociado(account.id));
     } else {
       dispatch(getEntity(id)).then(value => {
         dispatch(getAssociado(value.payload['data'].associado.id));
+        if (value.payload['data'].status === 'Bloqueado') {
+          setBloqueioReserva(true);
+        }
       });
     }
-
     dispatch(
       getAssociados({
         size: associadoCount,
@@ -94,6 +87,7 @@ export const ReservaUpdate = () => {
       ...reservaEntity,
       ...values,
       local: localEntity,
+      descricao: values.descricao + ' ' + '23:59:59',
       associado: associados.find(it => it.id.toString() === values.associado.toString()),
       departamento: departamentos.find(it => it.id.toString() === values.departamento.toString()),
     };
@@ -124,12 +118,12 @@ export const ReservaUpdate = () => {
           modified: convertDateTimeFromServer(reservaEntity.modified),
           numPessoas: reservaEntity.numPessoas,
           local: reservaEntity?.local?.id,
+          descricao: reservaEntity?.descricao?.substring(0, 10),
           associado: reservaEntity?.associado?.id,
           departamento: reservaEntity?.departamento?.id,
         };
 
-  console.log({ associados });
-  // @ts-ignore
+  console.log(reservaEntity?.descricao?.slice(0, 10));
   return (
     <>
       {loading ? (
@@ -148,11 +142,9 @@ export const ReservaUpdate = () => {
             </BreadcrumbItem>
             <BreadcrumbItem active>Reserva</BreadcrumbItem>
           </Breadcrumb>
-          {/*<Modal isOpen toggle={handleClose}  fullscreen={"sm"} style={{ marginTop: '10vh' }} >*/}
-          {/*  <ModalHeader toggle={handleClose}>*/}
+
           <Row className="justify-content-center">
             <Col md="8" sx={{ textAlign: 'center' }}>
-              {/*<Translate contentKey="aapmApp.reserva.home.createOrEditLabel">Create or edit a Reserva</Translate>*/}
               {!isNew ? <h4>Editar Reserva {localEntity.nome}</h4> : <h4>Reserva {localEntity.nome}</h4>}
             </Col>
           </Row>
@@ -165,7 +157,7 @@ export const ReservaUpdate = () => {
                 <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity} key={'form-reserva'} name={'form-reserva'}>
                   {/* Motivo da Reserva */}
                   <ValidatedField
-                    label={translate('aapmApp.reserva.motivoReserva')}
+                    label={bloqueioReserva ? 'Motivo do Bloqueio' : translate('aapmApp.reserva.motivoReserva')}
                     id="reserva-motivoReserva"
                     name="motivoReserva"
                     className={'motivoReserva'}
@@ -178,26 +170,48 @@ export const ReservaUpdate = () => {
                     }}
                   />
                   <br />
+
                   {/* Numero de Pessoas */}
-                  <ValidatedField
-                    label={translate('aapmApp.reserva.numPessoas')}
-                    id="reserva-numPessoas"
-                    name="numPessoas"
-                    required={true}
-                    data-cy="numPessoas"
-                    type="number"
-                    validate={{
-                      required: { value: true, message: translate('entity.validation.required') },
-                      max: {
-                        value: localEntity.capacidade,
-                        message: `A ${localEntity.nome} comporta apenas ${localEntity.capacidade} pessoas.`,
-                      },
-                    }}
-                  />
+                  {bloqueioReserva ? (
+                    <ValidatedField
+                      label={translate('aapmApp.reserva.numPessoas')}
+                      id="reserva-numPessoas"
+                      name="numPessoas"
+                      hidden={bloqueioReserva}
+                      required={true}
+                      data-cy="numPessoas"
+                      type="number"
+                      value={0}
+                      validate={{
+                        required: { value: true, message: translate('entity.validation.required') },
+                        max: {
+                          value: localEntity.capacidade,
+                          message: `A ${localEntity.nome} comporta apenas ${localEntity.capacidade} pessoas.`,
+                        },
+                      }}
+                    />
+                  ) : (
+                    <ValidatedField
+                      label={translate('aapmApp.reserva.numPessoas')}
+                      id="reserva-numPessoas"
+                      name="numPessoas"
+                      className={'reserva-numPessoas'}
+                      required={true}
+                      data-cy="numPessoas"
+                      type="number"
+                      validate={{
+                        required: { value: true, message: translate('entity.validation.required') },
+                        max: {
+                          value: localEntity.capacidade,
+                          message: `A ${localEntity.nome} comporta apenas ${localEntity.capacidade} pessoas.`,
+                        },
+                      }}
+                    />
+                  )}
 
                   {/* Data */}
                   <ValidatedField
-                    label={translate('aapmApp.reserva.data')}
+                    label={bloqueioReserva ? 'Data Inicial' : translate('aapmApp.reserva.data')}
                     id="reservas-data"
                     name="data"
                     data-cy="data"
@@ -210,20 +224,35 @@ export const ReservaUpdate = () => {
                     }}
                   />
                   <ValidatedField
-                    label={translate('aapmApp.reserva.data')}
+                    label={bloqueioReserva ? 'Data inicial' : translate('aapmApp.reserva.data')}
                     id="reservas-data-see"
                     name="datasee"
+                    className={'data-inicial-reserva'}
                     disabled={true}
                     Value={isNew ? start : reservaEntity.data}
                     type="date"
                     readonly={true}
                   />
 
+                  {isAdmin ? (
+                    <ValidatedField
+                      label={'Data Final '}
+                      id="reserva-descricao"
+                      hidden={!bloqueioReserva}
+                      name="descricao"
+                      defaultValue={isNew ? start : reservaEntity?.descricao?.substring(0, 10)}
+                      data-cy="descricao"
+                      type="date"
+                    />
+                  ) : null}
+
                   {/* Departamento */}
                   <ValidatedField
                     id="reserva-departamento"
                     name="departamento"
+                    className={'reserva-departamento'}
                     data-cy="departamento"
+                    hidden={bloqueioReserva}
                     label={translate('aapmApp.reserva.departamento')}
                     type="select"
                   >
@@ -241,6 +270,7 @@ export const ReservaUpdate = () => {
                     <ValidatedField
                       id="reserva-associado"
                       name="associado"
+                      hidden={bloqueioReserva}
                       data-cy="associado"
                       label={translate('aapmApp.reserva.associado')}
                       type="select"
@@ -259,6 +289,8 @@ export const ReservaUpdate = () => {
                       id="reserva-associado"
                       name="associado"
                       data-cy="associado"
+                      hidden={bloqueioReserva}
+                      value={associado.id}
                       label={translate('aapmApp.reserva.associado')}
                       type="select"
                     >
@@ -273,11 +305,11 @@ export const ReservaUpdate = () => {
                     id="reservas-local"
                     name="local"
                     data-cy="local"
+                    hidden={bloqueioReserva}
                     label={translate('aapmApp.reserva.local')}
                     type="select"
                     defaultValue={reservaEntity?.local?.id}
                     required={true}
-                    hidden={false}
                     validate={{
                       required: { value: true, message: translate('entity.validation.required') },
                     }}
@@ -292,6 +324,7 @@ export const ReservaUpdate = () => {
                     label={translate('aapmApp.reserva.somenteFuncionarios')}
                     id="reserva-somenteFuncionarios"
                     name="somenteFuncionarios"
+                    hidden={bloqueioReserva}
                     data-cy="somenteFuncionarios"
                     check
                     type="checkbox"
@@ -300,13 +333,29 @@ export const ReservaUpdate = () => {
                   {/* Cancelar Reserva */}
                   {!isNew ? (
                     <ValidatedField
-                      label={'Cancelar reserva'}
+                      label={bloqueioReserva ? 'Cancelar Bloqueio' : 'Cancelar Reserva'}
                       id="cancelarReserva"
                       name="cancelarReserva"
                       check
                       onChange={() => setCancelarReserva(!cancelarReserva)}
                       type="checkbox"
                     />
+                  ) : null}
+
+                  {/* Reserva AAPM */}
+                  {isAdmin ? (
+                    <>
+                      {isNew ? (
+                        <ValidatedField
+                          label={'Bloqueio de Datas'}
+                          id="bloqueioReserva"
+                          name="bloqueioReserva"
+                          check
+                          onChange={() => setBloqueioReserva(!bloqueioReserva)}
+                          type="checkbox"
+                        />
+                      ) : null}
+                    </>
                   ) : null}
 
                   {/* Campos Hidden */}
@@ -322,16 +371,6 @@ export const ReservaUpdate = () => {
                       validate={{ required: true }}
                     />
                   ) : null}
-
-                  <ValidatedField
-                    label={translate('aapmApp.reserva.descricao')}
-                    id="reserva-descricao"
-                    name="descricao"
-                    defaultValue={reservaEntity?.descricao}
-                    hidden={true}
-                    data-cy="descricao"
-                    type="text"
-                  />
 
                   <ValidatedField
                     label={translate('aapmApp.reserva.created')}
@@ -352,22 +391,40 @@ export const ReservaUpdate = () => {
                     type="datetime-local"
                     placeholder="YYYY-MM-DD HH:mm"
                   />
+                  {bloqueioReserva ? (
+                    <ValidatedField
+                      label={translate('aapmApp.reserva.status')}
+                      id="reserva-status"
+                      name="status"
+                      value={'Bloqueado'}
+                      data-cy="status"
+                      type="select"
+                      hidden={true}
+                    >
+                      {statusReservaValues.map(statusReserva => (
+                        <option value={statusReserva} key={statusReserva}>
+                          {translate('aapmApp.StatusReserva.' + statusReserva)}
+                        </option>
+                      ))}
+                    </ValidatedField>
+                  ) : (
+                    <ValidatedField
+                      label={translate('aapmApp.reserva.status')}
+                      id="reserva-status"
+                      name="status"
+                      defaultValue={reservaEntity?.status}
+                      data-cy="status"
+                      type="select"
+                      hidden={true}
+                    >
+                      {statusReservaValues.map(statusReserva => (
+                        <option value={statusReserva} key={statusReserva}>
+                          {translate('aapmApp.StatusReserva.' + statusReserva)}
+                        </option>
+                      ))}
+                    </ValidatedField>
+                  )}
 
-                  <ValidatedField
-                    label={translate('aapmApp.reserva.status')}
-                    id="reserva-status"
-                    name="status"
-                    defaultValue={reservaEntity?.status}
-                    data-cy="status"
-                    type="select"
-                    hidden={true}
-                  >
-                    {statusReservaValues.map(statusReserva => (
-                      <option value={statusReserva} key={statusReserva}>
-                        {translate('aapmApp.StatusReserva.' + statusReserva)}
-                      </option>
-                    ))}
-                  </ValidatedField>
                   <br />
                   <hr />
                   <ModalFooter>
@@ -384,7 +441,7 @@ export const ReservaUpdate = () => {
                               color="danger"
                             >
                               <FontAwesomeIcon icon="trash" />
-                              &nbsp; Cancelar Reserva
+                              &nbsp; Cancelar
                               {/*<Translate contentKey="entity.action.back">Delete</Translate>*/}
                             </Button>
                           ) : null}
@@ -392,10 +449,10 @@ export const ReservaUpdate = () => {
                       </div>
                     ) : null}
                     {!cancelarReserva ? (
-                      <div className={'d-flex justify-content-between'}>
+                      <div className={'col-md-12 d-flex justify-content-end'}>
                         <Button tag={Link} id="cancel" data-cy="entityCreateCancelButton" to={'/local/' + local} replace color="info">
-                          <FontAwesomeIcon icon="cancel" />
-                          &nbsp; Cancelar
+                          <FontAwesomeIcon icon="arrow-left" />
+                          &nbsp; Voltar
                         </Button>
                         &nbsp; &nbsp;
                         <Button color="primary" id="save-entity2" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>

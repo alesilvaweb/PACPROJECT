@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
-import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { Button, Input, Table } from 'reactstrap';
+import { getSortState, JhiItemCount, JhiPagination, openFile, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { ILocal } from 'app/shared/model/local.model';
 import { getEntities } from './local.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
+import value from '*.json';
 
 export const Local = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +23,7 @@ export const Local = () => {
   const localList = useAppSelector(state => state.local.entities);
   const loading = useAppSelector(state => state.local.loading);
   const totalItems = useAppSelector(state => state.local.totalItems);
+  const [filterNome, setFilterNome] = useState('');
 
   const getAllEntities = () => {
     dispatch(
@@ -32,6 +31,7 @@ export const Local = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `nome.contains=${filterNome}`,
       })
     );
   };
@@ -46,7 +46,7 @@ export const Local = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filterNome]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -83,39 +83,54 @@ export const Local = () => {
 
   return (
     <div>
-      <h2 id="local-heading" data-cy="LocalHeading">
+      <Breadcrunbs atual={'Locais'} />
+      <h3 id="local-heading" data-cy="LocalHeading">
         <Translate contentKey="aapmApp.local.home.title">Locals</Translate>
+      </h3>
+
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilterNome(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
+
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <FontAwesomeIcon icon="sync" spin={loading} />
             {/*<Translate contentKey="aapmApp.local.home.refreshListLabel">Refresh List</Translate>*/}
           </Button>
           <Link to="/local/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp;
             {/*<Translate contentKey="aapmApp.local.home.createLabel">Create new Local</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </div>
+
       <div className="table-responsive">
         {localList && localList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.local.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.local.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('nome')}>
-                  <Translate contentKey="aapmApp.local.nome">Nome</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="aapmApp.local.nome">Nome</Translate>&nbsp; <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('descricao')}>
-                  <Translate contentKey="aapmApp.local.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="aapmApp.local.descricao">Descricao</Translate>&nbsp; <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('capacidade')}>
-                  <Translate contentKey="aapmApp.local.capacidade">Capacidade</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="aapmApp.local.capacidade">Capacidade</Translate>&nbsp; <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('imagen')}>
-                  <Translate contentKey="aapmApp.local.imagen">Imagen</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="aapmApp.local.imagen">Imagen</Translate>&nbsp; <FontAwesomeIcon icon="sort" />
                 </th>
                 {/*<th className="hand" onClick={sort('observacoes')}>*/}
                 {/*  <Translate contentKey="aapmApp.local.observacoes">Observacoes</Translate> <FontAwesomeIcon icon="sort" />*/}
@@ -124,7 +139,10 @@ export const Local = () => {
                 {/*  <Translate contentKey="aapmApp.local.localizacao">Localizacao</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
                 <th className="hand" onClick={sort('valor')}>
-                  <Translate contentKey="aapmApp.local.valor">Valor</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="aapmApp.local.valor">Valor</Translate>&nbsp; <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('status')}>
+                  <Translate contentKey="aapmApp.local.status">Status</Translate>&nbsp; <FontAwesomeIcon icon="sort" />
                 </th>
                 {/*<th className="hand" onClick={sort('cor')}>*/}
                 {/*  <Translate contentKey="aapmApp.local.cor">Cor</Translate> <FontAwesomeIcon icon="sort" />*/}
@@ -141,11 +159,11 @@ export const Local = () => {
             <tbody>
               {localList.map((local, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/local/${local.id}`} color="link" size="sm">
-                      {local.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/local/${local.id}`} color="link" size="sm">*/}
+                  {/*    {local.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{local.nome}</td>
                   <td>{local.descricao}</td>
                   <td>{local.capacidade}</td>
@@ -167,6 +185,7 @@ export const Local = () => {
                   {/*<td>{local.observacoes}</td>*/}
                   {/*<td>{local.localizacao}</td>*/}
                   <td>{local.valor}</td>
+                  <td>{local.status}</td>
                   {/*<td>{local.cor}</td>*/}
                   {/*<td>{local.created ? <TextFormat type="date" value={local.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   {/*<td>{local.modified ? <TextFormat type="date" value={local.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}

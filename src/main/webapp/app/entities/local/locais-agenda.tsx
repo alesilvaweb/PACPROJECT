@@ -15,8 +15,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
-import { Simulate } from 'react-dom/test-utils';
-import ended = Simulate.ended;
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
@@ -33,21 +31,23 @@ const LocaisAgenda = args => {
   const [parametro, setParametro] = useState([]);
   const [numReservas, setNumReservas] = useState(0);
   const [count, setCount] = useState(0);
-  const [dias, setDias] = useState(0);
+  const [diasStart, setDiasStart] = useState(0);
+  const [diasEnd, setDiasEnd] = useState(0);
 
   const calendarRef = useRef<FullCalendar>(null!);
 
   const { id } = useParams<'id'>();
-  const data = new Date();
-  const DataValida = addDays(data, dias);
-  // const DataFinal = addDays(data, 120);
+
+  const DataValida = addDays(diasStart);
+  const DataFinal = addDays(diasEnd);
 
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter(x => x);
 
-  function addDays(date, days) {
-    date.setDate(date.getDate() + days);
-    return date;
+  function addDays(days) {
+    const data = new Date();
+    data.setDate(data.getDate() + days);
+    return data;
   }
 
   async function countReservas() {
@@ -61,10 +61,10 @@ const LocaisAgenda = args => {
 
   async function fetchParametros() {
     try {
-      const response = await axios.get(`api/parametros?chave.equals=limite-age`);
+      const response = await axios.get(`api/parametros?chave.in=limite-start&chave.in=limite-end&page=0&size=20`);
       setParametro(response.data);
     } catch (error) {
-      console.error('Erro ao buscar convênios:', error);
+      console.error('Erro ao buscar Parametros:', error);
     }
   }
 
@@ -91,10 +91,15 @@ const LocaisAgenda = args => {
     atualizaAgenda();
   }, []);
 
-  /* Define a quantidade de dias permitida de acordo com o parametro "limite-age" */
+  /* Define a quantidade de dias permitida de acordo com os parametros "limite-start inicio e limite-end final" */
   useEffect(() => {
-    parametro.map(values => {
-      setDias(parseInt(values.valor));
+    parametro.map(a => {
+      if (a.chave.toString() === 'limite-start') {
+        setDiasStart(parseInt(a.valor));
+      }
+      if (a.chave.toString() === 'limite-end') {
+        setDiasEnd(parseInt(a.valor));
+      }
     });
   }, [parametro]);
 
@@ -148,6 +153,7 @@ const LocaisAgenda = args => {
       console.log(error);
     }
   }
+
   console.log({ currentEvents });
   const [callendarButton, setCallendarButton] = useState({
     fontSize: '0.9rem',
@@ -241,14 +247,8 @@ const LocaisAgenda = args => {
                 initialView="dayGridMonth"
                 validRange={{
                   start: DataValida.toISOString().substring(0, 10),
+                  end: DataFinal.toISOString().substring(0, 10),
                 }}
-                // visibleRange={
-                //   {
-                //     start: '2023-11-26',
-                //     end: '2023-12-30',
-                //   }
-                // }
-
                 editable={false}
                 selectable={true}
                 dragScroll={false}
@@ -299,11 +299,11 @@ const LocaisAgenda = args => {
         title: 'Data Limite!',
         text: 'Você não pode fazer uma reserva no passado!',
       });
-    } else if (difDate(dataAtual(), selectInfo.startStr) == 0 || difDate(dataAtual(), selectInfo.startStr) > -dias) {
+    } else if (difDate(dataAtual(), selectInfo.startStr) == 0 || difDate(dataAtual(), selectInfo.startStr) > -diasStart) {
       Swal.fire({
         icon: 'info',
         title: 'Data Limite!',
-        text: `Você não pode fazer uma reserva com menos de ${dias} dias de antecedência!`,
+        text: `Você não pode fazer uma reserva com menos de ${diasStart} dias de antecedência!`,
       });
     } else {
       navigate('/reserva/new/' + locaisEntity.id + '/' + selectInfo.startStr);
@@ -327,11 +327,11 @@ const LocaisAgenda = args => {
           title: 'Data Limite!',
           text: 'Você não pode editar uma reserva no passado!',
         });
-      } else if (difDate(dataAtual(), clickInfo.event.startStr) == 0 || difDate(dataAtual(), clickInfo.event.startStr) > -dias) {
+      } else if (difDate(dataAtual(), clickInfo.event.startStr) == 0 || difDate(dataAtual(), clickInfo.event.startStr) > -diasStart) {
         Swal.fire({
           icon: 'info',
           title: 'Data Limite!',
-          text: `Você não pode editar reservas com menos de ${dias} dias de antecedência!`,
+          text: `Você não pode editar reservas com menos de ${diasStart} dias de antecedência!`,
         });
       } else {
         navigate('/reserva/' + clickInfo.event.id + '/' + locaisEntity.id + '/edit');

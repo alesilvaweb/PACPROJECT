@@ -33,8 +33,6 @@ const AssociadoFilter = () => {
     }
   };
 
-  console.log({ associados });
-
   const handlePagination = page => {
     handleSearch(searchQuery, page, sort);
   };

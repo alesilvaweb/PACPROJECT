@@ -44,6 +44,7 @@ export default function Banner() {
       <Card sx={cardStyle}>
         <Swiper
           onAutoplay={true}
+          loop={true}
           autoplay={{ delay: 3000 }}
           navigation={true}
           breakpoints={{
@@ -93,9 +94,6 @@ export default function Banner() {
                   <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
                 </SwiperSlide>
                 <SwiperSlide key={3}>
-                  <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
-                </SwiperSlide>
-                <SwiperSlide key={4}>
                   <Skeleton variant="rectangular" width={'100%'} height={'100%'} sx={{ borderRadius: '4px' }} />
                 </SwiperSlide>
                 <SwiperSlide key={4}>

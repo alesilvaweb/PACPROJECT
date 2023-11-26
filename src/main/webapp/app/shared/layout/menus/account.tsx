@@ -82,7 +82,7 @@ export const AccountMenuMaterial = ({ isAuthenticated = false }) => {
           <>
             <MenuItem
               onClick={() => {
-                handleClose('/account/settings');
+                handleClose(`/associado/${account.id}/contato`);
               }}
             >
               <Translate contentKey="global.menu.account.settings">Settings</Translate>

@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IParametro } from 'app/shared/model/parametro.model';
 import { getEntities } from './parametro.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Parametro = () => {
   const dispatch = useAppDispatch();
@@ -83,6 +84,7 @@ export const Parametro = () => {
 
   return (
     <div>
+      <Breadcrunbs atual={'Parâmetros'} />
       <h2 id="parametro-heading" data-cy="ParametroHeading">
         <Translate contentKey="aapmApp.parametro.home.title">Parametros</Translate>
         <div className="d-flex justify-content-end">
@@ -162,16 +164,16 @@ export const Parametro = () => {
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
                         <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.edit">Edit</Translate>*/}</span>
                       </Button>
-                      <Button
-                        tag={Link}
-                        to={`/parametro/${parametro.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                        color="danger"
-                        size="sm"
-                        data-cy="entityDeleteButton"
-                      >
-                        <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.delete">Delete</Translate>*/}</span>
-                      </Button>
+                      {/*<Button*/}
+                      {/*  tag={Link}*/}
+                      {/*  to={`/parametro/${parametro.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}*/}
+                      {/*  color="danger"*/}
+                      {/*  size="sm"*/}
+                      {/*  data-cy="entityDeleteButton"*/}
+                      {/*>*/}
+                      {/*  <FontAwesomeIcon icon="trash" />{' '}*/}
+                      {/*  <span className="d-none d-md-inline">/!*<Translate contentKey="entity.action.delete">Delete</Translate>*!/</span>*/}
+                      {/*</Button>*/}
                     </div>
                   </td>
                 </tr>

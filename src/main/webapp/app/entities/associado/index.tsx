@@ -8,6 +8,7 @@ import AssociadoDetail from './associado-detail';
 import AssociadoUpdate from './associado-update';
 import AssociadoDeleteDialog from './associado-delete-dialog';
 import AssociadoFilter from 'app/entities/associado/associado-filter-list';
+import AssociadoUpdateTelefone from 'app/entities/associado/associado-update-telefone';
 
 const AssociadoRoutes = () => (
   <ErrorBoundaryRoutes>
@@ -16,6 +17,7 @@ const AssociadoRoutes = () => (
     <Route path=":id">
       <Route index element={<AssociadoDetail />} />
       <Route path="edit" element={<AssociadoUpdate />} />
+      <Route path="contato" element={<AssociadoUpdateTelefone />} />
       <Route path="delete" element={<AssociadoDeleteDialog />} />
     </Route>
   </ErrorBoundaryRoutes>

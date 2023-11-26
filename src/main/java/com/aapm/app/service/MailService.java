@@ -1,6 +1,8 @@
 package com.aapm.app.service;
 
+import com.aapm.app.domain.Reserva;
 import com.aapm.app.domain.User;
+import com.aapm.app.service.dto.ReservaDTO;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import javax.mail.MessagingException;
@@ -28,6 +30,8 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
+
+    private static final String RESERVA = "reserva";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -93,6 +97,22 @@ public class MailService {
     }
 
     @Async
+    public void sendEmailReservasFromTemplate(ReservaDTO reserva, User user, String templateName, String titleKey) {
+        if (user.getEmail() == null) {
+            log.debug("Email doesn't exist for user '{}'", user.getLogin());
+            return;
+        }
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(USER, user);
+        context.setVariable(RESERVA, reserva);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = "AAPM Confirmação de Reserva";
+        sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
@@ -102,6 +122,12 @@ public class MailService {
     public void sendCreationEmail(User user) {
         log.debug("Sending creation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title");
+    }
+
+    @Async
+    public void sendReservaEmail(ReservaDTO reserva, User user) {
+        log.debug("Sending reserva email to '{}'", reserva.getAssociado().getEmail());
+        sendEmailReservasFromTemplate(reserva, user, "mail/reservaEmail", "email.reserva.title");
     }
 
     @Async

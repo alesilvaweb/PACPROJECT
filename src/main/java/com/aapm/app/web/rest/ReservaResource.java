@@ -1,6 +1,9 @@
 package com.aapm.app.web.rest;
 
+import com.aapm.app.domain.User;
 import com.aapm.app.repository.ReservaRepository;
+import com.aapm.app.repository.UserRepository;
+import com.aapm.app.service.MailService;
 import com.aapm.app.service.ReservaQueryService;
 import com.aapm.app.service.ReservaService;
 import com.aapm.app.service.criteria.ReservaCriteria;
@@ -42,12 +45,24 @@ public class ReservaResource {
 
     private final ReservaService reservaService;
 
+    private final UserRepository userRepository;
+
+    private final MailService mailService;
+
     private final ReservaRepository reservaRepository;
 
     private final ReservaQueryService reservaQueryService;
 
-    public ReservaResource(ReservaService reservaService, ReservaRepository reservaRepository, ReservaQueryService reservaQueryService) {
+    public ReservaResource(
+        ReservaService reservaService,
+        UserRepository userRepository,
+        MailService mailService,
+        ReservaRepository reservaRepository,
+        ReservaQueryService reservaQueryService
+    ) {
         this.reservaService = reservaService;
+        this.userRepository = userRepository;
+        this.mailService = mailService;
         this.reservaRepository = reservaRepository;
         this.reservaQueryService = reservaQueryService;
     }
@@ -66,6 +81,15 @@ public class ReservaResource {
             throw new BadRequestAlertException("A new reserva cannot already have an ID", ENTITY_NAME, "idexists");
         }
         ReservaDTO result = reservaService.save(reservaDTO);
+        User newUser = userRepository
+            .findById(result.getAssociado().getId())
+            .stream()
+            .filter(p -> Objects.equals(p.getId(), result.getAssociado().getId()))
+            .findFirst()
+            .orElse(null);
+
+        mailService.sendReservaEmail(result, newUser);
+
         return ResponseEntity
             .created(new URI("/api/reservas/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

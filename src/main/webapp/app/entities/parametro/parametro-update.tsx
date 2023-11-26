@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { IParametro } from 'app/shared/model/parametro.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './parametro.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const ParametroUpdate = () => {
   const dispatch = useAppDispatch();
@@ -75,6 +76,7 @@ export const ParametroUpdate = () => {
 
   return (
     <div>
+      <Breadcrunbs atual={!isNew ? parametroEntity.parametro : 'Novo'} />
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="aapmApp.parametro.home.createOrEditLabel" data-cy="ParametroCreateUpdateHeading">
@@ -115,7 +117,14 @@ export const ParametroUpdate = () => {
                 data-cy="descricao"
                 type="text"
               />
-              <ValidatedField label={translate('aapmApp.parametro.chave')} id="parametro-chave" name="chave" data-cy="chave" type="text" />
+              <ValidatedField
+                label={translate('aapmApp.parametro.chave')}
+                id="parametro-chave"
+                readOnly={!isNew}
+                name="chave"
+                data-cy="chave"
+                type="text"
+              />
               <ValidatedField
                 label={translate('aapmApp.parametro.valor')}
                 id="parametro-valor"

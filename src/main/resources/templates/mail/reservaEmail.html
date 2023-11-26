@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+  <head>
+    <title th:text="#{email.reserva.title}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+  </head>
+  <body>
+    <p th:text="#{email.reserva.greeting(${user.getFirstName()})}">Olá</p>
+
+    <p th:text="#{email.reserva.text1(${#temporals.format(reserva.getData, 'dd/MM/yyyy')},${reserva.getLocal().getNome()})}">
+      Foi criada uma nova reserva
+    </p>
+    <p>
+      <a th:with="url=(@{|${baseUrl}/|})" th:href="${url}" th:text="${url}">Aplicativo da AAPM</a>
+    </p>
+    <p>
+      <span th:text="#{email.activation.text2}">Atensiosamente,</span>
+      <br />
+      <em th:text="#{email.signature}">AAPM</em>
+    </p>
+  </body>
+</html>

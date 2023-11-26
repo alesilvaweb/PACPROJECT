@@ -8,11 +8,16 @@ import CardDashboard from 'app/modules/home/inicial/card-dashboard';
 import ModalInicial from 'app/modules/home/inicial/nodal-inicial';
 import Banner from 'app/modules/home/banner/banner';
 import '../home.scss';
+import validaTelefone from 'app/components/valida-telefone';
 
 const PaginaInicial = () => {
   const account = useAppSelector(state => state.authentication.account);
   const navigate = useNavigate();
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
+
+  if (validaTelefone().length > 0) {
+    navigate(`/associado/${account.id}/contato`);
+  }
 
   const iconStyle = {
     // fontSize:"5vh", // Ajuste o tamanho do ícone conforme necessário

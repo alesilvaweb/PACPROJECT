@@ -33,6 +33,7 @@ const AppRoutes = () => {
   React.useEffect(() => {
     sendActivity(location.pathname);
   }, [location]);
+
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>

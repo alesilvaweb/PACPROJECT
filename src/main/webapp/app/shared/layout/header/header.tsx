@@ -13,8 +13,7 @@ import Button from '@mui/material/Button';
 import Sidebar from 'app/shared/layout/header/sidebar';
 import { Lock, Menu } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import validaTelefone from 'app/components/valida-telefone';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -29,6 +28,8 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
   const [menuOpen, setMenuOpen] = useState(false);
 
   const dispatch = useAppDispatch();
+  const account = useAppSelector(state => state.authentication.account);
+  const navigate = useNavigate();
 
   const darkTheme = createTheme({
     palette: {
@@ -54,16 +55,17 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
     ) : null;
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
   const loading = useAppSelector(state => state.reserva.loading);
   const loadingLocal = useAppSelector(state => state.local.loading);
   const loadingArquivo = useAppSelector(state => state.arquivo.loading);
   const loadingConvenio = useAppSelector(state => state.convenio.loading);
+  const loadingAssociado = useAppSelector(state => state.associado.loading);
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar>
-        <Container maxWidth="lg">
+        <Container>
           <Toolbar disableGutters>
             <Box sx={{ mr: 1 }}>
               <IconButton size="large" color="inherit" onClick={() => setIsOpen(true)}>
@@ -88,10 +90,17 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
             )}
           </Toolbar>
         </Container>
-        {loading ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
-        {loadingLocal ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
-        {loadingArquivo ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
-        {loadingConvenio ? <LinearProgress color={'error'} sx={{ borderRadius: 5 }} /> : null}
+        {loading ? (
+          <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
+        ) : loadingLocal ? (
+          <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
+        ) : loadingArquivo ? (
+          <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
+        ) : loadingConvenio ? (
+          <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
+        ) : loadingAssociado ? (
+          <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
+        ) : null}
       </AppBar>
 
       {/* <Sidebar {...{ isOpen, setIsOpen, currentLocale, isOpenAPIEnabled, isAdmin, isAuthenticated }} /> */}

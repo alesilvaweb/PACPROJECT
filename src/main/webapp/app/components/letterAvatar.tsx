@@ -86,18 +86,18 @@ const getTextColor = color => {
 
 export const LetterAvatar = props => {
   const size = getPercent(32, 64);
-  const textColor = getTextColor('#ffffff');
+  const textColor = '#bbbbbb';
 
   return (
     <svg height={42} width={42}>
-      <circle cx={size} cy={size} r={size} fill={'#d4d4d4'} />
+      <circle cx={size + 1} cy={size + 1} r={size - 1} fill={'#3b3b3b'} stroke="#bbbbbb" strokeWidth="2" />
       <text
         fontFamily="Arial, Helvetica, sans-serif"
-        fontWeight={700}
-        fontSize={size}
+        fontWeight={500}
+        fontSize={size - 2}
         textAnchor="middle"
         fill={textColor}
-        x={size}
+        x={size + 2}
         y={getPercent(59, 48)}
       >
         {props.children}

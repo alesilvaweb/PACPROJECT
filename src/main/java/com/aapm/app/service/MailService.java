@@ -1,7 +1,9 @@
 package com.aapm.app.service;
 
-import com.aapm.app.domain.Reserva;
+import com.aapm.app.domain.Parametro;
 import com.aapm.app.domain.User;
+import com.aapm.app.repository.ParametroRepository;
+import com.aapm.app.service.dto.ParametroDTO;
 import com.aapm.app.service.dto.ReservaDTO;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
@@ -39,6 +41,8 @@ public class MailService {
 
     private final JavaMailSender javaMailSender;
 
+    private final ParametroRepository parametroRepository;
+
     private final MessageSource messageSource;
 
     private final SpringTemplateEngine templateEngine;
@@ -46,11 +50,13 @@ public class MailService {
     public MailService(
         JHipsterProperties jHipsterProperties,
         JavaMailSender javaMailSender,
+        ParametroRepository parametroRepository,
         MessageSource messageSource,
         SpringTemplateEngine templateEngine
     ) {
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
+        this.parametroRepository = parametroRepository;
         this.messageSource = messageSource;
         this.templateEngine = templateEngine;
     }
@@ -68,9 +74,12 @@ public class MailService {
 
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        Parametro parametro = parametroRepository.findByChave("mail-adm");
+        log.debug("Parametro '{}'", parametro);
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
-            message.setTo(to);
+            message.setTo(parametro.getValor());
+            //            message.setTo(to);
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);

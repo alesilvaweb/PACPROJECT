@@ -8,16 +8,27 @@ import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-u
 import { getUsersAsAdmin, updateUser } from './user-management.reducer';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import Breadcrunbs from 'app/components/breadcrunbs';
+import { handlePasswordResetInit } from 'app/modules/account/password-reset/password-reset.reducer';
 
 export const UserManagement = () => {
   const dispatch = useAppDispatch();
-
+  const account = useAppSelector(state => state.authentication.account);
+  const users = useAppSelector(state => state.userManagement.users);
+  const totalItems = useAppSelector(state => state.userManagement.totalItems);
+  const loading = useAppSelector(state => state.userManagement.loading);
   const location = useLocation();
   const navigate = useNavigate();
   const [filterName, setFilterName] = useState('');
   const [pagination, setPagination] = useState(
     overridePaginationStateWithQueryParams(getSortState(location, ITEMS_PER_PAGE, 'id'), location.search)
   );
+
+  const handleResetPassword = email => {
+    dispatch(handlePasswordResetInit(email)).then(value => {
+      console.log(value.payload['data']);
+      navigate(`/account/reset/finish?key=${value.payload['data']}`);
+    });
+  };
 
   const getUsersFromProps = () => {
     dispatch(
@@ -80,11 +91,6 @@ export const UserManagement = () => {
       getUsersFromProps();
     });
   };
-
-  const account = useAppSelector(state => state.authentication.account);
-  const users = useAppSelector(state => state.userManagement.users);
-  const totalItems = useAppSelector(state => state.userManagement.totalItems);
-  const loading = useAppSelector(state => state.userManagement.loading);
 
   return (
     <div>
@@ -202,6 +208,9 @@ export const UserManagement = () => {
               {/*</td>*/}
               <td className="text-end">
                 <div className="btn-group flex-btn-group-container">
+                  <Button type={'button'} color="secondary" size="sm" onClick={() => handleResetPassword(user.email)}>
+                    <FontAwesomeIcon icon="lock" /> <span className="d-none d-md-inline"></span>
+                  </Button>
                   <Button tag={Link} to={user.login} color="info" size="sm">
                     <FontAwesomeIcon icon="eye" />{' '}
                     <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>

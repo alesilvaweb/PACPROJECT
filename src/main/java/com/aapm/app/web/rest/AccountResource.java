@@ -10,13 +10,17 @@ import com.aapm.app.service.dto.PasswordChangeDTO;
 import com.aapm.app.web.rest.errors.*;
 import com.aapm.app.web.rest.vm.KeyAndPasswordVM;
 import com.aapm.app.web.rest.vm.ManagedUserVM;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -55,15 +59,15 @@ public class AccountResource {
      * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already used.
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already used.
      */
-    @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
-        if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
-            throw new InvalidPasswordException();
-        }
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
-    }
+    //    @PostMapping("/register")
+    //    @ResponseStatus(HttpStatus.CREATED)
+    //    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    //        if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
+    //            throw new InvalidPasswordException();
+    //        }
+    //        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+    //        mailService.sendActivationEmail(user);
+    //    }
 
     /**
      * {@code GET  /activate} : activate the registered user.
@@ -154,15 +158,24 @@ public class AccountResource {
      * @param mail the mail of the user.
      */
     @PostMapping(path = "/account/reset-password/init")
-    public void requestPasswordReset(@RequestBody String mail) {
+    public ResponseEntity<String> requestPasswordReset(@RequestBody String mail) throws URISyntaxException {
         Optional<User> user = userService.requestPasswordReset(mail);
-        if (user.isPresent()) {
-            mailService.sendPasswordResetMail(user.get());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isAdmin = authentication.getAuthorities().stream().anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+
+        if (isAdmin) {
+            return ResponseEntity.created(new URI("/api/admin/users/" + user.get().getLogin())).body(user.get().getResetKey());
         } else {
-            // Pretend the request has been successful to prevent checking which emails really exist
-            // but log that an invalid attempt has been made
-            log.warn("Password reset requested for non existing mail");
+            if (user.isPresent()) {
+                mailService.sendPasswordResetMail(user.get());
+            } else {
+                log.warn("Password reset requested for non existing mail");
+            }
         }
+
+        return ResponseEntity.created(new URI("/api/admin/users/" + user.get().getLogin())).body("Email enviado!");
     }
 
     /**

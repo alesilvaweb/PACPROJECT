@@ -11,6 +11,7 @@
     <p th:text="#{email.reserva.text1(${#temporals.format(reserva.getData, 'dd/MM/yyyy')},${reserva.getLocal().getNome()})}">
       Foi criada uma nova reserva
     </p>
+    <p th:text="#{email.reserva.text2(${reserva.getMotivoReserva()},${reserva.getNumPessoas()})}"></p>
     <p>
       <a th:with="url=(@{|${baseUrl}/|})" th:href="${url}" th:text="${url}">Aplicativo da AAPM</a>
     </p>

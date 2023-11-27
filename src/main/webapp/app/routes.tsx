@@ -15,6 +15,7 @@ import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import { sendActivity } from 'app/config/websocket-middleware';
+import PasswordResetFinishAdm from 'app/modules/account/password-reset/finish/password-reset-finish-adm';
 
 const loading = <div>loading ...</div>;
 
@@ -53,6 +54,7 @@ const AppRoutes = () => {
           <Route path="reset">
             <Route path="request" element={<PasswordResetInit />} />
             <Route path="finish" element={<PasswordResetFinish />} />
+            <Route path="finishadm" element={<PasswordResetFinishAdm />} />
           </Route>
         </Route>
         <Route

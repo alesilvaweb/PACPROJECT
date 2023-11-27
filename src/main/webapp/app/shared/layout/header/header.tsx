@@ -62,6 +62,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
   const loadingArquivo = useAppSelector(state => state.arquivo.loading);
   const loadingConvenio = useAppSelector(state => state.convenio.loading);
   const loadingAssociado = useAppSelector(state => state.associado.loading);
+  const loadingResetPassword = useAppSelector(state => state.passwordReset.loading);
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar>
@@ -99,6 +100,8 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
         ) : loadingConvenio ? (
           <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
         ) : loadingAssociado ? (
+          <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
+        ) : loadingResetPassword ? (
           <LinearProgress color={'error'} sx={{ borderRadius: 5 }} />
         ) : null}
       </AppBar>

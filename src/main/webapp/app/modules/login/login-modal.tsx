@@ -85,7 +85,7 @@ const LoginModal = (props: ILoginModalProps) => {
               required
               autoFocus
               data-cy="username"
-              validate={{ required: 'Informe o seu usuário!' }}
+              validate={{ required: 'Informe o seu email!' }}
               register={register}
               error={errors.username as FieldError}
               isTouched={touchedFields.username}
@@ -103,7 +103,7 @@ const LoginModal = (props: ILoginModalProps) => {
               isTouched={touchedFields.password}
             />
 
-            <Col md={12} style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Col md={12} style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
               <ValidatedField
                 name="rememberMe"
                 type="checkbox"
@@ -112,15 +112,22 @@ const LoginModal = (props: ILoginModalProps) => {
                 value={true}
                 register={register}
               />
-
-              <Button variant="contained" color={'primary'} type="submit" className={'text-center'}>
-                <Translate contentKey="login.form.button">Sign in</Translate>
-              </Button>
+              <div style={{ float: 'right' }}>
+                <Button variant="contained" color={'primary'} type="submit" className={'text-center'}>
+                  <Translate contentKey="login.form.button">Sign in</Translate>
+                </Button>
+              </div>
             </Col>
           </Row>
-          <Link href="/account/reset/request" underline="none">
-            <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
-          </Link>
+          <hr />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Link href="/account/reset/request" underline="none">
+              <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
+            </Link>
+            <Link href="/account/reset/request" underline="none">
+              Primeiro acesso?
+            </Link>
+          </div>
         </Form>
       </Col>
     </div>

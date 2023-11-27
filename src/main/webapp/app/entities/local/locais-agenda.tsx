@@ -154,7 +154,6 @@ const LocaisAgenda = args => {
     }
   }
 
-  console.log({ currentEvents });
   const [callendarButton, setCallendarButton] = useState({
     fontSize: '0.9rem',
     padding: '1vh',

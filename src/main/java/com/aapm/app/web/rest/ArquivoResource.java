@@ -165,7 +165,7 @@ public class ArquivoResource {
                         associado.setNome(cell.getStringCellValue());
                         user.setFirstName(cell.getStringCellValue());
                         /* Coluna Situação */
-                    } else if (columnIndex == 2) {}/* Coluna Dependente Nome */ else if (columnIndex == 3) {
+                    } else if (columnIndex == 2) {} /* Coluna Dependente Nome */else if (columnIndex == 3) {
                         if (cell.getStringCellValue().isBlank()) {
                             salvarDependentes = false;
                         } else {
@@ -174,21 +174,21 @@ public class ArquivoResource {
                         if (salvarDependentes) {
                             dependente.setNome(cell.getStringCellValue());
                         }
-                    }/* Coluna sequencia gera o id concatenado com o id do associado */ else if (columnIndex == 4) {
+                    } /* Coluna sequencia gera o id concatenado com o id do associado */else if (columnIndex == 4) {
                         dependente.setId(
                             Long.valueOf(associado.getId().toString().concat(String.valueOf((long) cell.getNumericCellValue())))
                         );
-                    }/* Coluna Parentesco */ else if (columnIndex == 5) {
+                    } /* Coluna Parentesco */else if (columnIndex == 5) {
                         if (salvarDependentes) {
                             dependente.setParentesco(cell.getStringCellValue());
                         }
-                    }/* Coluna Data de nascimento Associado */ else if (columnIndex == 6) {
+                    } /* Coluna Data de nascimento Associado */else if (columnIndex == 6) {
                         associado.setDataNascimento(cell.getLocalDateTimeCellValue().toLocalDate());
-                    }/* Coluna Data de nascimento Dependente */ else if (columnIndex == 7) {
+                    } /* Coluna Data de nascimento Dependente */else if (columnIndex == 7) {
                         if (salvarDependentes) {
                             dependente.setDataNascimento(cell.getLocalDateTimeCellValue().toLocalDate());
                         }
-                    }/* Coluna status */ else if (columnIndex == 8) {
+                    } /* Coluna status */else if (columnIndex == 8) {
                         if (cell.getStringCellValue().toLowerCase().trim().equals("ativo")) {
                             if (salvarDependentes) {
                                 dependente.setStatus(Status.Ativo);
@@ -198,7 +198,7 @@ public class ArquivoResource {
                                 dependente.setStatus(Status.Inativo);
                             }
                         }
-                    }/* Coluna Email */ else if (columnIndex == 9) {
+                    } /* Coluna Email */else if (columnIndex == 9) {
                         String mail = cell.getStringCellValue().toLowerCase();
                         associado.setEmail(mail);
 
@@ -229,7 +229,7 @@ public class ArquivoResource {
                     /* Save user */
                     User newUser = userService.createUser(user);
                     usuariosSalvos = (usuariosSalvos + 1);
-                    mailService.sendCreationEmail(newUser);
+                    //                  mailService.sendCreationEmail(newUser);
                     log.debug("<<< NEW USER >>> : {},", user);
                 }
 
@@ -247,16 +247,6 @@ public class ArquivoResource {
 
                 /* Salva os Dependente */
                 if (salvarDependentes) {
-                    //                    List<Optional<Associado>> associado2 = Collections.singletonList(associadoRepository.findById(associado.getId())
-                    //                        .filter(associado1 -> associado1.getDependentes()
-                    //                            .stream().filter(dependente1 -> {
-                    //                                return dependente.getNome().toLowerCase().trim().equals(dependente1.getNome().toLowerCase().trim());
-                    //                            }).isParallel()));
-
-                    //                    if (associado2.stream().findAny().isPresent()) {
-                    //                        salvarDependente = "update";
-                    //                        log.debug("<<< IS PRESENTE >>> : {},", associado2);
-                    //                    } else {
                     if (Objects.equals(salvarDependente, "update")) {
                         /* Update Dependente */
                         dependenteService.update(dependente);

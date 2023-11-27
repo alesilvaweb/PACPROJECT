@@ -9,6 +9,7 @@ import { getUsersAsAdmin, updateUser } from './user-management.reducer';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import Breadcrunbs from 'app/components/breadcrunbs';
 import { handlePasswordResetInit } from 'app/modules/account/password-reset/password-reset.reducer';
+import { Tooltip } from '@mui/material';
 
 export const UserManagement = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export const UserManagement = () => {
   const handleResetPassword = email => {
     dispatch(handlePasswordResetInit(email)).then(value => {
       console.log(value.payload['data']);
-      navigate(`/account/reset/finish?key=${value.payload['data']}`);
+      navigate(`/account/reset/finishadm?key=${value.payload['data']}`);
     });
   };
 
@@ -208,9 +209,11 @@ export const UserManagement = () => {
               {/*</td>*/}
               <td className="text-end">
                 <div className="btn-group flex-btn-group-container">
-                  <Button type={'button'} color="secondary" size="sm" onClick={() => handleResetPassword(user.email)}>
-                    <FontAwesomeIcon icon="lock" /> <span className="d-none d-md-inline"></span>
-                  </Button>
+                  <Tooltip title="Alterar Senha">
+                    <Button type={'button'} on color="secondary" size="sm" onClick={() => handleResetPassword(user.email)}>
+                      <FontAwesomeIcon icon="lock" /> <span className="d-none d-md-inline"></span>
+                    </Button>
+                  </Tooltip>
                   <Button tag={Link} to={user.login} color="info" size="sm">
                     <FontAwesomeIcon icon="eye" />{' '}
                     <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>

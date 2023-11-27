@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Button } from 'reactstrap';
+import { Col, Row, Button, ModalHeader, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -7,14 +7,17 @@ import { toast } from 'react-toastify';
 import { handlePasswordResetFinish, reset } from '../password-reset.reducer';
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { savePassword } from 'app/modules/account/password/password.reducer';
 
-export const PasswordResetFinishPage = () => {
+export const PasswordResetFinishAdm = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
   const key = searchParams.get('key');
 
   const [password, setPassword] = useState('');
+  const [success, setSuccess] = useState(false);
 
   useEffect(
     () => () => {
@@ -25,7 +28,7 @@ export const PasswordResetFinishPage = () => {
 
   const handleValidSubmit = ({ newPassword }) => {
     dispatch(handlePasswordResetFinish({ key, newPassword })).then(() => {
-      navigate('/');
+      handleClose();
     });
   };
 
@@ -61,7 +64,8 @@ export const PasswordResetFinishPage = () => {
           }}
           data-cy="confirmResetPassword"
         />
-        <Button color="primary" type="submit" data-cy="submit">
+
+        <Button color="primary" type="submit" data-cy="submit" style={{ float: 'right' }}>
           <Translate contentKey="reset.finish.form.button">Validate new password</Translate>
         </Button>
       </ValidatedForm>
@@ -70,24 +74,33 @@ export const PasswordResetFinishPage = () => {
 
   const successMessage = useAppSelector(state => state.passwordReset.successMessage);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (successMessage) {
+    if (successMessage === 'reset.finish.messages.success') {
       toast.success(translate(successMessage));
     }
   }, [successMessage]);
 
+  const handleClose = () => {
+    navigate('/admin/user-management' + location.search);
+  };
   return (
     <div>
-      <Row className="justify-content-center">
-        <Col md="4">
-          <h1>
-            <Translate contentKey="reset.finish.title">Reset password</Translate>
-          </h1>
-          <div>{key ? getResetForm() : null}</div>
-        </Col>
-      </Row>
+      <Modal isOpen toggle={handleClose} style={{ marginTop: '18vh' }}>
+        <ModalHeader toggle={handleClose} data-cy="mensagemDeleteDialogHeading">
+          <Translate contentKey="reset.finish.title">Reset password</Translate>
+        </ModalHeader>
+        <ModalBody id="aapmApp.mensagem.delete.question">
+          <Row className="justify-content-center">
+            <Col md="12">
+              <div>{key ? getResetForm() : null}</div>
+            </Col>
+          </Row>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };
 
-export default PasswordResetFinishPage;
+export default PasswordResetFinishAdm;

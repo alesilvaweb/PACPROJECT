@@ -49,8 +49,8 @@
       "language": "Idioma"
     },
     "form": {
-      "username.label": "Usuário",
-      "username.placeholder": "Seu usuário",
+      "username.label": "Email",
+      "username.placeholder": "Seu email",
       "currentpassword.label": "Senha atual",
       "currentpassword.placeholder": "Senha atual",
       "newpassword.label": "Nova senha",

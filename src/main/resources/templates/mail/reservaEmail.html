@@ -12,9 +12,9 @@
       Foi criada uma nova reserva
     </p>
     <p th:text="#{email.reserva.text2(${reserva.getMotivoReserva()},${reserva.getNumPessoas()})}"></p>
-    <p>
-      <a th:with="url=(@{|${baseUrl}/|})" th:href="${url}" th:text="${url}">Aplicativo da AAPM</a>
-    </p>
+    <!--    <p>-->
+    <!--      <a th:with="url=(@{|${baseUrl}/|})" th:href="${url}" th:text="${url}">Aplicativo da AAPM</a>-->
+    <!--    </p>-->
     <p>
       <span th:text="#{email.activation.text2}">Atensiosamente,</span>
       <br />

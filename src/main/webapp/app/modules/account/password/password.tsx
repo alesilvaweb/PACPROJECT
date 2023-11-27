@@ -86,7 +86,7 @@ export const PasswordPage = () => {
               }}
               data-cy="confirmPassword"
             />
-            <Button color="success" type="submit" data-cy="submit">
+            <Button color="primary" type="submit" data-cy="submit">
               <Translate contentKey="password.form.button">Save</Translate>
             </Button>
           </ValidatedForm>

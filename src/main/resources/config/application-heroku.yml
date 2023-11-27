@@ -26,3 +26,15 @@ spring:
       maximumPoolSize: 8
 server:
   port: ${PORT:8080}
+
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: alesilvascs@gmail.com
+  password: oqku emlu ykun rnpe
+  protocol: smtp
+  tls: true
+  properties.mail.smtp:
+    auth: true
+    starttls.enable: true
+    ssl.trust: smtp.gmail.com

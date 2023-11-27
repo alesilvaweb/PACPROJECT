@@ -159,6 +159,17 @@ server:
     session:
       cookie:
         http-only: true
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: alesilvascs@gmail.com
+  password: oqku emlu ykun rnpe
+  protocol: smtp
+  tls: true
+  properties.mail.smtp:
+    auth: true
+    starttls.enable: true
+    ssl.trust: smtp.gmail.com
 
 springdoc:
   show-actuator: true

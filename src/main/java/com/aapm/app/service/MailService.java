@@ -3,7 +3,6 @@ package com.aapm.app.service;
 import com.aapm.app.domain.Parametro;
 import com.aapm.app.domain.User;
 import com.aapm.app.repository.ParametroRepository;
-import com.aapm.app.service.dto.ParametroDTO;
 import com.aapm.app.service.dto.ReservaDTO;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;

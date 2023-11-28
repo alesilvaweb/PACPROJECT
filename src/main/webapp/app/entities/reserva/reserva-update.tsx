@@ -88,7 +88,7 @@ export const ReservaUpdate = () => {
       ...reservaEntity,
       ...values,
       local: localEntity,
-      descricao: bloqueioReserva ? values.descricao + ' ' + '23:59:59' : null,
+      descricao: values.descricao + ' ' + '23:59:59',
       associado: isAdmin ? associados.find(it => it.id.toString() === values.associado.toString()) : associado,
       departamento: departamentos.find(it => it.id.toString() === values.departamento.toString()),
     };

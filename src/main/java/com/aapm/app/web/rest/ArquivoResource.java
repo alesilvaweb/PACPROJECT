@@ -229,7 +229,7 @@ public class ArquivoResource {
                     /* Save user */
                     User newUser = userService.createUser(user);
                     usuariosSalvos = (usuariosSalvos + 1);
-                    //                  mailService.sendCreationEmail(newUser);
+                    // mailService.sendCreationEmail(newUser);
                     log.debug("<<< NEW USER >>> : {},", user);
                 }
 

@@ -13,8 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.authorization.AuthenticatedAuthorizationManager;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -71,8 +73,17 @@ public class MailService {
             content
         );
 
+        // Configurar o provedor de e-mail
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("alesilvascs@gmail.com");
+        mailSender.setPassword("oqku emlu ykun rnpe");
+        mailSender.setProtocol("smtp");
+
         // Prepare message using a Spring helper
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        //        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
         Parametro parametro = parametroRepository.findByChave("mail-adm");
         log.debug("Parametro '{}'", parametro);
         try {

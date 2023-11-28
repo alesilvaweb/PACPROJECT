@@ -77,8 +77,8 @@ public class MailService {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("alesilvascs@gmail.com");
-        mailSender.setPassword("oqku emlu ykun rnpe");
+        mailSender.setUsername("aapm.aplicativo@gmail.com");
+        mailSender.setPassword("dlgb odwr tifr qmik");
         mailSender.setProtocol("smtp");
 
         // Prepare message using a Spring helper
@@ -88,8 +88,8 @@ public class MailService {
         log.debug("Parametro '{}'", parametro);
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
-            message.setTo(parametro.getValor());
-            //            message.setTo(to);
+            //            message.setTo(parametro.getValor());
+            message.setTo(to);
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);

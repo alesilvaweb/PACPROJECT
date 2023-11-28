@@ -47,8 +47,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: alesilvascs@gmail.com
-    password: oqku emlu ykun rnpe
+    username: aapm.aplicativo@gmail.com
+    password: dlgb odwr tifr qmik
     protocol: smtp
     tls: true
     properties.mail.smtp:
@@ -110,7 +110,7 @@ jhipster:
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: https://aapm.app.br/ # Modify according to your server's URL
+    base-url: https://aapm.app.br # Modify according to your server's URL
   #    base-url: localhost:9000 # Modify according to your server's URL
 
   logging:

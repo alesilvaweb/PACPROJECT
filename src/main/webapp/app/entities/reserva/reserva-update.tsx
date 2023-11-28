@@ -55,6 +55,7 @@ export const ReservaUpdate = () => {
       dispatch(reset());
       dispatch(getLocal(local));
       dispatch(getAssociado(account.id));
+      dispatch(getAssociados({}));
     } else {
       dispatch(getEntity(id)).then(value => {
         dispatch(getAssociado(value.payload['data'].associado.id));
@@ -88,7 +89,7 @@ export const ReservaUpdate = () => {
       ...values,
       local: localEntity,
       descricao: bloqueioReserva ? values.descricao + ' ' + '23:59:59' : null,
-      associado: associados.find(it => it.id.toString() === values.associado.toString()),
+      associado: isAdmin ? associados.find(it => it.id.toString() === values.associado.toString()) : associado,
       departamento: departamentos.find(it => it.id.toString() === values.departamento.toString()),
     };
 

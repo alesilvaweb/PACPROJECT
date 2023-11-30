@@ -29,11 +29,11 @@ export default function Banner() {
     padding: 1,
     backgroundColor: 'gray-100',
     borderRadius: 2,
-    borderWidth: '1px',
+    borderWidth: '2px',
     borderStyle: 'solid',
     borderColor: '#a1a1a1',
     ':hover': {
-      boxShadow: 5,
+      boxShadow: 7,
       borderColor: '#1975d1',
     },
   };

@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-import { dataAtual, difDate } from 'app/shared/util/date-utils';
+import { dataAtual, difDate, formatData } from 'app/shared/util/date-utils';
 import FullCalendar from '@fullcalendar/react';
 import { IReserva } from 'app/shared/model/reserva.model';
 import { Chip } from '@mui/material';
@@ -32,17 +32,16 @@ const LocaisAgenda = args => {
   const [numReservas, setNumReservas] = useState(0);
   const [count, setCount] = useState(0);
   const [diasStart, setDiasStart] = useState(0);
-  const [diasEnd, setDiasEnd] = useState(0);
+  const [diasEnd, setDiasEnd] = useState('');
 
   const calendarRef = useRef<FullCalendar>(null!);
 
   const { id } = useParams<'id'>();
 
   const DataValida = addDays(diasStart);
-  const DataFinal = addDays(diasEnd);
 
-  const location = useLocation();
-  const pathnames = location.pathname.split('/').filter(x => x);
+  let arrData = diasEnd.split('/');
+  const DataFinal = (arrData[2] + '-' + arrData[1] + '-' + arrData[0]).toString();
 
   function addDays(days) {
     const data = new Date();
@@ -98,7 +97,7 @@ const LocaisAgenda = args => {
         setDiasStart(parseInt(a.valor));
       }
       if (a.chave.toString() === 'limite-end') {
-        setDiasEnd(parseInt(a.valor));
+        setDiasEnd(a.valor);
       }
     });
   }, [parametro]);
@@ -154,6 +153,7 @@ const LocaisAgenda = args => {
     }
   }
 
+  console.log({ DataFinal });
   const [callendarButton, setCallendarButton] = useState({
     fontSize: '0.9rem',
     padding: '1vh',
@@ -246,7 +246,7 @@ const LocaisAgenda = args => {
                 initialView="dayGridMonth"
                 validRange={{
                   start: DataValida.toISOString().substring(0, 10),
-                  end: DataFinal.toISOString().substring(0, 10),
+                  end: DataFinal,
                 }}
                 editable={false}
                 selectable={true}

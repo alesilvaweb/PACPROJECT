@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import { useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
 
 export interface ILoginModalProps {
   showModal: boolean;
@@ -26,6 +27,8 @@ const LoginModal = (props: ILoginModalProps) => {
   const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('sm');
   const [open, setOpen] = React.useState(false);
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
+  const authorities = useAppSelector(state => state.authentication.authorities);
+  const hasUserRole = authorities?.includes('ROLE_VIEW_REPORT');
   const navigate = useNavigate();
 
   if (isAuthenticated) {
@@ -119,16 +122,16 @@ const LoginModal = (props: ILoginModalProps) => {
               </div>
             </Col>
           </Row>
-          <hr />
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Link href="/account/reset/request" underline="none">
-              <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
-            </Link>
-            <Link href="/account/reset/request" underline="none">
-              Primeiro acesso?
-            </Link>
-          </div>
         </Form>
+        <hr />
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Link href="/account/reset/request" underline="none">
+            <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
+          </Link>
+          <Link href="/account/reset/request" underline="none">
+            Primeiro acesso?
+          </Link>
+        </div>
       </Col>
     </div>
     // <Modal isOpen={props.showModal} toggle={handleClose} backdrop="static" id="login-page" autoFocus={false} style={{marginTop:'8%'}}>

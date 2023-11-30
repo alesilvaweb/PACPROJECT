@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -8,8 +9,9 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import { useMediaQuery, useTheme } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Card, CardContent, CardMedia, useMediaQuery, useTheme } from '@mui/material';
+import axios from 'axios';
+import { dataAtual } from 'app/shared/util/date-utils';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -22,11 +24,31 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export default function ModalInicial() {
   const [open, setOpen] = useState(false);
-
+  const [mensagens, setMensagens] = useState([]);
   const handleClose = () => {
     sessionStorage.setItem('popUpShow', 'true');
     setOpen(false);
   };
+
+  const data = dataAtual();
+
+  async function fetchMensagens() {
+    try {
+      const response = await axios.get(
+        `/api/mensagems?endDate.greaterThanOrEqual=${data}&startDate.lessThanOrEqual=${data}&tipoId.equals=11351&page=0&size=20`
+      );
+      setMensagens(response.data);
+      console.log({ response });
+    } catch (error) {
+      console.error('Erro ao buscar Mensagens:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMensagens();
+  }, []);
+
+  console.log({ mensagens });
 
   useEffect(() => {
     const hasPopUpBeenShown = sessionStorage.getItem('popUpShow');
@@ -57,8 +79,24 @@ export default function ModalInicial() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-          <img src="../../../../content/images/oktober.png" alt="" width={'100%'} />
-          <Typography gutterBottom>Descição aqui ..... Descição aqui .....</Typography>
+          {mensagens ? (
+            <div>
+              {mensagens.map(message => (
+                <>
+                  <Card>
+                    <CardMedia component="img" image={`data:${message.imagenContentType};base64,${message.imagen}`} />
+                    <CardContent>
+                      <Typography variant="h6" component="div">
+                        {message.titulo}
+                      </Typography>
+                      <Typography color="textSecondary">{message.descricao}</Typography>
+                    </CardContent>
+                  </Card>
+                  <hr />
+                </>
+              ))}
+            </div>
+          ) : null}
         </DialogContent>
 
         <DialogActions>

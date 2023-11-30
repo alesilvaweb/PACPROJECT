@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import HomeIcon from '@mui/icons-material/Home';
 import { AdminMenu } from 'app/shared/layout/menus';
-import { useAppDispatch } from 'app/config/store';
+import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { Storage, Translate, translate } from 'react-jhipster';
 import { setLocale } from 'app/shared/reducers/locale';
 import { ListSubheader } from '@mui/material';
@@ -31,6 +31,7 @@ import {
   Schedule,
   Settings,
 } from '@mui/icons-material';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -43,6 +44,8 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
   };
   const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
+  const account = useAppSelector(state => state.authentication.account);
+  const isReport = hasAnyAuthority(account.authorities, ['ROLE_VIEW_REPORT']);
 
   const [state, setState] = React.useState({
     top: false,
@@ -85,12 +88,18 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
       >
         {isAuthenticated ? (
           <>
-            {/* Menus Fixos */}
-            <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-            <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<Schedule />} setIsOpen={setIsOpen} />
-            <hr />
+            {!isReport ? (
+              <>
+                {/* Menus Fixos */}
+                <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<Schedule />} setIsOpen={setIsOpen} />
+                <hr />
+              </>
+            ) : (
+              <ItemSidebar title={'Reservas'} link={'/report'} icon={<CalendarMonth />} setIsOpen={setIsOpen} />
+            )}
           </>
         ) : null}
         {isAdmin ? (

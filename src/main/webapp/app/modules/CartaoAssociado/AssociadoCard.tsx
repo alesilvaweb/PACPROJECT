@@ -8,6 +8,9 @@ import CardActions from '@mui/material/CardActions';
 import './cartao.scss';
 import { Download, Print, Share } from '@mui/icons-material';
 import { dE } from '@fullcalendar/core/internal-common';
+import { formatDate } from '@fullcalendar/core';
+import { now } from 'lodash';
+import { Row } from 'reactstrap';
 
 const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
   const cardRef = useRef(null);
@@ -16,7 +19,7 @@ const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
 
   // const { id } = account.id;
   const id = idAssociado;
-
+  const ano = formatDate(new Date(now()), { year: 'numeric' });
   const handleShare = nome => {
     if (cardRef.current) {
       html2canvas(cardRef.current).then(canvas => {
@@ -30,6 +33,7 @@ const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
       });
     }
   };
+
   const captureAndShare = async () => {
     try {
       // Captura a imagem do componente
@@ -145,11 +149,14 @@ const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
                   <div className={'campoField'}>TITULAR</div>
                 </div>
               </Grid>
+
               <Grid item xs={2}></Grid>
             </>
           )}
+          <Row style={{ display: 'flex', justifyContent: 'flex-end', color: 'white', marginLeft: '85%', fontSize: '0.8rem' }}>
+            <span>{ano}</span>
+          </Row>
         </Grid>
-        <br />
       </Container>
       <br />
       <div className={'justify-content-between'}>

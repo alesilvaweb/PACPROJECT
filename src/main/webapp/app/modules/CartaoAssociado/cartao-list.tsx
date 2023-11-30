@@ -17,7 +17,7 @@ export default function CartaoList() {
   const account = useAppSelector(state => state.authentication.account);
   const id = account.id;
   // const id = 3963; //sem dependentes
-  // const id = 15660; //dois dependentes
+  //   const id = 15660; //dois dependentes
 
   const associadoEntity = useAppSelector(state => state.associado.entity);
   const cardRef = useRef(null);

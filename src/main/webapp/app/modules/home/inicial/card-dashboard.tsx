@@ -32,12 +32,12 @@ export default function CardDashboard({ link, title, icon, subtitle }) {
         className={'hand'}
         sx={{
           backgroundColor: 'gray-100',
-          borderRadius: 2,
-          borderWidth: '1px',
+          borderRadius: 3,
+          borderWidth: '2px',
           borderStyle: 'solid',
           borderColor: '#a1a1a1',
           ':hover': {
-            boxShadow: 5,
+            boxShadow: 7,
             borderColor: '#1975d1',
           },
         }}
@@ -67,6 +67,7 @@ export default function CardDashboard({ link, title, icon, subtitle }) {
 
           <CardActionArea
             sx={{
+              textAlign: 'center',
               borderRadius: 2,
               padding: '5px',
               height: '15vh',

@@ -10,6 +10,7 @@ import { useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Login, Person } from '@mui/icons-material';
 import { LetterAvatar } from 'app/components/letterAvatar';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
 
 // const accountMenuItemsAuthenticated = () => (
 //   <>
@@ -43,13 +44,14 @@ import { LetterAvatar } from 'app/components/letterAvatar';
 //   </NavDropdown>
 // );
 export const AccountMenuMaterial = ({ isAuthenticated = false }) => {
-  const account = useAppSelector(state => state.authentication.account);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const account = useAppSelector(state => state.authentication.account);
+  const isReport = hasAnyAuthority(account.authorities, ['ROLE_VIEW_REPORT']);
   const handleClose = link => {
     setAnchorEl(null);
     navigate(link);
@@ -80,13 +82,17 @@ export const AccountMenuMaterial = ({ isAuthenticated = false }) => {
       >
         {isAuthenticated && (
           <>
-            <MenuItem
-              onClick={() => {
-                handleClose(`/associado/${account.id}/contato`);
-              }}
-            >
-              <Translate contentKey="global.menu.account.settings">Settings</Translate>
-            </MenuItem>
+            <>
+              {!isReport ? (
+                <MenuItem
+                  onClick={() => {
+                    handleClose(`/associado/${account.id}/contato`);
+                  }}
+                >
+                  <Translate contentKey="global.menu.account.settings">Settings</Translate>
+                </MenuItem>
+              ) : null}
+            </>
             <MenuItem
               onClick={() => {
                 handleClose('/account/password');

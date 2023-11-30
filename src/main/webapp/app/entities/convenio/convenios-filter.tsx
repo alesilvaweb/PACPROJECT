@@ -133,12 +133,25 @@ const ConveniosFilter = () => {
                       navigate(`/convenio/${convenio.id}`);
                     }}
                     className={'hand'}
+                    sx={{
+                      padding: '1px',
+                      backgroundColor: 'gray-100',
+                      borderRadius: 2,
+                      borderWidth: '2px',
+                      borderStyle: 'solid',
+                      borderColor: '#a1a1a1',
+                      ':hover': {
+                        boxShadow: 7,
+                        borderColor: '#1975d1',
+                      },
+                    }}
                   >
                     <CardMedia
                       component="img"
                       height="140"
                       image={`data:${convenio.imagemContentType};base64,${convenio.imagem}`}
                       alt={convenio.nome}
+                      sx={{ borderRadius: 2 }}
                     />
                     <CardContent>
                       <Typography variant="h6">{convenio.nome}</Typography>

@@ -84,11 +84,12 @@ public class MailService {
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         //        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        Parametro parametro = parametroRepository.findByChave("mail-adm");
-        log.debug("Parametro '{}'", parametro);
+
+        //        Parametro parametro = parametroRepository.findByChave("mail-adm");
+        //        log.debug("Parametro '{}'", parametro);
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
-            //            message.setTo(parametro.getValor());
+            // message.setTo(parametro.getValor());
             message.setTo(to);
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);

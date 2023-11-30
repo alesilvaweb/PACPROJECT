@@ -10,12 +10,15 @@ import PasswordResetFinish from 'app/modules/account/password-reset/finish/passw
 import Logout from 'app/modules/login/logout';
 import EntitiesRoutes from 'app/entities/routes';
 import HomeRoutes from 'app/modules/home/routes';
-import PrivateRoute from 'app/shared/auth/private-route';
+import ReportRoutes from 'app/modules/relatório/routes';
+import PrivateRoute, { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import { sendActivity } from 'app/config/websocket-middleware';
 import PasswordResetFinishAdm from 'app/modules/account/password-reset/finish/password-reset-finish-adm';
+import ReservaListWithLocalizationProvider from 'app/modules/relatório/reserva-list';
+import { useAppSelector } from 'app/config/store';
 
 const loading = <div>loading ...</div>;
 
@@ -40,15 +43,17 @@ const AppRoutes = () => {
       <ErrorBoundaryRoutes>
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
+
         <Route path="account">
           <Route
             path="*"
             element={
-              <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]}>
+              <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER, AUTHORITIES.REPORT]}>
                 <Account />
               </PrivateRoute>
             }
           />
+
           <Route path="register" element={<Register />} />
           <Route path="activate" element={<Activate />} />
           <Route path="reset">
@@ -66,11 +71,19 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path="report/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.REPORT]}>
+              <ReportRoutes />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="*"
           element={
-            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]}>
-              <EntitiesRoutes />
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER, AUTHORITIES.REPORT]}>
               <HomeRoutes />
+              <EntitiesRoutes />
             </PrivateRoute>
           }
         />

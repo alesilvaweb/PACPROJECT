@@ -7,10 +7,10 @@
 
     <groupId>com.aapm.app</groupId>
     <artifactId>aapm</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
     <name>AAPM</name>
-    <description>Sistema de Reservas AAPM</description>
+    <description>Sistema de Reservas</description>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

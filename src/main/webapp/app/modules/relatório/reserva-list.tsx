@@ -17,7 +17,7 @@ const ReservaList = () => {
 
   async function fetchReservas() {
     try {
-      const response = await axios.get('api/reservas');
+      const response = await axios.get('api/reservas?status.equals=Agendado&data.greaterThanOrEqual=2023-11-28&page=0&size=9999');
       setReservas(response.data);
     } catch (error) {
       console.error('Erro ao buscar Reservas:', error);
@@ -27,6 +27,10 @@ const ReservaList = () => {
   useEffect(() => {
     fetchReservas();
   }, []);
+
+  useEffect(() => {
+    dataReserva();
+  }, [reservas]);
 
   type Reserva = {
     matricula: string;
@@ -42,15 +46,6 @@ const ReservaList = () => {
 
   const columns = useMemo<MRT_ColumnDef<Reserva>[]>(
     () => [
-      // {
-      //   header: 'Status',
-      //   accessorFn: (originalRow) => (originalRow.status ? 'Ativo' : 'Inativo'), //must be strings
-      //   id: 'status',
-      //   filterVariant: 'checkbox',
-      //   Cell: ({cell}) =>
-      //     cell.getValue() === 'Ativo' ? 'Ativo' : 'Inativo',
-      //   size: 170,
-      // },
       {
         accessorKey: 'local',
         header: 'Local',
@@ -91,30 +86,6 @@ const ReservaList = () => {
         filterVariant: 'text', // default
         size: 200,
       },
-      // {
-      //   accessorKey: 'numPessoas',
-      //   header: 'Número Pessoas',
-      //   Cell: ({cell}) =>
-      //     cell.getValue<number>().toLocaleString('pt-br', {
-      //
-      //
-      //     }),
-      //   filterVariant: 'range-slider',
-      //   filterFn: 'betweenInclusive', // default (or between)
-      //   muiFilterSliderProps: {
-      //     marks: true,
-      //     max: 300 , //custom max (as opposed to faceted max)
-      //     min: 0, //custom min (as opposed to faceted min)
-      //     step: 1 ,
-      //
-      //   },
-      // },
-
-      // {
-      //   accessorKey: 'departamento',
-      //   header: 'Departamento',
-      //   filterVariant: 'text',
-      // },
     ],
     []
   );
@@ -130,12 +101,11 @@ const ReservaList = () => {
       body: tableData,
       headStyles: { lineWidth: 1, fillColor: [202, 37, 30], textColor: [255, 255, 255] },
     });
-    console.log({ doc });
+
     var y = 10;
     doc.setLineWidth(2);
     doc.text('Relatório de Reservas AAPM', (y = y + 30), 25);
     doc.setLanguage('pt-BR');
-
     doc.save('Reservas.pdf');
   };
 
@@ -156,10 +126,6 @@ const ReservaList = () => {
     });
     setData(re);
   };
-
-  useEffect(() => {
-    dataReserva();
-  }, [reservas]);
 
   // @ts-ignore
   const navigate = useNavigate();

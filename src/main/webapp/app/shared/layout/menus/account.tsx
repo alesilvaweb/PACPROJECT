@@ -1,5 +1,5 @@
 import React from 'react';
-// import MenuItem from 'app/shared/layout/menus/menu-item';
+import MenuItems from 'app/shared/layout/menus/menu-item';
 import MenuItem from '@mui/material/MenuItem';
 import { Translate, translate } from 'react-jhipster';
 import { NavDropdown } from './menu-components';
@@ -12,37 +12,37 @@ import { Lock, Login, Person } from '@mui/icons-material';
 import { LetterAvatar } from 'app/components/letterAvatar';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 
-// const accountMenuItemsAuthenticated = () => (
-//   <>
-//     <MenuItem icon="wrench" to="/account/settings" data-cy="settings">
-//       <Translate contentKey="global.menu.account.settings">Settings</Translate>
-//     </MenuItem>
-//     <MenuItem icon="lock" to="/account/password" data-cy="passwordItem">
-//       <Translate contentKey="global.menu.account.password">Password</Translate>
-//     </MenuItem>
-//     <MenuItem icon="sign-out-alt" to="/logout" data-cy="logout">
-//       <Translate contentKey="global.menu.account.logout">Sign out</Translate>
-//     </MenuItem>
-//   </>
-// );
-//
-// const accountMenuItems = () => (
-//   <>
-//     <MenuItem id="login-item" icon="sign-in-alt" to="/login" data-cy="login">
-//       <Translate contentKey="global.menu.account.login">Sign in</Translate>
-//     </MenuItem>
-//     <MenuItem icon="user-plus" to="/account/register" data-cy="register">
-//       <Translate contentKey="global.menu.account.register">Register</Translate>
-//     </MenuItem>
-//   </>
-// );
-//
-// export const AccountMenu = ({ isAuthenticated = false }) => (
-//   <NavDropdown icon="user" name={' Alessandro'} id="account-menu" data-cy="accountMenu">
-//     {isAuthenticated && accountMenuItemsAuthenticated()}
-//     {!isAuthenticated && accountMenuItems()}
-//   </NavDropdown>
-// );
+const accountMenuItemsAuthenticated = () => (
+  <>
+    <MenuItems icon="wrench" to="/account/settings" data-cy="settings">
+      <Translate contentKey="global.menu.account.settings">Settings</Translate>
+    </MenuItems>
+    <MenuItems icon="lock" to="/account/password" data-cy="passwordItem">
+      <Translate contentKey="global.menu.account.password">Password</Translate>
+    </MenuItems>
+    <MenuItems icon="sign-out-alt" to="/logout" data-cy="logout">
+      <Translate contentKey="global.menu.account.logout">Sign out</Translate>
+    </MenuItems>
+  </>
+);
+
+const accountMenuItems = () => (
+  <>
+    <MenuItems id="login-item" icon="sign-in-alt" to="/login" data-cy="login">
+      <Translate contentKey="global.menu.account.login">Sign in</Translate>
+    </MenuItems>
+    <MenuItems icon="user-plus" to="/account/register" data-cy="register">
+      <Translate contentKey="global.menu.account.register">Register</Translate>
+    </MenuItems>
+  </>
+);
+
+export const AccountMenu = ({ isAuthenticated = false }) => (
+  <NavDropdown icon="user" name={' Alessandro'} id="account-menu" data-cy="accountMenu">
+    {isAuthenticated && accountMenuItemsAuthenticated()}
+    {!isAuthenticated && accountMenuItems()}
+  </NavDropdown>
+);
 export const AccountMenuMaterial = ({ isAuthenticated = false }) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -52,10 +52,12 @@ export const AccountMenuMaterial = ({ isAuthenticated = false }) => {
   };
   const account = useAppSelector(state => state.authentication.account);
   const isReport = hasAnyAuthority(account.authorities, ['ROLE_VIEW_REPORT']);
+
   const handleClose = link => {
     setAnchorEl(null);
     navigate(link);
   };
+
   return (
     <div>
       <Button

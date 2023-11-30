@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Col, Row } from 'reactstrap';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem, Col, Row } from 'reactstrap';
 import { openFile, Translate } from 'react-jhipster';
 import './locais.scss';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity } from './local.reducer';
 import BotaoVoltar from 'app/components/botaoVoltar';
 import Breadcrunbs from 'app/components/breadcrunbs';
+import { Card } from '@mui/material';
 
 export const LocalDetail = () => {
   const dispatch = useAppDispatch();
@@ -17,27 +18,25 @@ export const LocalDetail = () => {
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
-
+  const navigate = useNavigate();
   const localEntity = useAppSelector(state => state.local.entity);
   return (
     <div>
-      <Breadcrunbs atual={localEntity.nome} />
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/Cabanas')}>
+          <a>Cabanas</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{localEntity.nome}</BreadcrumbItem>
+      </Breadcrumb>
       <Row className={'locais-detail'}>
-        <Col md="8">
-          <h2 data-cy="localDetailsHeading">{localEntity.nome}</h2>
-          <dd>
-            {localEntity.imagen ? (
-              <div>
-                {localEntity.imagenContentType ? (
-                  <a onClick={openFile(localEntity.imagenContentType, localEntity.imagen)}>
-                    <img src={`data:${localEntity.imagenContentType};base64,${localEntity.imagen}`} style={{ maxHeight: '300px' }} />
-                  </a>
-                ) : null}
-              </div>
-            ) : null}
-          </dd>
+        <Col md="8" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <dl className="jh-entity-details">
             <dt>
+              <h4 data-cy="localDetailsHeading">{localEntity.nome}</h4>
+              <hr />
               <span id="descricao">
                 <Translate contentKey="aapmApp.local.descricao">Descricao</Translate>
               </span>
@@ -48,7 +47,7 @@ export const LocalDetail = () => {
                 <Translate contentKey="aapmApp.local.capacidade">Capacidade</Translate>
               </span>
             </dt>
-            <dd>{localEntity.capacidade}</dd>
+            <dd>{localEntity.capacidade} pessoas</dd>
 
             <dt>
               <span id="valor">
@@ -56,13 +55,29 @@ export const LocalDetail = () => {
               </span>
             </dt>
             <dd>{`R$ ${localEntity.valor},00`}</dd>
-            <dt>
-              <span id="observacoes">
-                <Translate contentKey="aapmApp.local.observacoes">Observacoes</Translate>
-              </span>
-            </dt>
-            <dd>{localEntity.observacoes}</dd>
+
+            {localEntity.observacoes ? (
+              <>
+                <dt>
+                  <span id="observacoes">
+                    <Translate contentKey="aapmApp.local.observacoes">Observacoes</Translate>
+                  </span>
+                </dt>
+                <dd>{localEntity.observacoes}</dd>
+              </>
+            ) : null}
           </dl>
+          <dd>
+            {localEntity.imagen ? (
+              <Card>
+                {localEntity.imagenContentType ? (
+                  <a onClick={openFile(localEntity.imagenContentType, localEntity.imagen)}>
+                    <img src={`data:${localEntity.imagenContentType};base64,${localEntity.imagen}`} style={{ maxHeight: '400px' }} />
+                  </a>
+                ) : null}
+              </Card>
+            ) : null}
+          </dd>
         </Col>
       </Row>
     </div>

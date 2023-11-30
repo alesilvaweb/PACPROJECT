@@ -1,6 +1,5 @@
 package com.aapm.app.web.rest;
 
-import com.aapm.app.domain.Associado;
 import com.aapm.app.domain.User;
 import com.aapm.app.domain.enumeration.Status;
 import com.aapm.app.domain.enumeration.StatusArquivo;
@@ -76,6 +75,7 @@ public class ArquivoResource {
     private boolean salvarDependentes;
     private int usuariosSalvos;
     private int usuariosAtualizados;
+    private long ultimoId;
     private final Set<String> ROLE = Collections.singleton("ROLE_USER");
 
     public ArquivoResource(
@@ -100,6 +100,7 @@ public class ArquivoResource {
         this.associadoRepository = associadoRepository;
         this.userService = userService;
         this.mailService = mailService;
+
         this.usuariosSalvos = 0;
         this.usuariosAtualizados = 0;
     }
@@ -222,14 +223,22 @@ public class ArquivoResource {
                 /* Salva os usuários */
                 if (Objects.equals(salvarUser, "update")) {
                     /* Update user */
-                    userService.updateUser(user);
-                    usuariosAtualizados = (usuariosAtualizados + 1);
+
+                    if (!user.getId().equals(ultimoId)) {
+                        userService.updateUser(user);
+                        usuariosAtualizados = (usuariosAtualizados + 1);
+                        ultimoId = user.getId();
+                    }
+
                     log.debug("<<< UPDATE USER >>> : {},", user);
                 } else {
                     /* Save user */
-                    User newUser = userService.createUser(user);
-                    usuariosSalvos = (usuariosSalvos + 1);
-                    // mailService.sendCreationEmail(newUser);
+                    if (!user.getId().equals(ultimoId)) {
+                        userService.createUser(user);
+                        usuariosSalvos = (usuariosSalvos + 1);
+                        ultimoId = user.getId();
+                    }
+
                     log.debug("<<< NEW USER >>> : {},", user);
                 }
 
@@ -267,6 +276,7 @@ public class ArquivoResource {
 
         tempFile.delete();
 
+        arquivoDTO.setDescricao("Novos:" + usuariosSalvos + "    " + "Atualizados:" + usuariosAtualizados);
         ArquivoDTO result = arquivoService.save(arquivoDTO);
 
         return ResponseEntity

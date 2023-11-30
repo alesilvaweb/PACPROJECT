@@ -131,6 +131,7 @@ export const AssociadoUpdateTelefone = () => {
                 id="associado-nome"
                 name="nome"
                 data-cy="nome"
+                readOnly
                 type="text"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },

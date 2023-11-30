@@ -124,6 +124,7 @@ export const UserManagementUpdate = () => {
               <ValidatedField
                 type="text"
                 name="lastName"
+                hidden
                 label={translate('userManagement.lastName')}
                 validate={{
                   maxLength: {

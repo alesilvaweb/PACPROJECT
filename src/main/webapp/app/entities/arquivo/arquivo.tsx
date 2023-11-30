@@ -123,9 +123,9 @@ export const Arquivo = () => {
                 <th className="hand" onClick={sort('nome')}>
                   <Translate contentKey="aapmApp.arquivo.nome">Nome</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                {/*<th className="hand" onClick={sort('descricao')}>*/}
-                {/*  <Translate contentKey="aapmApp.arquivo.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />*/}
-                {/*</th>*/}
+                <th className="hand" onClick={sort('descricao')}>
+                  <Translate contentKey="aapmApp.arquivo.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('arquivo')}>
                   <Translate contentKey="aapmApp.arquivo.arquivo">Arquivo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -150,7 +150,7 @@ export const Arquivo = () => {
                   {/*  </Button>*/}
                   {/*</td>*/}
                   <td>{arquivo.nome}</td>
-                  {/*<td>{arquivo.descricao}</td>*/}
+                  <td>{arquivo.descricao}</td>
                   <td>
                     {arquivo.arquivo ? (
                       <div>

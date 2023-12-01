@@ -55,10 +55,10 @@ export const ReservaUpdate = () => {
       dispatch(reset());
       dispatch(getLocal(local));
       dispatch(getAssociado(account.id));
-      dispatch(getAssociados({})).then(() => {
+      dispatch(getAssociados({ size: 1 })).then(value => {
         dispatch(
           getAssociados({
-            size: associadoCount,
+            size: value.payload['headers']['x-total-count'],
             sort: 'nome,asc',
           })
         );

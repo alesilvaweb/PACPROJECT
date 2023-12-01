@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import { CorporateFare, CreditCard, SpaceBar } from '@mui/icons-material';
@@ -10,6 +10,8 @@ import Banner from 'app/modules/home/banner/banner';
 import '../home.scss';
 import validaTelefone from 'app/components/valida-telefone';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { dataAtual } from 'app/shared/util/date-utils';
+import axios from 'axios';
 
 const PaginaInicial = () => {
   const navigate = useNavigate();
@@ -18,11 +20,28 @@ const PaginaInicial = () => {
   const hasUserRole = authorities?.includes('ROLE_VIEW_REPORT');
   const account = useAppSelector(state => state.authentication.account);
   const isAuthorized = hasAnyAuthority(account.authorities, ['ROLE_VIEW_REPORT']);
-  console.log({ hasUserRole });
+  const [mensagens, setMensagens] = useState([]);
 
   if (validaTelefone().length > 0) {
     navigate(`/associado/${account.id}/contato`);
   }
+  const data = dataAtual();
+
+  async function fetchMensagens() {
+    try {
+      const response = await axios.get(
+        `/api/mensagems?endDate.greaterThanOrEqual=${data}&startDate.lessThanOrEqual=${data}&tipoId.equals=11351&status.equals=Ativo&page=0&size=20`
+      );
+      setMensagens(response.data);
+      console.log({ response });
+    } catch (error) {
+      console.error('Erro ao buscar Mensagens:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchMensagens();
+  }, []);
 
   const iconStyle = {
     // fontSize:"5vh", // Ajuste o tamanho do ícone conforme necessário
@@ -47,7 +66,8 @@ const PaginaInicial = () => {
                 Explore os recursos exclusivos para membros da AAPM e aproveite ao máximo sua associação.
               </div>
             </div>
-            <ModalInicial />
+            {mensagens.length > 0 ? <ModalInicial mensagens={mensagens} /> : null}
+
             <Grid container>
               <Grid
                 container

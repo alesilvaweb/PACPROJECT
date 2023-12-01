@@ -22,31 +22,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function ModalInicial() {
+export default function ModalInicial({ mensagens }) {
   const [open, setOpen] = useState(false);
-  const [mensagens, setMensagens] = useState([]);
+
   const handleClose = () => {
     sessionStorage.setItem('popUpShow', 'true');
     setOpen(false);
   };
-
-  const data = dataAtual();
-
-  async function fetchMensagens() {
-    try {
-      const response = await axios.get(
-        `/api/mensagems?endDate.greaterThanOrEqual=${data}&startDate.lessThanOrEqual=${data}&tipoId.equals=11351&page=0&size=20`
-      );
-      setMensagens(response.data);
-      console.log({ response });
-    } catch (error) {
-      console.error('Erro ao buscar Mensagens:', error);
-    }
-  }
-
-  useEffect(() => {
-    fetchMensagens();
-  }, []);
 
   console.log({ mensagens });
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem, Col, Row } from 'reactstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem, Button, Col, Row } from 'reactstrap';
 import { openFile, Translate } from 'react-jhipster';
 import './locais.scss';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -9,6 +9,7 @@ import { getEntity } from './local.reducer';
 import BotaoVoltar from 'app/components/botaoVoltar';
 import Breadcrunbs from 'app/components/breadcrunbs';
 import { Card } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const LocalDetail = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +33,7 @@ export const LocalDetail = () => {
         <BreadcrumbItem active>{localEntity.nome}</BreadcrumbItem>
       </Breadcrumb>
       <Row className={'locais-detail'}>
-        <Col md="8" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        <Col md="10" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
           <dl className="jh-entity-details">
             <dt>
               <h4 data-cy="localDetailsHeading">{localEntity.nome}</h4>
@@ -78,6 +79,13 @@ export const LocalDetail = () => {
               </Card>
             ) : null}
           </dd>
+          <hr />
+          <div className={'col-md-12 d-flex justify-content-start'}>
+            <Button tag={Link} id="cancel" data-cy="entityCreateCancelButton" to={'/cabanas'} replace color="info">
+              <FontAwesomeIcon icon="arrow-left" />
+              &nbsp; Voltar
+            </Button>
+          </div>
         </Col>
       </Row>
     </div>

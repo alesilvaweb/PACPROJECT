@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { ITipo } from 'app/shared/model/tipo.model';
 import { getEntity, updateEntity, createEntity, reset } from './tipo.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const TipoUpdate = () => {
   const dispatch = useAppDispatch();
@@ -64,11 +65,20 @@ export const TipoUpdate = () => {
 
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/tipo')}>
+          <a>Tipos</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{isNew ? 'Novo' : tipoEntity.tipo}</BreadcrumbItem>
+      </Breadcrumb>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="aapmApp.tipo.home.createOrEditLabel" data-cy="TipoCreateUpdateHeading">
+          <h3 id="aapmApp.tipo.home.createOrEditLabel" data-cy="TipoCreateUpdateHeading">
             <Translate contentKey="aapmApp.tipo.home.createOrEditLabel">Create or edit a Tipo</Translate>
-          </h2>
+          </h3>
         </Col>
       </Row>
       <Row className="justify-content-center">

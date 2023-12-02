@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Button, Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -17,14 +17,23 @@ export const ParametroDetail = () => {
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
-
+  const navigate = useNavigate();
   const parametroEntity = useAppSelector(state => state.parametro.entity);
   return (
     <Row>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/parametro')}>
+          <a>Parâmetros</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{parametroEntity.parametro}</BreadcrumbItem>
+      </Breadcrumb>
       <Col md="8">
-        <h2 data-cy="parametroDetailsHeading">
+        <h3 data-cy="parametroDetailsHeading">
           <Translate contentKey="aapmApp.parametro.detail.title">Parametro</Translate>
-        </h2>
+        </h3>
         <dl className="jh-entity-details">
           <dt>
             <span id="id">

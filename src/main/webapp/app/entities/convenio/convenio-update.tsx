@@ -220,18 +220,13 @@ export const ConvenioUpdate = () => {
         <BreadcrumbItem onClick={() => navigate('/convenio/list')}>
           <a>Convênios</a>
         </BreadcrumbItem>
-        {!isNew ? (
-          <BreadcrumbItem onClick={() => navigate(`/convenio/${convenioEntity.id}`)}>
-            <a>{convenioEntity.nome}</a>
-          </BreadcrumbItem>
-        ) : null}
-        <BreadcrumbItem active>{isNew ? <>Novo</> : <>Edição</>}</BreadcrumbItem>
+        <BreadcrumbItem active>{isNew ? 'Novo' : convenioEntity.nome}</BreadcrumbItem>
       </Breadcrumb>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="aapmApp.convenio.home.createOrEditLabel" data-cy="ConvenioCreateUpdateHeading">
+          <h3 id="aapmApp.convenio.home.createOrEditLabel" data-cy="ConvenioCreateUpdateHeading">
             {isNew ? <>Novo Convênio</> : <>Editar Convênio</>}
-          </h2>
+          </h3>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -244,7 +239,7 @@ export const ConvenioUpdate = () => {
                 <ValidatedField
                   name="id"
                   required
-                  hidden={true}
+                  hidden
                   readOnly
                   id="convenio-id"
                   label={translate('global.field.id')}

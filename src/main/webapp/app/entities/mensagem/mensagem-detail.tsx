@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Button, Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -17,10 +17,19 @@ export const MensagemDetail = () => {
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
-
+  const navigate = useNavigate();
   const mensagemEntity = useAppSelector(state => state.mensagem.entity);
   return (
     <Row>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/mensagem')}>
+          <a>Mensagens</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{mensagemEntity.titulo}</BreadcrumbItem>
+      </Breadcrumb>
       <Col md="8">
         <h2 data-cy="mensagemDetailsHeading">
           <Translate contentKey="aapmApp.mensagem.detail.title">Mensagem</Translate>
@@ -60,12 +69,9 @@ export const MensagemDetail = () => {
               <div>
                 {mensagemEntity.imagenContentType ? (
                   <a onClick={openFile(mensagemEntity.imagenContentType, mensagemEntity.imagen)}>
-                    <img src={`data:${mensagemEntity.imagenContentType};base64,${mensagemEntity.imagen}`} style={{ maxHeight: '30px' }} />
+                    <img src={`data:${mensagemEntity.imagenContentType};base64,${mensagemEntity.imagen}`} style={{ maxHeight: '200px' }} />
                   </a>
                 ) : null}
-                <span>
-                  {mensagemEntity.imagenContentType}, {byteSize(mensagemEntity.imagen)}
-                </span>
               </div>
             ) : null}
           </dd>

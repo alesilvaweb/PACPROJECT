@@ -191,10 +191,10 @@ export const Local = () => {
                   {/*<td>{local.modified ? <TextFormat type="date" value={local.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`/local/detail/${local.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">{/*<Translate contentKey="entity.action.view">View</Translate>*/}</span>
-                      </Button>
+                      {/*<Button tag={Link} to={`/local/detail/${local.id}`} color="info" size="sm" data-cy="entityDetailsButton">*/}
+                      {/*  <FontAwesomeIcon icon="eye" />{' '}*/}
+                      {/*  <span className="d-none d-md-inline">/!*<Translate contentKey="entity.action.view">View</Translate>*!/</span>*/}
+                      {/*</Button>*/}
                       <Button
                         tag={Link}
                         to={`/local/${local.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}

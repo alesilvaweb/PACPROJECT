@@ -65,15 +65,17 @@ export default function ModalInicial({ mensagens }) {
             <div>
               {mensagens.map(message => (
                 <>
-                  <Card>
-                    <CardMedia component="img" image={`data:${message.imagenContentType};base64,${message.imagen}`} />
-                    <CardContent>
-                      <Typography variant="h6" component="div">
-                        {message.titulo}
-                      </Typography>
-                      <Typography color="textSecondary">{message.descricao}</Typography>
-                    </CardContent>
-                  </Card>
+                  <a href={message.link} target={'_blank'}>
+                    <Card>
+                      <CardMedia component="img" image={`data:${message.imagenContentType};base64,${message.imagen}`} />
+                      <CardContent>
+                        <Typography variant="h6" component="div">
+                          {message.titulo}
+                        </Typography>
+                        <Typography color="textSecondary">{message.descricao}</Typography>
+                      </CardContent>
+                    </Card>
+                  </a>
                   <hr />
                 </>
               ))}

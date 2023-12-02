@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -76,12 +76,21 @@ export const ParametroUpdate = () => {
 
   return (
     <div>
-      <Breadcrunbs atual={!isNew ? parametroEntity.parametro : 'Novo'} />
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/parametro')}>
+          <a>Parâmetros</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{!isNew ? parametroEntity.parametro : 'Novo'}</BreadcrumbItem>
+      </Breadcrumb>
+
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="aapmApp.parametro.home.createOrEditLabel" data-cy="ParametroCreateUpdateHeading">
-            <Translate contentKey="aapmApp.parametro.home.createOrEditLabel">Create or edit a Parametro</Translate>
-          </h2>
+          <h3 id="aapmApp.parametro.home.createOrEditLabel" data-cy="ParametroCreateUpdateHeading">
+            {!isNew ? parametroEntity.parametro : 'Novo Parâmetro'}
+          </h3>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -93,6 +102,7 @@ export const ParametroUpdate = () => {
               {!isNew ? (
                 <ValidatedField
                   name="id"
+                  hidden
                   required
                   readOnly
                   id="parametro-id"

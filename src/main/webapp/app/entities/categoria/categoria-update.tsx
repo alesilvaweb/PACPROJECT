@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -72,11 +72,20 @@ export const CategoriaUpdate = () => {
 
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/categoria')}>
+          <a>Categorias</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{isNew ? 'Novo' : categoriaEntity.categoria}</BreadcrumbItem>
+      </Breadcrumb>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="aapmApp.categoria.home.createOrEditLabel" data-cy="CategoriaCreateUpdateHeading">
-            <Translate contentKey="aapmApp.categoria.home.createOrEditLabel">Create or edit a Categoria</Translate>
-          </h2>
+          <h3 id="aapmApp.categoria.home.createOrEditLabel" data-cy="CategoriaCreateUpdateHeading">
+            {isNew ? 'Nova Categoria' : categoriaEntity.categoria}
+          </h3>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -88,6 +97,7 @@ export const CategoriaUpdate = () => {
               {!isNew ? (
                 <ValidatedField
                   name="id"
+                  hidden={true}
                   required
                   readOnly
                   id="categoria-id"
@@ -109,6 +119,7 @@ export const CategoriaUpdate = () => {
                 label={translate('aapmApp.categoria.descricao')}
                 id="categoria-descricao"
                 name="descricao"
+                hidden={true}
                 data-cy="descricao"
                 type="text"
               />

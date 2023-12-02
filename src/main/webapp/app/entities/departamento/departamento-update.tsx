@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { IDepartamento } from 'app/shared/model/departamento.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './departamento.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const DepartamentoUpdate = () => {
   const dispatch = useAppDispatch();
@@ -75,11 +76,20 @@ export const DepartamentoUpdate = () => {
 
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/departamento')}>
+          <a>Departamentos</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{isNew ? 'Novo' : departamentoEntity.nome}</BreadcrumbItem>
+      </Breadcrumb>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="aapmApp.departamento.home.createOrEditLabel" data-cy="DepartamentoCreateUpdateHeading">
-            <Translate contentKey="aapmApp.departamento.home.createOrEditLabel">Create or edit a Departamento</Translate>
-          </h2>
+          <h3 id="aapmApp.departamento.home.createOrEditLabel" data-cy="DepartamentoCreateUpdateHeading">
+            {isNew ? 'Novo Departamento' : departamentoEntity.nome}
+          </h3>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -92,6 +102,7 @@ export const DepartamentoUpdate = () => {
                 <ValidatedField
                   name="id"
                   required
+                  hidden
                   readOnly
                   id="departamento-id"
                   label={translate('global.field.id')}

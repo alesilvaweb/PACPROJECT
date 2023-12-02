@@ -95,11 +95,11 @@ export const Convenio = () => {
       <h2 id="convenio-heading" data-cy="ConvenioHeading">
         <Translate contentKey="aapmApp.convenio.home.title">Convenios</Translate>
         <div className="d-flex justify-content-end">
-          <Link to="/desconto-convenio" className="btn btn-primary jh-create-entity">
-            <FontAwesomeIcon icon="plus" />
-            &nbsp; Descontos
-          </Link>
-          &nbsp;
+          {/*<Link to="/desconto-convenio" className="btn btn-primary jh-create-entity">*/}
+          {/*  <FontAwesomeIcon icon="plus" />*/}
+          {/*  &nbsp; Descontos*/}
+          {/*</Link>*/}
+          {/*&nbsp;*/}
           <Link to="/categoria" className="btn btn-primary jh-create-entity">
             <FontAwesomeIcon icon="plus" />
             &nbsp; Categorias

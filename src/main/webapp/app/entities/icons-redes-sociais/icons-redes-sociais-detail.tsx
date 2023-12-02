@@ -38,40 +38,40 @@ export const IconsRedesSociaisDetail = () => {
             </span>
           </dt>
           <dd>{iconsRedesSociaisEntity.nome}</dd>
-          <dt>
-            <span id="descricao">
-              <Translate contentKey="aapmApp.iconsRedesSociais.descricao">Descricao</Translate>
-            </span>
-          </dt>
-          <dd>{iconsRedesSociaisEntity.descricao}</dd>
-          <dt>
-            <span id="icon">
-              <Translate contentKey="aapmApp.iconsRedesSociais.icon">Icon</Translate>
-            </span>
-          </dt>
-          <dd>{iconsRedesSociaisEntity.icon}</dd>
-          <dt>
-            <span id="image">
-              <Translate contentKey="aapmApp.iconsRedesSociais.image">Image</Translate>
-            </span>
-          </dt>
-          <dd>
-            {iconsRedesSociaisEntity.image ? (
-              <div>
-                {iconsRedesSociaisEntity.imageContentType ? (
-                  <a onClick={openFile(iconsRedesSociaisEntity.imageContentType, iconsRedesSociaisEntity.image)}>
-                    <img
-                      src={`data:${iconsRedesSociaisEntity.imageContentType};base64,${iconsRedesSociaisEntity.image}`}
-                      style={{ maxHeight: '30px' }}
-                    />
-                  </a>
-                ) : null}
-                <span>
-                  {iconsRedesSociaisEntity.imageContentType}, {byteSize(iconsRedesSociaisEntity.image)}
-                </span>
-              </div>
-            ) : null}
-          </dd>
+          {/*<dt>*/}
+          {/*  <span id="descricao">*/}
+          {/*    <Translate contentKey="aapmApp.iconsRedesSociais.descricao">Descricao</Translate>*/}
+          {/*  </span>*/}
+          {/*</dt>*/}
+          {/*<dd>{iconsRedesSociaisEntity.descricao}</dd>*/}
+          {/*<dt>*/}
+          {/*  <span id="icon">*/}
+          {/*    <Translate contentKey="aapmApp.iconsRedesSociais.icon">Icon</Translate>*/}
+          {/*  </span>*/}
+          {/*</dt>*/}
+          {/*<dd>{iconsRedesSociaisEntity.icon}</dd>*/}
+          {/*<dt>*/}
+          {/*  <span id="image">*/}
+          {/*    <Translate contentKey="aapmApp.iconsRedesSociais.image">Image</Translate>*/}
+          {/*  </span>*/}
+          {/*</dt>*/}
+          {/*<dd>*/}
+          {/*  {iconsRedesSociaisEntity.image ? (*/}
+          {/*    <div>*/}
+          {/*      {iconsRedesSociaisEntity.imageContentType ? (*/}
+          {/*        <a onClick={openFile(iconsRedesSociaisEntity.imageContentType, iconsRedesSociaisEntity.image)}>*/}
+          {/*          <img*/}
+          {/*            src={`data:${iconsRedesSociaisEntity.imageContentType};base64,${iconsRedesSociaisEntity.image}`}*/}
+          {/*            style={{ maxHeight: '30px' }}*/}
+          {/*          />*/}
+          {/*        </a>*/}
+          {/*      ) : null}*/}
+          {/*      <span>*/}
+          {/*        {iconsRedesSociaisEntity.imageContentType}, {byteSize(iconsRedesSociaisEntity.image)}*/}
+          {/*      </span>*/}
+          {/*    </div>*/}
+          {/*  ) : null}*/}
+          {/*</dd>*/}
         </dl>
         <Button tag={Link} to="/icons-redes-sociais" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

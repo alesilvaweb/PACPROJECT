@@ -40,7 +40,7 @@ export const DepartamentoDeleteDialog = () => {
   };
 
   return (
-    <Modal isOpen toggle={handleClose}>
+    <Modal isOpen toggle={handleClose} style={{ marginTop: '30vh' }}>
       <ModalHeader toggle={handleClose} data-cy="departamentoDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>

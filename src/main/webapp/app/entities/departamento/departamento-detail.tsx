@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Button, Row, Col, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -17,14 +17,23 @@ export const DepartamentoDetail = () => {
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
-
+  const navigate = useNavigate();
   const departamentoEntity = useAppSelector(state => state.departamento.entity);
   return (
     <Row>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/departamento')}>
+          <a>Departamentos</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{departamentoEntity.nome}</BreadcrumbItem>
+      </Breadcrumb>
       <Col md="8">
-        <h2 data-cy="departamentoDetailsHeading">
+        <h3 data-cy="departamentoDetailsHeading">
           <Translate contentKey="aapmApp.departamento.detail.title">Departamento</Translate>
-        </h2>
+        </h3>
         <dl className="jh-entity-details">
           <dt>
             <span id="id">

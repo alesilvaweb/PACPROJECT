@@ -131,6 +131,12 @@ const LoginModal = (props: ILoginModalProps) => {
           <Link href="/account/reset/request" underline="none">
             Primeiro acesso?
           </Link>
+          {/*<Button type={'button'} color={'primary'} onClick={()=> {*/}
+          {/*  navigate('/account/reset/request');*/}
+          {/*  return false;*/}
+          {/*}} >*/}
+          {/*  Primeiro acesso?*/}
+          {/*</Button>*/}
         </div>
       </Col>
     </div>

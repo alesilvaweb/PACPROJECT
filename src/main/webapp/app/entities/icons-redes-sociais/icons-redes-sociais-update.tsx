@@ -67,7 +67,7 @@ export const IconsRedesSociaisUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="aapmApp.iconsRedesSociais.home.createOrEditLabel" data-cy="IconsRedesSociaisCreateUpdateHeading">
-            <Translate contentKey="aapmApp.iconsRedesSociais.home.createOrEditLabel">Create or edit a IconsRedesSociais</Translate>
+            {isNew ? 'Nova Rede Social' : iconsRedesSociaisEntity.nome}
           </h2>
         </Col>
       </Row>
@@ -101,6 +101,7 @@ export const IconsRedesSociaisUpdate = () => {
                 label={translate('aapmApp.iconsRedesSociais.descricao')}
                 id="icons-redes-sociais-descricao"
                 name="descricao"
+                hidden
                 data-cy="descricao"
                 type="text"
               />
@@ -108,6 +109,7 @@ export const IconsRedesSociaisUpdate = () => {
                 label={translate('aapmApp.iconsRedesSociais.icon')}
                 id="icons-redes-sociais-icon"
                 name="icon"
+                hidden
                 data-cy="icon"
                 type="text"
               />
@@ -115,6 +117,7 @@ export const IconsRedesSociaisUpdate = () => {
                 label={translate('aapmApp.iconsRedesSociais.image')}
                 id="icons-redes-sociais-image"
                 name="image"
+                hidden
                 data-cy="image"
                 isImage
                 accept="image/*"

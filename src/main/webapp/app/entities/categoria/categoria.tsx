@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { ICategoria } from 'app/shared/model/categoria.model';
 import { getEntities } from './categoria.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Categoria = () => {
   const dispatch = useAppDispatch();
@@ -83,7 +84,8 @@ export const Categoria = () => {
 
   return (
     <div>
-      <h2 id="categoria-heading" data-cy="CategoriaHeading">
+      <Breadcrunbs atual={'Categorias'} />
+      <h3 id="categoria-heading" data-cy="CategoriaHeading">
         <Translate contentKey="aapmApp.categoria.home.title">Categorias</Translate>
         <div className="d-flex justify-content-end">
           <Link to="/convenio" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
@@ -101,7 +103,7 @@ export const Categoria = () => {
             {/*<Translate contentKey="aapmApp.categoria.home.createLabel">Create new Categoria</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </h3>
       <div className="table-responsive">
         {categoriaList && categoriaList.length > 0 ? (
           <Table responsive>
@@ -113,15 +115,15 @@ export const Categoria = () => {
                 <th className="hand" onClick={sort('categoria')}>
                   <Translate contentKey="aapmApp.categoria.categoria">Categoria</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('descricao')}>
-                  <Translate contentKey="aapmApp.categoria.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('created')}>
-                  <Translate contentKey="aapmApp.categoria.created">Created</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('modified')}>
-                  <Translate contentKey="aapmApp.categoria.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('descricao')}>*/}
+                {/*  <Translate contentKey="aapmApp.categoria.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('created')}>*/}
+                {/*  <Translate contentKey="aapmApp.categoria.created">Created</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
+                {/*<th className="hand" onClick={sort('modified')}>*/}
+                {/*  <Translate contentKey="aapmApp.categoria.modified">Modified</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th />
               </tr>
             </thead>
@@ -134,9 +136,9 @@ export const Categoria = () => {
                   {/*  </Button>*/}
                   {/*</td>*/}
                   <td>{categoria.categoria}</td>
-                  <td>{categoria.descricao}</td>
-                  <td>{categoria.created ? <TextFormat type="date" value={categoria.created} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{categoria.modified ? <TextFormat type="date" value={categoria.modified} format={APP_DATE_FORMAT} /> : null}</td>
+                  {/*<td>{categoria.descricao}</td>*/}
+                  {/*<td>{categoria.created ? <TextFormat type="date" value={categoria.created} format={APP_DATE_FORMAT} /> : null}</td>*/}
+                  {/*<td>{categoria.modified ? <TextFormat type="date" value={categoria.modified} format={APP_DATE_FORMAT} /> : null}</td>*/}
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/categoria/${categoria.id}`} color="info" size="sm" data-cy="entityDetailsButton">

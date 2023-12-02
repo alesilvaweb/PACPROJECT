@@ -81,7 +81,7 @@ export const IconsRedesSociais = () => {
   return (
     <div>
       <Breadcrunbs atual={'Redes Sociais'} />
-      <h2 id="icons-redes-sociais-heading" data-cy="IconsRedesSociaisHeading">
+      <h3 id="icons-redes-sociais-heading" data-cy="IconsRedesSociaisHeading">
         <Translate contentKey="aapmApp.iconsRedesSociais.home.title">Icons Redes Sociais</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
@@ -99,21 +99,21 @@ export const IconsRedesSociais = () => {
             {/*<Translate contentKey="aapmApp.iconsRedesSociais.home.createLabel">Create new Icons Redes Sociais</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </h3>
       <div className="table-responsive">
         {iconsRedesSociaisList && iconsRedesSociaisList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.iconsRedesSociais.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.iconsRedesSociais.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('nome')}>
                   <Translate contentKey="aapmApp.iconsRedesSociais.nome">Nome</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('descricao')}>
-                  <Translate contentKey="aapmApp.iconsRedesSociais.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('descricao')}>*/}
+                {/*  <Translate contentKey="aapmApp.iconsRedesSociais.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 {/*<th className="hand" onClick={sort('icon')}>*/}
                 {/*  <Translate contentKey="aapmApp.iconsRedesSociais.icon">Icon</Translate> <FontAwesomeIcon icon="sort" />*/}
                 {/*</th>*/}
@@ -126,13 +126,13 @@ export const IconsRedesSociais = () => {
             <tbody>
               {iconsRedesSociaisList.map((iconsRedesSociais, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/icons-redes-sociais/${iconsRedesSociais.id}`} color="link" size="sm">
-                      {iconsRedesSociais.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/icons-redes-sociais/${iconsRedesSociais.id}`} color="link" size="sm">*/}
+                  {/*    {iconsRedesSociais.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{iconsRedesSociais.nome}</td>
-                  <td>{iconsRedesSociais.descricao}</td>
+                  {/*<td>{iconsRedesSociais.descricao}</td>*/}
                   {/*<td>{iconsRedesSociais.icon}</td>*/}
                   {/*<td>*/}
                   {/*  {iconsRedesSociais.image ? (*/}

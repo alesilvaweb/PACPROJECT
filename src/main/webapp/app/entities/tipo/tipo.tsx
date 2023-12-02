@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { ITipo } from 'app/shared/model/tipo.model';
 import { getEntities } from './tipo.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Tipo = () => {
   const dispatch = useAppDispatch();
@@ -83,7 +84,8 @@ export const Tipo = () => {
 
   return (
     <div>
-      <h2 id="tipo-heading" data-cy="TipoHeading">
+      <Breadcrunbs atual={'Tipos'} />
+      <h3 id="tipo-heading" data-cy="TipoHeading">
         <Translate contentKey="aapmApp.tipo.home.title">Tipos</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
@@ -96,7 +98,7 @@ export const Tipo = () => {
             {/*<Translate contentKey="aapmApp.tipo.home.createLabel">Create new Tipo</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </h3>
       <div className="table-responsive">
         {tipoList && tipoList.length > 0 ? (
           <Table responsive>

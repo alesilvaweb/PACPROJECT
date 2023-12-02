@@ -85,7 +85,7 @@ export const Mensagem = () => {
   return (
     <div>
       <Breadcrunbs atual={'Mensagens'} />
-      <h2 id="mensagem-heading" data-cy="MensagemHeading">
+      <h3 id="mensagem-heading" data-cy="MensagemHeading">
         <Translate contentKey="aapmApp.mensagem.home.title">Mensagems</Translate>
         <div className="d-flex justify-content-end">
           <Link to="/tipo" className="btn btn-primary jh-create-entity">
@@ -102,30 +102,30 @@ export const Mensagem = () => {
             {/*<Translate contentKey="aapmApp.mensagem.home.createLabel">Create new Mensagem</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </h3>
       <div className="table-responsive">
         {mensagemList && mensagemList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
-                <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="aapmApp.mensagem.id">ID</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('id')}>*/}
+                {/*  <Translate contentKey="aapmApp.mensagem.id">ID</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('titulo')}>
                   <Translate contentKey="aapmApp.mensagem.titulo">Titulo</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('descricao')}>
                   <Translate contentKey="aapmApp.mensagem.descricao">Descricao</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('conteudo')}>
-                  <Translate contentKey="aapmApp.mensagem.conteudo">Conteudo</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('conteudo')}>*/}
+                {/*  <Translate contentKey="aapmApp.mensagem.conteudo">Conteudo</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('imagen')}>
                   <Translate contentKey="aapmApp.mensagem.imagen">Imagen</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('link')}>
-                  <Translate contentKey="aapmApp.mensagem.link">Link</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+                {/*<th className="hand" onClick={sort('link')}>*/}
+                {/*  <Translate contentKey="aapmApp.mensagem.link">Link</Translate> <FontAwesomeIcon icon="sort" />*/}
+                {/*</th>*/}
                 <th className="hand" onClick={sort('startDate')}>
                   <Translate contentKey="aapmApp.mensagem.startDate">Start Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -150,14 +150,14 @@ export const Mensagem = () => {
             <tbody>
               {mensagemList.map((mensagem, i) => (
                 <tr key={`entity-${i}`} data-cy="entityTable">
-                  <td>
-                    <Button tag={Link} to={`/mensagem/${mensagem.id}`} color="link" size="sm">
-                      {mensagem.id}
-                    </Button>
-                  </td>
+                  {/*<td>*/}
+                  {/*  <Button tag={Link} to={`/mensagem/${mensagem.id}`} color="link" size="sm">*/}
+                  {/*    {mensagem.id}*/}
+                  {/*  </Button>*/}
+                  {/*</td>*/}
                   <td>{mensagem.titulo}</td>
                   <td>{mensagem.descricao}</td>
-                  <td>{mensagem.conteudo}</td>
+                  {/*<td>{mensagem.conteudo}</td>*/}
                   <td>
                     {mensagem.imagen ? (
                       <div>
@@ -167,13 +167,13 @@ export const Mensagem = () => {
                             &nbsp;
                           </a>
                         ) : null}
-                        <span>
-                          {mensagem.imagenContentType}, {byteSize(mensagem.imagen)}
-                        </span>
+                        {/*<span>*/}
+                        {/*   {byteSize(mensagem.imagen)}*/}
+                        {/*</span>*/}
                       </div>
                     ) : null}
                   </td>
-                  <td>{mensagem.link}</td>
+                  {/*<td>{mensagem.link}</td>*/}
                   <td>
                     {mensagem.startDate ? <TextFormat type="date" value={mensagem.startDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>

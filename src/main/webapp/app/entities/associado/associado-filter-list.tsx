@@ -67,23 +67,22 @@ const AssociadoFilter = () => {
           <thead>
             <tr>
               <th className="hand" onClick={() => handleSort('nome')}>
-                Nome
+                Nome &nbsp;
                 <FontAwesomeIcon icon="sort" />
               </th>
               <th className="hand" onClick={() => handleSort('id')}>
-                Matrícula
-                <FontAwesomeIcon icon="sort" />
+                Matrícula &nbsp; <FontAwesomeIcon icon="sort" />
               </th>
 
               <th className="hand" onClick={() => handleSort('status')}>
-                Status
+                Status &nbsp;
                 <FontAwesomeIcon icon="sort" />
               </th>
               <th className="hand" onClick={() => handleSort('dataNascimento')}>
-                Data Nascimento
+                Data Nascimento &nbsp;
                 <FontAwesomeIcon icon="sort" />
               </th>
-              {/*<th> </th>*/}
+              <th> </th>
             </tr>
           </thead>
           <tbody>

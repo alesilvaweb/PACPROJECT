@@ -88,7 +88,7 @@ export const LocalUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h3 id="aapmApp.local.home.createOrEditLabel" data-cy="LocalCreateUpdateHeading">
-            <Translate contentKey="aapmApp.local.home.createOrEditLabel">Create or edit a Local</Translate>
+            {isNew ? 'Novo Local' : 'Editar Local'}
           </h3>
         </Col>
       </Row>

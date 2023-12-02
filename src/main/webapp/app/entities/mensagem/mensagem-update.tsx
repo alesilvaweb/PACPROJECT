@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -82,11 +82,20 @@ export const MensagemUpdate = () => {
 
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/mensagem')}>
+          <a>Mensagens</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{isNew ? 'Novo' : mensagemEntity.titulo}</BreadcrumbItem>
+      </Breadcrumb>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="aapmApp.mensagem.home.createOrEditLabel" data-cy="MensagemCreateUpdateHeading">
-            <Translate contentKey="aapmApp.mensagem.home.createOrEditLabel">Create or edit a Mensagem</Translate>
-          </h2>
+          <h3 id="aapmApp.mensagem.home.createOrEditLabel" data-cy="MensagemCreateUpdateHeading">
+            {isNew ? 'Nova Mensagem' : 'Editar Mensagem'}
+          </h3>
         </Col>
       </Row>
       <Row className="justify-content-center">
@@ -99,6 +108,7 @@ export const MensagemUpdate = () => {
                 <ValidatedField
                   name="id"
                   required
+                  hidden
                   readOnly
                   id="mensagem-id"
                   label={translate('global.field.id')}
@@ -129,6 +139,7 @@ export const MensagemUpdate = () => {
                 label={translate('aapmApp.mensagem.conteudo')}
                 id="mensagem-conteudo"
                 name="conteudo"
+                hidden
                 data-cy="conteudo"
                 type="textarea"
               />

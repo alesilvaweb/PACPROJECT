@@ -12,6 +12,7 @@ import validaTelefone from 'app/components/valida-telefone';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { dataAtual } from 'app/shared/util/date-utils';
 import axios from 'axios';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 const PaginaInicial = () => {
   const navigate = useNavigate();

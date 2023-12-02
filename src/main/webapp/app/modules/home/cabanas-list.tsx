@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -11,8 +11,11 @@ import { BottomNavigation, BottomNavigationAction, Card, Grid } from '@mui/mater
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Divider from '@mui/material/Divider';
-import { CalendarMonth, Info, LocationOn } from '@mui/icons-material';
+import { CalendarMonth, Info, LocationOn, Map, WhatsApp } from '@mui/icons-material';
 import Breadcrunbs from 'app/components/breadcrunbs';
+import Button from '@mui/material/Button';
+import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import Link from '@mui/material/Link';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
@@ -86,15 +89,22 @@ export default function CabanasList() {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const maps = `https://www.google.com/maps/place/Associac%C3%A3o+Atl%C3%A9tica+Philip+Morris+-+AAPM/@-29.7616726,-52.4307327,18z/data=!4m6!3m5!1s0x951ca3eb61944605:0x3d9978ee7389b7b!8m2!3d-29.7615903!4d-52.430465!16s%2Fg%2F11c32bznx8?authuser=0&entry=ttu`;
 
-  const handleClose = () => {
-    setOpen(false);
+  const center = {
+    lat: -29.761491,
+    lng: -52.43024,
   };
+  const { lat, lng } = center;
+  const whatsappMessage = `https://wa.me/?text=Localização:%20https://maps.google.com/?q=${lat},${lng}`;
+  const closeBtn = (
+    <button className="close" onClick={toggle} type="button">
+      &times;
+    </button>
+  );
 
   /* Carregamento de locais*/
   const getAllEntities = () => {
@@ -200,7 +210,7 @@ export default function CabanasList() {
                             label="Localização"
                             icon={<LocationOn sx={{ fontSize: '30px' }} />}
                             onClick={() => {
-                              navigate('/mapa');
+                              toggle();
                             }}
                           />
                         </BottomNavigation>
@@ -211,6 +221,42 @@ export default function CabanasList() {
               ))}
             </Grid>
           </Box>
+
+          <Modal isOpen={modal} toggle={toggle} style={{ marginTop: '30vh' }}>
+            <ModalHeader toggle={toggle} close={closeBtn}>
+              Localização
+            </ModalHeader>
+            <ModalBody>
+              <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
+                <Button
+                  onClick={() => {
+                    window.open(whatsappMessage, '_blank');
+                    toggle();
+                  }}
+                  startIcon={<WhatsApp />}
+                  color={'success'}
+                >
+                  Compartilhar
+                </Button>
+                &nbsp;
+                <Button
+                  onClick={() => {
+                    window.open(maps, '_blank');
+                    toggle();
+                  }}
+                  startIcon={<Map />}
+                  color={'primary'}
+                >
+                  Abrir no Maps
+                </Button>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={toggle}>
+                Fechar
+              </Button>
+            </ModalFooter>
+          </Modal>
         </div>
       ) : (
         <div>Carregando...</div>

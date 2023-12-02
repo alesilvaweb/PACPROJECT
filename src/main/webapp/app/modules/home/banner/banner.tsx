@@ -40,17 +40,18 @@ export default function Banner() {
   // @ts-ignore
   return (
     <div>
-      <Typography variant={'h5'}>Convênios</Typography>
+      <div className={'subtiTileCard'}>Convênios</div>
       <Card sx={cardStyle}>
         <Swiper
           onAutoplay={true}
+          effect={'fade'}
           loop={true}
           autoplay={{ delay: 3000 }}
-          navigation={true}
+          // navigation={true}
           breakpoints={{
             200: {
               slidesPerView: 1,
-              spaceBetween: 20,
+              spaceBetween: 50,
             },
             750: {
               slidesPerView: 2,

@@ -81,6 +81,8 @@ public class Local implements Serializable {
     @JsonIgnoreProperties(value = { "local", "associado", "departamento" }, allowSetters = true)
     private Set<Reserva> reservas = new HashSet<>();
 
+    public Local() {}
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {

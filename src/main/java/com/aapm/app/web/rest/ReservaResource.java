@@ -1,5 +1,7 @@
 package com.aapm.app.web.rest;
 
+import com.aapm.app.domain.Local;
+import com.aapm.app.domain.Reserva;
 import com.aapm.app.domain.User;
 import com.aapm.app.repository.ReservaRepository;
 import com.aapm.app.repository.UserRepository;
@@ -80,20 +82,29 @@ public class ReservaResource {
         if (reservaDTO.getId() != null) {
             throw new BadRequestAlertException("A new reserva cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ReservaDTO result = reservaService.save(reservaDTO);
-        User newUser = userRepository
-            .findById(result.getAssociado().getId())
-            .stream()
-            .filter(p -> Objects.equals(p.getId(), result.getAssociado().getId()))
-            .findFirst()
-            .orElse(null);
+        Local local = new Local();
+        local.setId(reservaDTO.getLocal().getId());
 
-        mailService.sendReservaEmail(result, newUser);
+        List<Reserva> reserva = reservaRepository.findReservaByDataAndLocal(reservaDTO.getData(), local);
 
-        return ResponseEntity
-            .created(new URI("/api/reservas/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        if (reserva.isEmpty()) {
+            ReservaDTO result = reservaService.save(reservaDTO);
+            User newUser = userRepository
+                .findById(result.getAssociado().getId())
+                .stream()
+                .filter(p -> Objects.equals(p.getId(), result.getAssociado().getId()))
+                .findFirst()
+                .orElse(null);
+
+            mailService.sendReservaEmail(result, newUser);
+
+            return ResponseEntity
+                .created(new URI("/api/reservas/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+        } else {
+            throw new BadRequestAlertException("Esta data já possue reserva !!", reservaDTO.getLocal().getNome(), "reservaexists");
+        }
     }
 
     /**

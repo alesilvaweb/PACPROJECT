@@ -8,7 +8,7 @@ import { Card, CardActionArea, Grid } from '@mui/material';
 
 export default function CardDashboard({ link, title, icon, subtitle }) {
   const navigate = useNavigate();
-  // @ts-ignore
+
   return (
     <Grid item xs={4} sm={4} md={4} sx={{ marginTop: '5%' }}>
       <Card

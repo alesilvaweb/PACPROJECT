@@ -16,6 +16,7 @@ import Breadcrunbs from 'app/components/breadcrunbs';
 import Button from '@mui/material/Button';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import Link from '@mui/material/Link';
+import Spinner from 'app/components/spinner';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
@@ -259,7 +260,8 @@ export default function CabanasList() {
           </Modal>
         </div>
       ) : (
-        <div>Carregando...</div>
+        // <div>Carregando...</div>
+        <Spinner />
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import { CorporateFare, CreditCard, SpaceBar } from '@mui/icons-material';
+import { CorporateFare, CreditCard } from '@mui/icons-material';
 import { useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
 import CardDashboard from 'app/modules/home/inicial/card-dashboard';
@@ -12,21 +12,21 @@ import validaTelefone from 'app/components/valida-telefone';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { dataAtual } from 'app/shared/util/date-utils';
 import axios from 'axios';
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { LoadingBar } from 'react-redux-loading-bar';
 
 const PaginaInicial = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   const authorities = useAppSelector(state => state.authentication.authorities);
-  const hasUserRole = authorities?.includes('ROLE_VIEW_REPORT');
   const account = useAppSelector(state => state.authentication.account);
   const isAuthorized = hasAnyAuthority(account.authorities, ['ROLE_VIEW_REPORT']);
   const [mensagens, setMensagens] = useState([]);
+  const hasPopUpBeenShown = sessionStorage.getItem('popUpShow');
+  const data = dataAtual();
 
   if (validaTelefone().length > 0) {
     navigate(`/associado/${account.id}/contato`);
   }
-  const data = dataAtual();
 
   async function fetchMensagens() {
     try {
@@ -41,7 +41,9 @@ const PaginaInicial = () => {
   }
 
   useEffect(() => {
-    fetchMensagens();
+    if (!hasPopUpBeenShown) {
+      fetchMensagens();
+    }
   }, []);
 
   const iconStyle = {
@@ -64,12 +66,13 @@ const PaginaInicial = () => {
             <div>
               <div className={'tituloInicial'}>Bem-vindos ao App da AAPM</div>
               <div className={'subtiTileCard'}>
-                Explore os recursos exclusivos para membros da AAPM e aproveite ao máximo sua associação.
+                Explore os recursos exclusivos para membros da AAPM
+                <span className={'text-descricao'}> e aproveite ao máximo sua associação.</span>
               </div>
             </div>
             {mensagens.length > 0 ? <ModalInicial mensagens={mensagens} /> : null}
 
-            <Grid container>
+            <Grid container className={'grid-cards'}>
               <Grid
                 container
                 spacing={{ xs: 2, md: 2, sm: 1 }}
@@ -95,16 +98,14 @@ const PaginaInicial = () => {
                   icon={<CorporateFare sx={iconStyle} />}
                 />
               </Grid>
-
-              <Grid item xs={12} sm={12} md={12}>
-                <br />
+              <Grid item xs={12} sm={12} md={12} style={{ marginTop: '5px' }}>
                 <Banner />
               </Grid>
             </Grid>
             <br />
           </>
         ) : (
-          <div>Carregando ...</div>
+          <LoadingBar />
         )}
       </div>
     );

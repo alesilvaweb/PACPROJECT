@@ -1,5 +1,6 @@
 package com.aapm.app.service.dto;
 
+import com.aapm.app.domain.Local;
 import com.aapm.app.domain.enumeration.StatusReserva;
 import java.io.Serializable;
 import java.time.Instant;

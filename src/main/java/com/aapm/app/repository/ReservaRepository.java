@@ -1,8 +1,13 @@
 package com.aapm.app.repository;
 
+import com.aapm.app.domain.Local;
 import com.aapm.app.domain.Reserva;
+import com.aapm.app.service.dto.LocalDTO;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -21,6 +26,8 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>, JpaSpec
     default List<Reserva> findAllWithEagerRelationships() {
         return this.findAllWithToOneRelationships();
     }
+
+    List<Reserva> findReservaByDataAndLocal(@NotNull LocalDate data, Local local);
 
     default Page<Reserva> findAllWithEagerRelationships(Pageable pageable) {
         return this.findAllWithToOneRelationships(pageable);

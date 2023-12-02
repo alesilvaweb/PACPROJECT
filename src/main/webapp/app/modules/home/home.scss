@@ -47,10 +47,27 @@ Main page styles
     font-size: 1.2rem;
   }
 }
+.grid-cards {
+  @media (min-width: 1500px) and (max-width: 5000px) {
+    margin-top: -40px;
+  }
+  @media (min-width: 800px) and (max-width: 1500px) {
+    margin-top: -30px;
+  }
+  @media (min-width: 200px) and (max-width: 600px) {
+    margin-top: -5px;
+  }
+}
+.text-descricao {
+  @media (min-width: 200px) and (max-width: 600px) {
+    display: none;
+  }
+}
 
 .tituloInicial {
   font-size: 2rem;
   font-weight: 500;
+  margin-top: -15px;
 
   @media (min-width: 200px) and (max-width: 1000px) {
     font-size: 1.5rem;

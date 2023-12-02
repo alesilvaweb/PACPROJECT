@@ -10,8 +10,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { Card, CardContent, CardMedia, useMediaQuery, useTheme } from '@mui/material';
-import axios from 'axios';
-import { dataAtual } from 'app/shared/util/date-utils';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -34,7 +32,6 @@ export default function ModalInicial({ mensagens }) {
 
   useEffect(() => {
     const hasPopUpBeenShown = sessionStorage.getItem('popUpShow');
-
     if (!hasPopUpBeenShown) {
       setOpen(true);
     }

@@ -67,7 +67,7 @@ export const App = () => {
             </ErrorBoundary>
             {/*</Card>*/}
           </div>
-          {/*<Footer />*/}
+          <Footer />
         </div>
       </BrowserRouter>
     </ThemeProvider>

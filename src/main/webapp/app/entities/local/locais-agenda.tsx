@@ -15,6 +15,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
+import Spinner from 'app/components/spinner';
 
 const LocaisAgenda = args => {
   const dispatch = useAppDispatch();
@@ -163,13 +164,13 @@ const LocaisAgenda = args => {
   });
 
   if (statusText != 'OK') {
-    return <div>Carregando ...</div>;
+    return <Spinner />;
   } else {
     return (
       <div>
         <div>
           {loadingLocal ? (
-            <p>Carregando ...</p>
+            <Spinner />
           ) : (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>

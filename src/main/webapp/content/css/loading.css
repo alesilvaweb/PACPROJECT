@@ -150,13 +150,12 @@
   -webkit-animation-delay: 0s;
   animation-delay: 0s;
 }
-
 /* APP LOADING */
 .lds-spinner {
   color: #f50101;
   display: inline-block;
   position: relative;
-  margin-top: 10rem;
+  margin-top: 10vh;
   width: 80px;
   height: 80px;
 }

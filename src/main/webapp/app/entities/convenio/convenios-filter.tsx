@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/convenio/convenio.reducer';
 import ConvenioDetail from 'app/entities/convenio/convenio-detail';
 import { Input } from 'reactstrap';
+import Spinner from 'app/components/spinner';
 
 const ConveniosFilter = () => {
   const [convenios, setConvenios] = useState([]);
@@ -181,7 +182,7 @@ const ConveniosFilter = () => {
           ) : null}
         </div>
       ) : (
-        <div>Carregando...</div>
+        <Spinner />
       )}
     </div>
   );

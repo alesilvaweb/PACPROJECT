@@ -17,6 +17,7 @@ import { createEntity, getEntity, reset, updateEntity } from './reserva.reducer'
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import axios from 'axios';
+import Spinner from 'app/components/spinner';
 
 export const ReservaUpdate = () => {
   const dispatch = useAppDispatch();
@@ -38,6 +39,7 @@ export const ReservaUpdate = () => {
   const associadoCount = useAppSelector(state => state.associado.totalItems);
   const localEntity = useAppSelector(state => state.local.entity);
   const loading = useAppSelector(state => state.reserva.loading);
+  const loadingAssociado = useAppSelector(state => state.associado.loading);
   const updating = useAppSelector(state => state.reserva.updating);
   const updateSuccess = useAppSelector(state => state.reserva.updateSuccess);
   const [localId, setLocalId] = useState('');
@@ -134,8 +136,8 @@ export const ReservaUpdate = () => {
   console.log(reservaEntity?.descricao?.slice(0, 10));
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
+      {loading || loadingAssociado ? (
+        <Spinner />
       ) : (
         <div>
           <Breadcrumb>

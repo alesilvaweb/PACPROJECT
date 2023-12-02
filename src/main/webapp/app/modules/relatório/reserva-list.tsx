@@ -184,6 +184,8 @@ const ReservaList = () => {
         <BreadcrumbItem active>Relatório de Reservas</BreadcrumbItem>
       </Breadcrumb>
       <MaterialReactTable table={table} />
+      <br />
+      <br />
     </div>
   );
 };

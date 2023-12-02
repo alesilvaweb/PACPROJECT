@@ -8,6 +8,7 @@ import { useAppSelector } from 'app/config/store';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import CardActions from '@mui/material/CardActions';
+import Spinner from 'app/components/spinner';
 
 function ConveniosList() {
   const [convenios, setConvenios] = useState([]);
@@ -191,7 +192,7 @@ function ConveniosList() {
           {/*<Pagination count={Math.ceil(convenios.length / itemsPerPage)} page={page} onChange={handlePageChange} color="primary" />*/}
         </div>
       ) : (
-        <div>Carregando...</div>
+        <Spinner />
       )}
     </div>
   );

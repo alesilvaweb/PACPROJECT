@@ -19,6 +19,7 @@ import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
+import Spinner from 'app/components/spinner';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#e43922',
@@ -98,17 +99,20 @@ function ConvenioDetalhe() {
             }}
           />
         ) : (
-          <Skeleton
-            variant="rectangular"
-            sx={{
-              width: '250px',
-              height: '150px',
-              float: 'right',
-              borderRadius: '4px',
-              boxShadow: 5,
-              marginRight: '10px',
-            }}
-          />
+          <>
+            <Spinner />
+            <Skeleton
+              variant="rectangular"
+              sx={{
+                width: '250px',
+                height: '150px',
+                float: 'right',
+                borderRadius: '4px',
+                boxShadow: 5,
+                marginRight: '10px',
+              }}
+            />
+          </>
         )}
         <CardContent>
           {convenioEntity.logo ? (

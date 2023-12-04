@@ -6,14 +6,18 @@
   color: white;
   bottom: 0;
   width: 100%;
-  height: 4vh;
+  height: 5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row-reverse;
+
   @media (min-width: 200px) and (max-width: 600px) {
     justify-content: center;
   }
+}
+footer :hover {
+  box-shadow: #474bff;
 }
 
 .copyright {

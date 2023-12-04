@@ -9,6 +9,9 @@ import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useAppSelector } from 'app/config/store';
+import HomeIcon from '@mui/icons-material/Home';
+import { useNavigate } from 'react-router-dom';
+import { Col } from 'reactstrap';
 
 export const Footer = () => {
   const ano = formatDate(new Date(now()), { year: 'numeric' });
@@ -17,6 +20,7 @@ export const Footer = () => {
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
+  const navigate = useNavigate();
   const iconsFooter = {
     fontSize: '10px',
     color: '#e2e2e2',
@@ -66,20 +70,27 @@ export const Footer = () => {
   }, [parametro]);
 
   return (
-    <div>
+    <>
       <footer className={'footer-app'}>
         <div className={'copyright'}>
           &nbsp;
           <Copyright sx={{ fontSize: '18px' }} />
           <span style={{ fontSize: '12px' }}>&nbsp;{ano}&nbsp;AAPM</span>&nbsp;
         </div>
-        <div
+        <Col
+          xs={10}
+          sm={4}
+          xl={3}
           style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
           }}
         >
+          <IconButton color="primary" onClick={() => navigate('/')} sx={iconsFooter}>
+            <HomeIcon />
+          </IconButton>
+          &nbsp;&nbsp;
           <IconButton color="primary" href={'https://www.facebook.com/aapmscs'} target="_blank" sx={iconsFooter}>
             <FacebookIcon />
           </IconButton>
@@ -95,7 +106,7 @@ export const Footer = () => {
           <IconButton color="primary" onClick={toggleDrawer(true)} sx={iconsFooter}>
             <Phone />
           </IconButton>
-        </div>
+        </Col>
         <div className={'versao'}>
           <Update sx={{ fontSize: '18px' }} />
           &nbsp;<span style={{ fontSize: '12px' }}>{VERSION}</span>&nbsp;
@@ -130,7 +141,7 @@ export const Footer = () => {
           </div>
         </Box>
       </Drawer>
-    </div>
+    </>
   );
 };
 

@@ -12,6 +12,7 @@ import { useAppSelector } from 'app/config/store';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
 import { Col } from 'reactstrap';
+import Link from '@mui/material/Link';
 
 export const Footer = () => {
   const ano = formatDate(new Date(now()), { year: 'numeric' });
@@ -21,12 +22,31 @@ export const Footer = () => {
   const [telefone, setTelefone] = useState('');
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   const navigate = useNavigate();
+
   const iconsFooter = {
-    fontSize: '10px',
     color: '#e2e2e2',
     ':hover': {
       color: '#1974d0',
     },
+  };
+
+  const icon = {
+    fontSize: '3vh',
+    '@media (min-width: 200px) and (max-width: 600px)': {
+      fontSize: '4vh',
+    },
+  };
+  const linkContato = {
+    color: '#ffffff',
+    textDecoration: 'none',
+    ':hover': {
+      color: '#1974d0',
+    },
+  };
+
+  const handleClick = () => {
+    const link = `tel:${telefone}`;
+    window.location.href = link;
   };
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -39,6 +59,7 @@ export const Footer = () => {
       });
     }
   };
+
   async function fetchParametros() {
     try {
       const response = await axios.get(`api/parametros?chave.in=mail-aapm&chave.in=fone-aapm&page=0&size=20`);
@@ -88,23 +109,23 @@ export const Footer = () => {
           }}
         >
           <IconButton color="primary" onClick={() => navigate('/')} sx={iconsFooter}>
-            <HomeIcon />
+            <HomeIcon sx={icon} />
           </IconButton>
           &nbsp;&nbsp;
           <IconButton color="primary" href={'https://www.facebook.com/aapmscs'} target="_blank" sx={iconsFooter}>
-            <FacebookIcon />
+            <FacebookIcon sx={icon} />
           </IconButton>
           &nbsp;&nbsp;
           <IconButton color="primary" href={'https://www.instagram.com/aapmscs'} target="_blank" sx={iconsFooter}>
-            <Instagram />
+            <Instagram sx={icon} />
           </IconButton>
           &nbsp;&nbsp;
           <IconButton color="primary" sx={iconsFooter} onClick={toggleDrawer(true)}>
-            <Mail />
+            <Mail sx={icon} />
           </IconButton>
           &nbsp;&nbsp;
           <IconButton color="primary" onClick={toggleDrawer(true)} sx={iconsFooter}>
-            <Phone />
+            <Phone sx={icon} />
           </IconButton>
         </Col>
         <div className={'versao'}>
@@ -125,20 +146,25 @@ export const Footer = () => {
           }}
           role="presentation"
         >
-          {/*<p>*/}
-          {/*  <span>*/}
-          {/*    Entre em contato com a AAPM pelo número {telefone} ou envie um e-mail para {email}*/}
-          {/*  </span>*/}
-          {/*</p>*/}
-          <div>
-            <h6> Entre em contato com a AAPM</h6>
-            <div>
-              <ul>
-                <li style={{ textAlign: 'left' }}>Fone : {telefone}</li>
-                <li style={{ textAlign: 'left' }}>E-mail : {email}</li>
-              </ul>
+          <Col xs={10} sm={4}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Link color="primary" href={`mailto:${email}`} sx={linkContato}>
+                <Mail />
+                &nbsp;{email}
+              </Link>
+              <Link color="primary" href={`tel:${telefone}`} onClick={handleClick} sx={linkContato}>
+                {' '}
+                <Phone />
+                &nbsp;{telefone}{' '}
+              </Link>
             </div>
-          </div>
+          </Col>
         </Box>
       </Drawer>
     </>

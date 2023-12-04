@@ -107,6 +107,8 @@ const PaginaInicial = () => {
         ) : (
           <LoadingBar />
         )}
+        <br />
+        <br />
       </div>
     );
   }

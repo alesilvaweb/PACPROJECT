@@ -258,6 +258,8 @@ export default function CabanasList() {
               </Button>
             </ModalFooter>
           </Modal>
+          <br />
+          <br />
         </div>
       ) : (
         // <div>Carregando...</div>

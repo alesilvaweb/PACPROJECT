@@ -45,6 +45,8 @@ const render = Component =>
       <Provider store={store}>
         <div>
           <Component />
+          <br />
+          <br />
         </div>
       </Provider>
     </ErrorBoundary>

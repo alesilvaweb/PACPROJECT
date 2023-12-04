@@ -261,6 +261,8 @@ const LocaisAgenda = args => {
             </div>
           )}
         </div>
+        <br />
+        <br />
       </div>
     );
   }

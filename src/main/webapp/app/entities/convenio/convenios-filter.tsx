@@ -184,6 +184,8 @@ const ConveniosFilter = () => {
       ) : (
         <Spinner text={'convênios'} />
       )}
+      <br />
+      <br />
     </div>
   );
 };

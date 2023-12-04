@@ -261,7 +261,7 @@ export default function CabanasList() {
         </div>
       ) : (
         // <div>Carregando...</div>
-        <Spinner />
+        <Spinner text={'cabanas'} />
       )}
     </>
   );

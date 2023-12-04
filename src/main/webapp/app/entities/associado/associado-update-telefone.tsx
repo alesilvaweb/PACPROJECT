@@ -220,6 +220,8 @@ export const AssociadoUpdateTelefone = () => {
           )}
         </Col>
       </Row>
+      <br />
+      <br />
     </div>
   );
 };

@@ -154,7 +154,6 @@ const LocaisAgenda = args => {
     }
   }
 
-  console.log({ DataFinal });
   const [callendarButton, setCallendarButton] = useState({
     fontSize: '0.9rem',
     padding: '1vh',
@@ -164,13 +163,13 @@ const LocaisAgenda = args => {
   });
 
   if (statusText != 'OK') {
-    return <Spinner />;
+    return <Spinner text={'reservas'} />;
   } else {
     return (
       <div>
         <div>
           {loadingLocal ? (
-            <Spinner />
+            <Spinner text={'locais'} />
           ) : (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>

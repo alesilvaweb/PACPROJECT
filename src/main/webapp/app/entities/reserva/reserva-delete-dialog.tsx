@@ -16,6 +16,7 @@ export const ReservaDeleteDialog = () => {
   const { local } = useParams<'local'>();
   const loading = useAppSelector(state => state.reserva.loading);
   const [loadModal, setLoadModal] = useState(false);
+  const [deleteReserva, setDelete] = useState(false);
 
   useEffect(() => {
     dispatch(getEntity(id));
@@ -27,6 +28,7 @@ export const ReservaDeleteDialog = () => {
 
   const handleClose = () => {
     dispatch(reset());
+    setDelete(false);
     navigate('/local/' + local);
   };
 
@@ -38,13 +40,14 @@ export const ReservaDeleteDialog = () => {
   }, [updateSuccess]);
 
   const confirmDelete = () => {
+    setDelete(true);
     dispatch(deleteEntity(reservaEntity.id));
   };
 
   return (
     <div>
       {loading ? (
-        <Spinner />
+        <Spinner action={deleteReserva ? 'Excluindo' : 'Carregando'} text={'reserva'} />
       ) : (
         <Modal isOpen toggle={handleClose} style={{ marginTop: '20vh' }}>
           <ModalHeader toggle={handleClose} data-cy="reservaDeleteDialogHeading">

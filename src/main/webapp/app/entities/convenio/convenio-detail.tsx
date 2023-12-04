@@ -70,160 +70,163 @@ function ConvenioDetalhe() {
   const navigate = useNavigate();
   return (
     <div>
-      <Breadcrumb>
-        <BreadcrumbItem onClick={() => navigate('/')}>
-          <a>Início</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem onClick={() => navigate('/convenio/list')}>
-          <a>Convênios</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem active>{convenioEntity.nome}</BreadcrumbItem>
-      </Breadcrumb>
-      <Card raised sx={{ margin: '0 auto', padding: '0.1em' }}>
-        {!loadingConvenio ? (
-          <CardMedia
-            component="img"
-            alt={convenioEntity.nome}
-            height="200"
-            image={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`}
-            title={convenioEntity.nome}
-            sx={{
-              objectFit: 'contain',
-              maxWidth: '400px',
-              width: '100%',
-              height: '100%',
-              float: 'right',
-              borderRadius: '4px',
-              boxShadow: 5,
-              marginRight: '10px',
-            }}
-          />
-        ) : (
-          <>
-            <Spinner />
-            <Skeleton
-              variant="rectangular"
+      {!loadingConvenio ? (
+        <>
+          <Breadcrumb>
+            <BreadcrumbItem onClick={() => navigate('/')}>
+              <a>Início</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem onClick={() => navigate('/convenio/list')}>
+              <a>Convênios</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>{convenioEntity.nome}</BreadcrumbItem>
+          </Breadcrumb>
+          <Card raised sx={{ margin: '0 auto', padding: '0.1em' }}>
+            <CardMedia
+              component="img"
+              alt={convenioEntity.nome}
+              height="200"
+              image={`data:${convenioEntity.imagemContentType};base64,${convenioEntity.imagem}`}
+              title={convenioEntity.nome}
               sx={{
-                width: '250px',
-                height: '150px',
+                objectFit: 'contain',
+                maxWidth: '400px',
+                width: '100%',
+                height: '100%',
                 float: 'right',
                 borderRadius: '4px',
                 boxShadow: 5,
                 marginRight: '10px',
               }}
             />
-          </>
-        )}
-        <CardContent>
-          {convenioEntity.logo ? (
-            <Typography variant="h4" component="div">
-              <img
-                src={`data:${convenioEntity.logoContentType};base64,${convenioEntity.logo}`}
-                style={{ maxHeight: '50px', borderRadius: '4px', marginTop: '10px', marginBottom: '5px' }}
-              />{' '}
-              {convenioEntity.nome}
-            </Typography>
-          ) : (
-            <Typography variant="h4" component="div">
-              {convenioEntity.nome}
-            </Typography>
-          )}
-          <Typography variant="subtitle2" component="div">
-            {convenioEntity.titulo}
-          </Typography>
 
-          <hr />
-          <Typography variant="subtitle2" component="div">
-            {convenioEntity.endereco}
-          </Typography>
-          <Typography variant="subtitle2" component="div">
-            Fone: {convenioEntity.telefone}
-          </Typography>
-          <Typography variant="subtitle2" component="div">
-            {convenioEntity.email}
-          </Typography>
-          <hr />
-          <Typography variant="subtitle1" component="div">
-            Descontos
-          </Typography>
+            <CardContent>
+              {convenioEntity.logo ? (
+                <Typography variant="h4" component="div">
+                  <img
+                    src={`data:${convenioEntity.logoContentType};base64,${convenioEntity.logo}`}
+                    style={{ maxHeight: '50px', borderRadius: '4px', marginTop: '10px', marginBottom: '5px' }}
+                  />{' '}
+                  {convenioEntity.nome}
+                </Typography>
+              ) : (
+                <Typography variant="h4" component="div">
+                  {convenioEntity.nome}
+                </Typography>
+              )}
+              <Typography variant="subtitle2" component="div">
+                {convenioEntity.titulo}
+              </Typography>
 
-          <Typography variant="button" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-            {desconto.map(desc => (
-              <>
-                <Stack
-                  direction="row"
-                  divider={<Divider orientation="vertical" flexItem />}
-                  spacing={{ xs: 1, sm: 2, md: 4 }}
-                  key={desc.id}
-                  sx={{ marginTop: '5px' }}
-                >
-                  <Item>
-                    &nbsp;{desc.desconto}% {desc.descricao} &nbsp;
-                  </Item>
-                </Stack>
-                &nbsp;
-              </>
-            ))}
-          </Typography>
-          <hr />
-          <Grid container spacing={2}>
-            {redeSocial.map(rede => (
-              <Grid item key={rede.id}>
-                <IconButton
-                  color="primary"
-                  aria-label={rede.nome}
-                  // href={""}
-                  // target="_blank"
-                  style={{ fontSize: '15px', float: 'right' }}
-                >
-                  {rede.icon?.nome === 'Facebook' ? (
-                    <>
-                      <FacebookIcon /> {rede.endereco} &nbsp;
-                    </>
-                  ) : rede.icon?.nome === 'WhatsApp' ? (
-                    <>
-                      <WhatsApp /> {rede.endereco} &nbsp;
-                    </>
-                  ) : rede.icon?.nome === 'Instagram' ? (
-                    <>
-                      <Instagram /> {rede.endereco} &nbsp;
-                    </>
-                  ) : null}
-                </IconButton>
+              <hr />
+              <Typography variant="subtitle2" component="div">
+                {convenioEntity.endereco}
+              </Typography>
+              <Typography variant="subtitle2" component="div">
+                Fone: {convenioEntity.telefone}
+              </Typography>
+              <Typography variant="subtitle2" component="div">
+                {convenioEntity.email}
+              </Typography>
+              <hr />
+              <Typography variant="subtitle1" component="div">
+                Descontos
+              </Typography>
+
+              <Typography variant="button" color="textSecondary" sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+                {desconto.map(desc => (
+                  <>
+                    <Stack
+                      direction="row"
+                      divider={<Divider orientation="vertical" flexItem />}
+                      spacing={{ xs: 1, sm: 2, md: 4 }}
+                      key={desc.id}
+                      sx={{ marginTop: '5px' }}
+                    >
+                      <Item>
+                        &nbsp;{desc.desconto}% {desc.descricao} &nbsp;
+                      </Item>
+                    </Stack>
+                    &nbsp;
+                  </>
+                ))}
+              </Typography>
+              <hr />
+              <Grid container spacing={2}>
+                {redeSocial.map(rede => (
+                  <Grid item key={rede.id}>
+                    <IconButton
+                      color="primary"
+                      aria-label={rede.nome}
+                      // href={""}
+                      // target="_blank"
+                      style={{ fontSize: '15px', float: 'right' }}
+                    >
+                      {rede.icon?.nome === 'Facebook' ? (
+                        <>
+                          <FacebookIcon /> {rede.endereco} &nbsp;
+                        </>
+                      ) : rede.icon?.nome === 'WhatsApp' ? (
+                        <>
+                          <WhatsApp /> {rede.endereco} &nbsp;
+                        </>
+                      ) : rede.icon?.nome === 'Instagram' ? (
+                        <>
+                          <Instagram /> {rede.endereco} &nbsp;
+                        </>
+                      ) : null}
+                    </IconButton>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        </CardContent>
-        <hr />
-        {isAdmin ? (
-          <CardFooter>
+            </CardContent>
+            <hr />
+            {isAdmin ? (
+              <CardFooter>
+                <Button
+                  type={'button'}
+                  color={'primary'}
+                  style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
+                  onClick={() => navigate(`/convenio/${convenioEntity.id}/edit`)}
+                >
+                  Editar
+                </Button>
+                <Button
+                  type={'button'}
+                  color={'error'}
+                  style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
+                  onClick={() => navigate(`/convenio/${convenioEntity.id}/delete?page=1&sort=id,asc`)}
+                >
+                  Excluir
+                </Button>
+              </CardFooter>
+            ) : null}
             <Button
               type={'button'}
               color={'primary'}
-              style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
-              onClick={() => navigate(`/convenio/${convenioEntity.id}/edit`)}
+              style={{ float: 'left', marginBottom: '10px', marginLeft: '10px' }}
+              onClick={() => navigate(`/convenio/list`)}
             >
-              Editar
+              voltar
             </Button>
-            <Button
-              type={'button'}
-              color={'error'}
-              style={{ float: 'right', marginBottom: '10px', marginRight: '10px' }}
-              onClick={() => navigate(`/convenio/${convenioEntity.id}/delete?page=1&sort=id,asc`)}
-            >
-              Excluir
-            </Button>
-          </CardFooter>
-        ) : null}
-        <Button
-          type={'button'}
-          color={'primary'}
-          style={{ float: 'left', marginBottom: '10px', marginLeft: '10px' }}
-          onClick={() => navigate(`/convenio/list`)}
-        >
-          voltar
-        </Button>
-      </Card>
+          </Card>
+        </>
+      ) : (
+        <>
+          <Spinner text={'convênio'} />
+          {/*<Skeleton*/}
+          {/*  variant="rectangular"*/}
+          {/*  sx={{*/}
+          {/*    width: '250px',*/}
+          {/*    height: '150px',*/}
+          {/*    float: 'right',*/}
+          {/*    borderRadius: '4px',*/}
+          {/*    boxShadow: 5,*/}
+          {/*    marginRight: '10px',*/}
+          {/*  }}*/}
+          {/*/>*/}
+        </>
+      )}
     </div>
   );
 }

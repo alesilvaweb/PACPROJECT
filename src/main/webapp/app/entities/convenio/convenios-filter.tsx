@@ -182,7 +182,7 @@ const ConveniosFilter = () => {
           ) : null}
         </div>
       ) : (
-        <Spinner />
+        <Spinner text={'convênios'} />
       )}
     </div>
   );

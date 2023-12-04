@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Translate, translate, ValidatedField, ValidatedForm, isEmail } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { locales, languages } from 'app/config/translation';
 import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { v4 as uuidv4 } from 'uuid';
+import Spinner from 'app/components/spinner';
 
 export const UserManagementUpdate = () => {
   const dispatch = useAppDispatch();
@@ -62,17 +63,24 @@ export const UserManagementUpdate = () => {
   }
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbItem onClick={() => navigate('/')}>
+          <a>Início</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem onClick={() => navigate('/admin/user-management')}>
+          <a>Usuários</a>
+        </BreadcrumbItem>
+        <BreadcrumbItem active>{!isNew ? user.firstName : 'Novo'}</BreadcrumbItem>
+      </Breadcrumb>
       <Row className="justify-content-center">
         <Col md="8">
-          <h1>
-            <Translate contentKey="userManagement.home.createOrEditLabel">Create or edit a User</Translate>
-          </h1>
+          <h3>{isNew ? 'Novo usuário' : `Editar ${user.firstName}`}</h3>
         </Col>
       </Row>
       <Row className="justify-content-center">
         <Col md="8">
           {loading ? (
-            <p>Loading...</p>
+            <Spinner />
           ) : (
             <ValidatedForm onSubmit={saveUser} defaultValues={user}>
               {isNew ? (
@@ -193,6 +201,8 @@ export const UserManagementUpdate = () => {
           )}
         </Col>
       </Row>
+      <br />
+      <br />
     </div>
   );
 };

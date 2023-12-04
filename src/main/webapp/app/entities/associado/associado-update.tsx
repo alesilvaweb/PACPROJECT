@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
+import { Button, Row, Col, FormText, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { IAssociado } from 'app/shared/model/associado.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
 import { getEntity, updateEntity, createEntity, reset } from './associado.reducer';
+import Breadcrunbs from 'app/components/breadcrunbs';
+import Spinner from 'app/components/spinner';
 
 export const AssociadoUpdate = () => {
   const dispatch = useAppDispatch();
@@ -75,122 +77,142 @@ export const AssociadoUpdate = () => {
 
   return (
     <div>
-      <Row className="justify-content-center">
-        <Col md="8">
-          <h2 id="aapmApp.associado.home.createOrEditLabel" data-cy="AssociadoCreateUpdateHeading">
-            <Translate contentKey="aapmApp.associado.home.createOrEditLabel">Create or edit a Associado</Translate>
-          </h2>
-        </Col>
-      </Row>
-      <Row className="justify-content-center">
-        <Col md="8">
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? (
+      {loading ? (
+        <Spinner text={'fomulário'} />
+      ) : (
+        <>
+          <Breadcrumb>
+            <BreadcrumbItem onClick={() => navigate('/')}>
+              <a>Início</a>
+            </BreadcrumbItem>
+            <BreadcrumbItem onClick={() => navigate('/associado')}>
+              <a>Associados</a>
+            </BreadcrumbItem>
+            {!isNew ? (
+              <BreadcrumbItem onClick={() => navigate(`/associado/${associadoEntity.id}`)}>
+                <a>{associadoEntity.nome}</a>
+              </BreadcrumbItem>
+            ) : null}
+
+            <BreadcrumbItem active>{!isNew ? 'Edição' : 'Novo'}</BreadcrumbItem>
+          </Breadcrumb>
+          <Row className="justify-content-center">
+            <Col md="8">
+              <h2 id="aapmApp.associado.home.createOrEditLabel" data-cy="AssociadoCreateUpdateHeading">
+                <Translate contentKey="aapmApp.associado.home.createOrEditLabel">Create or edit a Associado</Translate>
+              </h2>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
+            <Col md="8">
+              <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
+                {!isNew ? (
+                  <ValidatedField
+                    name="id"
+                    required
+                    readOnly
+                    id="associado-id"
+                    label={translate('global.field.id')}
+                    validate={{ required: true }}
+                  />
+                ) : null}
                 <ValidatedField
-                  name="id"
-                  required
-                  readOnly
-                  id="associado-id"
-                  label={translate('global.field.id')}
-                  validate={{ required: true }}
+                  label={translate('aapmApp.associado.nome')}
+                  id="associado-nome"
+                  name="nome"
+                  data-cy="nome"
+                  type="text"
+                  validate={{
+                    required: { value: true, message: translate('entity.validation.required') },
+                    minLength: { value: 2, message: translate('entity.validation.minlength', { min: 2 }) },
+                  }}
                 />
-              ) : null}
-              <ValidatedField
-                label={translate('aapmApp.associado.nome')}
-                id="associado-nome"
-                name="nome"
-                data-cy="nome"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                  minLength: { value: 2, message: translate('entity.validation.minlength', { min: 2 }) },
-                }}
-              />
-              <ValidatedField
-                label={translate('aapmApp.associado.matricula')}
-                id="associado-matricula"
-                name="matricula"
-                data-cy="matricula"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                }}
-              />
-              <ValidatedField
-                label={translate('aapmApp.associado.status')}
-                id="associado-status"
-                name="status"
-                data-cy="status"
-                type="select"
-              >
-                {statusValues.map(status => (
-                  <option value={status} key={status}>
-                    {translate('aapmApp.Status.' + status)}
-                  </option>
-                ))}
-              </ValidatedField>
-              <ValidatedField
-                label={translate('aapmApp.associado.telefone')}
-                id="associado-telefone"
-                name="telefone"
-                data-cy="telefone"
-                type="text"
-              />
-              <ValidatedField
-                label={translate('aapmApp.associado.email')}
-                id="associado-email"
-                name="email"
-                data-cy="email"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                }}
-              />
-              <ValidatedField
-                label={translate('aapmApp.associado.dataNascimento')}
-                id="associado-dataNascimento"
-                name="dataNascimento"
-                data-cy="dataNascimento"
-                type="date"
-              />
-              <ValidatedField
-                label={translate('aapmApp.associado.created')}
-                id="associado-created"
-                name="created"
-                data-cy="created"
-                hidden={true}
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
-              <ValidatedField
-                label={translate('aapmApp.associado.modified')}
-                id="associado-modified"
-                name="modified"
-                data-cy="modified"
-                hidden={true}
-                type="datetime-local"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/associado" replace color="info">
-                <FontAwesomeIcon icon="arrow-left" />
+                <ValidatedField
+                  label={translate('aapmApp.associado.matricula')}
+                  id="associado-matricula"
+                  name="matricula"
+                  data-cy="matricula"
+                  type="text"
+                  validate={{
+                    required: { value: true, message: translate('entity.validation.required') },
+                  }}
+                />
+                <ValidatedField
+                  label={translate('aapmApp.associado.status')}
+                  id="associado-status"
+                  name="status"
+                  data-cy="status"
+                  type="select"
+                >
+                  {statusValues.map(status => (
+                    <option value={status} key={status}>
+                      {translate('aapmApp.Status.' + status)}
+                    </option>
+                  ))}
+                </ValidatedField>
+                <ValidatedField
+                  label={translate('aapmApp.associado.telefone')}
+                  id="associado-telefone"
+                  name="telefone"
+                  data-cy="telefone"
+                  type="text"
+                />
+                <ValidatedField
+                  label={translate('aapmApp.associado.email')}
+                  id="associado-email"
+                  name="email"
+                  data-cy="email"
+                  type="text"
+                  validate={{
+                    required: { value: true, message: translate('entity.validation.required') },
+                  }}
+                />
+                <ValidatedField
+                  label={translate('aapmApp.associado.dataNascimento')}
+                  id="associado-dataNascimento"
+                  name="dataNascimento"
+                  data-cy="dataNascimento"
+                  type="date"
+                />
+                <ValidatedField
+                  label={translate('aapmApp.associado.created')}
+                  id="associado-created"
+                  name="created"
+                  data-cy="created"
+                  hidden={true}
+                  type="datetime-local"
+                  placeholder="YYYY-MM-DD HH:mm"
+                />
+                <ValidatedField
+                  label={translate('aapmApp.associado.modified')}
+                  id="associado-modified"
+                  name="modified"
+                  data-cy="modified"
+                  hidden={true}
+                  type="datetime-local"
+                  placeholder="YYYY-MM-DD HH:mm"
+                />
+                <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/associado" replace color="info">
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
+                  <span className="d-none d-md-inline">
+                    <Translate contentKey="entity.action.back">Back</Translate>
+                  </span>
+                </Button>
                 &nbsp;
-                <span className="d-none d-md-inline">
-                  <Translate contentKey="entity.action.back">Back</Translate>
-                </span>
-              </Button>
-              &nbsp;
-              <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
-                <FontAwesomeIcon icon="save" />
-                &nbsp;
-                <Translate contentKey="entity.action.save">Save</Translate>
-              </Button>
-            </ValidatedForm>
-          )}
-        </Col>
-      </Row>
+                <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
+                  <Translate contentKey="entity.action.save">Save</Translate>
+                </Button>
+              </ValidatedForm>
+            </Col>
+          </Row>
+        </>
+      )}
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

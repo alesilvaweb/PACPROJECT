@@ -224,6 +224,8 @@ export const MensagemUpdate = () => {
           )}
         </Col>
       </Row>
+      <br />
+      <br />
     </div>
   );
 };

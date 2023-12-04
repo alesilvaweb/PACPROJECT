@@ -2,10 +2,10 @@ import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-export default function Spinner() {
+export default function Spinner({ action = 'Carregando', text = '' }) {
   return (
     <div>
-      Carregando ...
+      {action} {text} ...
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
         <div className="lds-spinner">
           <div></div>

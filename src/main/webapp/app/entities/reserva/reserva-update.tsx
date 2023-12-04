@@ -46,9 +46,11 @@ export const ReservaUpdate = () => {
   const statusReservaValues = Object.keys(StatusReserva);
   const [cancelarReserva, setCancelarReserva] = useState(false);
   const [bloqueioReserva, setBloqueioReserva] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const handleClose = () => {
     dispatch(reset());
+    setUpdate(false);
     navigate('/local/' + local + '/1');
   };
 
@@ -90,6 +92,7 @@ export const ReservaUpdate = () => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
+    setUpdate(true);
     values.created = convertDateTimeToServer(values.created);
     values.modified = convertDateTimeToServer(values.modified);
     console.log({ values });
@@ -133,11 +136,10 @@ export const ReservaUpdate = () => {
           departamento: reservaEntity?.departamento?.id,
         };
 
-  console.log(reservaEntity?.descricao?.slice(0, 10));
   return (
     <>
       {loading || loadingAssociado ? (
-        <Spinner />
+        <Spinner action={update ? 'Salvando' : 'Carregando'} text={loading ? 'reserva' : loadingAssociado ? 'associados' : null} />
       ) : (
         <div>
           <Breadcrumb>

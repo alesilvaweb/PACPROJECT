@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import { Copyright, Instagram, Mail, Phone } from '@mui/icons-material';
+import { Copyright, Instagram, Mail, Phone, Update } from '@mui/icons-material';
 import { formatDate } from '@fullcalendar/core';
 import { now } from 'lodash';
 import './footer.scss';
@@ -19,8 +19,10 @@ export const Footer = () => {
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   const iconsFooter = {
     fontSize: '10px',
-    float: 'right',
     color: '#e2e2e2',
+    ':hover': {
+      color: '#1974d0',
+    },
   };
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -68,8 +70,8 @@ export const Footer = () => {
       <footer className={'footer-app'}>
         <div className={'copyright'}>
           &nbsp;
-          <Copyright sx={{ fontSize: '20px' }} />
-          <span style={{ fontSize: '14px' }}>&nbsp;{ano}&nbsp;AAPM</span>&nbsp;
+          <Copyright sx={{ fontSize: '18px' }} />
+          <span style={{ fontSize: '12px' }}>&nbsp;{ano}&nbsp;AAPM</span>&nbsp;
         </div>
         <div
           style={{
@@ -82,7 +84,7 @@ export const Footer = () => {
             <FacebookIcon />
           </IconButton>
           &nbsp;&nbsp;
-          <IconButton color="primary" href={'https://www.instagram.com/aapmscs/'} target="_blank" sx={iconsFooter}>
+          <IconButton color="primary" href={'https://www.instagram.com/aapmscs'} target="_blank" sx={iconsFooter}>
             <Instagram />
           </IconButton>
           &nbsp;&nbsp;
@@ -95,7 +97,8 @@ export const Footer = () => {
           </IconButton>
         </div>
         <div className={'versao'}>
-          &nbsp;<span style={{ fontSize: '14px' }}>{VERSION}</span>&nbsp;
+          <Update sx={{ fontSize: '18px' }} />
+          &nbsp;<span style={{ fontSize: '12px' }}>{VERSION}</span>&nbsp;
         </div>
       </footer>
       <Drawer anchor={'bottom'} open={toogle} onClose={toggleDrawer(false)}>
@@ -111,11 +114,20 @@ export const Footer = () => {
           }}
           role="presentation"
         >
-          <p>
-            <span>
-              Entre em contato com a AAPM pelo número {telefone} ou envie um e-mail para {email}
-            </span>
-          </p>
+          {/*<p>*/}
+          {/*  <span>*/}
+          {/*    Entre em contato com a AAPM pelo número {telefone} ou envie um e-mail para {email}*/}
+          {/*  </span>*/}
+          {/*</p>*/}
+          <div>
+            <h6> Entre em contato com a AAPM</h6>
+            <div>
+              <ul>
+                <li style={{ textAlign: 'left' }}>Fone : {telefone}</li>
+                <li style={{ textAlign: 'left' }}>E-mail : {email}</li>
+              </ul>
+            </div>
+          </div>
         </Box>
       </Drawer>
     </div>

@@ -3,17 +3,24 @@ import { MaterialReactTable, type MRT_ColumnDef, MRT_Row, useMaterialReactTable 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Button } from '@mui/material';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import * as XLSX from 'xlsx';
+import { PictureAsPdf } from '@mui/icons-material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileExcel, faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { useAppSelector } from 'app/config/store';
+import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AUTHORITIES } from 'app/config/constants';
 
 const ReservaList = () => {
   const [reservas, setReservas] = useState([]);
   const [data, setData] = useState([]);
+  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
 
   async function fetchReservas() {
     try {
@@ -90,9 +97,21 @@ const ReservaList = () => {
     []
   );
 
+  const handleExportRowsExcel = (rows: MRT_Row<Reserva>[]) => {
+    const dataExcel = [];
+
+    rows.map(row => {
+      dataExcel.push(row.original);
+    });
+
+    const ws = XLSX.utils.json_to_sheet(dataExcel);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Reservas AAPM');
+    XLSX.writeFile(wb, 'Reservas AAPM.xlsx');
+  };
+
   const handleExportRows = (rows: MRT_Row<Reserva>[]) => {
     const doc = new jsPDF('l', 'pt', 'letter');
-
     const tableData = rows.map(row => Object.values(row.original));
     const tableHeaders = columns.map(c => c.header);
 
@@ -106,7 +125,7 @@ const ReservaList = () => {
     doc.setLineWidth(2);
     doc.text('Relatório de Reservas AAPM', (y = y + 30), 25);
     doc.setLanguage('pt-BR');
-    doc.save('Reservas.pdf');
+    // doc.save('Reservas.pdf');
   };
 
   const dataReserva = () => {
@@ -150,10 +169,21 @@ const ReservaList = () => {
           disabled={table.getPrePaginationRowModel().rows.length === 0}
           //export all rows, including from the next page, (still respects filtering and sorting)
           onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
-          startIcon={<FileDownloadIcon />}
+          startIcon={<FontAwesomeIcon icon={faFilePdf} />}
         >
           Baixar PDF
         </Button>
+        {isAdmin ? (
+          <Button
+            disabled={table.getPrePaginationRowModel().rows.length === 0}
+            //export all rows, including from the next page, (still respects filtering and sorting)
+            onClick={() => handleExportRowsExcel(table.getPrePaginationRowModel().rows)}
+            startIcon={<FontAwesomeIcon icon={faFileExcel} />}
+          >
+            Baixar Excel
+          </Button>
+        ) : null}
+
         {/*<Button*/}
         {/*  disabled={table.getRowModel().rows.length === 0}*/}
         {/*  //export all rows as seen on the screen (respects pagination, sorting, filtering, etc.)*/}

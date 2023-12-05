@@ -20,6 +20,8 @@ export const Footer = () => {
   const [toogle, setToogle] = useState(false);
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [facebook, setFacebook] = useState('');
+  const [instagram, setInstagram] = useState('');
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   const navigate = useNavigate();
 
@@ -61,11 +63,14 @@ export const Footer = () => {
   };
 
   async function fetchParametros() {
-    try {
-      const response = await axios.get(`api/parametros?chave.in=mail-aapm&chave.in=fone-aapm&page=0&size=20`);
-      setParametro(response.data);
-    } catch (error) {
-      console.error('Erro ao buscar Parametros:', error);
+    if (isAuthenticated) {
+      const url = `api/parametros?chave.in=mail-aapm&chave.in=fone-aapm&chave.in=facebook-aapm&chave.in=instagram-aapm&status.equals=Ativo&page=0&size=20`;
+      try {
+        const response = await axios.get(url);
+        setParametro(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar Parametros:', error);
+      }
     }
   }
 
@@ -74,7 +79,7 @@ export const Footer = () => {
     if (isAuthenticated) {
       fetchParametros();
     }
-  }, []);
+  }, [isAuthenticated]);
 
   /* Define a quantidade de dias permitida de acordo com os parametros "limite-start inicio e limite-end final" */
   useEffect(() => {
@@ -85,6 +90,12 @@ export const Footer = () => {
         }
         if (a.chave.toString() === 'fone-aapm') {
           setTelefone(a.valor);
+        }
+        if (a.chave.toString() === 'facebook-aapm') {
+          setFacebook(a.valor);
+        }
+        if (a.chave.toString() === 'instagram-aapm') {
+          setInstagram(a.valor);
         }
       });
     }
@@ -98,36 +109,39 @@ export const Footer = () => {
           <Copyright sx={{ fontSize: '18px' }} />
           <span style={{ fontSize: '12px' }}>&nbsp;{ano}&nbsp;AAPM</span>&nbsp;
         </div>
-        <Col
-          xs={10}
-          sm={4}
-          xl={3}
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <IconButton color="primary" onClick={() => navigate('/')} sx={iconsFooter}>
-            <HomeIcon sx={icon} />
-          </IconButton>
-          &nbsp;&nbsp;
-          <IconButton color="primary" href={'https://www.facebook.com/aapmscs'} target="_blank" sx={iconsFooter}>
-            <FacebookIcon sx={icon} />
-          </IconButton>
-          &nbsp;&nbsp;
-          <IconButton color="primary" href={'https://www.instagram.com/aapmscs'} target="_blank" sx={iconsFooter}>
-            <Instagram sx={icon} />
-          </IconButton>
-          &nbsp;&nbsp;
-          <IconButton color="primary" sx={iconsFooter} onClick={toggleDrawer(true)}>
-            <Mail sx={icon} />
-          </IconButton>
-          &nbsp;&nbsp;
-          <IconButton color="primary" onClick={toggleDrawer(true)} sx={iconsFooter}>
-            <Phone sx={icon} />
-          </IconButton>
-        </Col>
+        {isAuthenticated ? (
+          <Col
+            xs={10}
+            sm={4}
+            xl={3}
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <IconButton color="primary" onClick={() => navigate('/')} sx={iconsFooter}>
+              <HomeIcon sx={icon} />
+            </IconButton>
+            &nbsp;&nbsp;
+            <IconButton color="primary" href={facebook} target="_blank" onClick={fetchParametros} sx={iconsFooter}>
+              <FacebookIcon sx={icon} />
+            </IconButton>
+            &nbsp;&nbsp;
+            <IconButton color="primary" href={instagram} target="_blank" onClick={fetchParametros} sx={iconsFooter}>
+              <Instagram sx={icon} />
+            </IconButton>
+            &nbsp;&nbsp;
+            <IconButton color="primary" sx={iconsFooter} onClick={toggleDrawer(true)}>
+              <Mail sx={icon} />
+            </IconButton>
+            &nbsp;&nbsp;
+            <IconButton color="primary" onClick={toggleDrawer(true)} sx={iconsFooter}>
+              <Phone sx={icon} />
+            </IconButton>
+          </Col>
+        ) : null}
+
         <div className={'versao'}>
           <Update sx={{ fontSize: '18px' }} />
           &nbsp;<span style={{ fontSize: '12px' }}>{VERSION}</span>&nbsp;

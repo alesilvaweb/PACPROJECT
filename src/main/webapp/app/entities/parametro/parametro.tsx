@@ -85,7 +85,7 @@ export const Parametro = () => {
   return (
     <div>
       <Breadcrunbs atual={'Parâmetros'} />
-      <h2 id="parametro-heading" data-cy="ParametroHeading">
+      <h4 id="parametro-heading" data-cy="ParametroHeading">
         <Translate contentKey="aapmApp.parametro.home.title">Parametros</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
@@ -98,7 +98,7 @@ export const Parametro = () => {
             {/*<Translate contentKey="aapmApp.parametro.home.createLabel">Create new Parametro</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </h4>
       <div className="table-responsive">
         {parametroList && parametroList.length > 0 ? (
           <Table responsive>

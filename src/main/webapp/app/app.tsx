@@ -49,7 +49,12 @@ export const App = () => {
     <ThemeProvider theme={darkTheme}>
       <BrowserRouter basename={baseHref}>
         <div className="app-container" style={{ paddingTop }}>
-          <ToastContainer position={toast.POSITION.BOTTOM_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+          <ToastContainer
+            position={toast.POSITION.BOTTOM_LEFT}
+            style={{ marginBottom: '10px' }}
+            className="toastify-container"
+            toastClassName="toastify-toast"
+          />
           <ErrorBoundary>
             <Header
               isAuthenticated={isAuthenticated}

@@ -165,11 +165,11 @@ mail:
   username: aapm.app@outlook.com
   password: aapm@2023
   protocol: smtp
-  tls: true
+  tls: false
   properties.mail.smtp:
     auth: true
     starttls.enable: true
-    ssl.trust: smtp.outlook.com
+#    ssl.trust: smtp.outlook.com
 
 springdoc:
   show-actuator: true

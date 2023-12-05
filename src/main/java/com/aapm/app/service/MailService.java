@@ -73,17 +73,17 @@ public class MailService {
             content
         );
 
-        // Configurar o provedor de e-mail
-        //        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        //        mailSender.setHost("smtp.gmail.com");
-        //        mailSender.setPort(587);
-        //        mailSender.setUsername("aapm.aplicativo@gmail.com");
-        //        mailSender.setPassword("dlgb odwr tifr qmik");
-        //        mailSender.setProtocol("smtp");
+        //         Configurar o provedor de e-mail
+        //                JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        //                mailSender.setHost("smtp.outlook.com");
+        //                mailSender.setPort(587);
+        //                mailSender.setUsername("aapm.app@outlook.com");
+        //                mailSender.setPassword("aapm@2023");
+        //                mailSender.setProtocol("smtp");
 
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        //        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        //                MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         //        Parametro parametro = parametroRepository.findByChave("mail-adm");
         //        log.debug("Parametro '{}'", parametro);
@@ -92,6 +92,7 @@ public class MailService {
             // message.setTo(parametro.getValor());
             message.setTo(to);
             message.setFrom(jHipsterProperties.getMail().getFrom());
+
             message.setSubject(subject);
             message.setText(content, isHtml);
             javaMailSender.send(mimeMessage);

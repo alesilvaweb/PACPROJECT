@@ -44,16 +44,16 @@ spring:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
   mail:
-    host: smtp.gmail.com
+    host: smtp.outlook.com
     port: 587
-    username: aapm.aplicativo@gmail.com
-    password: dlgb odwr tifr qmik
+    username: aapm.app@outlook.com
+    password: aapm@2023
     protocol: smtp
     tls: true
     properties.mail.smtp:
       auth: true
       starttls.enable: true
-      ssl.trust: smtp.gmail.com
+      ssl.trust: smtp.outlook.com
 
 server:
   port: 8080

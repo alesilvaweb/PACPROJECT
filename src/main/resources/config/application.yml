@@ -160,16 +160,16 @@ server:
       cookie:
         http-only: true
 mail:
-  host: smtp.gmail.com
+  host: smtp.outlook.com
   port: 587
-  username: aapm.aplicativo@gmail.com
-  password: dlgb odwr tifr qmik
+  username: aapm.app@outlook.com
+  password: aapm@2023
   protocol: smtp
   tls: true
   properties.mail.smtp:
     auth: true
     starttls.enable: true
-    ssl.trust: smtp.gmail.com
+    ssl.trust: smtp.outlook.com
 
 springdoc:
   show-actuator: true
@@ -197,7 +197,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: AAPM@localhost
+    from: aapm.app@outlook.com
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/**
     management-include-pattern: ${server.servlet.context-path:}/management/**

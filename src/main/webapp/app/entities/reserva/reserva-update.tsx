@@ -181,7 +181,6 @@ export const ReservaUpdate = () => {
                       minLength: { value: 2, message: translate('entity.validation.minlength', { min: 2 }) },
                     }}
                   />
-                  <br />
 
                   {/* Numero de Pessoas */}
                   {bloqueioReserva ? (

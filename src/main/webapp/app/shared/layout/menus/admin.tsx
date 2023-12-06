@@ -1,45 +1,80 @@
 import React from 'react';
-import MenuItem from 'app/shared/layout/menus/menu-item';
-import { DropdownItem } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavDropdown } from './menu-components';
+import MenuItens from 'app/shared/layout/menus/menu-item';
 import { Translate, translate } from 'react-jhipster';
+import { Button, Menu } from '@mui/material';
+import Fade from '@mui/material/Fade';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const adminMenuItems = () => (
   <>
-    <MenuItem icon="users" to="/admin/user-management">
+    <MenuItens icon="users" to="/admin/user-management">
       <Translate contentKey="global.menu.admin.userManagement">User management</Translate>
-    </MenuItem>
-    <MenuItem icon="eye" to="/admin/tracker">
+    </MenuItens>
+    <MenuItens icon="eye" to="/admin/tracker">
       <Translate contentKey="global.menu.admin.tracker">User tracker</Translate>
-    </MenuItem>
-    <MenuItem icon="tachometer-alt" to="/admin/metrics">
+    </MenuItens>
+    <MenuItens icon="tachometer-alt" to="/admin/metrics">
       <Translate contentKey="global.menu.admin.metrics">Metrics</Translate>
-    </MenuItem>
-    <MenuItem icon="heart" to="/admin/health">
+    </MenuItens>
+    <MenuItens icon="heart" to="/admin/health">
       <Translate contentKey="global.menu.admin.health">Health</Translate>
-    </MenuItem>
-    <MenuItem icon="cogs" to="/admin/configuration">
+    </MenuItens>
+    <MenuItens icon="cogs" to="/admin/configuration">
       <Translate contentKey="global.menu.admin.configuration">Configuration</Translate>
-    </MenuItem>
-    <MenuItem icon="tasks" to="/admin/logs">
+    </MenuItens>
+    <MenuItens icon="tasks" to="/admin/logs">
       <Translate contentKey="global.menu.admin.logs">Logs</Translate>
-    </MenuItem>
-    {/* jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here */}
+    </MenuItens>
   </>
 );
 
 const openAPIItem = () => (
-  <MenuItem icon="book" to="/admin/docs">
+  <MenuItens icon="book" to="/admin/docs">
     <Translate contentKey="global.menu.admin.apidocs">API</Translate>
-  </MenuItem>
+  </MenuItens>
 );
 
-export const AdminMenu = ({ showOpenAPI }) => (
-  <NavDropdown icon="users-cog" name={translate('global.menu.admin.main')} id="admin-menu" data-cy="adminMenu">
-    {adminMenuItems()}
-    {showOpenAPI && openAPIItem()}
-  </NavDropdown>
-);
+export const AdminMenu = ({ showOpenAPI }) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    // <NavDropdown icon="faEllipsisVertical" name={''} id="admin-menu" data-cy="adminMenu" style={{listStyle:"none"}}>
+    //   {adminMenuItems()}
+    //   {showOpenAPI && openAPIItem()}
+    // </NavDropdown>
+    <div>
+      <Button
+        id="fade-button"
+        aria-controls={open ? 'fade-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        sx={{ color: '#ffffff' }}
+      >
+        <MoreVertIcon />
+      </Button>
+      <Menu
+        id="fade-menu"
+        MenuListProps={{
+          'aria-labelledby': 'fade-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Fade}
+      >
+        {adminMenuItems()}
+        {showOpenAPI && openAPIItem()}
+      </Menu>
+    </div>
+  );
+};
 
 export default AdminMenu;

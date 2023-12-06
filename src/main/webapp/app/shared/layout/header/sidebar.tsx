@@ -8,7 +8,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import HomeIcon from '@mui/icons-material/Home';
-import { AdminMenu } from 'app/shared/layout/menus';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { Storage, Translate, translate } from 'react-jhipster';
 import { setLocale } from 'app/shared/reducers/locale';
@@ -20,18 +19,23 @@ import Collapse from '@mui/material/Collapse';
 import { useNavigate } from 'react-router-dom';
 import { ItemSidebar } from 'app/shared/layout/menus/item-sidebar';
 import {
+  AccountTree,
+  AddComment,
   AddHomeWork,
   AdminPanelSettings,
   CalendarMonth,
-  CorporateFare,
   CreditCard,
+  EventAvailable,
   Grading,
   GroupAdd,
+  Handshake,
   ManageAccounts,
-  Schedule,
+  PlaylistAdd,
   Settings,
+  ThumbUpAlt,
 } from '@mui/icons-material';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
+import { AdminMenu } from 'app/shared/layout/menus';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -93,8 +97,8 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
                 {/* Menus Fixos */}
                 <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<Schedule />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<EventAvailable />} setIsOpen={setIsOpen} />
                 <hr />
               </>
             ) : (
@@ -117,13 +121,13 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
             <Collapse in={stateMenu.admin} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ItemSidebar title={'Associados'} link={'/associado'} icon={<GroupAdd />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Parâmetros'} link={'/parametro'} icon={<Settings />} setIsOpen={setIsOpen} />
                 <ItemSidebar
                   title={<Translate contentKey="global.menu.admin.userManagement">User management</Translate>}
                   link={'/admin/user-management'}
                   icon={<ManageAccounts />}
                   setIsOpen={setIsOpen}
                 />
-                <ItemSidebar title={'Parâmetros'} link={'/parametro'} icon={<Settings />} setIsOpen={setIsOpen} />
               </List>
             </Collapse>
 
@@ -139,12 +143,12 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
             {/* SubMenus de Cadastros*/}
             <Collapse in={stateMenu.entity} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<PlaylistAdd />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<AccountTree />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Locais'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<CorporateFare />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Redes Sociais'} link={'/icons-redes-sociais'} icon={<Settings />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<AddComment />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Redes Sociais'} link={'/icons-redes-sociais'} icon={<ThumbUpAlt />} setIsOpen={setIsOpen} />
               </List>
             </Collapse>
 

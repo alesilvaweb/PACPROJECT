@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, useNavigate } from 'react-router-dom';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PaginaInicial from 'app/modules/home/inicial/pagina-inicial';
-import AAPMDashboard from 'app/modules/home/inicial/aapm-dashboard';
+// import AAPMDashboard from 'app/modules/home/inicial/aapm-dashboard';
 import CabanasList from 'app/modules/home/cabanas-list';
 import Sobre from 'app/modules/home/info/sobre';
 import Guia from 'app/modules/home/info/guia';
@@ -13,7 +13,7 @@ export default () => {
   return (
     <div>
       <ErrorBoundaryRoutes>
-        <Route path="home/*" element={<AAPMDashboard />} />
+        {/*<Route path="home/*" element={<AAPMDashboard />} />*/}
         <Route index element={<PaginaInicial />} />
         <Route path="cabanas" element={<CabanasList />} />
         <Route path="sobre" element={<Sobre />} />

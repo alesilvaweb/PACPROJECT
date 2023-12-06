@@ -91,11 +91,11 @@ export const Arquivo = () => {
         <BreadcrumbItem onClick={() => navigate('/associado')}>
           <a>Associados</a>
         </BreadcrumbItem>
-        <BreadcrumbItem active>{'Importação de associados'}</BreadcrumbItem>
+        <BreadcrumbItem active>{'Importação'}</BreadcrumbItem>
       </Breadcrumb>
 
       <h4 id="arquivo-heading" data-cy="ArquivoHeading">
-        Importação de arquivos
+        Importação de associados
         <div className="d-flex justify-content-end">
           {/*<Link to="/associado" className="btn btn-primary jh-create-entity">*/}
           {/*  Associados*/}

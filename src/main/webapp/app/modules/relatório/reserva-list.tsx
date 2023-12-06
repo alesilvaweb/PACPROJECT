@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { MaterialReactTable, type MRT_ColumnDef, MRT_Row, useMaterialReactTable } from 'material-react-table';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Button } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import Box from '@mui/material/Box';
@@ -10,7 +10,6 @@ import axios from 'axios';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
-import { PictureAsPdf } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExcel, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from 'app/config/store';
@@ -165,23 +164,27 @@ const ReservaList = () => {
           flexWrap: 'wrap',
         }}
       >
-        <Button
-          disabled={table.getPrePaginationRowModel().rows.length === 0}
-          //export all rows, including from the next page, (still respects filtering and sorting)
-          onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
-          startIcon={<FontAwesomeIcon icon={faFilePdf} />}
-        >
-          Baixar PDF
-        </Button>
-        {isAdmin ? (
+        <Tooltip title="Baixar PDF">
           <Button
             disabled={table.getPrePaginationRowModel().rows.length === 0}
             //export all rows, including from the next page, (still respects filtering and sorting)
-            onClick={() => handleExportRowsExcel(table.getPrePaginationRowModel().rows)}
-            startIcon={<FontAwesomeIcon icon={faFileExcel} />}
+            onClick={() => handleExportRows(table.getPrePaginationRowModel().rows)}
+            startIcon={<FontAwesomeIcon icon={faFilePdf} />}
           >
-            Baixar Excel
+            PDF
           </Button>
+        </Tooltip>
+        {isAdmin ? (
+          <Tooltip title="Baixar Excel">
+            <Button
+              disabled={table.getPrePaginationRowModel().rows.length === 0}
+              //export all rows, including from the next page, (still respects filtering and sorting)
+              onClick={() => handleExportRowsExcel(table.getPrePaginationRowModel().rows)}
+              startIcon={<FontAwesomeIcon icon={faFileExcel} />}
+            >
+              Excel
+            </Button>
+          </Tooltip>
         ) : null}
 
         {/*<Button*/}

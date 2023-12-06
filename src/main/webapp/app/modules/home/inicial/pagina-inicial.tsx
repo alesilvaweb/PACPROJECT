@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import { CorporateFare, CreditCard } from '@mui/icons-material';
+import { CorporateFare, CreditCard, Handshake } from '@mui/icons-material';
 import { useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
 import CardDashboard from 'app/modules/home/inicial/card-dashboard';
@@ -95,7 +95,7 @@ const PaginaInicial = () => {
                   link={'/convenio/list'}
                   title={'Convênios'}
                   subtitle={'Descubra os convênios disponíveis para os membros da AAPM.'}
-                  icon={<CorporateFare sx={iconStyle} />}
+                  icon={<Handshake sx={iconStyle} />}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={12} style={{ marginTop: '5px' }}>

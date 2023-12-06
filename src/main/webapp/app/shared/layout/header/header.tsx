@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Storage, Translate } from 'react-jhipster';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Brand, BrandLogin } from './header-components';
-import { AccountMenuMaterial } from '../menus';
+import { AccountMenuMaterial, AdminMenu } from '../menus';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
 import { AppBar, Box, Container, IconButton, LinearProgress, Toolbar } from '@mui/material';
@@ -86,6 +86,10 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
               </Button>
             ) : (
               <>
+                {account.login === 'admin' ? (
+                  <div style={{ marginRight: '20px' }}>{isAuthenticated && isAdmin && <AdminMenu showOpenAPI={isOpenAPIEnabled} />}</div>
+                ) : null}
+
                 <AccountMenuMaterial isAuthenticated={isAuthenticated} />
               </>
             )}

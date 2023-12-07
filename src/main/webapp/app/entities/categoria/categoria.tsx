@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Button, Input, Table } from 'reactstrap';
 import { Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -26,6 +26,7 @@ export const Categoria = () => {
   const categoriaList = useAppSelector(state => state.categoria.entities);
   const loading = useAppSelector(state => state.categoria.loading);
   const totalItems = useAppSelector(state => state.categoria.totalItems);
+  const [filter, setFilter] = useState('');
 
   const getAllEntities = () => {
     dispatch(
@@ -33,6 +34,7 @@ export const Categoria = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `categoria.contains=${filter}`,
       })
     );
   };
@@ -47,7 +49,7 @@ export const Categoria = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filter]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -87,6 +89,18 @@ export const Categoria = () => {
       <Breadcrunbs atual={'Categorias'} />
       <h3 id="categoria-heading" data-cy="CategoriaHeading">
         <Translate contentKey="aapmApp.categoria.home.title">Categorias</Translate>
+      </h3>
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilter(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
         <div className="d-flex justify-content-end">
           <Link to="/convenio" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
@@ -103,7 +117,7 @@ export const Categoria = () => {
             {/*<Translate contentKey="aapmApp.categoria.home.createLabel">Create new Categoria</Translate>*/}
           </Link>
         </div>
-      </h3>
+      </div>
       <div className="table-responsive">
         {categoriaList && categoriaList.length > 0 ? (
           <Table responsive>

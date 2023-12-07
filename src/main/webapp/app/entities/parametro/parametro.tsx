@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Button, Input, Table } from 'reactstrap';
 import { Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -26,6 +26,7 @@ export const Parametro = () => {
   const parametroList = useAppSelector(state => state.parametro.entities);
   const loading = useAppSelector(state => state.parametro.loading);
   const totalItems = useAppSelector(state => state.parametro.totalItems);
+  const [filterParametro, setFilterParametro] = useState('');
 
   const getAllEntities = () => {
     dispatch(
@@ -33,6 +34,7 @@ export const Parametro = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `parametro.contains=${filterParametro}`,
       })
     );
   };
@@ -47,7 +49,7 @@ export const Parametro = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filterParametro]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -85,8 +87,20 @@ export const Parametro = () => {
   return (
     <div>
       <Breadcrunbs atual={'Parâmetros'} />
-      <h4 id="parametro-heading" data-cy="ParametroHeading">
+      <h3 id="parametro-heading" data-cy="ParametroHeading">
         <Translate contentKey="aapmApp.parametro.home.title">Parametros</Translate>
+      </h3>
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilterParametro(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
@@ -98,7 +112,8 @@ export const Parametro = () => {
             {/*<Translate contentKey="aapmApp.parametro.home.createLabel">Create new Parametro</Translate>*/}
           </Link>
         </div>
-      </h4>
+      </div>
+
       <div className="table-responsive">
         {parametroList && parametroList.length > 0 ? (
           <Table responsive>

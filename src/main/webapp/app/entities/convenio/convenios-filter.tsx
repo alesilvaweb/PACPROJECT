@@ -128,7 +128,7 @@ const ConveniosFilter = () => {
           <Grid container spacing={2}>
             {currentConvenios.map(convenio => (
               <>
-                <Grid item key={convenio.id} xs={6} sm={4} md={3}>
+                <Grid item key={convenio.id} xs={12} sm={4} md={3}>
                   <Card
                     onClick={() => {
                       navigate(`/convenio/${convenio.id}`);

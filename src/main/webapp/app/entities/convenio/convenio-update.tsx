@@ -47,7 +47,7 @@ export const ConvenioUpdate = () => {
   const toggleRedesSociais = () => setModalRedesSociais(!modalRedesSociais);
 
   const handleClose = () => {
-    navigate('/convenio/list' + location.search);
+    navigate('/convenio' + location.search);
   };
 
   useEffect(() => {
@@ -217,7 +217,7 @@ export const ConvenioUpdate = () => {
         <BreadcrumbItem onClick={() => navigate('/')}>
           <a>Início</a>
         </BreadcrumbItem>
-        <BreadcrumbItem onClick={() => navigate('/convenio/list')}>
+        <BreadcrumbItem onClick={() => navigate('/convenio')}>
           <a>Convênios</a>
         </BreadcrumbItem>
         <BreadcrumbItem active>{isNew ? 'Novo' : convenioEntity.nome}</BreadcrumbItem>
@@ -445,7 +445,7 @@ export const ConvenioUpdate = () => {
               />
 
               <div>
-                <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/convenio/list" replace color="info">
+                <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/convenio" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;
                   <span className="d-none d-md-inline">

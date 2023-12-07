@@ -23,8 +23,10 @@ import {
   AddComment,
   AddHomeWork,
   AdminPanelSettings,
+  AppRegistration,
   CalendarMonth,
   CreditCard,
+  DynamicFeed,
   EventAvailable,
   Grading,
   GroupAdd,
@@ -97,7 +99,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
                 {/* Menus Fixos */}
                 <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Convênio'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<EventAvailable />} setIsOpen={setIsOpen} />
                 <hr />
               </>
@@ -144,11 +146,12 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
             <Collapse in={stateMenu.entity} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<PlaylistAdd />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Convênios'} link={'/convenio'} icon={<Handshake />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<AccountTree />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Locais'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<AddComment />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Redes Sociais'} link={'/icons-redes-sociais'} icon={<ThumbUpAlt />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Tipos'} link={'/tipo'} icon={<DynamicFeed />} setIsOpen={setIsOpen} />
               </List>
             </Collapse>
 

@@ -25,7 +25,7 @@ export const ConvenioDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.convenio.updateSuccess);
 
   const handleClose = () => {
-    navigate('/convenio/list' + location.search);
+    navigate('/convenio' + location.search);
   };
 
   useEffect(() => {

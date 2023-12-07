@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Button, Input, Table } from 'reactstrap';
 import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -15,7 +15,7 @@ import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Mensagem = () => {
   const dispatch = useAppDispatch();
-
+  const [filter, setFilter] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,6 +33,7 @@ export const Mensagem = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `titulo.contains=${filter}`,
       })
     );
   };
@@ -47,7 +48,7 @@ export const Mensagem = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filter]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -87,6 +88,18 @@ export const Mensagem = () => {
       <Breadcrunbs atual={'Mensagens'} />
       <h3 id="mensagem-heading" data-cy="MensagemHeading">
         <Translate contentKey="aapmApp.mensagem.home.title">Mensagems</Translate>
+      </h3>
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilter(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
         <div className="d-flex justify-content-end">
           <Link to="/tipo" className="btn btn-primary jh-create-entity">
             Tipo
@@ -102,7 +115,7 @@ export const Mensagem = () => {
             {/*<Translate contentKey="aapmApp.mensagem.home.createLabel">Create new Mensagem</Translate>*/}
           </Link>
         </div>
-      </h3>
+      </div>
       <div className="table-responsive">
         {mensagemList && mensagemList.length > 0 ? (
           <Table responsive>

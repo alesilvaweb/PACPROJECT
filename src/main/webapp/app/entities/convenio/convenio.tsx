@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem, Button, Table } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Input, Table } from 'reactstrap';
 import { openFile, byteSize, Translate, TextFormat, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -18,7 +18,7 @@ export const Convenio = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [filter, setFilter] = useState('');
   const [paginationState, setPaginationState] = useState(
     overridePaginationStateWithQueryParams(getSortState(location, ITEMS_PER_PAGE, 'id'), location.search)
   );
@@ -33,6 +33,7 @@ export const Convenio = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `nome.contains=${filter}`,
       })
     );
   };
@@ -47,7 +48,7 @@ export const Convenio = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filter]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -92,8 +93,20 @@ export const Convenio = () => {
           <a>Convênios</a>
         </BreadcrumbItem>
       </Breadcrumb>
-      <h2 id="convenio-heading" data-cy="ConvenioHeading">
+      <h3 id="convenio-heading" data-cy="ConvenioHeading">
         <Translate contentKey="aapmApp.convenio.home.title">Convenios</Translate>
+      </h3>
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilter(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
         <div className="d-flex justify-content-end">
           {/*<Link to="/desconto-convenio" className="btn btn-primary jh-create-entity">*/}
           {/*  <FontAwesomeIcon icon="plus" />*/}
@@ -115,7 +128,7 @@ export const Convenio = () => {
             {/*<Translate contentKey="aapmApp.convenio.home.createLabel">Create new Convenio</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </div>
       <div className="table-responsive">
         {convenioList && convenioList.length > 0 ? (
           <Table responsive>

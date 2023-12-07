@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Button, Input, Table } from 'reactstrap';
 import { Translate, getSortState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -15,7 +15,7 @@ import Breadcrunbs from 'app/components/breadcrunbs';
 
 export const Tipo = () => {
   const dispatch = useAppDispatch();
-
+  const [filter, setFilter] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,6 +33,7 @@ export const Tipo = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `tipo.contains=${filter}`,
       })
     );
   };
@@ -47,7 +48,7 @@ export const Tipo = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filter]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -87,6 +88,18 @@ export const Tipo = () => {
       <Breadcrunbs atual={'Tipos'} />
       <h3 id="tipo-heading" data-cy="TipoHeading">
         <Translate contentKey="aapmApp.tipo.home.title">Tipos</Translate>
+      </h3>
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilter(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
@@ -98,7 +111,7 @@ export const Tipo = () => {
             {/*<Translate contentKey="aapmApp.tipo.home.createLabel">Create new Tipo</Translate>*/}
           </Link>
         </div>
-      </h3>
+      </div>
       <div className="table-responsive">
         {tipoList && tipoList.length > 0 ? (
           <Table responsive>

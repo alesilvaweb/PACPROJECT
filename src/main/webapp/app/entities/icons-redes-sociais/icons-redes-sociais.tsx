@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Button, Input, Table } from 'reactstrap';
 import { getSortState, JhiItemCount, JhiPagination, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
@@ -14,6 +14,7 @@ export const IconsRedesSociais = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const [filter, setFilter] = useState('');
 
   const [paginationState, setPaginationState] = useState(
     overridePaginationStateWithQueryParams(getSortState(location, ITEMS_PER_PAGE, 'id'), location.search)
@@ -29,6 +30,7 @@ export const IconsRedesSociais = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `nome.contains=${filter}`,
       })
     );
   };
@@ -43,7 +45,7 @@ export const IconsRedesSociais = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filter]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -83,6 +85,18 @@ export const IconsRedesSociais = () => {
       <Breadcrunbs atual={'Redes Sociais'} />
       <h3 id="icons-redes-sociais-heading" data-cy="IconsRedesSociaisHeading">
         <Translate contentKey="aapmApp.iconsRedesSociais.home.title">Icons Redes Sociais</Translate>
+      </h3>
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilter(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
@@ -99,7 +113,7 @@ export const IconsRedesSociais = () => {
             {/*<Translate contentKey="aapmApp.iconsRedesSociais.home.createLabel">Create new Icons Redes Sociais</Translate>*/}
           </Link>
         </div>
-      </h3>
+      </div>
       <div className="table-responsive">
         {iconsRedesSociaisList && iconsRedesSociaisList.length > 0 ? (
           <Table responsive>

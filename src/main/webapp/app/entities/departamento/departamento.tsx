@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button, Table } from 'reactstrap';
+import { Button, Input, Table } from 'reactstrap';
 import { getSortState, JhiItemCount, JhiPagination, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
@@ -23,6 +23,7 @@ export const Departamento = () => {
   const departamentoList = useAppSelector(state => state.departamento.entities);
   const loading = useAppSelector(state => state.departamento.loading);
   const totalItems = useAppSelector(state => state.departamento.totalItems);
+  const [filter, setFilter] = useState('');
 
   const getAllEntities = () => {
     dispatch(
@@ -30,6 +31,7 @@ export const Departamento = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
+        filter: `nome.contains=${filter}`,
       })
     );
   };
@@ -44,7 +46,7 @@ export const Departamento = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort, filter]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -82,8 +84,20 @@ export const Departamento = () => {
   return (
     <div>
       <Breadcrunbs atual={'Departamentos'} />
-      <h2 id="departamento-heading" data-cy="DepartamentoHeading">
+      <h3 id="departamento-heading" data-cy="DepartamentoHeading">
         <Translate contentKey="aapmApp.departamento.home.title">Departamentos</Translate>
+      </h3>
+      <div className="d-flex justify-content-between">
+        <div className="col-md-4 col-sm-8 col-xl-4">
+          <Input
+            type={'text'}
+            name={'busca'}
+            onChange={e => {
+              setFilter(e.target.value);
+            }}
+            placeholder={'Buscar'}
+          />
+        </div>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
@@ -95,7 +109,7 @@ export const Departamento = () => {
             {/*<Translate contentKey="aapmApp.departamento.home.createLabel">Create new Departamento</Translate>*/}
           </Link>
         </div>
-      </h2>
+      </div>
       <div className="table-responsive">
         {departamentoList && departamentoList.length > 0 ? (
           <Table responsive>

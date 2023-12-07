@@ -25,15 +25,14 @@ const ConveniosFilter = () => {
   const convenioList = useAppSelector(state => state.convenio.entities);
   const loadingConvenio = useAppSelector(state => state.convenio.loading);
   const dispatch = useAppDispatch();
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    dispatch(getEntities({})).then(() => {});
+    dispatch(getEntities({ filter: `nome.contains=${filter}` })).then(() => {});
   }, []);
 
   useEffect(() => {
-    console.log({ convenioList });
     const categoriasFromApi = convenioList.map(convenio => convenio.categoria);
-    console.log({ categoriasFromApi });
     const uniqueCategorias = categoriasFromApi.filter((categoria, index, array) => array.findIndex(c => c.id === categoria.id) === index);
     setCategorias(uniqueCategorias);
   }, [convenioList]);

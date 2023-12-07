@@ -28,7 +28,7 @@ const ConveniosFilter = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    dispatch(getEntities({ filter: `nome.contains=${filter}` })).then(() => {});
+    dispatch(getEntities({})).then(() => {});
   }, []);
 
   useEffect(() => {

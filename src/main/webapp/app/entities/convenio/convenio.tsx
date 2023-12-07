@@ -33,7 +33,7 @@ export const Convenio = () => {
         page: paginationState.activePage - 1,
         size: paginationState.itemsPerPage,
         sort: `${paginationState.sort},${paginationState.order}`,
-        filter: `nome.contains=${filter}`,
+        // filter: `nome.contains=${filter}`,
       })
     );
   };
@@ -48,7 +48,7 @@ export const Convenio = () => {
 
   useEffect(() => {
     sortEntities();
-  }, [paginationState.activePage, paginationState.order, paginationState.sort, filter]);
+  }, [paginationState.activePage, paginationState.order, paginationState.sort]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);

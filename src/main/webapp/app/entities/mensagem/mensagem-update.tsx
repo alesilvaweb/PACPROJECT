@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
+import { Breadcrumb, BreadcrumbItem, Button, Col, Row } from 'reactstrap';
+import { Translate, translate, ValidatedBlobField, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { ITipo } from 'app/shared/model/tipo.model';
 import { getEntities as getTipos } from 'app/entities/tipo/tipo.reducer';
-import { IMensagem } from 'app/shared/model/mensagem.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
-import { getEntity, updateEntity, createEntity, reset } from './mensagem.reducer';
+import { createEntity, getEntity, reset, updateEntity } from './mensagem.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const MensagemUpdate = () => {
   const dispatch = useAppDispatch();
-
+  isAdm();
   const navigate = useNavigate();
 
   const { id } = useParams<'id'>();

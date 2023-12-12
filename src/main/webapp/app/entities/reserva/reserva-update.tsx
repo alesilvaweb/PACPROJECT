@@ -16,7 +16,6 @@ import { getEntities as getDepartamentos } from 'app/entities/departamento/depar
 import { createEntity, getEntity, reset, updateEntity } from './reserva.reducer';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
-import axios from 'axios';
 import Spinner from 'app/components/spinner';
 
 export const ReservaUpdate = () => {

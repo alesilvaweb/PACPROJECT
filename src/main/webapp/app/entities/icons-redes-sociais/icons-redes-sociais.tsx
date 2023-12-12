@@ -8,10 +8,11 @@ import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-u
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntities } from './icons-redes-sociais.reducer';
 import Breadcrunbs from 'app/components/breadcrunbs';
+import isAdm from 'app/components/is-adm';
 
 export const IconsRedesSociais = () => {
   const dispatch = useAppDispatch();
-
+  isAdm();
   const location = useLocation();
   const navigate = useNavigate();
   const [filter, setFilter] = useState('');

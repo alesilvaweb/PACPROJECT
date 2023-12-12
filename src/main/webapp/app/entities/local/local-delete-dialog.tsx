@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-import { getEntity, deleteEntity } from './local.reducer';
+import { deleteEntity, getEntity } from './local.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const LocalDeleteDialog = () => {
   const dispatch = useAppDispatch();
-
+  isAdm();
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams<'id'>();

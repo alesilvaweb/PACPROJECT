@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
-import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
+import { Button, Col, Row } from 'reactstrap';
+import { byteSize, openFile, TextFormat, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { APP_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './arquivo.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const ArquivoDetail = () => {
+  isAdm();
   const dispatch = useAppDispatch();
-
   const { id } = useParams<'id'>();
 
   useEffect(() => {

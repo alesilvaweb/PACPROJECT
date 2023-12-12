@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText, BreadcrumbItem, Breadcrumb } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { Breadcrumb, BreadcrumbItem, Button, Col, Row } from 'reactstrap';
+import { Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { ITipo } from 'app/shared/model/tipo.model';
-import { getEntity, updateEntity, createEntity, reset } from './tipo.reducer';
-import Breadcrunbs from 'app/components/breadcrunbs';
+import { createEntity, getEntity, reset, updateEntity } from './tipo.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const TipoUpdate = () => {
+  isAdm();
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();

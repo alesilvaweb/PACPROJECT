@@ -11,8 +11,10 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IContato } from 'app/shared/model/contato.model';
 import { getEntities } from './contato.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const Contato = () => {
+  isAdm();
   const dispatch = useAppDispatch();
 
   const location = useLocation();

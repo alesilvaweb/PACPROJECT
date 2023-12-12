@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Badge, Breadcrumb, BreadcrumbItem, Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 import { Translate, translate, ValidatedBlobField, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -19,8 +19,10 @@ import { createEntity as createCategoria } from './../categoria/categoria.reduce
 import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import { Chip, Typography } from '@mui/material';
+import isAdm from 'app/components/is-adm';
 
 export const ConvenioUpdate = () => {
+  isAdm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams<'id'>();

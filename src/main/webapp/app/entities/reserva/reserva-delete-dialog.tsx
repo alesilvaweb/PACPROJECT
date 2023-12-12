@@ -9,7 +9,6 @@ import Spinner from 'app/components/spinner';
 
 export const ReservaDeleteDialog = () => {
   const dispatch = useAppDispatch();
-
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams<'id'>();

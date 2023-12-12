@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
-import axios from 'axios';
 import { JhiItemCount, JhiPagination, ValidatedField } from 'react-jhipster';
 import Breadcrunbs from 'app/components/breadcrunbs';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -8,8 +7,6 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import { useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/convenio/convenio.reducer';
-import ConvenioDetail from 'app/entities/convenio/convenio-detail';
-import { Input } from 'reactstrap';
 import Spinner from 'app/components/spinner';
 
 const ConveniosFilter = () => {

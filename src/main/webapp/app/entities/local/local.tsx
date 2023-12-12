@@ -8,9 +8,10 @@ import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-u
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntities } from './local.reducer';
 import Breadcrunbs from 'app/components/breadcrunbs';
-import value from '*.json';
+import isAdm from 'app/components/is-adm';
 
 export const Local = () => {
+  isAdm();
   const dispatch = useAppDispatch();
 
   const location = useLocation();

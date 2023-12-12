@@ -6,14 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity, deleteEntity } from './convenio.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const ConvenioDeleteDialog = () => {
+  isAdm();
   const dispatch = useAppDispatch();
-
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams<'id'>();
-
   const [loadModal, setLoadModal] = useState(false);
 
   useEffect(() => {

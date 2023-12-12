@@ -18,6 +18,7 @@ const ValidaTelefone = () => {
   useEffect(() => {
     verificaTelefone();
   }, []);
+
   return associado;
 };
 

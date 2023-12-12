@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, BreadcrumbItem, Breadcrumb, Table } from 'reactstrap';
-import { Translate, TextFormat } from 'react-jhipster';
+import { Breadcrumb, BreadcrumbItem, Button, Col, Row, Table } from 'reactstrap';
+import { TextFormat, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './associado.reducer';
 import axios from 'axios';
 import { formatData } from 'app/shared/util/date-utils';
-import Breadcrunbs from 'app/components/breadcrunbs';
+import isAdm from 'app/components/is-adm';
 
 export const AssociadoDetail = () => {
+  isAdm();
   const dispatch = useAppDispatch();
   const [dependentes, setDependentes] = useState([]);
   const { id } = useParams<'id'>();
   const navigate = useNavigate();
+
   async function fetchDependentes() {
     try {
       const response = await axios.get(`api/dependentes?associadoId.equals=${id}`);
@@ -25,6 +27,7 @@ export const AssociadoDetail = () => {
       console.error('Erro ao buscar Dependentes:', error);
     }
   }
+
   useEffect(() => {
     dispatch(getEntity(id));
     fetchDependentes().then(r => null);

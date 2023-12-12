@@ -7,10 +7,11 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.cons
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntities } from './departamento.reducer';
-import { Breadcrumbs } from '@mui/material';
 import Breadcrunbs from 'app/components/breadcrunbs';
+import isAdm from 'app/components/is-adm';
 
 export const Departamento = () => {
+  isAdm();
   const dispatch = useAppDispatch();
 
   const location = useLocation();

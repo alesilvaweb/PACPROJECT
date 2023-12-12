@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntity, deleteEntity } from './departamento.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const DepartamentoDeleteDialog = () => {
+  isAdm();
   const dispatch = useAppDispatch();
 
   const location = useLocation();

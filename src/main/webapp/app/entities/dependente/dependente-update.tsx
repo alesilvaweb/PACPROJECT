@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { Button, Col, Row } from 'reactstrap';
+import { Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { IAssociado } from 'app/shared/model/associado.model';
 import { getEntities as getAssociados } from 'app/entities/associado/associado.reducer';
-import { IDependente } from 'app/shared/model/dependente.model';
 import { Status } from 'app/shared/model/enumerations/status.model';
-import { getEntity, updateEntity, createEntity, reset } from './dependente.reducer';
+import { createEntity, getEntity, reset, updateEntity } from './dependente.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const DependenteUpdate = () => {
+  isAdm();
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();

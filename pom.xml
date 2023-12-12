@@ -7,7 +7,7 @@
 
     <groupId>com.aapm.app</groupId>
     <artifactId>aapm</artifactId>
-    <version>1.0.34</version>
+    <version>1.0.35</version>
     <packaging>jar</packaging>
     <name>AAPM</name>
     <description>Sistema de Reservas</description>

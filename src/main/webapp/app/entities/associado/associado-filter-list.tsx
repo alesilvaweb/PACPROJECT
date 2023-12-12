@@ -8,8 +8,10 @@ import Breadcrunbs from 'app/components/breadcrunbs';
 import { toast } from 'react-toastify';
 import { TextField } from '@mui/material';
 import { APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import isAdm from 'app/components/is-adm';
 
 const AssociadoFilter = () => {
+  isAdm();
   const [searchQuery, setSearchQuery] = useState('');
   const [associados, setAssociados] = useState([]);
   const [totalItems, setTotalItems] = useState(0);

@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { Button, Col, Row } from 'reactstrap';
+import { Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
-import { IIconsRedesSociais } from 'app/shared/model/icons-redes-sociais.model';
 import { getEntities as getIconsRedesSociais } from 'app/entities/icons-redes-sociais/icons-redes-sociais.reducer';
-import { IConvenio } from 'app/shared/model/convenio.model';
 import { getEntities as getConvenios } from 'app/entities/convenio/convenio.reducer';
-import { IRedesSociaisConvenio } from 'app/shared/model/redes-sociais-convenio.model';
-import { getEntity, updateEntity, createEntity, reset } from './redes-sociais-convenio.reducer';
+import { createEntity, getEntity, reset, updateEntity } from './redes-sociais-convenio.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const RedesSociaisConvenioUpdate = () => {
   const dispatch = useAppDispatch();
-
+  isAdm();
   const navigate = useNavigate();
 
   const { id } = useParams<'id'>();

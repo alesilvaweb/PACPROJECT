@@ -6,14 +6,11 @@ import './locais.scss';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './local.reducer';
-import BotaoVoltar from 'app/components/botaoVoltar';
-import Breadcrunbs from 'app/components/breadcrunbs';
 import { Card } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const LocalDetail = () => {
   const dispatch = useAppDispatch();
-
   const { id } = useParams<'id'>();
 
   useEffect(() => {

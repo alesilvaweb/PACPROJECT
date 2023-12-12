@@ -8,8 +8,10 @@ import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './departamento.reducer';
+import isAdm from 'app/components/is-adm';
 
 export const DepartamentoDetail = () => {
+  isAdm();
   const dispatch = useAppDispatch();
 
   const { id } = useParams<'id'>();

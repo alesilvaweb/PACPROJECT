@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
-
 import Arquivo from './arquivo';
 import ArquivoDetail from './arquivo-detail';
 import ArquivoUpdate from './arquivo-update';

@@ -160,7 +160,7 @@ server:
       cookie:
         http-only: true
 mail:
-  host: smtp.outlook.com
+  host: smtp.zoho.com
   port: 587
   username: aapm@aapm.app.br
   password: aapm@2023

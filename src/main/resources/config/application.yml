@@ -162,7 +162,7 @@ server:
 mail:
   host: smtp.outlook.com
   port: 587
-  username: aapm.app@outlook.com
+  username: aapm@aapm.app.br
   password: aapm@2023
   protocol: smtp
   tls: false
@@ -197,7 +197,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: aapm.app@outlook.com
+    from: aapm@aapm.app.br
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/**
     management-include-pattern: ${server.servlet.context-path:}/management/**

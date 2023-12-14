@@ -45,9 +45,9 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: smtp.outlook.com
+    host: smtp.zoho.com
     port: 587
-    username: aapm.app@outlook.com
+    username: aapm@aapm.app.br
     password: aapm@2023
     protocol: smtp
     tls: false

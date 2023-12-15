@@ -125,7 +125,7 @@ const ReservaList = () => {
     doc.setLineWidth(2);
     doc.text('Relatório de Reservas AAPM', (y = y + 30), 25);
     doc.setLanguage('pt-BR');
-    // doc.save('Reservas.pdf');
+    doc.save('Reservas.pdf');
   };
 
   console.log({ reservas });

@@ -15,6 +15,7 @@ import { faFileExcel, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from 'app/config/store';
 import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
+import { convertDateTimeToServer } from 'app/shared/util/date-utils';
 
 const ReservaList = () => {
   const [reservas, setReservas] = useState([]);
@@ -58,7 +59,7 @@ const ReservaList = () => {
         filterVariant: 'text',
       },
       {
-        accessorFn: originalRow => new Date(originalRow.data), //convert to date for sorting and filtering
+        accessorFn: originalRow => convertDateTimeToServer(originalRow.data), //convert to date for sorting and filtering
         id: 'data',
         header: 'Data',
         filterVariant: 'date-range',
@@ -126,6 +127,8 @@ const ReservaList = () => {
     doc.setLanguage('pt-BR');
     // doc.save('Reservas.pdf');
   };
+
+  console.log({ reservas });
 
   const dataReserva = () => {
     const re = [];
@@ -218,13 +221,12 @@ const ReservaList = () => {
       </Breadcrumb>
       <MaterialReactTable table={table} />
       <br />
-      <br />
     </div>
   );
 };
 
 const ReservaListWithLocalizationProvider = () => (
-  <LocalizationProvider dateAdapter={AdapterDayjs}>
+  <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
     <ReservaList />
   </LocalizationProvider>
 );

@@ -64,7 +64,7 @@ const PaginaInicial = () => {
         {isAuthenticated ? (
           <>
             <div>
-              <div className={'tituloInicial'}>Bem-vindos ao App da AAPM</div>
+              <div className={'tituloInicial'}>Bem vindo a plataforma AAPM</div>
               <div className={'subtiTileCard'}>
                 Explore os recursos exclusivos para membros da AAPM
                 <span className={'text-descricao'}> e aproveite ao máximo sua associação.</span>

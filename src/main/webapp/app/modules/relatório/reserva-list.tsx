@@ -157,6 +157,12 @@ const ReservaList = () => {
     initialState: {
       showColumnFilters: false,
       density: 'compact',
+      sorting: [
+        {
+          id: 'data',
+          desc: true,
+        },
+      ],
     },
     renderTopToolbarCustomActions: ({ table }) => (
       <Box

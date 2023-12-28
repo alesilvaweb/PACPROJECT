@@ -1,6 +1,6 @@
 package com.aapm.app.web.rest;
 
-import com.aapm.app.domain.User;
+import com.aapm.app.domain.Associado;
 import com.aapm.app.domain.enumeration.Status;
 import com.aapm.app.domain.enumeration.StatusArquivo;
 import com.aapm.app.repository.ArquivoRepository;
@@ -21,8 +21,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.function.Function;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.slf4j.Logger;
@@ -142,6 +144,11 @@ public class ArquivoResource {
                     if (cell.getColumnIndex() == 0) {
                         Long id = (long) cell.getNumericCellValue();
                         if (associadoRepository.findById(id).isPresent()) {
+                            Optional<Associado> assoc = associadoRepository.findById(id);
+                            String associad = String.valueOf(assoc.map((Function<Associado, Object>) Associado::getTelefone).orElse(null));
+                            if (!associad.equals("null")) {
+                                associado.setTelefone(associad);
+                            }
                             salvarAssociado = "update";
                         }
                         if (userRepository.findById(id).isPresent()) {

@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { useNavigate } from 'react-router-dom';
 import { getEntities } from 'app/entities/local/local.reducer';
-import { BottomNavigation, BottomNavigationAction, Card, Grid } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, BottomNavigation, BottomNavigationAction, Card, Grid } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Divider from '@mui/material/Divider';
@@ -17,7 +17,8 @@ import Button from '@mui/material/Button';
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import Link from '@mui/material/Link';
 import Spinner from 'app/components/spinner';
-
+import MinhasReservasLocal from 'app/modules/home/minhas-reservas';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
@@ -221,6 +222,29 @@ export default function CabanasList() {
                 </>
               ))}
             </Grid>
+
+            <div>
+              <br />
+              <h5>Minhas Reservas</h5>
+            </div>
+
+            <Card
+              sx={{
+                width: '100%',
+                backgroundColor: '#fafafa',
+                borderRadius: 2,
+                borderWidth: '2px',
+                borderStyle: 'solid',
+                borderColor: '#a1a1a1',
+                ':hover': {
+                  boxShadow: 10,
+                  position: 'relative',
+                  borderColor: '#1975d1',
+                },
+              }}
+            >
+              <MinhasReservasLocal />
+            </Card>
           </Box>
 
           <Modal isOpen={modal} toggle={toggle} style={{ marginTop: '30vh' }}>

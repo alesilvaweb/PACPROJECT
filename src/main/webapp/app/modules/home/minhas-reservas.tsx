@@ -169,7 +169,10 @@ const MinhasReservas = () => {
       clearSort: 'Limpar classificações',
       clickToCopy: 'Clique para copiar',
       rowsPerPage: 'Registros por página',
+      min: 'Inicial',
+      max: 'Final',
       search: 'Busca',
+      filterByColumn: 'Filtrar',
       noRecordsToDisplay: 'Nenhuma reserva agendada',
     },
     initialState: {

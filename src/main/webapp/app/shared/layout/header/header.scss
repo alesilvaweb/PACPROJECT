@@ -18,7 +18,7 @@ Developement Ribbon
   top: 30px;
   white-space: nowrap;
   width: 15em;
-  z-index: 99999;
+  z-index: 900;
   pointer-events: none;
   opacity: 0.75;
   a {
@@ -44,6 +44,7 @@ Navbar styles
 .jh-navbar .navbar-nav .nav-link {
   padding-right: 0;
   padding-left: 0;
+  z-index: 900;
 }
 
 .navbar-version {
@@ -80,5 +81,5 @@ Navbar styles
   background-color: #009cd8;
   position: absolute;
   top: 0px;
-  z-index: 1031;
+  z-index: 900;
 }

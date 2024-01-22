@@ -65,7 +65,7 @@ const Header = ({ currentLocale, isInProduction, ribbonEnv, isOpenAPIEnabled, is
   const loadingResetPassword = useAppSelector(state => state.passwordReset.loading);
   return (
     <ThemeProvider theme={darkTheme}>
-      <AppBar>
+      <AppBar sx={{ zIndex: '900' }}>
         <Container>
           <Toolbar disableGutters>
             <Box sx={{ mr: 1 }}>

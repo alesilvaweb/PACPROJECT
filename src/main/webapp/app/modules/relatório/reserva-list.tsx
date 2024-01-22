@@ -154,6 +154,23 @@ const ReservaList = () => {
   const table = useMaterialReactTable({
     columns,
     data,
+    localization: {
+      actions: 'Ações',
+      and: 'e',
+      cancel: 'Cancelar',
+      changeFilterMode: 'Alterar o modo de filtro',
+      changeSearchMode: 'Alterar o modo de pesquisa',
+      clearFilter: 'Limpar filtros',
+      clearSearch: 'Limpar pesquisa',
+      clearSort: 'Limpar classificações',
+      clickToCopy: 'Clique para copiar',
+      rowsPerPage: 'Registros por página',
+      min: 'Inicial',
+      max: 'Final',
+      search: 'Busca',
+      filterByColumn: 'Filtrar',
+      noRecordsToDisplay: 'Nenhuma reserva agendada',
+    },
     initialState: {
       showColumnFilters: false,
       density: 'compact',

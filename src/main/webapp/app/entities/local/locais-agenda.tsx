@@ -105,7 +105,7 @@ const LocaisAgenda = args => {
 
   /* Busca os dados das reservas a partir da data atual e do local selecionado */
   async function atualizaAgenda() {
-    const apiUrl = `api/reservas?data.greaterThan=${dataAtual()}&localId.equals=${id}`;
+    const apiUrl = `api/reservas?size=999&data.greaterThan=${dataAtual()}&localId.equals=${id}`;
     try {
       const requestUrl = `${apiUrl}`;
       const response = await axios
@@ -247,6 +247,8 @@ const LocaisAgenda = args => {
                 validRange={{
                   start: DataValida.toISOString().substring(0, 10),
                   end: DataFinal,
+                  // start: isAdmin ? '' : DataValida.toISOString().substring(0, 10),
+                  // end: isAdmin ? '' : DataFinal,
                 }}
                 editable={false}
                 selectable={true}
@@ -305,6 +307,12 @@ const LocaisAgenda = args => {
         icon: 'info',
         title: 'Data Limite!',
         text: `Você não pode fazer uma reserva com menos de ${diasStart} dias de antecedência!`,
+      });
+    } else if (selectInfo.startStr > DataFinal) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Data Limite!',
+        text: `São permitidas reservas até ${formatData(DataFinal)}.`,
       });
     } else {
       navigate('/reserva/new/' + locaisEntity.id + '/' + selectInfo.startStr);

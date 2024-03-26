@@ -121,6 +121,7 @@ const LocaisAgenda = args => {
                   title: '-RESERVADO AAPM',
                   start: event.data,
                   end: event.descricao,
+                  groupId: '000',
                   color: 'black',
                 });
               } else {
@@ -246,9 +247,9 @@ const LocaisAgenda = args => {
                 initialView="dayGridMonth"
                 validRange={{
                   start: DataValida.toISOString().substring(0, 10),
-                  end: DataFinal,
-                  // start: isAdmin ? '' : DataValida.toISOString().substring(0, 10),
-                  // end: isAdmin ? '' : DataFinal,
+                  //end: DataFinal,
+                  //start: isAdmin ? '' : DataValida.toISOString().substring(0, 10),
+                  end: isAdmin ? '' : DataFinal,
                 }}
                 editable={false}
                 selectable={true}
@@ -295,6 +296,7 @@ const LocaisAgenda = args => {
         title: 'Data reservada',
         text: 'Escolha uma outra data ',
       });
+
       this.count = 0;
     } else if (difDate(dataAtual(), selectInfo.startStr) >= 1) {
       Swal.fire({
@@ -308,7 +310,7 @@ const LocaisAgenda = args => {
         title: 'Data Limite!',
         text: `Você não pode fazer uma reserva com menos de ${diasStart} dias de antecedência!`,
       });
-    } else if (selectInfo.startStr > DataFinal) {
+    } else if (selectInfo.startStr > DataFinal && !isAdmin) {
       Swal.fire({
         icon: 'info',
         title: 'Data Limite!',
@@ -325,11 +327,19 @@ const LocaisAgenda = args => {
       navigate('/reserva/' + clickInfo.event.id + '/' + locaisEntity.id + '/edit');
     } else {
       if (clickInfo.event.groupId != account.id) {
-        Swal.fire({
-          icon: 'info',
-          title: 'Data reservada!',
-          text: `Esta data já está reservada para ${locaisEntity.nome}`,
-        });
+        if (clickInfo.event.groupId === '000') {
+          Swal.fire({
+            icon: 'info',
+            title: 'Data bloqueada!',
+            text: `Esta data foi bloqueada pela AAPM.`,
+          });
+        } else {
+          Swal.fire({
+            icon: 'info',
+            title: 'Data reservada!',
+            text: `Esta data já está reservada para ${locaisEntity.nome}`,
+          });
+        }
       } else if (difDate(dataAtual(), clickInfo.startStr) >= 1) {
         Swal.fire({
           icon: 'info',

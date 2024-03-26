@@ -143,9 +143,17 @@ function ConvenioDetalhe() {
                       key={desc.id}
                       sx={{ marginTop: '5px' }}
                     >
-                      <Item>
-                        &nbsp;{desc.desconto}% {desc.descricao} &nbsp;
-                      </Item>
+                      {desc.tipo === '%' ? (
+                        <Item>
+                          &nbsp;{desc.desconto}
+                          {desc.tipo} {desc.descricao} &nbsp;
+                        </Item>
+                      ) : (
+                        <Item>
+                          &nbsp;{desc.tipo}
+                          {desc.desconto} {desc.descricao} &nbsp;
+                        </Item>
+                      )}
                     </Stack>
                     &nbsp;
                   </>

@@ -131,7 +131,7 @@ const ConveniosFilter = () => {
                     }}
                     className={'hand'}
                     sx={{
-                      padding: '1px',
+                      padding: '5px',
                       backgroundColor: 'gray-100',
                       borderRadius: 2,
                       borderWidth: '2px',
@@ -145,11 +145,12 @@ const ConveniosFilter = () => {
                   >
                     <CardMedia
                       component="img"
-                      height="140"
-                      image={`data:${convenio.imagemContentType};base64,${convenio.imagem}`}
+                      height="300"
+                      image={`data:${convenio.imagemContentType};base64,${convenio.logo}`}
                       alt={convenio.nome}
-                      sx={{ borderRadius: 2 }}
+                      sx={{ borderRadius: 2, paddingLeft: '50px', paddingRight: '50px' }}
                     />
+                    <hr />
                     <CardContent>
                       <Typography variant="h6">{convenio.nome}</Typography>
                       <Typography>{convenio.categoria.categoria}</Typography>

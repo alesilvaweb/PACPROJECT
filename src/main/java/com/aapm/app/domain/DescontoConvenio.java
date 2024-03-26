@@ -29,6 +29,9 @@ public class DescontoConvenio implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
+    @Column(name = "tipo_desconto")
+    private String tipo;
+
     @ManyToOne
     @JsonIgnoreProperties(value = { "imagens", "redesSociais", "descontos", "categoria" }, allowSetters = true)
     private Convenio convenio;
@@ -74,6 +77,14 @@ public class DescontoConvenio implements Serializable {
         this.descricao = descricao;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public Convenio getConvenio() {
         return this.convenio;
     }
@@ -112,6 +123,7 @@ public class DescontoConvenio implements Serializable {
         return "DescontoConvenio{" +
             "id=" + getId() +
             ", desconto='" + getDesconto() + "'" +
+            ", tipo='" + getTipo() + "'" +
             ", descricao='" + getDescricao() + "'" +
             "}";
     }

@@ -95,6 +95,7 @@ export const ConvenioUpdate = () => {
         createDesconto({
           desconto: values.desconto,
           descricao: values.descricao,
+          tipo: values.tipo,
           convenio: convenioEntity,
         })
       ).then(() => {
@@ -378,7 +379,11 @@ export const ConvenioUpdate = () => {
                         <Chip
                           color="error"
                           variant="filled"
-                          label={`Desconto de ${desc.desconto}% ${desc.descricao}`}
+                          label={
+                            desc.tipo === 'R$'
+                              ? `Desconto de ${desc.tipo}${desc.desconto} ${desc.descricao}`
+                              : `Desconto de ${desc.desconto}${desc.tipo} ${desc.descricao}`
+                          }
                           onDelete={() => removerDesconto(isNew ? desc : desc.id)}
                         />
                       </Stack>
@@ -475,12 +480,32 @@ export const ConvenioUpdate = () => {
           <ModalBody>
             <ValidatedForm onSubmit={saveDesconto}>
               <ValidatedField
-                label={'Desconto (%) '}
+                id="tipo"
+                name="tipo"
+                required={true}
+                data-cy="tipo"
+                label={'Tipo Desconto'}
+                type="select"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
+              >
+                <option value={'%'} key={1}>
+                  Porcentagem (%)
+                </option>
+                <option value={'R$'} key={2}>
+                  Reais (R$)
+                </option>
+              </ValidatedField>
+
+              <ValidatedField
+                label={'Valor desconto '}
                 id="desconto"
                 name="desconto"
                 required={true}
                 data-cy="desconto"
                 type="number"
+                step="0.01"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}

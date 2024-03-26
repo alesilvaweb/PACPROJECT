@@ -13,6 +13,8 @@ public class DescontoConvenioDTO implements Serializable {
 
     private String desconto;
 
+    private String tipo;
+
     private String descricao;
 
     private ConvenioDTO convenio;
@@ -31,6 +33,14 @@ public class DescontoConvenioDTO implements Serializable {
 
     public void setDesconto(String desconto) {
         this.desconto = desconto;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getDescricao() {
@@ -76,6 +86,7 @@ public class DescontoConvenioDTO implements Serializable {
         return "DescontoConvenioDTO{" +
             "id=" + getId() +
             ", desconto='" + getDesconto() + "'" +
+            ", tipo='" + getTipo() + "'" +
             ", descricao='" + getDescricao() + "'" +
             ", convenio=" + getConvenio() +
             "}";

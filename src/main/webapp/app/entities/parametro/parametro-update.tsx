@@ -137,7 +137,7 @@ export const ParametroUpdate = () => {
                 id="parametro-valor"
                 name="valor"
                 data-cy="valor"
-                type="text"
+                type="textarea"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}

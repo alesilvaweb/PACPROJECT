@@ -2,7 +2,7 @@ import './../stylesEntities.scss';
 import './reservas.scss';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Breadcrumb, BreadcrumbItem, Button, Col, ModalFooter, Row } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 import { Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StatusReserva } from 'app/shared/model/enumerations/status-reserva.model';
@@ -46,11 +46,18 @@ export const ReservaUpdate = () => {
   const [cancelarReserva, setCancelarReserva] = useState(false);
   const [bloqueioReserva, setBloqueioReserva] = useState(false);
   const [update, setUpdate] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
 
   const handleClose = () => {
     dispatch(reset());
     setUpdate(false);
-    navigate('/local/' + local + '/1');
+    if (bloqueioReserva) {
+      navigate('/local/' + local + '/1');
+    } else {
+      navigate('/reserva/' + id + '/' + local + '/message');
+    }
   };
 
   useEffect(() => {

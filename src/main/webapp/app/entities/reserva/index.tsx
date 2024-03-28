@@ -7,6 +7,7 @@ import Reservas from './reserva';
 import ReservasDetail from './reserva-detail';
 import ReservasUpdate from './reserva-update';
 import ReservasDeleteDialog from './reserva-delete-dialog';
+import ReservaMessageDialog from 'app/entities/reserva/reserva-message-dialog';
 
 const ReservasRoutes = () => (
   <ErrorBoundaryRoutes>
@@ -14,6 +15,7 @@ const ReservasRoutes = () => (
     <Route path="new" element={<ReservasUpdate />} />
     <Route path="new/:local/:start" element={<ReservasUpdate />} />
     <Route path=":id/:local/delete" element={<ReservasDeleteDialog />} />
+    <Route path=":id/:local/message" element={<ReservaMessageDialog />} />
     <Route path=":id/:local/edit" element={<ReservasUpdate />} />
 
     <Route path=":id/">

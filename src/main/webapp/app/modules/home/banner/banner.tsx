@@ -77,12 +77,7 @@ export default function Banner() {
               <>
                 {convenioList.map(convenio => (
                   <SwiperSlide key={convenio.id} onClick={() => navigate(`/convenio/${convenio.id}`)} className={'hand'}>
-                    <img
-                      src={`data:${convenio.imagenContentType};base64,${convenio.imagem}`}
-                      alt={convenio.nome}
-                      width={100}
-                      height={150}
-                    />
+                    <img src={`data:${convenio.imagenContentType};base64,${convenio.logo}`} alt={convenio.nome} width={100} height={150} />
                   </SwiperSlide>
                 ))}
               </>

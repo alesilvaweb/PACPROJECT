@@ -15,7 +15,7 @@ const ConveniosFilter = () => {
   const [categoriaFiltro, setCategoriaFiltro] = useState('');
   const [buscaNome, setBuscaNome] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [conveniosPerPage] = useState(8); // Número de convênios por página
+  const [conveniosPerPage] = useState(12); // Número de convênios por página
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
@@ -124,7 +124,7 @@ const ConveniosFilter = () => {
           <Grid container spacing={2}>
             {currentConvenios.map(convenio => (
               <>
-                <Grid item key={convenio.id} xs={12} sm={4} md={3}>
+                <Grid item key={convenio.id} xs={6} sm={4} md={3} xl={2}>
                   <Card
                     onClick={() => {
                       navigate(`/convenio/${convenio.id}`);
@@ -145,15 +145,15 @@ const ConveniosFilter = () => {
                   >
                     <CardMedia
                       component="img"
-                      height="300"
+                      height="100"
                       image={`data:${convenio.imagemContentType};base64,${convenio.logo}`}
                       alt={convenio.nome}
-                      sx={{ borderRadius: 2, paddingLeft: '50px', paddingRight: '50px' }}
+                      sx={{ borderRadius: 2, paddingLeft: '20px', paddingRight: '20px' }}
                     />
                     <hr />
                     <CardContent>
-                      <Typography variant="h6">{convenio.nome}</Typography>
-                      <Typography>{convenio.categoria.categoria}</Typography>
+                      <Typography variant="subtitle1">{convenio.nome}</Typography>
+                      <Typography variant="subtitle2">{convenio.categoria.categoria}</Typography>
                     </CardContent>
                   </Card>
                 </Grid>

@@ -207,7 +207,7 @@ public class ArquivoResource {
                             }
                         }
                     } /* Coluna Email */else if (columnIndex == 9) {
-                        String mail = cell.getStringCellValue().toLowerCase();
+                        String mail = cell.getStringCellValue().toLowerCase().trim();
                         associado.setEmail(mail);
 
                         if (userRepository.findOneByLogin(mail).isPresent()) {

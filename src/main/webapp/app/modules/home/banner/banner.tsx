@@ -22,7 +22,7 @@ export default function Banner() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getEntities({}));
+    dispatch(getEntities({ page: 0, size: 2000 }));
   }, []);
 
   const cardStyle = {

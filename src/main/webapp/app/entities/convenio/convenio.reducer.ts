@@ -20,7 +20,7 @@ const apiUrl = 'api/convenios';
 // Actions
 
 export const getEntities = createAsyncThunk('convenio/fetch_entity_list', async ({ page, size, sort }: IQueryParams) => {
-  const requestUrl = `${apiUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}&` : '?'}cacheBuster=${new Date().getTime()}`;
+  const requestUrl = `${apiUrl}?page=${page}&size=${size}`;
   return axios.get<IConvenio[]>(requestUrl);
 });
 

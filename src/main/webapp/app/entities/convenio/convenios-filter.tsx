@@ -25,7 +25,12 @@ const ConveniosFilter = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    dispatch(getEntities({})).then(() => {});
+    dispatch(
+      getEntities({
+        page: 0,
+        size: 999,
+      })
+    );
   }, []);
 
   useEffect(() => {

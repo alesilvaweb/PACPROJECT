@@ -41,7 +41,7 @@ function ConveniosList() {
   async function fetchConvenios() {
     try {
       // const response = await axios.get(`api/convenios?categoriaId.equals=${categoria}`).then(res => {
-      const response = await axios.get(`api/convenios`).then(res => {
+      const response = await axios.get(`api/convenios?page=0&size=9999`).then(res => {
         setConvenios(res.data);
       });
     } catch (error) {
@@ -51,7 +51,7 @@ function ConveniosList() {
 
   async function fetchCategorias() {
     try {
-      const response = await axios.get('api/categorias');
+      const response = await axios.get('api/categorias?page=0&size=9999');
       setCategorias(response.data);
     } catch (error) {
       console.error('Erro ao buscar categorias:', error);

@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/aapm-app-dev
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://ec2-52-54-140-137.compute-1.amazonaws.com:5432/d7kdid98v1epqk
+    username: tvcwfprxdhbwid
+    password: 8342943e6928c375ed78e0e36b7b01a021d77ea43b5e8a2cbcc967bb6fedf27e
     hikari:
       poolName: Hikari
       auto-commit: false

@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231102181628"
+  },
   "applications": "*",
   "changelogDate": "20231102181628",
   "dto": "mapstruct",
@@ -39,6 +42,7 @@
       "otherEntityName": "iconsRedesSociais",
       "otherEntityRelationshipName": "redeSocial",
       "relationshipName": "icon",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     },
     {
@@ -46,6 +50,7 @@
       "otherEntityName": "convenio",
       "otherEntityRelationshipName": "redesSociais",
       "relationshipName": "convenio",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }
   ],

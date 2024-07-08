@@ -1,17 +1,3 @@
-# ===================================================================
-# Spring Boot configuration for the "dev" profile.
-#
-# This configuration overrides the application.yml file.
-#
-# More information on profiles: https://www.jhipster.tech/profiles/
-# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
-# ===================================================================
-
-# ===================================================================
-# Standard Spring Boot properties.
-# Full reference is available at:
-# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
-# ===================================================================
 
 logging:
   level:
@@ -32,9 +18,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://ec2-52-54-140-137.compute-1.amazonaws.com:5432/d7kdid98v1epqk
-    username: tvcwfprxdhbwid
-    password: 8342943e6928c375ed78e0e36b7b01a021d77ea43b5e8a2cbcc967bb6fedf27e
+    url: jdbc:postgresql://localhost:5432/aapm_dev
+    username: postgres
+    password: postgres
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -46,8 +32,8 @@ spring:
   mail:
     host: smtp.zoho.com
     port: 587
-    username: aapm@aapm.app.br
-    password: aapm@2023
+    username: service@pacsso.com.br
+    password: Dt:rz-9HMr2XPSq
     protocol: smtp
     tls: false
     properties.mail.smtp:

@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231102181624"
+  },
   "applications": "*",
   "changelogDate": "20231102181624",
   "dto": "mapstruct",
@@ -36,6 +39,7 @@
       "otherEntityName": "associado",
       "otherEntityRelationshipName": "contatos",
       "relationshipName": "associado",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }
   ],

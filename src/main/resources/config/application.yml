@@ -92,7 +92,7 @@ management:
 
 spring:
   application:
-    name: AAPM
+    name: PAC RESERVAS
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -162,8 +162,8 @@ server:
 mail:
   host: smtp.zoho.com
   port: 587
-  username: aapm@aapm.app.br
-  password: aapm@2023
+  username: service@pacsso.com.br
+  password: Dt:rz-9HMr2XPSq
   protocol: smtp
   tls: false
   properties.mail.smtp:
@@ -187,7 +187,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'aapmApp'
+    name: 'PacReservas'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #   allowed-origins: "http://localhost:8100,http://localhost:9000"
@@ -197,12 +197,12 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: aapm@aapm.app.br
+    from: services@pacsso.com.br
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/**
     management-include-pattern: ${server.servlet.context-path:}/management/**
-    title: AAPM API
-    description: AAPM API documentation
+    title: PAC API
+    description: PAC API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:

@@ -6,7 +6,7 @@
         "button": "Criar nova senha"
       },
       "messages": {
-        "info": "Informe endereço de e-mail utilizado no cadastro da AAPM",
+        "info": "Informe endereço de e-mail utilizado no cadastro da Associação",
         "success": "Verifique seu e-mail para detalhes sobre a criação de uma nova senha."
       }
     },

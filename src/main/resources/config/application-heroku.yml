@@ -12,7 +12,7 @@
 
 eureka:
   instance:
-    hostname: aapm-app.herokuapp.com
+    hostname: pac-reservas.herokuapp.com
     non-secure-port: 80
     prefer-ip-address: false
 

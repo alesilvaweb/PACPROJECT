@@ -64,9 +64,9 @@ const PaginaInicial = () => {
         {isAuthenticated ? (
           <>
             <div>
-              <div className={'tituloInicial'}>Bem vindo a plataforma AAPM</div>
+              <div className={'tituloInicial'}>Bem vindo a plataforma PAC RESERVAS</div>
               <div className={'subtiTileCard'}>
-                Explore os recursos exclusivos para membros da AAPM
+                Explore os recursos exclusivos para membros da PAC RESERVAS
                 <span className={'text-descricao'}> e aproveite ao máximo sua associação.</span>
               </div>
             </div>
@@ -88,13 +88,13 @@ const PaginaInicial = () => {
                 <CardDashboard
                   link={'/cartao'}
                   title={'Cartões'}
-                  subtitle={'Gerencie seus cartões da AAPM nesta seção.'}
+                  subtitle={'Gerencie seus cartões da PAC RESERVAS nesta seção.'}
                   icon={<CreditCard sx={iconStyle} />}
                 />
                 <CardDashboard
                   link={'/convenio/list'}
                   title={'Convênios'}
-                  subtitle={'Descubra os convênios disponíveis para os membros da AAPM.'}
+                  subtitle={'Descubra os convênios disponíveis para os membros da PAC RESERVAS.'}
                   icon={<Handshake sx={iconStyle} />}
                 />
               </Grid>

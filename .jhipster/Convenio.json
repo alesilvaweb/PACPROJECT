@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231102181625"
+  },
   "applications": "*",
   "changelogDate": "20231102181625",
   "dto": "mapstruct",
@@ -77,6 +80,7 @@
       "otherEntityName": "imagensConvenio",
       "otherEntityRelationshipName": "convenio",
       "relationshipName": "imagens",
+      "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
@@ -84,6 +88,7 @@
       "otherEntityName": "redesSociaisConvenio",
       "otherEntityRelationshipName": "convenio",
       "relationshipName": "redesSociais",
+      "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
@@ -91,6 +96,7 @@
       "otherEntityName": "descontoConvenio",
       "otherEntityRelationshipName": "convenio",
       "relationshipName": "desconto",
+      "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
     {
@@ -98,6 +104,7 @@
       "otherEntityName": "categoria",
       "otherEntityRelationshipName": "convenio",
       "relationshipName": "categoria",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }
   ],

@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231102181634"
+  },
   "applications": "*",
   "changelogDate": "20231102181634",
   "dto": "mapstruct",
@@ -34,6 +37,7 @@
       "otherEntityName": "convenio",
       "otherEntityRelationshipName": "categoria",
       "relationshipName": "convenio",
+      "relationshipSide": "left",
       "relationshipType": "one-to-many"
     }
   ],

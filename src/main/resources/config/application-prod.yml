@@ -47,14 +47,14 @@ spring:
   mail:
     host: smtp.zoho.com
     port: 587
-    username: aapm@aapm.app.br
-    password: aapm@2023
+    username: service@pacsso.com.br
+    password: Dt:rz-9HMr2XPSq
     protocol: smtp
     tls: false
     properties.mail.smtp:
       auth: true
       starttls.enable: true
-#      ssl.trust: aapm.app@outlook.com
+
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
@@ -110,7 +110,7 @@ jhipster:
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: https://aapm.app.br # Modify according to your server's URL
+    base-url: https://pacsso.com.br # Modify according to your server's URL
   #    base-url: localhost:9000 # Modify according to your server's URL
 
   logging:

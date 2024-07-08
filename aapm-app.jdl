@@ -145,9 +145,9 @@ enum Status {
     Ativo, Inativo, Bloqueado
 }
 relationship OneToMany {
-  Local{reserva(title)}  to  Reserva{local(nome)},
-  Associado{reserva(title)} to Reserva{associado(nome)}
-  Departamento{reserva(title)} to Reserva{departamento(nome)}
+  Local{reserva(motivoReserva)}  to  Reserva{local(nome)},
+  Associado{reserva(motivoReserva)} to Reserva{associado(nome)}
+  Departamento{reserva(motivoReserva)} to Reserva{departamento(nome)}
   Categoria{convenio(nome)}  to Convenio{categoria(categoria)}
   Tipo{mensagem(titulo)}  to Mensagem{tipo(tipo)}
   IconsRedesSociais{redeSocial(nome)} to RedesSociaisConvenio{icon(nome)}

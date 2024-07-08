@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231102181630"
+  },
   "applications": "*",
   "changelogDate": "20231102181630",
   "dto": "mapstruct",
@@ -54,6 +57,7 @@
       "otherEntityName": "local",
       "otherEntityRelationshipName": "reserva",
       "relationshipName": "local",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     },
     {
@@ -61,6 +65,7 @@
       "otherEntityName": "associado",
       "otherEntityRelationshipName": "reserva",
       "relationshipName": "associado",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     },
     {
@@ -68,6 +73,7 @@
       "otherEntityName": "departamento",
       "otherEntityRelationshipName": "reserva",
       "relationshipName": "departamento",
+      "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }
   ],

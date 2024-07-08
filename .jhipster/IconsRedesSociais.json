@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231102181629"
+  },
   "applications": "*",
   "changelogDate": "20231102181629",
   "dto": "mapstruct",
@@ -35,6 +38,7 @@
       "otherEntityName": "redesSociaisConvenio",
       "otherEntityRelationshipName": "icon",
       "relationshipName": "redeSocial",
+      "relationshipSide": "left",
       "relationshipType": "one-to-many"
     }
   ],

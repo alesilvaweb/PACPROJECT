@@ -1,4 +1,7 @@
 {
+  "annotations": {
+    "changelogDate": "20231102181631"
+  },
   "applications": "*",
   "changelogDate": "20231102181631",
   "dto": "mapstruct",
@@ -34,10 +37,11 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityField": "title",
+      "otherEntityField": "motivoReserva",
       "otherEntityName": "reserva",
       "otherEntityRelationshipName": "departamento",
       "relationshipName": "reserva",
+      "relationshipSide": "left",
       "relationshipType": "one-to-many"
     }
   ],

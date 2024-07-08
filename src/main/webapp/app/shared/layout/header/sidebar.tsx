@@ -88,7 +88,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
-            Associação Atlética Philip Morris
+            PAC Smart Solutions
           </ListSubheader>
         }
       >

@@ -64,7 +64,7 @@ export const Footer = () => {
 
   async function fetchParametros() {
     if (isAuthenticated) {
-      const url = `api/parametros?chave.in=mail-aapm&chave.in=fone-aapm&chave.in=facebook-aapm&chave.in=instagram-aapm&status.equals=Ativo&page=0&size=20`;
+      const url = `api/parametros?chave.in=mail&chave.in=fone&chave.in=facebook&chave.in=instagram&status.equals=Ativo&page=0&size=20`;
       try {
         const response = await axios.get(url);
         setParametro(response.data);
@@ -85,16 +85,16 @@ export const Footer = () => {
   useEffect(() => {
     if (isAuthenticated) {
       parametro.map(a => {
-        if (a.chave.toString() === 'mail-aapm') {
+        if (a.chave.toString() === 'mail') {
           setEmail(a.valor);
         }
-        if (a.chave.toString() === 'fone-aapm') {
+        if (a.chave.toString() === 'fone') {
           setTelefone(a.valor);
         }
-        if (a.chave.toString() === 'facebook-aapm') {
+        if (a.chave.toString() === 'facebook') {
           setFacebook(a.valor);
         }
-        if (a.chave.toString() === 'instagram-aapm') {
+        if (a.chave.toString() === 'instagram') {
           setInstagram(a.valor);
         }
       });
@@ -107,7 +107,7 @@ export const Footer = () => {
         <div className={'copyright'}>
           &nbsp;
           <Copyright sx={{ fontSize: '18px' }} />
-          <span style={{ fontSize: '12px' }}>&nbsp;{ano}&nbsp;AAPM</span>&nbsp;
+          <span style={{ fontSize: '12px' }}>&nbsp;{ano}&nbsp;PAC Smart Solutions</span>&nbsp;
         </div>
         {isAuthenticated ? (
           <Col

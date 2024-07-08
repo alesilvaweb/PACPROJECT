@@ -19,7 +19,7 @@
       "Categoria",
       "Tipo"
     ],
-    "herokuAppName": "PacReservas",
+    "herokuAppName": "pac-reservas",
     "herokuDeployType": "git",
     "herokuJavaVersion": "17",
     "jhipsterVersion": "8.6.0"

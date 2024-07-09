@@ -1,15 +1,15 @@
 {
   "name": "SISTEMA DE RESERVAS",
-  "short_name": "AAPM APP",
+  "short_name": "PacReservas",
   "description" :"Sistema de Reservas",
   "icons": [
     {
-      "src": "./content/images/jhipster_family_member_1_head-192.png",
+      "src": "./content/images/android-launchericon-192-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "./content/images/jhipster_family_member_1_head-256.png",
+      "src": "./content/images/256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
@@ -19,7 +19,7 @@
       "type": "image/png"
     },
     {
-      "src": "./content/images/jhipster_family_member_1_head-512.png",
+      "src": "./content/images/android-launchericon-512-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -28,7 +28,7 @@
   "background_color": "#e0e0e0",
   "start_url": ".",
   "display": "standalone",
-  "orientation": "portrait"
-  "id": "aapm-app",
+  "orientation": "portrait",
+  "id": "PacReservas",
   "lang": "pt"
 }

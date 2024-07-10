@@ -15,7 +15,7 @@ export default () => {
       <ErrorBoundaryRoutes>
         {/*<Route path="home/*" element={<AAPMDashboard />} />*/}
         <Route index element={<PaginaInicial />} />
-        <Route path="cabanas" element={<CabanasList />} />
+        <Route path="Locais" element={<CabanasList />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="guia" element={<Guia />} />
         <Route path="mapa" element={<MapaGoogle />} />

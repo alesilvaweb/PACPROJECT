@@ -80,7 +80,7 @@ const PaginaInicial = () => {
                 sx={{ display: 'flex', flexWrap: 'wrap' }}
               >
                 <CardDashboard
-                  link={'/cabanas'}
+                  link={'/Locais'}
                   title={'Reservas'}
                   subtitle={'Faça reservas para eventos aqui.'}
                   icon={<EventAvailableIcon sx={iconStyle} />}

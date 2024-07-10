@@ -131,9 +131,9 @@ export default function CabanasList() {
     <>
       {!loading ? (
         <div>
-          <Breadcrunbs atual={'Cabanas'} />
+          <Breadcrunbs atual={'Locais'} />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '2vh' }}>
-            <h5>Cabanas</h5>
+            <h5>Locais</h5>
             <Grid container spacing={{ xs: 1, md: 3 }}>
               {locaisList.map(locais => (
                 <>
@@ -287,7 +287,7 @@ export default function CabanasList() {
         </div>
       ) : (
         // <div>Carregando...</div>
-        <Spinner text={'cabanas'} />
+        <Spinner text={'Locais'} />
       )}
     </>
   );

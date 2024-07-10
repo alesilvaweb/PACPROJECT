@@ -174,7 +174,7 @@ const LocaisAgenda = args => {
           ) : (
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                {/*<BotaoVoltar link={'/cabanas'} label={locaisEntity.nome} />*/}
+                {/*<BotaoVoltar link={'/Locais'} label={locaisEntity.nome} />*/}
 
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
@@ -182,7 +182,7 @@ const LocaisAgenda = args => {
                       <Link to="/">Início</Link>
                     </li>
                     <li className="breadcrumb-item">
-                      <Link to="/cabanas">Cabanas</Link>
+                      <Link to="/Locais">Locais</Link>
                     </li>
                     <li className="breadcrumb-item active align-middle mt7 " aria-current="page">
                       <Link to={'#'}>

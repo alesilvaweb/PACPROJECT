@@ -100,7 +100,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
                 <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Reservas'} link={'/cabanas'} icon={<EventAvailable />} setIsOpen={setIsOpen} />
+                <ItemSidebar title={'Reservas'} link={'/Locais'} icon={<EventAvailable />} setIsOpen={setIsOpen} />
                 <hr />
               </>
             ) : (

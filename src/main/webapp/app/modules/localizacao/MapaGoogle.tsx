@@ -59,8 +59,8 @@ function MapaGoogle() {
           <BreadcrumbItem onClick={() => navigate('/')}>
             <a>Início</a>
           </BreadcrumbItem>
-          <BreadcrumbItem onClick={() => navigate('/cabanas')}>
-            <a>Cabanas</a>
+          <BreadcrumbItem onClick={() => navigate('/Locais')}>
+            <a>Locais</a>
           </BreadcrumbItem>
           <BreadcrumbItem active>{'Localização'}</BreadcrumbItem>
         </Breadcrumb>

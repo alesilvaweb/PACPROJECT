@@ -5,9 +5,9 @@
 
     <groupId>com.aapm.app</groupId>
     <artifactId>PACReservas</artifactId>
-    <version>1.0.66</version>
+    <version>1.0.71</version>
     <packaging>jar</packaging>
-    <name>AAPM</name>
+    <name>PAC RESERVAS</name>
     <description>Sistema de Reservas</description>
 
     <repositories>

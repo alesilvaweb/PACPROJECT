@@ -24,8 +24,8 @@ export const LocalDetail = () => {
         <BreadcrumbItem onClick={() => navigate('/')}>
           <a>Início</a>
         </BreadcrumbItem>
-        <BreadcrumbItem onClick={() => navigate('/Cabanas')}>
-          <a>Cabanas</a>
+        <BreadcrumbItem onClick={() => navigate('/Locais')}>
+          <a>Locais</a>
         </BreadcrumbItem>
         <BreadcrumbItem active>{localEntity.nome}</BreadcrumbItem>
       </Breadcrumb>
@@ -78,7 +78,7 @@ export const LocalDetail = () => {
           </dd>
           <hr />
           <div className={'col-md-12 d-flex justify-content-start'}>
-            <Button tag={Link} id="cancel" data-cy="entityCreateCancelButton" to={'/cabanas'} replace color="info">
+            <Button tag={Link} id="cancel" data-cy="entityCreateCancelButton" to={'/Locais'} replace color="info">
               <FontAwesomeIcon icon="arrow-left" />
               &nbsp; Voltar
             </Button>

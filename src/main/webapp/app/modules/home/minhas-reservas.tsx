@@ -60,7 +60,7 @@ const MinhasReservas = () => {
     () => [
       {
         accessorKey: 'local',
-        header: 'Cabana',
+        header: 'Local',
         filterVariant: 'text',
       },
       {

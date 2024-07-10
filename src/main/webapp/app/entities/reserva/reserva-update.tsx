@@ -152,8 +152,8 @@ export const ReservaUpdate = () => {
             <BreadcrumbItem onClick={() => navigate('/')}>
               <a>início</a>
             </BreadcrumbItem>
-            <BreadcrumbItem onClick={() => navigate('/cabanas')}>
-              <a>Cabanas</a>
+            <BreadcrumbItem onClick={() => navigate('/Locais')}>
+              <a>Locais</a>
             </BreadcrumbItem>
             <BreadcrumbItem onClick={() => navigate(`/local/${local}/1`)}>
               <a>{localEntity.nome}</a>

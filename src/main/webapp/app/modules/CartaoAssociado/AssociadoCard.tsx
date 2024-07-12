@@ -57,6 +57,7 @@ const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
     }
   };
 
+
   const PrintButton = ({ imgData }) => {
     if (cardRef.current) {
       html2canvas(cardRef.current).then(canvas => {
@@ -88,13 +89,14 @@ const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
     <div>
       {/*<Breadcrunbs atual={'Cartão Associado'} />*/}
 
-      <Container key={associadoEntity.id} style={{ backgroundColor: '#860608', padding: '0' }} ref={cardRef} className={'containerCard'}>
+      <Container key={associadoEntity.id} style={{ backgroundColor: '#35539c', padding: '0' }} ref={cardRef} className={'containerCard'}>
         <img
-          src="content/images/Cartao-associado.png"
-          alt="AAPM"
+          src="content/images/logo-jhipster.png"
+          alt="Cartão Associado"
           style={{
-            width: '100%',
-            height: '20%',
+            width: '50%',
+            marginLeft:'25%',
+            height: '50%',
             borderRadius: '8px',
           }}
         />

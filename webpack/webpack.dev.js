@@ -101,8 +101,8 @@ module.exports = async options =>
         }
       ),
       new WebpackNotifierPlugin({
-        title: 'AAPM',
-        contentImage: path.join(__dirname, 'logo-jhipster.png'),
+        title: 'AASC',
+        contentImage: path.join(__dirname, 'logo-jhipster.jpeg'),
       }),
     ].filter(Boolean),
   });

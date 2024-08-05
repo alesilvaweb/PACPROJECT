@@ -18,9 +18,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/aapm_dev
+    url: jdbc:postgresql://146.235.34.103:5432/aapm_dev
     username: postgres
-    password: postgres
+    password: Gahdj&212579
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -32,8 +32,8 @@ spring:
   mail:
     host: smtp.zoho.com
     port: 587
-    username: service@pacsso.com.br
-    password: Dt:rz-9HMr2XPSq
+    username: alessandro@pacsso.com.br
+    password: Gahdj&212579
     protocol: smtp
     tls: false
     properties.mail.smtp:

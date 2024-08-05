@@ -34,7 +34,7 @@ const PaginaInicial = () => {
         `/api/mensagems?endDate.greaterThanOrEqual=${data}&startDate.lessThanOrEqual=${data}&tipoId.equals=11351&status.equals=Ativo&page=0&size=20`
       );
       setMensagens(response.data);
-      console.log({ response });
+
     } catch (error) {
       console.error('Erro ao buscar Mensagens:', error);
     }
@@ -72,36 +72,36 @@ const PaginaInicial = () => {
             </div>
             {mensagens.length > 0 ? <ModalInicial mensagens={mensagens} /> : null}
 
-            <Grid container className={'grid-cards'}>
-              <Grid
-                container
-                spacing={{ xs: 2, md: 2, sm: 1 }}
-                columns={{ xs: 4, sm: 4, md: 12 }}
-                sx={{ display: 'flex', flexWrap: 'wrap' }}
-              >
-                <CardDashboard
-                  link={'/Locais'}
-                  title={'Reservas'}
-                  subtitle={'Faça reservas para eventos aqui.'}
-                  icon={<EventAvailableIcon sx={iconStyle} />}
-                />
-                <CardDashboard
-                  link={'/cartao'}
-                  title={'Cartões'}
-                  subtitle={'Gerencie seus cartões da PAC RESERVAS nesta seção.'}
-                  icon={<CreditCard sx={iconStyle} />}
-                />
-                <CardDashboard
-                  link={'/convenio/list'}
-                  title={'Convênios'}
-                  subtitle={'Descubra os convênios disponíveis para os membros da PAC RESERVAS.'}
-                  icon={<Handshake sx={iconStyle} />}
-                />
-              </Grid>
-              <Grid item xs={12} sm={12} md={12} style={{ marginTop: '5px' }}>
-                <Banner />
-              </Grid>
-            </Grid>
+            {/* <Grid container className={'grid-cards'}> */}
+            {/*   <Grid */}
+            {/*     container */}
+            {/*     spacing={{ xs: 2, md: 2, sm: 1 }} */}
+            {/*     columns={{ xs: 4, sm: 4, md: 12 }} */}
+            {/*     sx={{ display: 'flex', flexWrap: 'wrap' }} */}
+            {/*   > */}
+            {/*     <CardDashboard */}
+            {/*       link={'/Locais'} */}
+            {/*       title={'Reservas'} */}
+            {/*       subtitle={'Faça reservas para eventos aqui.'} */}
+            {/*       icon={<EventAvailableIcon sx={iconStyle} />} */}
+            {/*     /> */}
+            {/*     <CardDashboard */}
+            {/*       link={'/cartao'} */}
+            {/*       title={'Cartões'} */}
+            {/*       subtitle={'Gerencie seus cartões da PAC RESERVAS nesta seção.'} */}
+            {/*       icon={<CreditCard sx={iconStyle} />} */}
+            {/*     /> */}
+            {/*     <CardDashboard */}
+            {/*       link={'/convenio/list'} */}
+            {/*       title={'Convênios'} */}
+            {/*       subtitle={'Descubra os convênios disponíveis para os membros da PAC RESERVAS.'} */}
+            {/*       icon={<Handshake sx={iconStyle} />} */}
+            {/*     /> */}
+            {/*   </Grid> */}
+            {/*   <Grid item xs={12} sm={12} md={12} style={{ marginTop: '5px' }}> */}
+            {/*     <Banner /> */}
+            {/*   </Grid> */}
+            {/* </Grid> */}
             <br />
           </>
         ) : (

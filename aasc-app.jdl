@@ -2,7 +2,7 @@ entity Local{
 	nome String required minlength(2),
     descricao TextBlob required,
 	capacidade Integer required,
-    imagen ImageBlob required,
+    imagem ImageBlob required,
     observacoes TextBlob,
     localizacao String,
     status Status,
@@ -11,6 +11,10 @@ entity Local{
     created Instant,
     modified Instant
 }
+entity TipoLocal {
+    tipo String
+}
+
 entity Arquivo{
     nome String required,
     descricao String,
@@ -22,6 +26,7 @@ entity Arquivo{
 enum StatusArquivo{
     Carregado,Processado,Arquivado,Erro
 }
+
 entity Associado{
 	nome String required minlength(2),
     matricula String required,
@@ -66,7 +71,8 @@ entity Convenio{
 }
 entity DescontoConvenio{
     desconto String,
-    descricao String
+    descricao String,
+    tipoDesconto String
 }
 entity ImagensConvenio{
     titulo String required,
@@ -146,6 +152,7 @@ enum Status {
 }
 relationship OneToMany {
   Local{reserva(motivoReserva)}  to  Reserva{local(nome)},
+  TipoLocal{local(nome)} to Local{tipoLocal(tipo)},
   Associado{reserva(motivoReserva)} to Reserva{associado(nome)}
   Departamento{reserva(motivoReserva)} to Reserva{departamento(nome)}
   Categoria{convenio(nome)}  to Convenio{categoria(categoria)}

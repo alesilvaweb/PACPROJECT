@@ -94,14 +94,14 @@ export default function CabanasList() {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const maps = `https://www.google.com/maps/place/Associac%C3%A3o+Atl%C3%A9tica+Philip+Morris+-+AAPM/@-29.7616726,-52.4307327,18z/data=!4m6!3m5!1s0x951ca3eb61944605:0x3d9978ee7389b7b!8m2!3d-29.7615903!4d-52.430465!16s%2Fg%2F11c32bznx8?authuser=0&entry=ttu`;
+  const maps = `https://maps.app.goo.gl/1obowdgT8bADiLT4A`;
 
-  const center = {
-    lat: -29.761491,
-    lng: -52.43024,
-  };
-  const { lat, lng } = center;
-  const whatsappMessage = `https://wa.me/?text=Localização:%20https://maps.google.com/?q=${lat},${lng}`;
+  // const center = {
+  //   lat: -29.761491,
+  //   lng: -52.43024,
+  // };
+  // const { lat, lng } = center;
+  const whatsappMessage = `https://wa.me/?text=Localização:%20https://maps.app.goo.gl/1obowdgT8bADiLT4A`;
   const closeBtn = (
     <button className="close" onClick={toggle} type="button">
       &times;
@@ -131,9 +131,9 @@ export default function CabanasList() {
     <>
       {!loading ? (
         <div>
-          <Breadcrunbs atual={'Locais'} />
+          {/* <Breadcrunbs atual={'Locais'} /> */}
           <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%', marginTop: '2vh' }}>
-            <h5>Locais</h5>
+            <h5 className={'tituloInicial'}>Bem vindo a plataforma de reservas da AASC</h5>
             <Grid container spacing={{ xs: 1, md: 3 }}>
               {locaisList.map(locais => (
                 <>

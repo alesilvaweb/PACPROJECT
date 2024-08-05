@@ -1,0 +1,53 @@
+.rbc-row-content {
+    z-index: 0;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 1;
+  transition: opacity 200ms ease-in-out;
+
+}
+.rbc-timeslot-group:hover{
+  background-color: rgba(0, 0, 0, 0.28);
+}
+.rbc-calendar {
+  background-color: #bc1b1b;
+  color: #000;
+}
+
+.rbc-toolbar {
+  background-color: #ba2b2b;
+}
+
+.rbc-event {
+  color: #9c2828; /* Text color */
+}
+
+.rbc-event-work {
+  background-color: #007bff;
+}
+
+.rbc-event-personal {
+  background-color: #28a745;
+}
+
+.rbc-event-holiday {
+  background-color: #ffc107;
+}
+
+.rbc-event-birthday {
+  background-color: #ff5733; /* Example additional category */
+}
+
+.rbc-event-anniversary {
+  background-color: #9b59b6; /* Example additional category */
+}

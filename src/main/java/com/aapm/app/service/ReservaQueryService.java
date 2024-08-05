@@ -6,8 +6,12 @@ import com.aapm.app.repository.ReservaRepository;
 import com.aapm.app.service.criteria.ReservaCriteria;
 import com.aapm.app.service.dto.ReservaDTO;
 import com.aapm.app.service.mapper.ReservaMapper;
+
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.metamodel.SingularAttribute;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,6 +20,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+import tech.jhipster.service.filter.LocalDateFilter;
 
 /**
  * Service for executing complex queries for {@link Reserva} entities in the database.
@@ -140,5 +145,10 @@ public class ReservaQueryService extends QueryService<Reserva> {
             }
         }
         return specification;
+    }
+
+
+    private Specification<Reserva> buildRangeSpecification(LocalDateFilter data, SingularAttribute<Reserva, LocalDate> data1) {
+        return null;
     }
 }

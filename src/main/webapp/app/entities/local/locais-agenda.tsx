@@ -3,10 +3,17 @@ import './locais.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { getEntity } from './local.reducer';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-import { dataAtual, difDate, formatData } from 'app/shared/util/date-utils';
+import {
+  convertDateTimeFromServer,
+  convertDateTimeToServer,
+  dataAtual,
+  difDate,
+  formatData
+} from 'app/shared/util/date-utils';
 import FullCalendar from '@fullcalendar/react';
 import { IReserva } from 'app/shared/model/reserva.model';
 import { Chip } from '@mui/material';
@@ -38,10 +45,10 @@ const LocaisAgenda = args => {
   const calendarRef = useRef<FullCalendar>(null!);
 
   const { id } = useParams<'id'>();
-
+  const quadra = (id === '1652');
   const DataValida = addDays(diasStart);
 
-  let arrData = diasEnd.split('/');
+  const arrData = diasEnd.split('/');
   const DataFinal = (arrData[2] + '-' + arrData[1] + '-' + arrData[0]).toString();
 
   function addDays(days) {
@@ -95,7 +102,7 @@ const LocaisAgenda = args => {
   useEffect(() => {
     parametro.map(a => {
       if (a.chave.toString() === 'limite-start') {
-        setDiasStart(parseInt(a.valor));
+        setDiasStart(parseInt(a.valor, 10));
       }
       if (a.chave.toString() === 'limite-end') {
         setDiasEnd(a.valor);
@@ -118,10 +125,9 @@ const LocaisAgenda = args => {
               if (event.status === 'Bloqueado') {
                 evento.push({
                   id: event.id,
-                  title: '-RESERVADO AAPM',
-                  start: event.data,
+                  title: '-RESERVADO',
+                  start: convertDateTimeFromServer(event.data),
                   end: event.descricao,
-                  groupId: '000',
                   color: 'black',
                 });
               } else {
@@ -130,6 +136,7 @@ const LocaisAgenda = args => {
                     id: event.id,
                     title: event.local.nome,
                     start: event.data,
+                    end: event.descricao,
                     groupId: event.associado.id,
                     resourceEditable: false,
                   });
@@ -137,7 +144,8 @@ const LocaisAgenda = args => {
                   evento.push({
                     id: event.id,
                     title: 'RESERVADO',
-                    start: event.data,
+                    start:  event.data,
+                    end: event.descricao,
                     groupId: event.associado.id,
                     color: 'red',
                   });
@@ -151,6 +159,7 @@ const LocaisAgenda = args => {
           setStatusText('OK');
         });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -163,6 +172,7 @@ const LocaisAgenda = args => {
     borderRadius: '5px',
   });
 
+  // eslint-disable-next-line eqeqeq
   if (statusText != 'OK') {
     return <Spinner text={'reservas'} />;
   } else {
@@ -180,9 +190,6 @@ const LocaisAgenda = args => {
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                       <Link to="/">Início</Link>
-                    </li>
-                    <li className="breadcrumb-item">
-                      <Link to="/Locais">Locais</Link>
                     </li>
                     <li className="breadcrumb-item active align-middle mt7 " aria-current="page">
                       <Link to={'#'}>
@@ -227,34 +234,71 @@ const LocaisAgenda = args => {
                   nextYear: 'fa-angle-double-right',
                 }}
                 themeSystem={'bootstrap5'}
-                plugins={[dayGridPlugin, interactionPlugin]}
+                plugins={[dayGridPlugin, interactionPlugin,timeGridPlugin]}
+
                 headerToolbar={{
                   center: 'title',
-                  left: '',
-                  right: '',
+                  left: quadra ? 'timeGridWeek,timeGridDay':'',
+                  right: ''
+
                 }}
                 views={{
                   dayGridMonth: {
                     titleFormat: { year: 'numeric', month: 'short' },
-                  },
+                    },
+                    timeGridWeek: { titleFormat: { year: 'numeric', month: 'short' },
+                    },
+                    timeGridDay: { titleFormat: { year: 'numeric', month: 'short' },
+                    }
+
                 }}
                 eventDisplay={'block'}
                 selectLongPressDelay={5}
                 locale={'pt-br'}
+
                 // height='parent'
                 contentHeight={'80vh'}
                 selectOverlap={false}
-                initialView="dayGridMonth"
+                initialView={quadra ?'timeGridWeek':'dayGridMonth'}
                 validRange={{
                   start: DataValida.toISOString().substring(0, 10),
                   //end: DataFinal,
                   //start: isAdmin ? '' : DataValida.toISOString().substring(0, 10),
                   end: isAdmin ? '' : DataFinal,
                 }}
+                allDayText= "Dia Todo"
+                buttonText= {{
+                  today: 'Hoje',
+                  month: 'Mês',
+                  week: 'Semana',
+                  day: 'Hoje',
+                  list: 'Lista'
+                }}
+                slotDuration= '01:00' // Duração dos slots de tempo (60 minutos)
+                slotLabelInterval = '00:60:00' // Intervalo dos rótulos dos slots de tempo
+                slotLabelFormat={[
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    meridiem: false,
+                  },
+                ]}
+
+
+
+                dayHeaderFormat={{ weekday: 'short', month: 'numeric', day: 'numeric', omitCommas: true }}
+                // dayHeaderClassNames={'lane'}
+                // slotLabelClassNames={'lane'}
+                // slotLaneContent={'Content'}
+                slotMinTime={'08:00:00'}
+                slotMaxTime={'22:00:00'}
+                allDaySlot ={false}
                 editable={false}
                 selectable={true}
                 dragScroll={false}
                 weekends={weekendsVisible}
+
+
                 events={currentEvents}
                 select={handleDateSelect}
                 eventContent={renderEventContent}
@@ -304,6 +348,7 @@ const LocaisAgenda = args => {
         title: 'Data Limite!',
         text: 'Você não pode fazer uma reserva no passado!',
       });
+      // eslint-disable-next-line eqeqeq
     } else if (difDate(dataAtual(), selectInfo.startStr) == 0 || difDate(dataAtual(), selectInfo.startStr) > -diasStart) {
       Swal.fire({
         icon: 'info',
@@ -317,7 +362,7 @@ const LocaisAgenda = args => {
         text: `São permitidas reservas até ${formatData(DataFinal)}.`,
       });
     } else {
-      navigate('/reserva/new/' + locaisEntity.id + '/' + selectInfo.startStr);
+      navigate('/reserva/new/' + locaisEntity.id + '/' + selectInfo.startStr+'/'+selectInfo.endStr );
     }
   }
 
@@ -326,6 +371,7 @@ const LocaisAgenda = args => {
     if (isAdmin) {
       navigate('/reserva/' + clickInfo.event.id + '/' + locaisEntity.id + '/edit');
     } else {
+      // eslint-disable-next-line eqeqeq
       if (clickInfo.event.groupId != account.id) {
         if (clickInfo.event.groupId === '000') {
           Swal.fire({
@@ -346,6 +392,7 @@ const LocaisAgenda = args => {
           title: 'Data Limite!',
           text: 'Você não pode editar uma reserva no passado!',
         });
+        // eslint-disable-next-line eqeqeq
       } else if (difDate(dataAtual(), clickInfo.event.startStr) == 0 || difDate(dataAtual(), clickInfo.event.startStr) > -diasStart) {
         Swal.fire({
           icon: 'info',
@@ -364,6 +411,7 @@ const LocaisAgenda = args => {
 function renderEventContent(eventInfo) {
   return (
     <>
+      <b>{eventInfo.scheduleDate}</b>
       <b>{eventInfo.timeText}</b>
       <i>{eventInfo.event.title}</i>
     </>

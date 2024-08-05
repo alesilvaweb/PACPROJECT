@@ -18,7 +18,7 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import Spinner from 'app/components/spinner';
 
-export const ReservaUpdate = () => {
+export const ReservaUpdateQuadra = () => {
   const dispatch = useAppDispatch();
   const account = useAppSelector(state => state.authentication.account);
   const navigate = useNavigate();
@@ -109,11 +109,12 @@ export const ReservaUpdate = () => {
       ...reservaEntity,
       ...values,
       local: localEntity,
-      descricao: bloqueioReserva ? values.descricao + ' ' + '23:59:59' : null,
+      descricao: convertDateTimeFromServer(values.descricao),
       associado: isAdmin ? associados.find(it => it.id.toString() === values.associado.toString()) : associado,
       departamento: departamentos.find(it => it.id.toString() === values.departamento.toString()),
     };
-
+// eslint-disable-next-line no-console
+    console.log({ entity });
     if (isNew) {
       setLocalId(entity.local.id);
       dispatch(createEntity(entity));
@@ -140,7 +141,7 @@ export const ReservaUpdate = () => {
           modified: convertDateTimeFromServer(reservaEntity.modified),
           numPessoas: reservaEntity.numPessoas,
           local: reservaEntity?.local?.id,
-          descricao: reservaEntity?.descricao?.substring(0, 10),
+          descricao: reservaEntity?.descricao,
           associado: reservaEntity?.associado?.id,
           departamento: reservaEntity?.departamento?.id,
         };
@@ -155,18 +156,18 @@ export const ReservaUpdate = () => {
             <BreadcrumbItem onClick={() => navigate('/')}>
               <a>início</a>
             </BreadcrumbItem>
-            <BreadcrumbItem onClick={() => navigate('/Locais')}>
-              <a>Locais</a>
-            </BreadcrumbItem>
+
             <BreadcrumbItem onClick={() => navigate(`/local/${local}/1`)}>
               <a>{localEntity.nome}</a>
             </BreadcrumbItem>
             <BreadcrumbItem active>Reserva</BreadcrumbItem>
           </Breadcrumb>
 
+{/* ####################################################################################### */}
+
           <Row className="justify-content-center">
             <Col md="8" sx={{ textAlign: 'center' }}>
-              {!isNew ? <h4>Editar Reserva {localEntity.nome}</h4> : <h4>Reserva {localEntity.nome}</h4>}
+              {!isNew ? <h4>Editar Reserva {localEntity.nome}</h4> : <h4>Reserva {localEntity.nome} {end}</h4>}
             </Col>
           </Row>
           <br />
@@ -235,23 +236,32 @@ export const ReservaUpdate = () => {
                     id="reservas-data"
                     name="data"
                     data-cy="data"
-                    hidden={true}
-                    Value={isNew ? start.substring(0,10) : reservaEntity.data}
-                    type="date"
+                    // hidden={true}
+                    Value={isNew ? convertDateTimeFromServer(start)  : reservaEntity.data}
+                    type="datetime-local"
                     readonly={true}
                     validate={{
                       required: { value: true, message: translate('entity.validation.required') },
                     }}
                   />
                   <ValidatedField
+                    label={'Data Final '}
+                    id="reserva-descricao"
+                    // hidden={!bloqueioReserva}
+                    name="descricao"
+                    defaultValue={isNew ? convertDateTimeFromServer(end)  : reservaEntity?.descricao}
+                    data-cy="descricao"
+                    type="datetime-local"
+                  />
+                  <ValidatedField
                     label={bloqueioReserva ? 'Data inicial' : translate('aapmApp.reserva.data') }
                     id="reservas-data-see"
                     name="datasee"
                     className={'data-inicial-reserva'}
-                    disabled={true}
-                    Value={isNew ?  start.substring(0,10)  : reservaEntity.data}
-                    type="date"
-                    readonly={true}
+                    // disabled={true}
+                    Value={isNew ?  convertDateTimeFromServer(start)  : convertDateTimeFromServer(reservaEntity.data)}
+                    type="datetime-local"
+                    // readonly={true}
                   />
 
                   {isAdmin ? (
@@ -260,7 +270,7 @@ export const ReservaUpdate = () => {
                       id="reserva-descricao"
                       hidden={!bloqueioReserva}
                       name="descricao"
-                      defaultValue={isNew ? start.substring(0,10) : reservaEntity?.descricao?.substring(0, 10)}
+                      defaultValue={isNew ? start: reservaEntity?.descricao}
                       data-cy="descricao"
                       type="date"
                     />
@@ -496,4 +506,4 @@ export const ReservaUpdate = () => {
   );
 };
 
-export default ReservaUpdate;
+export default ReservaUpdateQuadra;

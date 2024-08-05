@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="AapmApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-    <module name="PACReservas" />
+    <module name="PACReservas-AASC" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.aapm.app.AapmApp" />
     <method v="2">
       <option name="Make" enabled="true" />

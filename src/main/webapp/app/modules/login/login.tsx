@@ -25,7 +25,8 @@ export const Login = () => {
     navigate('/');
   };
 
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+   // @ts-ignore
   const { from } = location.state || { from: { pathname: '/', search: location.search } };
   if (isAuthenticated) {
     return <Navigate to={'/'} replace />;

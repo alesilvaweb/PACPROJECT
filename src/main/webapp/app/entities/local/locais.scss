@@ -1,5 +1,19 @@
 @import './../../palette';
+.lane{
+  background-color: #299729;
+}
 
+.fc-timegrid-slot {
+
+}
+tr , .fc-timegrid-slot-lane {
+  height: 4.8vh;
+
+}
+
+  .fc-timegrid-slot-lane:hover{
+  background-color: rgba(0, 0, 0, 0.13);
+}
 .fc .fc-h-event {
   //background-color: #ca241d;
   display: block;

@@ -91,7 +91,7 @@ const AssociadoCard = ({ dependent, idAssociado, associadoEntity }) => {
 
       <Container key={associadoEntity.id} style={{ backgroundColor: '#35539c', padding: '0' }} ref={cardRef} className={'containerCard'}>
         <img
-          src="content/images/logo-jhipster.png"
+          src="content/images/logo-jhipster.jpg"
           alt="Cartão Associado"
           style={{
             width: '50%',

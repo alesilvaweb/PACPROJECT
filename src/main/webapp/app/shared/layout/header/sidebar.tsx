@@ -67,10 +67,12 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
   });
 
   /*Abertura do menu do sidebar*/
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const handleClick = (anchor: string, open: boolean) => {
     setStateMenu({ ...stateMenu, [anchor]: open });
   };
   /*Abertura do sidebar*/
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const toggleDrawer = (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
       return;
@@ -88,7 +90,7 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
-            PAC Smart Solutions
+            Associação Atletica Souza Cruz
           </ListSubheader>
         }
       >
@@ -98,8 +100,8 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
               <>
                 {/* Menus Fixos */}
                 <ItemSidebar title={'Página inicial'} link={'/'} icon={<HomeIcon />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} />
+                {/* <ItemSidebar title={'Cartão Sócio'} link={'/cartao'} icon={<CreditCard />} setIsOpen={setIsOpen} /> */}
+                {/* <ItemSidebar title={'Convênios'} link={'/convenio/list'} icon={<Handshake />} setIsOpen={setIsOpen} /> */}
                 <ItemSidebar title={'Reservas'} link={'/Locais'} icon={<EventAvailable />} setIsOpen={setIsOpen} />
                 <hr />
               </>
@@ -145,13 +147,13 @@ export default function Sidebar({ isOpen, setIsOpen, currentLocale, isOpenAPIEna
             {/* SubMenus de Cadastros*/}
             <Collapse in={stateMenu.entity} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<PlaylistAdd />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Convênios'} link={'/convenio'} icon={<Handshake />} setIsOpen={setIsOpen} />
+                {/* <ItemSidebar title={'Categorias'} link={'/categoria'} icon={<PlaylistAdd />} setIsOpen={setIsOpen} /> */}
+                {/* <ItemSidebar title={'Convênios'} link={'/convenio'} icon={<Handshake />} setIsOpen={setIsOpen} /> */}
                 <ItemSidebar title={'Departamentos'} link={'/departamento'} icon={<AccountTree />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Locais'} link={'/local'} icon={<AddHomeWork />} setIsOpen={setIsOpen} />
                 <ItemSidebar title={'Mensagens'} link={'/mensagem'} icon={<AddComment />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Redes Sociais'} link={'/icons-redes-sociais'} icon={<ThumbUpAlt />} setIsOpen={setIsOpen} />
-                <ItemSidebar title={'Tipos'} link={'/tipo'} icon={<DynamicFeed />} setIsOpen={setIsOpen} />
+                {/* <ItemSidebar title={'Redes Sociais'} link={'/icons-redes-sociais'} icon={<ThumbUpAlt />} setIsOpen={setIsOpen} /> */}
+                {/* <ItemSidebar title={'Tipos'} link={'/tipo'} icon={<DynamicFeed />} setIsOpen={setIsOpen} /> */}
               </List>
             </Collapse>
 

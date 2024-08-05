@@ -1,0 +1,64 @@
+.schedule-court {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.calendar-container {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+.date-picker-container {
+  margin-bottom: 20px;
+}
+
+.available-times-container {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px;
+}
+
+.available-times-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.available-time-item {
+  background-color: #d3f4ff;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.available-time-item:hover {
+  background-color: #bce0f2;
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reservation-form input {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.reservation-form button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reservation-form button:hover {
+  background-color: #45a049;
+}

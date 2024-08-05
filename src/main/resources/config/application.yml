@@ -162,8 +162,8 @@ server:
 mail:
   host: smtp.zoho.com
   port: 587
-  username: service@pacsso.com.br
-  password: Dt:rz-9HMr2XPSq
+  username: alessandro@pacsso.com.br
+  password: Gahdj&212579
   protocol: smtp
   tls: false
   properties.mail.smtp:
@@ -197,7 +197,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: services@pacsso.com.br
+    from: alessandro@pacsso.com.br
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/**
     management-include-pattern: ${server.servlet.context-path:}/management/**

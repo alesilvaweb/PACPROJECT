@@ -7,19 +7,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from 'app/config/store';
 
 export const BrandIcon = props => (
-  // <div {...props} className="brand-icon">
-  //   {/* <img src="content/images/logo-jhipster.png" alt="Logo" /> */}
-  // </div>
-  <span className="brand-title">
-     Sua Logo
-    </span>
+  <div {...props} className="brand-icon">
+    <img src="content/images/logo-jhipster.jpeg" alt="Logo" />
+  </div>
+  // <span className="brand-title">
+  //    AASC
+  //   </span>
 );
 
 export const BrandLogin = () => (
   <NavbarBrand className="brand-logo">
     {/* <BrandIcon /> */}
     <span className="brand-title">
-     Sua Logo
+     AASC
     </span>
     {/*<span className="navbar-version">{VERSION}</span>*/}
   </NavbarBrand>
